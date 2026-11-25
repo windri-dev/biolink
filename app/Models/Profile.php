@@ -42,6 +42,11 @@ class Profile extends Model
         'ai_model',
         'ai_system_prompt',
         'ai_temperature',
+        'ai_rate_limit_per_minute',
+        'ai_rate_limit_per_hour',
+        'ai_security_guard',
+        'ai_content_filter',
+        'ai_block_duration_minutes',
         'meta_title',
         'meta_description',
         'custom_css',
@@ -59,6 +64,11 @@ class Profile extends Model
             'show_share_button' => 'boolean',
             'show_subscribe_box' => 'boolean',
             'ai_assistant_enabled' => 'boolean',
+            'ai_security_guard' => 'boolean',
+            'ai_content_filter' => 'boolean',
+            'ai_rate_limit_per_minute' => 'integer',
+            'ai_rate_limit_per_hour' => 'integer',
+            'ai_block_duration_minutes' => 'integer',
         ];
     }
 

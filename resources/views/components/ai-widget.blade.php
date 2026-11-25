@@ -134,6 +134,9 @@
         <!-- Chat Input Form -->
         <div class="p-3 bg-white/5 border-t border-white/10 flex-shrink-0">
             <form id="aiChatForm" onsubmit="submitAiChat(event)" class="relative flex items-center">
+                <!-- Honeypot anti-spam bot trap -->
+                <input type="text" id="aiHoneypot" name="website_hp" value="" class="hidden" tabindex="-1" autocomplete="off" style="display:none !important">
+
                 <input type="text" 
                        id="aiChatInput" 
                        placeholder="Ketik pertanyaan untuk {{ $profile->ai_assistant_name }}..." 
@@ -239,6 +242,7 @@
                     profile_id: {{ $profile->id }},
                     message: message,
                     session_id: aiSessionId,
+                    website_hp: document.getElementById('aiHoneypot') ? document.getElementById('aiHoneypot').value : '',
                 })
             });
 

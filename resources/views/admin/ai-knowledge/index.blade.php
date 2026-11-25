@@ -369,6 +369,102 @@
                 </div>
             </div>
 
+            <!-- 3. KEAMANAN AI & LIMIT OBROLAN PER IP (ANTI-SPAM & FIREWALL SHIELD) -->
+            <div class="bg-zinc-800/40 border border-zinc-700/60 rounded-2xl p-5 space-y-4">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-zinc-700/50 gap-2">
+                    <div>
+                        <h4 class="text-xs font-bold text-white flex items-center gap-2">
+                            <i data-lucide="shield-check" class="w-4 h-4 text-emerald-400"></i>
+                            <span>3. Keamanan AI & Limit Obrolan per IP (Anti-Spam & Firewall)</span>
+                        </h4>
+                        <p class="text-[11px] text-zinc-400 mt-0.5">Lindungi kuota token API dari bot dan cegah serangan manipulasi prompt (Jailbreak / Prompt Injection).</p>
+                    </div>
+
+                    <span class="text-[10px] font-mono px-2.5 py-1 rounded-lg bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 flex items-center gap-1.5 w-fit">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                        <span>AI Security Active</span>
+                    </span>
+                </div>
+
+                <!-- Rate Limiting Controls -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-zinc-300 font-semibold mb-1">
+                            Batas Pesan / Menit per IP
+                        </label>
+                        <div class="relative">
+                            <input type="number" 
+                                   name="ai_rate_limit_per_minute" 
+                                   value="{{ $profile->ai_rate_limit_per_minute ?? 10 }}" 
+                                   min="1" 
+                                   max="120" 
+                                   class="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-3 py-2 text-white font-mono focus:outline-none focus:border-sky-400 text-xs">
+                            <span class="absolute right-3 top-2 text-[10px] text-zinc-500 font-mono">pesan/mnt</span>
+                        </div>
+                        <span class="text-[10px] text-zinc-500 mt-1 block">Rekomendasi: 5 - 15 pesan/menit agar tidak spam.</span>
+                    </div>
+
+                    <div>
+                        <label class="block text-zinc-300 font-semibold mb-1">
+                            Batas Maksimal / Jam per IP
+                        </label>
+                        <div class="relative">
+                            <input type="number" 
+                                   name="ai_rate_limit_per_hour" 
+                                   value="{{ $profile->ai_rate_limit_per_hour ?? 60 }}" 
+                                   min="5" 
+                                   max="1000" 
+                                   class="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-3 py-2 text-white font-mono focus:outline-none focus:border-sky-400 text-xs">
+                            <span class="absolute right-3 top-2 text-[10px] text-zinc-500 font-mono">pesan/jam</span>
+                        </div>
+                        <span class="text-[10px] text-zinc-500 mt-1 block">Rekomendasi: 30 - 100 pesan/jam per pengunjung.</span>
+                    </div>
+
+                    <div>
+                        <label class="block text-zinc-300 font-semibold mb-1">
+                            Durasi Auto-Ban Cooldown
+                        </label>
+                        <div class="relative">
+                            <input type="number" 
+                                   name="ai_block_duration_minutes" 
+                                   value="{{ $profile->ai_block_duration_minutes ?? 15 }}" 
+                                   min="1" 
+                                   max="1440" 
+                                   class="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-3 py-2 text-white font-mono focus:outline-none focus:border-sky-400 text-xs">
+                            <span class="absolute right-3 top-2 text-[10px] text-zinc-500 font-mono">menit</span>
+                        </div>
+                        <span class="text-[10px] text-zinc-500 mt-1 block">Waktu blokir sementara jika IP spamming terus menerus.</span>
+                    </div>
+                </div>
+
+                <!-- Security Toggles -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 border-t border-zinc-700/40">
+                    <label class="flex items-start gap-3 p-3 rounded-xl bg-zinc-900/60 border border-zinc-800 hover:border-zinc-700 cursor-pointer transition-colors">
+                        <input type="checkbox" 
+                               name="ai_security_guard" 
+                               value="1" 
+                               {{ ($profile->ai_security_guard ?? true) ? 'checked' : '' }} 
+                               class="mt-0.5 rounded border-zinc-700 bg-zinc-800 text-emerald-500 focus:ring-emerald-500">
+                        <div>
+                            <span class="text-xs font-bold text-white block">AI Firewall (Anti Prompt Injection & Jailbreak)</span>
+                            <span class="text-[11px] text-zinc-400 block mt-0.5">Memblokir otomatis upaya hacking prompt ("ignore instructions", "DAN mode", "bocorkan API key", dsb).</span>
+                        </div>
+                    </label>
+
+                    <label class="flex items-start gap-3 p-3 rounded-xl bg-zinc-900/60 border border-zinc-800 hover:border-zinc-700 cursor-pointer transition-colors">
+                        <input type="checkbox" 
+                               name="ai_content_filter" 
+                               value="1" 
+                               {{ ($profile->ai_content_filter ?? true) ? 'checked' : '' }} 
+                               class="mt-0.5 rounded border-zinc-700 bg-zinc-800 text-emerald-500 focus:ring-emerald-500">
+                        <div>
+                            <span class="text-xs font-bold text-white block">Sensor Kata Kasar & Konten Pelecehan</span>
+                            <span class="text-[11px] text-zinc-400 block mt-0.5">Menolak dan memberi teguran otomatis jika pengunjung mengirim kata-kata kasar atau toxic.</span>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
             <!-- Action Buttons Row -->
             <div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-4 border-t border-zinc-800">
                 <button type="button" 

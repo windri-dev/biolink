@@ -54,6 +54,11 @@ class AiKnowledgeController
             'ai_assistant_enabled' => 'nullable|boolean',
             'ai_avatar_url' => 'nullable|string|max:1000',
             'ai_avatar_file' => 'nullable|image|max:5120',
+            'ai_rate_limit_per_minute' => 'nullable|integer|min:1|max:120',
+            'ai_rate_limit_per_hour' => 'nullable|integer|min:5|max:1000',
+            'ai_security_guard' => 'nullable|boolean',
+            'ai_content_filter' => 'nullable|boolean',
+            'ai_block_duration_minutes' => 'nullable|integer|min:1|max:1440',
         ]);
 
         if ($request->hasFile('ai_avatar_file')) {
@@ -64,8 +69,12 @@ class AiKnowledgeController
         unset($validated['ai_avatar_file']);
 
         $validated['ai_provider'] = $request->input('ai_provider') ?: 'universal';
-
         $validated['ai_assistant_enabled'] = $request->boolean('ai_assistant_enabled', true);
+        $validated['ai_security_guard'] = $request->boolean('ai_security_guard', true);
+        $validated['ai_content_filter'] = $request->boolean('ai_content_filter', true);
+        $validated['ai_rate_limit_per_minute'] = (int) ($request->input('ai_rate_limit_per_minute') ?: 10);
+        $validated['ai_rate_limit_per_hour'] = (int) ($request->input('ai_rate_limit_per_hour') ?: 60);
+        $validated['ai_block_duration_minutes'] = (int) ($request->input('ai_block_duration_minutes') ?: 15);
         if (empty($validated['ai_api_base'])) {
             $validated['ai_api_base'] = 'https://api.openai.com/v1';
         }
