@@ -166,14 +166,29 @@ class AiAssistantService
      */
     public function queryLlmApi(Profile $profile, Collection $knowledges, string $userMessage, string $apiKey): ?string
     {
-        $systemPrompt = $profile->ai_system_prompt;
-        if (empty($systemPrompt)) {
-            $systemPrompt = "Anda adalah asisten AI ramah bernama {$profile->ai_assistant_name} untuk {$profile->display_name} ({$profile->tagline}). Berikut data pengetahuan resmi yang Anda ketahui:\n";
+        $customPrompt = trim((string) $profile->ai_system_prompt);
+
+        $systemPrompt = "Anda adalah asisten AI cerdas & ramah bernama {$profile->ai_assistant_name} yang mewakili {$profile->display_name}" . ($profile->tagline ? " ({$profile->tagline})" : "") . ".\n\n";
+
+        $systemPrompt .= "=== BASIS PENGETAHUAN RESMI {$profile->display_name} ===\n";
+        if ($knowledges->isNotEmpty()) {
             foreach ($knowledges as $k) {
-                $systemPrompt .= "- {$k->title}: {$k->content}\n";
+                $systemPrompt .= "• [{$k->category}] {$k->title}: {$k->content}\n";
             }
-            $systemPrompt .= "\nJawab pertanyaan pengunjung dengan ringkas, sopan, bersahabat dalam Bahasa Indonesia, dan mengacu pada data di atas tanpa menggunakan emoji berlebih.";
+        } else {
+            $systemPrompt .= "• Bio: {$profile->bio}\n";
         }
+
+        if (!empty($customPrompt)) {
+            $systemPrompt .= "\n=== INSTRUKSI KHUSUS PEMILIK PROFIL ===\n{$customPrompt}\n";
+        }
+
+        $systemPrompt .= "\n=== PANDUAN MENJAWAB & BATASAN KONTEKS (STRICT CONTEXT RULES) ===\n";
+        $systemPrompt .= "1. KARAKTER: Bersikaplah profesional, hangat, sopan, dan solutif layaknya representasi resmi dari {$profile->display_name}. Gunakan Bahasa Indonesia yang baik dan terstruktur.\n";
+        $systemPrompt .= "2. JELASKAN KEMAMPUAN: Jika pengunjung bertanya tentang kemampuan Anda (misalnya: 'kamu bisa apa?', 'apa fungsi kamu?', 'siapa kamu?'), jelaskan secara ramah bahwa Anda bertugas memandu pengunjung mengenal profil {$profile->display_name}, menjelaskan proyek & portofolio yang pernah/sedang dikembangkan, keahlian teknis (stack teknologi), serta jalur kontak/kolaborasi.\n";
+        $systemPrompt .= "3. STRICT BOUNDARY (TIDAK KELUAR KONTEKS): Anda HANYA diperkenankan menjawab hal-hal yang berkaitan langsung dengan {$profile->display_name}, portofolio proyeknya, latar belakangnya, serta keahlian teknisnya. JANGAN melayani atau menjawab pertanyaan topik umum yang tidak ada hubungannya (misal: resep memasak, politik, cerita fiksi, coding proyek lain yang tidak terkait, dll).\n";
+        $systemPrompt .= "4. TOLAK DENGAN ELEGAN: Jika pengunjung bertanya di luar konteks {$profile->display_name}, tolaklah secara sopan dan arahkan kembali pengunjung untuk bertanya seputar proyek, keahlian, atau cara menghubungi {$profile->display_name}.\n";
+        $systemPrompt .= "5. JAWABAN TUNTAS: Selesaikan setiap kalimat dan penjelasan secara lengkap dan tuntas tanpa terpotong di tengah jalan. Gunakan bullet point (*) jika menjabarkan daftar agar nyaman dibaca.";
 
         $apiBase = rtrim($profile->ai_api_base ?: 'https://api.openai.com/v1', '/');
         $endpoint = str_ends_with($apiBase, '/chat/completions') ? $apiBase : $apiBase . '/chat/completions';
@@ -181,14 +196,14 @@ class AiAssistantService
         $temperature = (float) ($profile->ai_temperature ?: 0.7);
 
         $response = Http::withToken($apiKey)
-            ->timeout(20)
+            ->timeout(35)
             ->post($endpoint, [
                 'model' => $model,
                 'messages' => [
                     ['role' => 'system', 'content' => $systemPrompt],
                     ['role' => 'user', 'content' => $userMessage],
                 ],
-                'max_tokens' => 450,
+                'max_tokens' => 2500,
                 'temperature' => $temperature,
             ]);
 

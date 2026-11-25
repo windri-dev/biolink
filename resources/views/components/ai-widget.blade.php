@@ -1,6 +1,11 @@
 @props(['profile'])
 
-<div id="aiWidgetRoot" class="fixed bottom-5 right-5 z-40 font-sans" x-data="aiWidget()">
+<!-- Mobile Backdrop Dimmer -->
+<div id="aiChatBackdrop" 
+     onclick="toggleAiChat()" 
+     class="fixed inset-0 bg-black/60 backdrop-blur-xs z-40 transition-opacity duration-300 opacity-0 pointer-events-none"></div>
+
+<div id="aiWidgetRoot" class="fixed bottom-4 sm:bottom-5 right-4 sm:right-5 z-40 font-sans">
     
     <!-- Floating Trigger Launcher Button -->
     <button id="aiLauncherBtn" 
@@ -8,44 +13,63 @@
             class="group relative flex items-center gap-2.5 px-4 py-3 bg-gradient-to-r from-sky-500 to-indigo-600 text-white rounded-full shadow-2xl shadow-sky-500/30 border border-white/20 hover:scale-105 active:scale-95 transition-all duration-300">
         
         <div class="relative w-7 h-7 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
-            <i data-lucide="bot" class="w-4 h-4 text-white"></i>
+            <!-- Bot SVG -->
+            <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="11" width="18" height="10" rx="2"></rect>
+                <circle cx="12" cy="5" r="2"></circle>
+                <path d="M12 7v4"></path>
+                <line x1="8" y1="16" x2="8" y2="16"></line>
+                <line x1="16" y1="16" x2="16" y2="16"></line>
+            </svg>
             <span class="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-emerald-400 rounded-full border-2 border-zinc-950 animate-pulse"></span>
         </div>
         
         <div class="text-left hidden sm:block">
             <p class="text-xs font-bold leading-tight flex items-center gap-1">
                 Tanya {{ $profile->ai_assistant_name }}
-                <span class="text-[9px] bg-white/25 px-1.5 py-0.2 rounded font-mono">AI</span>
+                <span class="text-[9px] bg-white/25 px-1.5 py-0.5 rounded font-mono">AI</span>
             </p>
             <p class="text-[10px] text-white/80 leading-none">Online & siap memandu</p>
         </div>
     </button>
 
-    <!-- Glassmorphic AI Chat Window Modal -->
+    <!-- Glassmorphic AI Chat Window Modal (Responsive Bottom-Sheet on Mobile) -->
     <div id="aiChatWindow" 
-         class="fixed sm:absolute bottom-0 sm:bottom-16 right-0 sm:right-0 w-full sm:w-[380px] h-[85vh] sm:h-[520px] max-h-[90vh] bg-zinc-950/95 border border-white/15 rounded-t-3xl sm:rounded-3xl shadow-2xl backdrop-blur-2xl flex flex-col overflow-hidden transition-all duration-300 transform translate-y-full opacity-0 pointer-events-none z-50">
+         class="fixed sm:absolute bottom-0 sm:bottom-16 right-0 sm:right-0 w-full sm:w-[385px] h-[60vh] sm:h-[520px] max-h-[62vh] sm:max-h-[540px] bg-zinc-950/95 border border-white/15 rounded-t-3xl sm:rounded-3xl shadow-2xl backdrop-blur-2xl flex flex-col overflow-hidden transition-all duration-300 transform translate-y-full opacity-0 pointer-events-none z-50">
         
+        <!-- Mobile Sheet Handle Pill -->
+        <div class="w-10 h-1 bg-white/20 rounded-full mx-auto mt-2.5 mb-1 sm:hidden flex-shrink-0 cursor-pointer" onclick="toggleAiChat()"></div>
+
         <!-- Header -->
-        <div class="px-5 py-4 bg-white/5 border-b border-white/10 flex items-center justify-between flex-shrink-0">
+        <div class="px-5 py-3 sm:py-4 bg-white/5 border-b border-white/10 flex items-center justify-between flex-shrink-0">
             <div class="flex items-center gap-3">
-                <div class="w-9 h-9 rounded-full bg-gradient-to-tr from-sky-400 to-indigo-600 flex items-center justify-center text-white shadow-inner">
-                    <i data-lucide="sparkles" class="w-4 h-4"></i>
+                <div class="w-9 h-9 rounded-full bg-gradient-to-tr from-sky-400 to-indigo-600 flex items-center justify-center text-white shadow-inner flex-shrink-0">
+                    <!-- Sparkles SVG -->
+                    <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                    </svg>
                 </div>
                 <div>
-                    <h4 class="text-sm font-bold text-white flex items-center gap-1.5">
+                    <h4 class="text-sm font-bold text-white flex items-center gap-1.5 leading-tight">
                         {{ $profile->ai_assistant_name }}
                         <span class="text-[10px] font-medium text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded-full border border-emerald-500/20">Online</span>
                     </h4>
-                    <p class="text-[11px] text-zinc-400">Asisten Pintar {{ $profile->display_name }}</p>
+                    <p class="text-[11px] text-zinc-400 leading-tight">Asisten Pintar {{ $profile->display_name }}</p>
                 </div>
             </div>
 
             <div class="flex items-center gap-1">
                 <button onclick="clearChatHistory()" class="p-1.5 rounded-lg text-zinc-400 hover:text-white hover:bg-white/10 transition-colors" title="Bersihkan Obrolan">
-                    <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+                    <!-- Rotate CCW SVG -->
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                    </svg>
                 </button>
                 <button onclick="toggleAiChat()" class="p-1.5 rounded-lg text-zinc-400 hover:text-white hover:bg-white/10 transition-colors" title="Tutup">
-                    <i data-lucide="x" class="w-4 h-4"></i>
+                    <!-- X SVG -->
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
                 </button>
             </div>
         </div>
@@ -56,7 +80,11 @@
             <!-- Welcome Bot Greeting -->
             <div class="flex items-start gap-2.5">
                 <div class="w-6 h-6 rounded-full bg-sky-500/20 border border-sky-400/30 flex items-center justify-center flex-shrink-0 text-sky-400 mt-0.5">
-                    <i data-lucide="bot" class="w-3.5 h-3.5"></i>
+                    <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="11" width="18" height="10" rx="2"></rect>
+                        <circle cx="12" cy="5" r="2"></circle>
+                        <path d="M12 7v4"></path>
+                    </svg>
                 </div>
                 <div class="bg-white/10 border border-white/10 rounded-2xl rounded-tl-sm px-3.5 py-2.5 text-zinc-200 leading-relaxed max-w-[85%] shadow-sm">
                     {{ $profile->ai_greeting_message }}
@@ -67,17 +95,26 @@
             <div id="suggestedChipsContainer" class="pt-2">
                 <p class="text-[11px] text-zinc-400 mb-2 font-medium">Pertanyaan cepat yang sering ditanyakan:</p>
                 <div class="flex flex-col gap-1.5" id="chipsList">
-                    <button onclick="sendPrompt(this.innerText)" class="chip-btn text-left px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/15 border border-white/10 text-sky-300 hover:text-white transition-all text-[11px] font-medium flex items-center justify-between">
-                        <span>Siapa itu Windri?</span>
-                        <i data-lucide="corner-down-left" class="w-3 h-3 text-white/40"></i>
+                    <button onclick="sendPrompt('Siapa itu {{ $profile->display_name }}?')" class="chip-btn text-left px-3 py-2 rounded-xl bg-white/5 hover:bg-white/15 border border-white/10 text-sky-300 hover:text-white transition-all text-[11px] font-medium flex items-center justify-between">
+                        <span>Siapa itu {{ $profile->display_name }}?</span>
+                        <svg class="w-3.5 h-3.5 text-white/40" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <polyline points="9 10 4 15 9 20"></polyline>
+                            <path d="M20 4v7a4 4 0 0 1-4 4H4"></path>
+                        </svg>
                     </button>
-                    <button onclick="sendPrompt(this.innerText)" class="chip-btn text-left px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/15 border border-white/10 text-sky-300 hover:text-white transition-all text-[11px] font-medium flex items-center justify-between">
+                    <button onclick="sendPrompt('Apa saja proyek yang pernah dibuat?')" class="chip-btn text-left px-3 py-2 rounded-xl bg-white/5 hover:bg-white/15 border border-white/10 text-sky-300 hover:text-white transition-all text-[11px] font-medium flex items-center justify-between">
                         <span>Apa saja proyek yang pernah dibuat?</span>
-                        <i data-lucide="corner-down-left" class="w-3 h-3 text-white/40"></i>
+                        <svg class="w-3.5 h-3.5 text-white/40" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <polyline points="9 10 4 15 9 20"></polyline>
+                            <path d="M20 4v7a4 4 0 0 1-4 4H4"></path>
+                        </svg>
                     </button>
-                    <button onclick="sendPrompt(this.innerText)" class="chip-btn text-left px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/15 border border-white/10 text-sky-300 hover:text-white transition-all text-[11px] font-medium flex items-center justify-between">
-                        <span>Bagaimana cara menghubungi Windri?</span>
-                        <i data-lucide="corner-down-left" class="w-3 h-3 text-white/40"></i>
+                    <button onclick="sendPrompt('Bagaimana cara menghubungi {{ $profile->display_name }}?')" class="chip-btn text-left px-3 py-2 rounded-xl bg-white/5 hover:bg-white/15 border border-white/10 text-sky-300 hover:text-white transition-all text-[11px] font-medium flex items-center justify-between">
+                        <span>Bagaimana cara menghubungi {{ $profile->display_name }}?</span>
+                        <svg class="w-3.5 h-3.5 text-white/40" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <polyline points="9 10 4 15 9 20"></polyline>
+                            <path d="M20 4v7a4 4 0 0 1-4 4H4"></path>
+                        </svg>
                     </button>
                 </div>
             </div>
@@ -105,7 +142,10 @@
                 <button type="submit" 
                         id="aiSubmitBtn"
                         class="absolute right-1.5 p-1.5 rounded-lg bg-sky-500 hover:bg-sky-400 text-white transition-colors disabled:opacity-50">
-                    <i data-lucide="send" class="w-3.5 h-3.5"></i>
+                    <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <line x1="22" y1="2" x2="11" y2="13"></line>
+                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                    </svg>
                 </button>
             </form>
         </div>
@@ -121,15 +161,43 @@
 
     function toggleAiChat() {
         const win = document.getElementById('aiChatWindow');
+        const launcher = document.getElementById('aiLauncherBtn');
+        const backdrop = document.getElementById('aiChatBackdrop');
         isAiChatOpen = !isAiChatOpen;
 
         if (isAiChatOpen) {
             win.classList.remove('translate-y-full', 'opacity-0', 'pointer-events-none');
             win.classList.add('translate-y-0', 'opacity-100');
-            setTimeout(() => document.getElementById('aiChatInput').focus(), 300);
+            
+            // Hide launcher button when modal is open so it doesn't overlap
+            if (launcher) {
+                launcher.classList.add('opacity-0', 'pointer-events-none', 'scale-75');
+            }
+
+            // Show mobile backdrop
+            if (backdrop) {
+                backdrop.classList.remove('opacity-0', 'pointer-events-none');
+                backdrop.classList.add('opacity-100', 'pointer-events-auto');
+            }
+
+            setTimeout(() => {
+                const input = document.getElementById('aiChatInput');
+                if (input && window.innerWidth >= 640) input.focus();
+            }, 300);
         } else {
             win.classList.add('translate-y-full', 'opacity-0', 'pointer-events-none');
             win.classList.remove('translate-y-0', 'opacity-100');
+
+            // Restore launcher button
+            if (launcher) {
+                launcher.classList.remove('opacity-0', 'pointer-events-none', 'scale-75');
+            }
+
+            // Hide mobile backdrop
+            if (backdrop) {
+                backdrop.classList.add('opacity-0', 'pointer-events-none');
+                backdrop.classList.remove('opacity-100', 'pointer-events-auto');
+            }
         }
     }
 
@@ -145,7 +213,6 @@
         if (!message) return;
 
         input.value = '';
-        input.focus();
 
         // 1. Append User Message
         appendUserMessage(message);
@@ -209,29 +276,36 @@
         
         wrapper.innerHTML = `
             <div class="w-6 h-6 rounded-full bg-sky-500/20 border border-sky-400/30 flex items-center justify-center flex-shrink-0 text-sky-400 mt-0.5">
-                <i data-lucide="bot" class="w-3.5 h-3.5"></i>
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="11" width="18" height="10" rx="2"></rect>
+                    <circle cx="12" cy="5" r="2"></circle>
+                    <path d="M12 7v4"></path>
+                </svg>
             </div>
             <div class="bg-white/10 border border-white/10 rounded-2xl rounded-tl-sm px-3.5 py-2.5 text-zinc-200 leading-relaxed max-w-[85%] shadow-sm bot-text"></div>
         `;
         container.appendChild(wrapper);
-        lucide.createIcons();
 
         const textEl = wrapper.querySelector('.bot-text');
-        const formattedHtml = formatMarkdown(text);
 
-        // Typewriter streaming effect
+        // Robust typewriter token-by-token effect without breaking markdown HTML tags
+        const tokens = text.split(/(\s+)/);
+        let currentText = '';
         let i = 0;
-        const words = formattedHtml.split(' ');
+
         const interval = setInterval(() => {
-            if (i < words.length) {
-                textEl.innerHTML = words.slice(0, i + 1).join(' ');
+            if (i < tokens.length) {
+                currentText += tokens[i];
+                textEl.innerHTML = formatMarkdown(currentText);
                 scrollChatToBottom();
                 i++;
             } else {
                 clearInterval(interval);
+                textEl.innerHTML = formatMarkdown(text); // 100% full text guarantee
+                scrollChatToBottom();
                 renderChips(suggestedPrompts);
             }
-        }, 30);
+        }, 16);
     }
 
     function appendBotMessage(text) {
@@ -240,14 +314,17 @@
         wrapper.className = 'flex items-start gap-2.5';
         wrapper.innerHTML = `
             <div class="w-6 h-6 rounded-full bg-sky-500/20 border border-sky-400/30 flex items-center justify-center flex-shrink-0 text-sky-400 mt-0.5">
-                <i data-lucide="bot" class="w-3.5 h-3.5"></i>
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="11" width="18" height="10" rx="2"></rect>
+                    <circle cx="12" cy="5" r="2"></circle>
+                    <path d="M12 7v4"></path>
+                </svg>
             </div>
             <div class="bg-white/10 border border-white/10 rounded-2xl rounded-tl-sm px-3.5 py-2.5 text-zinc-200 leading-relaxed max-w-[85%] shadow-sm">
                 ${formatMarkdown(text)}
             </div>
         `;
         container.appendChild(wrapper);
-        lucide.createIcons();
         scrollChatToBottom();
     }
 
@@ -260,20 +337,31 @@
         prompts.forEach(p => {
             const btn = document.createElement('button');
             btn.className = 'text-left px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/15 border border-white/10 text-sky-300 hover:text-white transition-all text-[11px] font-medium flex items-center justify-between';
-            btn.innerHTML = `<span>${escapeHtml(p)}</span><i data-lucide="corner-down-left" class="w-3 h-3 text-white/40"></i>`;
+            btn.innerHTML = `
+                <span>${escapeHtml(p)}</span>
+                <svg class="w-3 h-3 text-white/40" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <polyline points="9 10 4 15 9 20"></polyline>
+                    <path d="M20 4v7a4 4 0 0 1-4 4H4"></path>
+                </svg>
+            `;
             btn.onclick = () => sendPrompt(p);
             chipContainer.appendChild(btn);
         });
 
         container.appendChild(chipContainer);
-        lucide.createIcons();
         scrollChatToBottom();
     }
 
     function formatMarkdown(text) {
+        if (!text) return '';
         return text
-            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-            .replace(/\*(.*?)\*/g, '<em>$1</em>')
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/\*\*(.*?)\*\*/g, '<strong class="text-white font-semibold">$1</strong>')
+            .replace(/\*(.*?)\*/g, '<em class="text-sky-200">$1</em>')
+            .replace(/^• (.*)$/gm, '<div class="flex items-start gap-1.5 my-0.5"><span class="text-sky-400 font-bold">•</span><span>$1</span></div>')
+            .replace(/^- (.*)$/gm, '<div class="flex items-start gap-1.5 my-0.5"><span class="text-sky-400 font-bold">•</span><span>$1</span></div>')
             .replace(/\n/g, '<br>');
     }
 
@@ -289,7 +377,9 @@
 
     function scrollChatToBottom() {
         const container = document.getElementById('aiChatMessages');
-        container.scrollTop = container.scrollHeight;
+        if (container) {
+            container.scrollTop = container.scrollHeight;
+        }
     }
 
     function clearChatHistory() {
@@ -297,13 +387,16 @@
         container.innerHTML = `
             <div class="flex items-start gap-2.5">
                 <div class="w-6 h-6 rounded-full bg-sky-500/20 border border-sky-400/30 flex items-center justify-center flex-shrink-0 text-sky-400 mt-0.5">
-                    <i data-lucide="bot" class="w-3.5 h-3.5"></i>
+                    <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="11" width="18" height="10" rx="2"></rect>
+                        <circle cx="12" cy="5" r="2"></circle>
+                        <path d="M12 7v4"></path>
+                    </svg>
                 </div>
                 <div class="bg-white/10 border border-white/10 rounded-2xl rounded-tl-sm px-3.5 py-2.5 text-zinc-200 leading-relaxed max-w-[85%] shadow-sm">
                     {{ $profile->ai_greeting_message }}
                 </div>
             </div>
         `;
-        lucide.createIcons();
     }
 </script>

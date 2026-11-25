@@ -59,6 +59,10 @@ Route::middleware('auth')->prefix('admin')->as('admin.')->group(function () {
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::post('/profile/socials', [ProfileController::class, 'updateSocials'])->name('profile.socials');
+    Route::post('/profile/socials/add', [ProfileController::class, 'storeSocial'])->name('profile.socials.store');
+    Route::put('/profile/socials/{id}', [ProfileController::class, 'updateSocial'])->name('profile.socials.update');
+    Route::post('/profile/socials/{id}/toggle', [ProfileController::class, 'toggleSocial'])->name('profile.socials.toggle');
+    Route::delete('/profile/socials/{id}', [ProfileController::class, 'destroySocial'])->name('profile.socials.destroy');
 
     // Themes
     Route::get('/themes', [ThemeController::class, 'index'])->name('themes.index');

@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Profile;
 use App\Models\SocialLink;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -99,5 +100,74 @@ class ProfileController
         }
 
         return redirect()->route('admin.profile.index')->with('success', 'Akun media sosial berhasil disinkronkan!');
+    }
+
+    public function storeSocial(Request $request): RedirectResponse
+    {
+        $profile = $this->getProfile();
+
+        $validated = $request->validate([
+            'platform' => 'required|string|max:50',
+            'url' => 'required|string|max:500',
+            'label' => 'nullable|string|max:100',
+            'is_active' => 'nullable|boolean',
+        ]);
+
+        $maxOrder = SocialLink::where('profile_id', $profile->id)->max('sort_order') ?? 0;
+
+        SocialLink::create([
+            'profile_id' => $profile->id,
+            'platform' => strtolower(trim($validated['platform'])),
+            'url' => trim($validated['url']),
+            'label' => !empty($validated['label']) ? trim($validated['label']) : ucfirst($validated['platform']),
+            'is_active' => $request->boolean('is_active', true),
+            'sort_order' => $maxOrder + 1,
+        ]);
+
+        return redirect()->route('admin.profile.index')->with('success', 'Akun media sosial berhasil ditambahkan!');
+    }
+
+    public function updateSocial(Request $request, int $id): RedirectResponse
+    {
+        $profile = $this->getProfile();
+        $social = SocialLink::where('profile_id', $profile->id)->findOrFail($id);
+
+        $validated = $request->validate([
+            'platform' => 'required|string|max:50',
+            'url' => 'required|string|max:500',
+            'label' => 'nullable|string|max:100',
+            'is_active' => 'nullable|boolean',
+        ]);
+
+        $social->update([
+            'platform' => strtolower(trim($validated['platform'])),
+            'url' => trim($validated['url']),
+            'label' => !empty($validated['label']) ? trim($validated['label']) : ucfirst($validated['platform']),
+            'is_active' => $request->boolean('is_active', true),
+        ]);
+
+        return redirect()->route('admin.profile.index')->with('success', 'Akun media sosial berhasil diperbarui!');
+    }
+
+    public function toggleSocial(int $id): JsonResponse
+    {
+        $profile = $this->getProfile();
+        $social = SocialLink::where('profile_id', $profile->id)->findOrFail($id);
+        $social->update(['is_active' => !$social->is_active]);
+
+        return response()->json([
+            'success' => true,
+            'is_active' => $social->is_active,
+            'message' => $social->is_active ? 'Media sosial diaktifkan.' : 'Media sosial dinonaktifkan.',
+        ]);
+    }
+
+    public function destroySocial(int $id): RedirectResponse
+    {
+        $profile = $this->getProfile();
+        $social = SocialLink::where('profile_id', $profile->id)->findOrFail($id);
+        $social->delete();
+
+        return redirect()->route('admin.profile.index')->with('success', 'Akun media sosial berhasil dihapus.');
     }
 }
