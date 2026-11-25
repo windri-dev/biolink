@@ -48,6 +48,7 @@ class ProfileController
             'show_share_button' => 'nullable|boolean',
             'ai_assistant_enabled' => 'nullable|boolean',
             'ai_assistant_name' => 'nullable|string|max:64',
+            'ai_avatar_url' => 'nullable|string|max:1000',
             'ai_greeting_message' => 'nullable|string|max:500',
             'meta_title' => 'nullable|string|max:255',
             'meta_description' => 'nullable|string|max:500',

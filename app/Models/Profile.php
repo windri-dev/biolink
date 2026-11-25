@@ -34,6 +34,7 @@ class Profile extends Model
         'show_subscribe_box',
         'ai_assistant_enabled',
         'ai_assistant_name',
+        'ai_avatar_url',
         'ai_greeting_message',
         'ai_provider',
         'ai_api_key',

@@ -46,18 +46,195 @@
             </div>
         </div>
 
-        <form action="{{ route('admin.ai.settings.update') }}" method="POST" class="space-y-4 text-xs">
+        <form action="{{ route('admin.ai.settings.update') }}" method="POST" enctype="multipart/form-data" class="space-y-6 text-xs">
             @csrf
 
+            <!-- 1. FIGURAN & KARAKTER KOSTUM ASISTEN AI (MASCOT PERSONA) -->
+            <div class="bg-zinc-800/50 border border-zinc-700/70 rounded-2xl p-5 space-y-4">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-zinc-700/50 gap-2">
+                    <div>
+                        <h4 class="text-xs font-bold text-white flex items-center gap-2">
+                            <i data-lucide="smile" class="w-4 h-4 text-sky-400"></i>
+                            <span>1. Personalisasi Figuran & Kostum Karakter AI</span>
+                        </h4>
+                        <p class="text-[11px] text-zinc-400 mt-0.5">Ubah avatar gambar/maskot figuran pada tombol mengambang dan jendela chat agar terlihat menarik dan tidak polos.</p>
+                    </div>
+
+                    <!-- Toggle Enable/Disable AI Widget -->
+                    <label class="flex items-center gap-2 cursor-pointer select-none">
+                        <input type="checkbox" name="ai_assistant_enabled" value="1" {{ $profile->ai_assistant_enabled ? 'checked' : '' }} class="rounded border-zinc-700 bg-zinc-800 text-sky-500 focus:ring-sky-500">
+                        <span class="text-xs font-semibold text-zinc-200">Aktifkan Obrolan AI di Bio</span>
+                    </label>
+                </div>
+
+                <!-- Live Preview of Floating Launcher Button -->
+                <div class="bg-zinc-950/60 border border-zinc-800 rounded-xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div>
+                        <span class="text-[10px] font-bold uppercase tracking-wider text-zinc-400 block mb-1">Pratinjau Tombol Figuran Mengambang (Bio Page):</span>
+                        <div class="inline-flex items-center gap-3 pl-2.5 pr-4 py-2 bg-zinc-900/90 text-white rounded-full shadow-xl border border-sky-400/40 backdrop-blur-xl">
+                            <div class="relative flex-shrink-0">
+                                <div class="w-10 h-10 rounded-full p-0.5 bg-gradient-to-tr from-sky-400 via-indigo-500 to-pink-500 shadow-md ring-2 ring-white/10 overflow-hidden flex items-center justify-center bg-zinc-950">
+                                    <img id="previewMascotImg" 
+                                         src="{{ $profile->ai_avatar_url ?: 'https://api.dicebear.com/7.x/bottts-neutral/svg?seed=AuraBot&backgroundColor=0284c7' }}" 
+                                         alt="Preview Mascot" 
+                                         class="w-full h-full object-cover rounded-full">
+                                </div>
+                                <span class="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-emerald-400 rounded-full border-2 border-zinc-950 shadow-sm animate-pulse"></span>
+                            </div>
+                            <div class="text-left">
+                                <p class="text-xs font-bold leading-tight flex items-center gap-1.5 text-white">
+                                    <span id="previewMascotName">Tanya {{ $profile->ai_assistant_name }}</span>
+                                    <span class="text-[9px] font-mono uppercase px-1.5 py-0.5 rounded-full bg-sky-500/20 text-sky-300 border border-sky-400/30">AI</span>
+                                </p>
+                                <p class="text-[10px] text-zinc-400 leading-tight mt-0.5 flex items-center gap-1">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                                    <span>Online &bull; Siap memandu</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-right sm:border-l sm:border-zinc-800 sm:pl-4">
+                        <span class="text-[10px] text-zinc-500 block">Avatar saat ini:</span>
+                        <span class="text-[11px] font-mono text-sky-400 truncate max-w-[200px] inline-block" id="currentAvatarLabel">
+                            {{ $profile->ai_avatar_url ? 'Gambar Kustom / Preset' : 'Default (Aura 3D Bot)' }}
+                        </span>
+                        <div class="mt-1">
+                            <button type="button" onclick="resetAiMascotAvatar()" class="text-[11px] text-rose-400 hover:text-rose-300 underline font-medium">
+                                Reset ke Default
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Preset Figures / Mascots (1-Click Apply) -->
+                <div>
+                    <label class="block text-[11px] text-zinc-300 font-semibold mb-2">Pilihan Cepat Kostum Karakter Figuran (Klik 1 Kali untuk Menerapkan):</label>
+                    <div class="grid grid-cols-2 sm:grid-cols-6 gap-2.5">
+                        <!-- Preset 1 -->
+                        <button type="button" 
+                                onclick="applyMascotPreset('https://api.dicebear.com/7.x/bottts-neutral/svg?seed=AuraBot&backgroundColor=0284c7', 'Cyber Bot 3D')" 
+                                class="p-2 rounded-xl bg-zinc-800/80 hover:bg-zinc-700/80 border border-zinc-700 hover:border-sky-400 text-center transition-all group">
+                            <div class="w-10 h-10 mx-auto rounded-full overflow-hidden p-0.5 bg-sky-500/20 border border-sky-400/30 mb-1.5 group-hover:scale-105 transition-transform">
+                                <img src="https://api.dicebear.com/7.x/bottts-neutral/svg?seed=AuraBot&backgroundColor=0284c7" alt="Cyber Bot" class="w-full h-full object-cover rounded-full">
+                            </div>
+                            <span class="text-[10px] font-bold text-white group-hover:text-sky-300 block leading-tight">Cyber Bot 3D</span>
+                        </button>
+
+                        <!-- Preset 2 -->
+                        <button type="button" 
+                                onclick="applyMascotPreset('https://api.dicebear.com/7.x/shapes/svg?seed=AuraHolo&backgroundColor=6366f1', 'Hologram Aura')" 
+                                class="p-2 rounded-xl bg-zinc-800/80 hover:bg-zinc-700/80 border border-zinc-700 hover:border-sky-400 text-center transition-all group">
+                            <div class="w-10 h-10 mx-auto rounded-full overflow-hidden p-0.5 bg-indigo-500/20 border border-indigo-400/30 mb-1.5 group-hover:scale-105 transition-transform">
+                                <img src="https://api.dicebear.com/7.x/shapes/svg?seed=AuraHolo&backgroundColor=6366f1" alt="Hologram Aura" class="w-full h-full object-cover rounded-full">
+                            </div>
+                            <span class="text-[10px] font-bold text-white group-hover:text-sky-300 block leading-tight">Hologram Aura</span>
+                        </button>
+
+                        <!-- Preset 3 -->
+                        <button type="button" 
+                                onclick="applyMascotPreset('https://api.dicebear.com/7.x/bottts/svg?seed=AstroBuddy&backgroundColor=0ea5e9', 'Astro Companion')" 
+                                class="p-2 rounded-xl bg-zinc-800/80 hover:bg-zinc-700/80 border border-zinc-700 hover:border-sky-400 text-center transition-all group">
+                            <div class="w-10 h-10 mx-auto rounded-full overflow-hidden p-0.5 bg-sky-500/20 border border-sky-400/30 mb-1.5 group-hover:scale-105 transition-transform">
+                                <img src="https://api.dicebear.com/7.x/bottts/svg?seed=AstroBuddy&backgroundColor=0ea5e9" alt="Astro Companion" class="w-full h-full object-cover rounded-full">
+                            </div>
+                            <span class="text-[10px] font-bold text-white group-hover:text-sky-300 block leading-tight">Astro Bot</span>
+                        </button>
+
+                        <!-- Preset 4 -->
+                        <button type="button" 
+                                onclick="applyMascotPreset('https://api.dicebear.com/7.x/micah/svg?seed=AuraGirl&backgroundColor=1e1b4b', 'Cyber Anime Girl')" 
+                                class="p-2 rounded-xl bg-zinc-800/80 hover:bg-zinc-700/80 border border-zinc-700 hover:border-sky-400 text-center transition-all group">
+                            <div class="w-10 h-10 mx-auto rounded-full overflow-hidden p-0.5 bg-purple-500/20 border border-purple-400/30 mb-1.5 group-hover:scale-105 transition-transform">
+                                <img src="https://api.dicebear.com/7.x/micah/svg?seed=AuraGirl&backgroundColor=1e1b4b" alt="Cyber Anime" class="w-full h-full object-cover rounded-full">
+                            </div>
+                            <span class="text-[10px] font-bold text-white group-hover:text-sky-300 block leading-tight">Anime Assistant</span>
+                        </button>
+
+                        <!-- Preset 5 -->
+                        <button type="button" 
+                                onclick="applyMascotPreset('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=150&auto=format&fit=crop&q=80', 'Neon Core Orb')" 
+                                class="p-2 rounded-xl bg-zinc-800/80 hover:bg-zinc-700/80 border border-zinc-700 hover:border-sky-400 text-center transition-all group">
+                            <div class="w-10 h-10 mx-auto rounded-full overflow-hidden p-0.5 bg-pink-500/20 border border-pink-400/30 mb-1.5 group-hover:scale-105 transition-transform">
+                                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=150&auto=format&fit=crop&q=80" alt="Neon Core Orb" class="w-full h-full object-cover rounded-full">
+                            </div>
+                            <span class="text-[10px] font-bold text-white group-hover:text-sky-300 block leading-tight">Neon Core Orb</span>
+                        </button>
+
+                        <!-- Preset 6 -->
+                        <button type="button" 
+                                onclick="applyMascotPreset('https://images.unsplash.com/photo-1546776310-eef45dd6d63c?w=150&auto=format&fit=crop&q=80', '3D Metal Bot')" 
+                                class="p-2 rounded-xl bg-zinc-800/80 hover:bg-zinc-700/80 border border-zinc-700 hover:border-sky-400 text-center transition-all group">
+                            <div class="w-10 h-10 mx-auto rounded-full overflow-hidden p-0.5 bg-amber-500/20 border border-amber-400/30 mb-1.5 group-hover:scale-105 transition-transform">
+                                <img src="https://images.unsplash.com/photo-1546776310-eef45dd6d63c?w=150&auto=format&fit=crop&q=80" alt="3D Metal Bot" class="w-full h-full object-cover rounded-full">
+                            </div>
+                            <span class="text-[10px] font-bold text-white group-hover:text-sky-300 block leading-tight">3D Metal Bot</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Custom Avatar URL & Upload Inputs -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
+                    <div>
+                        <label class="block text-zinc-300 font-semibold mb-1">Link URL Gambar Kostum / Figuran</label>
+                        <div class="relative">
+                            <span class="absolute left-3.5 top-2.5 text-zinc-500"><i data-lucide="image" class="w-4 h-4"></i></span>
+                            <input type="url" 
+                                   id="aiAvatarUrlInput" 
+                                   name="ai_avatar_url" 
+                                   value="{{ $profile->ai_avatar_url }}" 
+                                   placeholder="https://... (URL gambar maskot)" 
+                                   oninput="updateAvatarPreviewFromUrl(this.value)"
+                                   class="w-full bg-zinc-800 border border-zinc-700 rounded-xl py-2 pl-10 pr-3 text-white font-mono focus:outline-none focus:border-sky-400 text-xs">
+                        </div>
+                        <span class="text-[10px] text-zinc-500 mt-1 block">Bisa paste link gambar karakter/maskot apapun (Unsplash, Imgur, DiceBear, dsb).</span>
+                    </div>
+
+                    <div>
+                        <label class="block text-zinc-300 font-semibold mb-1">Atau Upload Gambar dari Komputer / HP</label>
+                        <input type="file" 
+                               id="aiAvatarFileInput" 
+                               name="ai_avatar_file" 
+                               accept="image/png,image/jpeg,image/webp,image/svg+xml" 
+                               onchange="handleAvatarFileSelect(this)"
+                               class="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-3 py-1.5 text-white file:mr-3 file:py-1 file:px-2.5 file:rounded-lg file:border-0 file:text-[11px] file:font-semibold file:bg-sky-500 file:text-white hover:file:bg-sky-400 text-xs cursor-pointer">
+                        <span class="text-[10px] text-zinc-500 mt-1 block">Maksimal 5MB (Format PNG transparan atau JPG persegi disarankan).</span>
+                    </div>
+                </div>
+
+                <!-- Identity Settings: Name & Greeting -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 border-t border-zinc-700/40">
+                    <div>
+                        <label class="block text-zinc-300 font-semibold mb-1">Nama Asisten AI (Contoh: Aura, Jarvis, Luna)</label>
+                        <input type="text" 
+                               name="ai_assistant_name" 
+                               id="aiAssistantNameInput"
+                               value="{{ $profile->ai_assistant_name }}" 
+                               oninput="document.getElementById('previewMascotName').innerText = 'Tanya ' + (this.value || 'Aura')"
+                               placeholder="Aura" 
+                               class="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-3 py-2 text-white font-semibold focus:outline-none focus:border-sky-400 text-xs">
+                    </div>
+
+                    <div>
+                        <label class="block text-zinc-300 font-semibold mb-1">Pesan Sambutan Awal (Greeting)</label>
+                        <input type="text" 
+                               name="ai_greeting_message" 
+                               value="{{ $profile->ai_greeting_message }}" 
+                               placeholder="Halo, saya asisten AI..." 
+                               class="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-sky-400 text-xs">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. UNIVERSAL LLM ENGINE & KUNCI API -->
             <input type="hidden" name="ai_provider" id="aiProviderInput" value="{{ $profile->ai_provider ?: 'universal' }}">
 
-            <!-- Unified AI Engine Selector & Presets -->
             <div class="bg-zinc-800/40 border border-zinc-700/60 rounded-2xl p-4 space-y-3">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                     <div>
                         <span class="text-xs font-bold text-white flex items-center gap-2">
                             <i data-lucide="sparkles" class="w-4 h-4 text-sky-400"></i>
-                            <span>Universal LLM & API Engine</span>
+                            <span>2. Universal LLM & API Engine</span>
                         </span>
                         <p class="text-[11px] text-zinc-400 mt-0.5">Mendukung OpenAI resmi dan seluruh provider LLM OpenAI-Compatible dalam satu pengaturan.</p>
                     </div>
@@ -68,7 +245,7 @@
 
                 <!-- Quick Preset Selector (1-Click Fill) -->
                 <div>
-                    <label class="block text-[11px] text-zinc-400 font-semibold mb-1.5">Preset Cepat (Klik untuk mengisi Base URL & Model otomatis):</label>
+                    <label class="block text-[11px] text-zinc-400 font-semibold mb-1.5">Preset Cepat Engine (Klik untuk mengisi Base URL & Model otomatis):</label>
                     <div class="grid grid-cols-2 sm:grid-cols-5 gap-2">
                         <button type="button" onclick="applyAiEnginePreset('openai')" class="p-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 hover:border-sky-400 text-left transition-all group">
                             <div class="flex items-center gap-1.5">
@@ -110,7 +287,7 @@
             </div>
 
             <!-- API Credentials Section -->
-            <div id="apiFieldsWrapper" class="space-y-4 pt-2">
+            <div id="apiFieldsWrapper" class="space-y-4 pt-1">
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <!-- API Key -->
                     <div>
@@ -178,7 +355,7 @@
             </div>
 
             <!-- Action Buttons Row -->
-            <div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-3 border-t border-zinc-800">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-4 border-t border-zinc-800">
                 <button type="button" 
                         id="testApiBtn"
                         onclick="testExternalApiConnection()" 
@@ -187,8 +364,8 @@
                     <span>Uji Koneksi API AI</span>
                 </button>
 
-                <button type="submit" class="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-sky-500 hover:bg-sky-400 text-white font-bold text-xs transition-all shadow-lg shadow-sky-500/20">
-                    Simpan Konfigurasi Engine AI
+                <button type="submit" class="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-400 hover:to-indigo-500 text-white font-bold text-xs transition-all shadow-lg shadow-sky-500/20">
+                    Simpan Seluruh Konfigurasi AI & Figuran
                 </button>
             </div>
 
@@ -414,6 +591,45 @@
                 modelInput.value = 'llama3';
                 break;
         }
+    }
+
+    function applyMascotPreset(url, label) {
+        document.getElementById('aiAvatarUrlInput').value = url;
+        document.getElementById('aiAvatarFileInput').value = '';
+        document.getElementById('previewMascotImg').src = url;
+        document.getElementById('currentAvatarLabel').innerText = label;
+    }
+
+    function updateAvatarPreviewFromUrl(url) {
+        const preview = document.getElementById('previewMascotImg');
+        const defaultAvatar = 'https://api.dicebear.com/7.x/bottts-neutral/svg?seed=AuraBot&backgroundColor=0284c7';
+        if (url && url.trim().length > 5) {
+            preview.src = url.trim();
+            document.getElementById('currentAvatarLabel').innerText = 'URL Kustom';
+        } else {
+            preview.src = defaultAvatar;
+            document.getElementById('currentAvatarLabel').innerText = 'Default (Aura 3D Bot)';
+        }
+    }
+
+    function handleAvatarFileSelect(input) {
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('previewMascotImg').src = e.target.result;
+                document.getElementById('currentAvatarLabel').innerText = 'File: ' + input.files[0].name;
+                document.getElementById('aiAvatarUrlInput').value = '';
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    function resetAiMascotAvatar() {
+        const defaultAvatar = 'https://api.dicebear.com/7.x/bottts-neutral/svg?seed=AuraBot&backgroundColor=0284c7';
+        document.getElementById('aiAvatarUrlInput').value = '';
+        document.getElementById('aiAvatarFileInput').value = '';
+        document.getElementById('previewMascotImg').src = defaultAvatar;
+        document.getElementById('currentAvatarLabel').innerText = 'Default (Aura 3D Bot)';
     }
 
     function togglePasswordVisibility(inputId, btn) {

@@ -52,7 +52,16 @@ class AiKnowledgeController
             'ai_assistant_name' => 'nullable|string|max:64',
             'ai_greeting_message' => 'nullable|string|max:500',
             'ai_assistant_enabled' => 'nullable|boolean',
+            'ai_avatar_url' => 'nullable|string|max:1000',
+            'ai_avatar_file' => 'nullable|image|max:5120',
         ]);
+
+        if ($request->hasFile('ai_avatar_file')) {
+            $path = $request->file('ai_avatar_file')->store('ai-avatars', 'public');
+            $validated['ai_avatar_url'] = '/storage/' . $path;
+        }
+
+        unset($validated['ai_avatar_file']);
 
         $validated['ai_provider'] = $request->input('ai_provider') ?: 'universal';
 
