@@ -8,7 +8,7 @@
     <!-- Welcome Card -->
     <div class="bg-gradient-to-r from-sky-900/30 via-indigo-900/20 to-zinc-900 border border-zinc-800 rounded-2xl p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-            <h2 class="text-xl font-extrabold text-white tracking-tight">Selamat Datang, {{ $profile->display_name }}! 👋</h2>
+            <h2 class="text-xl font-extrabold text-white tracking-tight">Selamat Datang, {{ $profile->display_name }}</h2>
             <p class="text-xs text-zinc-400 mt-1">Halaman bio publik Anda aktif di URL <span class="text-sky-400 font-mono">/@ {{ $profile->clean_handle }}</span></p>
         </div>
         <div class="flex items-center gap-2">

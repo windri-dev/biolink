@@ -1,4 +1,4 @@
-# BioLink — Multi-User Link-in-Bio & Creator Platform with AI Assistant 🚀
+# BioLink — Multi-User Link-in-Bio & Creator Platform with AI Assistant
 
 [![PHP Version](https://img.shields.io/badge/PHP-8.2%20%7C%208.3%20%7C%208.4-777bb4?logo=php)](https://php.net)
 [![Laravel Framework](https://img.shields.io/badge/Laravel-11%20%7C%2012-FF2D20?logo=laravel)](https://laravel.com)
@@ -7,53 +7,56 @@
 [![Multi-User](https://img.shields.io/badge/Multi--User-SaaS%20Ready-emerald)](https://github.com/windri-dev/biolink)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-**BioLink** adalah platform *link-in-bio* **Multi-User (SaaS-Ready)** — replika lengkap terinspirasi dari [bio.link](https://bio.link/) yang dibangun menggunakan **Full Laravel Versi Terbaru**, database relasional **MySQL**, antarmuka responsif **Tailwind CSS**, dan dilengkapi dengan **Asisten AI Pintar** (*Floating AI Assistant*) pada setiap profil pengguna.
+**BioLink** adalah platform link-in-bio multi-user (SaaS-Ready) yang dibangun menggunakan **Full Laravel Versi Terbaru**, database relasional **MySQL**, antarmuka responsif **Tailwind CSS**, dan dilengkapi dengan **Asisten AI Pintar** (Floating AI Assistant) pada setiap profil pengguna.
 
-Platform ini tidak hanya dapat digunakan untuk satu orang, melainkan dapat digunakan oleh **banyak orang / publik**:
+Platform ini dapat digunakan oleh banyak pengguna secara mandiri:
 * Siapa saja dapat mendaftar melalui halaman registrasi (`/register`) atau mengklaim username di beranda (`/@username`).
 * Setiap pengguna mendapatkan halaman bio mandiri (`/@username` atau `/username`).
 * Setiap pengguna memiliki **Studio Dasbor Admin terisolasi** untuk mengatur profil, tautan, tema, basis pengetahuan AI, dan analitik mereka sendiri.
 
 ---
 
-## ✨ Fitur-Fitur Utama Platform
+## Fitur-Fitur Utama Platform
 
-### 1. Halaman Depan & Pendaftaran Multi-User (*SaaS Landing Page*)
-* **Beranda Modern (*bio.link Parity*)**: Dilengkapi formulir interaktif *Claim Your Link* (`biolink.local/@yourname`), showcase fitur, dan pratinjau tema langsung.
+### 1. Halaman Depan & Pendaftaran Multi-User (SaaS Landing Page)
+* **Beranda Modern**: Dilengkapi formulir interaktif klaim tautan (`biolink.local/@username`), visual showcase, dan pratinjau tema langsung.
 * **Sistem Registrasi Mandiri (`/register`)**: Pengecekan keunikan handle/username secara otomatis, proteksi username sistem terlarang (*reserved keywords*), dan pembuatan profil instan dengan tema default.
 * **Sistem Autentikasi (`/login` & `/logout`)**: Autentikasi sesi aman berbasis Laravel dengan proteksi remember token.
 
 ### 2. Halaman Bio Publik Tiap Pengguna (`/@handle` & `/{handle}`)
-* **Mobile-First & Clean Aesthetic**: Desain responsif super cepat yang memuat profil unik masing-masing pengguna.
-* **Identitas & Lencana Resmi**: Foto profil avatar, nama tampilan, handle unik (`/@budi`), verified badge centang biru, profesi, dan lokasi domisili.
-* **Kanal Media Sosial**: Barisan ikon media sosial resmi (GitHub, Telegram, WhatsApp, Email, YouTube, X/Twitter, LinkedIn, Situs Web) dengan animasi hover.
-* **Kartu Tautan Dinamis (*Bio Links*)**:
-  - Tombol tautan dengan ikon kustom, subjudul, dan lencana status (*NEW*, *HOT*, *OFFICIAL*, *LIVE DEMO*).
-  - Pilihan animasi sorotan halus (*subtle pulse / glow*).
-  - Pembatas kategori (*Header divider*) dan Embed Video YouTube responsif.
+* **Mobile-First & Clean Aesthetic**: Desain responsif presisi yang memuat profil unik masing-masing pengguna.
+* **Identitas & Lencana Resmi**: Foto profil avatar, nama tampilan, handle unik (`/@budi`), verified badge centang biru SVG, profesi, dan lokasi domisili.
+* **Kanal Media Sosial**: Barisan ikon media sosial resmi berbasis vektor SVG (GitHub, Telegram, WhatsApp, Email, YouTube, X/Twitter, LinkedIn, Situs Web) dengan animasi hover.
+* **Kartu Tautan Dinamis (Bio Links)**:
+  - Tombol tautan dengan ikon SVG kustom, subjudul, dan lencana status (NEW, HOT, OFFICIAL, LIVE DEMO).
+  - Pilihan animasi sorotan halus (subtle pulse / glow).
+  - Format kartu modular Bento Grid (50% berdampingan atau 100% lebar penuh).
+  - Pembatas kategori (Header divider) dan Embed Video YouTube responsif.
 * **Pelacakan Klik 1-Klik**: Setiap klik tautan diarahkan melalui endpoint pelacak `/l/{id}` untuk mencatat metrik klik per pengguna.
-* **Tombol Bagikan Cepat (*Share Button*)**: Mendukung *Web Share API* bawaan smartphone dan tombol salin link profil ke clipboard.
+* **Fitur Kontak & QR Code**: Mendukung unduhan vCard kontak langsung (`.vcf`) ke buku telepon HP serta modal QR Code resolusi tinggi.
 
-### 3. Asisten AI Interaktif (*Floating AI Widget*) 🤖
-* **Widget Mengambang pada Setiap Bio**: Tombol AI melayang di pojok kanan bawah dengan lencana status *online* yang dapat diperbesar menjadi jendela obrolan *glassmorphic*.
-* **Basis Pengetahuan Spesifik Pengguna (*Isolated Knowledge Engine*)**: Asisten AI menjawab pertanyaan pengunjung (tentang profil diri, portofolio, kontak kolaborasi) secara akurat berdasarkan basis pengetahuan yang diisi oleh masing-masing pemilik profil di dashboard mereka.
-* **Typewriter Effect & Chip Saran**: Efek ketik kata-per-kata yang natural disertai tombol saran pertanyaan cepat (*prompt chips*).
+### 3. Asisten AI Interaktif (Floating AI Widget)
+* **Widget Mengambang pada Setiap Bio**: Tombol AI melayang di pojok kanan bawah dengan lencana status online SVG yang dapat diperbesar menjadi jendela obrolan glassmorphic.
+* **Basis Pengetahuan Spesifik Pengguna (Isolated Knowledge Engine)**: Asisten AI menjawab pertanyaan pengunjung (tentang profil diri, portofolio, kontak kolaborasi) secara akurat berdasarkan basis pengetahuan yang diisi oleh masing-masing pemilik profil di dashboard mereka.
+* **Typewriter Effect & Chip Saran**: Efek ketik kata-per-kata yang natural disertai tombol saran pertanyaan cepat (prompt chips).
 * **Dukungan Dual-Engine**: Berfungsi mandiri secara offline/lokal menggunakan algoritma pencocokan kata kunci, dan dapat disambungkan ke OpenAI API (`gpt-4o-mini`) via file `.env`.
 
-### 4. Studio Dasbor Pengelola Mandiri (*Multi-Tenant User Studio*)
+### 4. Studio Dasbor Pengelola Mandiri (Multi-Tenant User Studio)
 Setiap pengguna yang masuk ke dasbor `/admin` hanya dapat mengelola data profil mereka sendiri:
-* **Ringkasan Analitik**: Total tayangan profil, total klik tautan, rasio konversi klik (*Click-Through Rate*), dan grafik tren kunjungan 7 hari terakhir.
-* **Manajemen Tautan (*Links Manager*)**: Tambah tautan baru, ubah urutan (*sort order*), edit badge/warna, dan sakelar instan aktif/nonaktifkan tautan tanpa menghapusnya.
-* **Pengaturan Profil & Medsos**: Perbarui nama, handle unik, bio, unggah foto avatar langsung dengan pratinjau instan, dan konfigurasi tautan medsos.
-* **Koleksi Tema Visual (*Theme Studio*)**:
-  - **6 Preset Tema Siap Pakai**: *Dark Luxury (Default)*, *Midnight Indigo*, *Emerald Glass*, *Minimalist Cream (Light Mode)*, *Cyberpunk Neon*, dan *Sunset Aura*.
-  - **Pembuat Tema Kustom**: Buat gradien latar belakang, warna kartu, aksen tombol, dan bentuk sudut sendiri.
-* **Otak Pengetahuan AI (*AI Brain Manager*)**: Tambah fakta, FAQ, kata kunci pemicu, serta simulator pengujian respon AI secara langsung (*Sandbox Test*).
-* **Log & Statistik Lengkap**: Rincian klik per tautan, distribusi perangkat (*mobile/desktop*), dan 10 riwayat percakapan AI terbaru.
+* **Split-Screen Live Mobile Preview**: Dasbor editor link dilengkapi bingkai smartphone interaktif live di layar kanan desktop untuk melihat perubahan secara instan.
+* **Ringkasan Analitik**: Total tayangan profil, total klik tautan, rasio konversi klik (Click-Through Rate), dan grafik tren kunjungan 7 hari terakhir.
+* **Manajemen Tautan (Links Manager)**: Tambah tautan baru, tentukan ukuran kartu (full / bento half), ubah urutan, edit badge/warna, dan sakelar instan aktif/nonaktifkan tautan.
+* **Pengaturan Profil & Medsos**: Perbarui nama, handle unik, bio, nomor kontak untuk vCard, unggah foto avatar langsung dengan pratinjau instan, dan konfigurasi tautan medsos.
+* **Koleksi Tema Visual (Theme Studio)**:
+  - 6 Preset Tema Siap Pakai: Dark Luxury (Default), Midnight Indigo, Emerald Glass, Minimalist Cream (Light Mode), Cyberpunk Neon, dan Sunset Aura.
+  - Pembuat Tema Kustom: Buat gradien latar belakang, warna kartu, aksen tombol, dan bentuk sudut sendiri.
+* **Otak Pengetahuan AI (AI Brain Manager)**: Tambah fakta, FAQ, kata kunci pemicu, serta simulator pengujian respon AI secara langsung (Sandbox Test).
+* **Geolokasi (GEO) & Analitik Lengkap**: Sebaran negara pengunjung (ID, SG, US, dll), sumber rujukan (Referrer), distribusi perangkat (Mobile, Desktop, Tablet), dan riwayat percakapan AI.
+* **Ekspor Data & Backup**: Unduh salinan seluruh data profil, tautan, dan basis pengetahuan dalam format JSON & CSV.
 
 ---
 
-## 🏗️ Struktur Arsitektur & Database
+## Struktur Arsitektur & Database
 
 Aplikasi menggunakan skema database MySQL yang terisolasi per akun pengguna (*multi-tenant* via `profile_id` & `user_id`):
 
@@ -64,14 +67,14 @@ Aplikasi menggunakan skema database MySQL yang terisolasi per akun pengguna (*mu
 ├── social_links           # Kanal media sosial terurut per profil
 ├── bio_links              # Daftar tautan, pembatas header, dan embed video per profil
 ├── ai_knowledges          # Basis data pengetahuan untuk asisten AI per profil
-├── page_views             # Log riwayat kunjungan halaman (IP, User-Agent, perangkat, referer)
-├── link_clicks            # Log pelacakan klik per tautan
+├── page_views             # Log riwayat kunjungan halaman (IP, GEO negara/kota, User-Agent, referer)
+├── link_clicks            # Log pelacakan klik per tautan (IP, GEO negara/kota, User-Agent)
 └── ai_chats               # Log percakapan pengunjung dengan AI Assistant per profil
 ```
 
 ---
 
-## 💻 Panduan Menjalankan di Komputer Lokal (Local Development)
+## Panduan Menjalankan di Komputer Lokal (Local Development)
 
 ### 1. Kloning Repositori
 ```bash
@@ -119,11 +122,11 @@ php artisan storage:link
 php artisan serve
 ```
 
-Aplikasi Anda kini aktif di: **`http://localhost:8000`** 🎉
+Aplikasi Anda kini aktif di: **`http://localhost:8000`**
 
 ---
 
-## 🌐 Alur Penggunaan Multi-User
+## Alur Penggunaan Multi-User
 
 1. **Pengunjung Umum**:
    - Membuka `http://localhost:8000` untuk melihat halaman beranda SaaS.
@@ -139,7 +142,7 @@ Aplikasi Anda kini aktif di: **`http://localhost:8000`** 🎉
 
 ---
 
-## 🔑 Akun Bawaan Seeder (Untuk Testing Instan)
+## Akun Bawaan Seeder (Untuk Testing Instan)
 
 * **URL Dasbor**: [http://localhost:8000/login](http://localhost:8000/login)
 * **Email**: `admin@biolink.local`
@@ -148,7 +151,7 @@ Aplikasi Anda kini aktif di: **`http://localhost:8000`** 🎉
 
 ---
 
-## 📄 Lisensi
+## Lisensi
 
 Proyek ini dirilis di bawah lisensi terbuka [MIT License](LICENSE). Bebas digunakan, dimodifikasi, dan dikembangkan secara mandiri.
 Dikelola dengan bangga oleh [@windri-dev](https://github.com/windri-dev).

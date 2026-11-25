@@ -32,7 +32,7 @@ return new class extends Migration
             $table->boolean('show_subscribe_box')->default(false);
             $table->boolean('ai_assistant_enabled')->default(true);
             $table->string('ai_assistant_name')->default('Aura');
-            $table->string('ai_greeting_message')->default('Halo! Saya asisten AI. Ada yang bisa saya bantu terkait proyek, kolaborasi, atau kontak? ✨');
+            $table->string('ai_greeting_message')->default('Halo, saya asisten AI. Ada yang bisa saya bantu terkait proyek, kolaborasi, atau kontak?');
             $table->string('meta_title')->nullable();
             $table->text('meta_description')->nullable();
             $table->text('custom_css')->nullable();

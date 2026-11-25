@@ -26,7 +26,7 @@ class AiAssistantService
 
         // 2. Check for Greetings
         if ($this->isGreeting($messageLower)) {
-            $greetingResponse = "Halo! Senang bertemu dengan Anda. Saya {$profile->ai_assistant_name}, asisten virtual cerdas untuk {$profile->display_name}. Silakan tanyakan apa saja tentang proyek, latar belakang keahlian, atau cara berkolaborasi! ✨";
+            $greetingResponse = "Halo, selamat datang. Saya {$profile->ai_assistant_name}, asisten virtual untuk {$profile->display_name}. Silakan tanyakan hal terkait proyek, keahlian teknis, atau jalur kolaborasi.";
 
             $this->logChat($profile->id, $sessionId, $userMessage, $greetingResponse, 'greeting', $ipAddress);
 
@@ -76,7 +76,7 @@ class AiAssistantService
         }
 
         // 5. Graceful Local Fallback Response
-        $fallback = "Terima kasih pertanyaannya! Informasi spesifik mengenai hal tersebut belum tercatat di data pengetahuan saya. Namun Anda bisa langsung menghubungi {$profile->display_name} melalui tautan kontak Telegram atau WhatsApp di profil ini agar dibalas langsung! 🚀";
+        $fallback = "Terima kasih atas pertanyaannya. Informasi spesifik mengenai hal tersebut belum tercatat di data pengetahuan saya. Anda dapat menghubungi {$profile->display_name} secara langsung melalui tautan kontak Telegram atau Email pada profil ini.";
 
         $this->logChat($profile->id, $sessionId, $userMessage, $fallback, 'fallback', $ipAddress);
 

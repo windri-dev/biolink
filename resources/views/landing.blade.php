@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BioLink — Your link-in-bio, now with a brain 🧠</title>
+    <title>BioLink — Modern Link-in-Bio Platform</title>
 
     <meta name="description" content="Platform link-in-bio modern dengan asisten AI pintar. Buat halaman profil, kumpulkan semua link penting, dan pandu pengunjung secara otomatis.">
 
@@ -106,7 +106,9 @@
 
             <div class="flex items-center justify-center gap-1.5 mb-1">
                 <h3 class="font-extrabold text-base text-white">Windri</h3>
-                <span class="w-3.5 h-3.5 bg-sky-500 text-white rounded-full flex items-center justify-center text-[8px]">✓</span>
+                <span class="w-4 h-4 bg-sky-500 text-white rounded-full flex items-center justify-center p-0.5 shadow-sm">
+                    <svg class="w-2.5 h-2.5 fill-current" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+                </span>
             </div>
             <p class="text-xs font-mono text-sky-400 mb-2">@windri</p>
             <p class="text-xs text-zinc-400 max-w-xs mx-auto mb-4 leading-relaxed">

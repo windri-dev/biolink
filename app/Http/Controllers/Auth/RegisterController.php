@@ -81,7 +81,7 @@ class RegisterController
                 'show_share_button' => true,
                 'ai_assistant_enabled' => true,
                 'ai_assistant_name' => 'Aura',
-                'ai_greeting_message' => "Halo! Saya asisten pintar {$validated['name']}. Ada yang bisa saya bantu terkait proyek atau kontak? ✨",
+                'ai_greeting_message' => "Halo, saya asisten pintar {$validated['name']}. Ada yang bisa saya bantu terkait proyek atau kontak?",
                 'meta_title' => "{$validated['name']} (@{$cleanHandle}) • BioLink",
                 'meta_description' => "Profil dan kumpulan tautan resmi {$validated['name']}.",
             ]);

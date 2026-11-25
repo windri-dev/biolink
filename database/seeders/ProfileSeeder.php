@@ -39,7 +39,7 @@ class ProfileSeeder extends Seeder
                 'show_share_button' => true,
                 'ai_assistant_enabled' => true,
                 'ai_assistant_name' => 'Aura',
-                'ai_greeting_message' => 'Halo! Saya asisten AI Windri. Tanyakan apa saja tentang proyek, stack teknologi, atau kontak kolaborasi! ✨',
+                'ai_greeting_message' => 'Halo, saya asisten AI Windri. Tanyakan apa saja tentang proyek, stack teknologi, atau kontak kolaborasi.',
                 'meta_title' => 'Windri (@windri) • Bio.link Official',
                 'meta_description' => 'Hub profil resmi Windri. Temukan repositori GitHub, proyek aplikasi e-commerce SHOPPE, arsitektur server, dan kontak.',
             ]
