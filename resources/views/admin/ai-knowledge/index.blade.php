@@ -67,34 +67,49 @@
                     </label>
                 </div>
 
-                <!-- Live Preview of Floating Launcher Button -->
-                <div class="bg-zinc-950/60 border border-zinc-800 rounded-xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                    <div>
-                        <span class="text-[10px] font-bold uppercase tracking-wider text-zinc-400 block mb-1">Pratinjau Tombol Figuran Mengambang (Bio Page):</span>
-                        <div class="inline-flex items-center gap-3 pl-2.5 pr-4 py-2 bg-zinc-900/90 text-white rounded-full shadow-xl border border-sky-400/40 backdrop-blur-xl">
-                            <div class="relative flex-shrink-0">
-                                <div class="w-10 h-10 rounded-full p-0.5 bg-gradient-to-tr from-sky-400 via-indigo-500 to-pink-500 shadow-md ring-2 ring-white/10 overflow-hidden flex items-center justify-center bg-zinc-950">
-                                    <img id="previewMascotImg" 
-                                         src="{{ $profile->ai_avatar_url ?: 'https://api.dicebear.com/7.x/bottts-neutral/svg?seed=AuraBot&backgroundColor=0284c7' }}" 
-                                         alt="Preview Mascot" 
-                                         class="w-full h-full object-cover rounded-full">
+                <!-- Live Preview of Floating Launcher Button (Desktop & Mobile) -->
+                <div class="bg-zinc-950/60 border border-zinc-800 rounded-xl p-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div class="space-y-2">
+                        <span class="text-[10px] font-bold uppercase tracking-wider text-zinc-400 block">Pratinjau Tombol Figuran Mengambang (Bio Page):</span>
+                        <div class="flex items-center gap-4 flex-wrap">
+                            <!-- Desktop Preview -->
+                            <div class="inline-flex items-center gap-3 pl-2.5 pr-4 py-2 bg-zinc-900/90 text-white rounded-full shadow-xl border border-sky-400/40 backdrop-blur-xl">
+                                <div class="relative flex-shrink-0">
+                                    <div class="w-10 h-10 rounded-full p-0.5 bg-gradient-to-tr from-sky-400 via-indigo-500 to-pink-500 shadow-md ring-2 ring-white/10 overflow-hidden flex items-center justify-center bg-zinc-950">
+                                        <img class="previewMascotImg w-full h-full object-cover rounded-full" 
+                                             src="{{ $profile->ai_avatar_url ?: 'https://api.dicebear.com/7.x/bottts-neutral/svg?seed=AuraBot&backgroundColor=0284c7' }}" 
+                                             alt="Preview Mascot">
+                                    </div>
+                                    <span class="absolute bottom-0 right-0 w-3 h-3 bg-emerald-400 rounded-full border-2 border-zinc-950 shadow-sm animate-pulse"></span>
                                 </div>
-                                <span class="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-emerald-400 rounded-full border-2 border-zinc-950 shadow-sm animate-pulse"></span>
+                                <div class="text-left">
+                                    <p class="text-xs font-bold leading-tight flex items-center gap-1.5 text-white">
+                                        <span id="previewMascotName">Tanya {{ $profile->ai_assistant_name }}</span>
+                                        <span class="text-[9px] font-mono uppercase px-1.5 py-0.5 rounded-full bg-sky-500/20 text-sky-300 border border-sky-400/30">AI</span>
+                                    </p>
+                                    <p class="text-[10px] text-zinc-400 leading-tight mt-0.5 flex items-center gap-1">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                                        <span>Desktop Mode</span>
+                                    </p>
+                                </div>
                             </div>
-                            <div class="text-left">
-                                <p class="text-xs font-bold leading-tight flex items-center gap-1.5 text-white">
-                                    <span id="previewMascotName">Tanya {{ $profile->ai_assistant_name }}</span>
-                                    <span class="text-[9px] font-mono uppercase px-1.5 py-0.5 rounded-full bg-sky-500/20 text-sky-300 border border-sky-400/30">AI</span>
-                                </p>
-                                <p class="text-[10px] text-zinc-400 leading-tight mt-0.5 flex items-center gap-1">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-                                    <span>Online &bull; Siap memandu</span>
-                                </p>
+
+                            <!-- Mobile Preview (Full Image without wrapper) -->
+                            <div class="flex items-center gap-2.5 bg-white/5 border border-white/10 rounded-2xl px-3 py-1.5">
+                                <div class="relative flex-shrink-0">
+                                    <div class="w-11 h-11 rounded-full p-0.5 bg-gradient-to-tr from-sky-400 via-indigo-500 to-pink-500 shadow-xl shadow-sky-500/30 ring-2 ring-white/20 overflow-hidden flex items-center justify-center bg-zinc-950">
+                                        <img class="previewMascotImg w-full h-full object-cover rounded-full" 
+                                             src="{{ $profile->ai_avatar_url ?: 'https://api.dicebear.com/7.x/bottts-neutral/svg?seed=AuraBot&backgroundColor=0284c7' }}" 
+                                             alt="Preview Mascot Mobile">
+                                    </div>
+                                    <span class="absolute bottom-0 right-0 w-3.5 h-3.5 bg-emerald-400 rounded-full border-2 border-zinc-950 shadow-md animate-pulse"></span>
+                                </div>
+                                <span class="text-[10px] text-zinc-300 font-medium">Versi Mobile (Full gambar murni)</span>
                             </div>
                         </div>
                     </div>
 
-                    <div class="text-right sm:border-l sm:border-zinc-800 sm:pl-4">
+                    <div class="text-left md:text-right md:border-l md:border-zinc-800 md:pl-4">
                         <span class="text-[10px] text-zinc-500 block">Avatar saat ini:</span>
                         <span class="text-[11px] font-mono text-sky-400 truncate max-w-[200px] inline-block" id="currentAvatarLabel">
                             {{ $profile->ai_avatar_url ? 'Gambar Kustom / Preset' : 'Default (Aura 3D Bot)' }}
@@ -593,21 +608,24 @@
         }
     }
 
+    function updateAllPreviewImgs(src) {
+        document.querySelectorAll('.previewMascotImg').forEach(img => img.src = src);
+    }
+
     function applyMascotPreset(url, label) {
         document.getElementById('aiAvatarUrlInput').value = url;
         document.getElementById('aiAvatarFileInput').value = '';
-        document.getElementById('previewMascotImg').src = url;
+        updateAllPreviewImgs(url);
         document.getElementById('currentAvatarLabel').innerText = label;
     }
 
     function updateAvatarPreviewFromUrl(url) {
-        const preview = document.getElementById('previewMascotImg');
         const defaultAvatar = 'https://api.dicebear.com/7.x/bottts-neutral/svg?seed=AuraBot&backgroundColor=0284c7';
         if (url && url.trim().length > 5) {
-            preview.src = url.trim();
+            updateAllPreviewImgs(url.trim());
             document.getElementById('currentAvatarLabel').innerText = 'URL Kustom';
         } else {
-            preview.src = defaultAvatar;
+            updateAllPreviewImgs(defaultAvatar);
             document.getElementById('currentAvatarLabel').innerText = 'Default (Aura 3D Bot)';
         }
     }
@@ -616,7 +634,7 @@
         if (input.files && input.files[0]) {
             const reader = new FileReader();
             reader.onload = function(e) {
-                document.getElementById('previewMascotImg').src = e.target.result;
+                updateAllPreviewImgs(e.target.result);
                 document.getElementById('currentAvatarLabel').innerText = 'File: ' + input.files[0].name;
                 document.getElementById('aiAvatarUrlInput').value = '';
             };
@@ -628,7 +646,7 @@
         const defaultAvatar = 'https://api.dicebear.com/7.x/bottts-neutral/svg?seed=AuraBot&backgroundColor=0284c7';
         document.getElementById('aiAvatarUrlInput').value = '';
         document.getElementById('aiAvatarFileInput').value = '';
-        document.getElementById('previewMascotImg').src = defaultAvatar;
+        updateAllPreviewImgs(defaultAvatar);
         document.getElementById('currentAvatarLabel').innerText = 'Default (Aura 3D Bot)';
     }
 

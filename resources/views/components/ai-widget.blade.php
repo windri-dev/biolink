@@ -14,20 +14,20 @@
     <!-- Floating Trigger Launcher Button with Custom Figurine / Avatar -->
     <button id="aiLauncherBtn" 
             onclick="toggleAiChat()" 
-            class="group relative flex items-center gap-3 pl-2 sm:pl-2.5 pr-4 py-2 sm:py-2.5 bg-zinc-900/90 hover:bg-zinc-900 text-white rounded-full shadow-2xl shadow-sky-500/30 border border-sky-400/30 hover:border-sky-400/60 hover:scale-105 active:scale-95 transition-all duration-300 backdrop-blur-xl">
+            class="group relative flex items-center p-0 sm:pl-2.5 sm:pr-4 sm:py-2 sm:gap-3 bg-transparent sm:bg-zinc-900/90 sm:hover:bg-zinc-900 text-white rounded-full border-0 sm:border sm:border-sky-400/30 sm:hover:border-sky-400/60 hover:scale-105 active:scale-95 transition-all duration-300 sm:backdrop-blur-xl sm:shadow-2xl sm:shadow-sky-500/30">
         
-        <!-- Figuran / Avatar Karakter AI -->
+        <!-- Figuran / Avatar Karakter AI (Full tanpa bungkus gelap di mobile) -->
         <div class="relative flex-shrink-0">
-            <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full p-0.5 bg-gradient-to-tr from-sky-400 via-indigo-500 to-pink-500 shadow-md shadow-sky-500/30 ring-2 ring-white/10 group-hover:ring-sky-400/50 transition-all overflow-hidden flex items-center justify-center bg-zinc-950">
+            <div class="w-[52px] h-[52px] sm:w-11 sm:h-11 rounded-full p-0.5 bg-gradient-to-tr from-sky-400 via-indigo-500 to-pink-500 shadow-2xl shadow-sky-500/40 ring-2 ring-white/20 group-hover:ring-sky-400/60 transition-all overflow-hidden flex items-center justify-center bg-zinc-950">
                 <img src="{{ $aiAvatar }}" 
                      alt="{{ $profile->ai_assistant_name }}" 
                      class="w-full h-full object-cover rounded-full">
             </div>
             <!-- Online status badge -->
-            <span class="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-emerald-400 rounded-full border-2 border-zinc-950 shadow-sm animate-pulse"></span>
+            <span class="absolute bottom-0 right-0 w-3.5 h-3.5 sm:w-3 sm:h-3 bg-emerald-400 rounded-full border-2 border-zinc-950 shadow-md animate-pulse"></span>
         </div>
         
-        <!-- Text Label -->
+        <!-- Text Label (Desktop only) -->
         <div class="text-left hidden sm:block pr-1">
             <p class="text-xs font-bold leading-tight flex items-center gap-1.5 text-white group-hover:text-sky-300 transition-colors">
                 <span>Tanya {{ $profile->ai_assistant_name }}</span>
