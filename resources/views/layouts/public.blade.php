@@ -7,7 +7,9 @@
     
     <!-- Canonical & SEO Meta -->
     <link rel="canonical" href="{{ url('/@' . $profile->clean_handle) }}">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
     <meta name="description" content="{{ $profile->meta_description ?: $profile->bio }}">
+    <meta name="keywords" content="{{ $profile->meta_keywords ?: 'biolink, link in bio, ' . $profile->display_name . ', ' . $profile->clean_handle }}">
     <meta name="author" content="{{ $profile->display_name }}">
     <meta property="og:title" content="{{ $profile->meta_title ?: $profile->display_name }}">
     <meta property="og:description" content="{{ $profile->meta_description ?: $profile->bio }}">
@@ -40,7 +42,8 @@
     </script>
     
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="{{ $profile->avatar_url ?: 'https://api.iconify.design/lucide:link-2.svg' }}">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="alternate icon" href="/favicon.ico">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

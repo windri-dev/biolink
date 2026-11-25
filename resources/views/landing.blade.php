@@ -3,17 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BioLink — Platform Link-in-Bio Generasi Baru Ditenagai Asisten AI</title>
+    <title>BioLink — Platform Link in Bio Gratis & AI Assistant untuk Kreator & Developer</title>
 
-    <meta name="description" content="Kumpulkan seluruh portofolio, tautan proyek, dan media sosial Anda dalam satu URL elegan. Dilengkapi Asisten AI pintar yang menyapa dan memandu pengunjung Anda 24/7.">
-    <meta name="keywords" content="biolink, link in bio, portfolio, ai assistant, website pribadi, kartu nama digital, vcard">
+    <!-- Canonical URL -->
+    <link rel="canonical" href="{{ url('/') }}">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+
+    <!-- Meta Description & High-Intent SEO Keywords -->
+    <meta name="description" content="Platform link-in-bio modern gratis dengan asisten AI pintar. Buat halaman bio profil Anda dalam hitungan detik, kumpulkan seluruh tautan media sosial, portofolio, dan pandu pengunjung secara otomatis 24/7.">
+    <meta name="keywords" content="link in bio, biolink, bio link, link bio, alternatif linktree, linktree clone, buat link bio, website bio link, biolink indonesia, kartu nama digital, vcard, bio link gratis, ai assistant bio, bio link creator, portfolio link">
+    <meta name="author" content="BioLink">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="alternate icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/favicon.svg">
 
     <!-- OpenGraph & Twitter Meta -->
-    <meta property="og:title" content="BioLink — Platform Link-in-Bio Generasi Baru Ditenagai Asisten AI">
-    <meta property="og:description" content="Platform link-in-bio modern dengan kecerdasan buatan, tema kustom tanpa batas, dan analitik real-time privasi tinggi.">
+    <meta property="og:site_name" content="BioLink">
+    <meta property="og:title" content="BioLink — Platform Link in Bio Gratis & AI Assistant untuk Kreator & Developer">
+    <meta property="og:description" content="Kumpulkan seluruh portofolio, tautan proyek, dan media sosial Anda dalam satu URL elegan. Dilengkapi Asisten AI pintar yang menyapa dan memandu pengunjung Anda 24/7.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ url('/') }}">
+    <meta property="og:image" content="{{ asset('favicon.svg') }}">
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="BioLink — Platform Link in Bio Gratis & AI Assistant">
+    <meta name="twitter:description" content="Platform link-in-bio modern dengan kecerdasan buatan, tema kustom tanpa batas, dan analitik real-time.">
+    <meta name="twitter:image" content="{{ asset('favicon.svg') }}">
+
+    <!-- Schema.org JSON-LD Structured Data for Google Search -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "{{ url('/') }}/#website",
+          "url": "{{ url('/') }}",
+          "name": "BioLink",
+          "description": "Platform Link in Bio Modern dengan Asisten AI untuk Kreator dan Developer",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": "{{ url('/') }}/@{search_term_string}"
+            },
+            "query-input": "required name=search_term_string"
+          },
+          "inLanguage": "id-ID"
+        },
+        {
+          "@type": "SoftwareApplication",
+          "name": "BioLink",
+          "applicationCategory": "BusinessApplication",
+          "operatingSystem": "All",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "IDR"
+          },
+          "featureList": [
+            "Link-in-bio builder",
+            "Custom Themes and CSS",
+            "Interactive AI Assistant",
+            "vCard Contact Download",
+            "High-resolution QR Code Generator",
+            "Geolocation Analytics"
+          ]
+        }
+      ]
+    }
+    </script>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -190,8 +250,17 @@
                 </button>
             </form>
 
+            <!-- Interactive Theme Switcher Pills -->
+            <div class="flex items-center justify-center gap-2 flex-wrap text-xs pb-1">
+                <span class="text-[11px] text-zinc-400 font-medium">Uji Coba Tema Mockup:</span>
+                <button type="button" onclick="switchHeroMockupTheme('dark', this)" class="theme-pill px-3 py-1 rounded-full text-[11px] font-semibold bg-zinc-800 text-sky-400 border border-sky-500/50 shadow-sm transition-all">Dark Luxury</button>
+                <button type="button" onclick="switchHeroMockupTheme('midnight', this)" class="theme-pill px-3 py-1 rounded-full text-[11px] font-semibold bg-zinc-900 text-zinc-400 border border-zinc-800 hover:text-white transition-all">Midnight Indigo</button>
+                <button type="button" onclick="switchHeroMockupTheme('emerald', this)" class="theme-pill px-3 py-1 rounded-full text-[11px] font-semibold bg-zinc-900 text-zinc-400 border border-zinc-800 hover:text-white transition-all">Emerald Glass</button>
+                <button type="button" onclick="switchHeroMockupTheme('minimal', this)" class="theme-pill px-3 py-1 rounded-full text-[11px] font-semibold bg-zinc-900 text-zinc-400 border border-zinc-800 hover:text-white transition-all">Minimal Light</button>
+            </div>
+
             <!-- Live Mockup Visual Showcase -->
-            <div class="w-full max-w-md bg-zinc-900/90 border border-zinc-800 rounded-3xl p-6 sm:p-7 shadow-2xl backdrop-blur-xl relative group text-left mx-auto">
+            <div id="heroMockupCard" class="w-full max-w-md bg-zinc-900/90 border border-zinc-800 rounded-3xl p-6 sm:p-7 shadow-2xl backdrop-blur-xl relative group text-left mx-auto transition-all duration-500">
                 
                 <!-- Avatar & Verified Badge -->
                 <div class="flex flex-col items-center text-center mb-5">
@@ -202,60 +271,80 @@
                         </span>
                     </div>
 
-                    <h3 class="font-black text-lg text-white">Windri</h3>
-                    <p class="text-xs font-mono text-sky-400 font-semibold mb-1">@windri</p>
-                    <p class="text-[11px] text-zinc-400 max-w-xs mx-auto leading-relaxed">
+                    <h3 id="mockupName" class="font-black text-lg text-white">Windri</h3>
+                    <p id="mockupHandle" class="text-xs font-mono text-sky-400 font-semibold mb-1">@windri</p>
+                    <p id="mockupBio" class="text-[11px] text-zinc-400 max-w-xs mx-auto leading-relaxed">
                         Senior Full-Stack Software Engineer & Builder. Focusing on distributed systems, modern web, & AI agents.
                     </p>
                 </div>
 
                 <!-- Sample Bento Cards -->
                 <div class="space-y-2.5 text-xs">
-                    <div class="p-3.5 rounded-2xl bg-white/5 border border-white/10 hover:border-sky-400/40 transition-all flex items-center justify-between group/card cursor-pointer">
+                    <div class="mockup-link-card p-3.5 rounded-2xl bg-white/5 border border-white/10 hover:border-sky-400/40 transition-all flex items-center justify-between group/card cursor-pointer">
                         <div class="flex items-center gap-3">
                             <div class="w-8 h-8 rounded-xl bg-white/10 flex items-center justify-center text-white">
                                 <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
                             </div>
                             <div>
-                                <span class="font-bold text-white block">GitHub windri-dev</span>
-                                <span class="text-[10px] text-zinc-400">Jelajahi repositori open-source</span>
+                                <span class="mockup-link-title font-bold text-white block">GitHub windri-dev</span>
+                                <span class="mockup-link-desc text-[10px] text-zinc-400">Jelajahi repositori open-source</span>
                             </div>
                         </div>
                         <span class="text-[9px] bg-sky-500/20 text-sky-300 px-2 py-0.5 rounded-full font-mono font-bold border border-sky-500/30">OFFICIAL</span>
                     </div>
 
-                    <div class="p-3.5 rounded-2xl bg-white/5 border border-white/10 hover:border-emerald-400/40 transition-all flex items-center justify-between group/card cursor-pointer">
+                    <div class="mockup-link-card p-3.5 rounded-2xl bg-white/5 border border-white/10 hover:border-emerald-400/40 transition-all flex items-center justify-between group/card cursor-pointer">
                         <div class="flex items-center gap-3">
                             <div class="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center">
                                 <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
                             </div>
                             <div>
-                                <span class="font-bold text-white block">SHOPPE E-Commerce</span>
-                                <span class="text-[10px] text-zinc-400">Staging demo modern boutique</span>
+                                <span class="mockup-link-title font-bold text-white block">SHOPPE E-Commerce</span>
+                                <span class="mockup-link-desc text-[10px] text-zinc-400">Staging demo modern boutique</span>
                             </div>
                         </div>
                         <span class="text-[9px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-full font-mono font-bold border border-emerald-500/30">LIVE</span>
                     </div>
                 </div>
 
-                <!-- Mascot Figurine Floating Button Preview -->
-                <div class="mt-4 p-3 rounded-2xl bg-zinc-950/80 border border-sky-400/30 flex items-center justify-between shadow-lg">
-                    <div class="flex items-center gap-2.5">
-                        <div class="relative">
-                            <div class="w-9 h-9 rounded-full p-0.5 bg-gradient-to-tr from-sky-400 via-indigo-500 to-pink-500 overflow-hidden">
-                                <img src="https://api.dicebear.com/7.x/bottts-neutral/svg?seed=AuraBot&backgroundColor=0284c7" alt="Aura Figurine" class="w-full h-full object-cover rounded-full">
+                <!-- Mascot Figurine Floating Button Preview with Interactive Chat Drawer -->
+                <div class="mt-4 space-y-2">
+                    <div onclick="toggleHeroMockupChat()" class="p-3 rounded-2xl bg-zinc-950/80 border border-sky-400/30 flex items-center justify-between shadow-lg cursor-pointer hover:border-sky-400/60 transition-all">
+                        <div class="flex items-center gap-2.5">
+                            <div class="relative">
+                                <div class="w-9 h-9 rounded-full p-0.5 bg-gradient-to-tr from-sky-400 via-indigo-500 to-pink-500 overflow-hidden">
+                                    <img src="https://api.dicebear.com/7.x/bottts-neutral/svg?seed=AuraBot&backgroundColor=0284c7" alt="Aura Figurine" class="w-full h-full object-cover rounded-full">
+                                </div>
+                                <span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-400 rounded-full border border-zinc-950 animate-pulse"></span>
                             </div>
-                            <span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-400 rounded-full border border-zinc-950 animate-pulse"></span>
+                            <div>
+                                <span class="text-[11px] font-bold text-white flex items-center gap-1">
+                                    Tanya Aura
+                                    <span class="text-[8px] font-mono px-1 py-0.2 bg-sky-500/20 text-sky-300 rounded">AI</span>
+                                </span>
+                                <p class="text-[10px] text-zinc-400">"Halo! Saya siap memandu tentang proyek Windri."</p>
+                            </div>
                         </div>
-                        <div>
-                            <span class="text-[11px] font-bold text-white flex items-center gap-1">
-                                Tanya Aura
-                                <span class="text-[8px] font-mono px-1 py-0.2 bg-sky-500/20 text-sky-300 rounded">AI</span>
-                            </span>
-                            <p class="text-[10px] text-zinc-400">"Halo! Saya siap memandu tentang proyek Windri."</p>
+                        <span id="heroChatToggleText" class="text-[10px] text-sky-400 font-semibold">Coba &rarr;</span>
+                    </div>
+
+                    <!-- Interactive Simulated Chat Dialog inside Mockup -->
+                    <div id="heroMockupChatBox" class="hidden p-3 rounded-2xl bg-zinc-950 border border-indigo-500/30 text-[11px] space-y-2 animate-fadeIn">
+                        <div class="flex items-start gap-2">
+                            <span class="w-5 h-5 rounded-full bg-zinc-800 text-zinc-300 flex items-center justify-center text-[10px] font-bold flex-shrink-0">U</span>
+                            <div class="bg-zinc-800/90 text-zinc-200 px-2.5 py-1.5 rounded-xl rounded-tl-none">
+                                Apa keahlian utama Windri?
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <div class="w-5 h-5 rounded-full bg-sky-500/20 text-sky-400 flex items-center justify-center flex-shrink-0">
+                                <svg class="w-3 h-3 fill-current" viewBox="0 0 24 24"><path d="M12 2a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2 2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Z"/></svg>
+                            </div>
+                            <div class="bg-sky-500/10 border border-sky-500/20 text-sky-200 px-2.5 py-1.5 rounded-xl rounded-tl-none">
+                                Windri adalah Senior Full-Stack Engineer yang ahli di Modern PHP & Laravel, Vue/Tailwind, arsitektur server Linux terdistribusi, serta integrasi AI autonomous agents.
+                            </div>
                         </div>
                     </div>
-                    <span class="text-[10px] text-sky-400 font-semibold cursor-pointer">Buka &rarr;</span>
                 </div>
 
             </div>
@@ -645,7 +734,108 @@
         </section>
 
 
-        <!-- SECTION F: PERTANYAAN UMUM (FAQ ACCORDION) -->
+        <!-- SECTION: GOOGLE SEARCH & SEO READINESS -->
+        <section id="seo-google" class="py-24 px-6 sm:px-12 border-t border-zinc-800/80 max-w-6xl mx-auto w-full">
+            <div class="text-center mb-16 space-y-3">
+                <span class="text-xs font-mono uppercase tracking-wider text-sky-400 font-bold block">OPTIMASI MESIN PENCARI (SEO & GOOGLE INDEXING)</span>
+                <h2 class="text-3xl sm:text-5xl font-black text-white tracking-tight">Mudah Ditemukan saat Audiens Mencari Anda di Google</h2>
+                <p class="text-xs sm:text-sm text-zinc-400 max-w-2xl mx-auto">Setiap profil bio secara otomatis dioptimasi dengan metadata Schema.org JSON-LD, XML Sitemap, dan protokol OpenGraph sehingga nama dan karya Anda langsung tampil rapi di hasil pencarian Google.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <!-- Left: Google Search Mockup Card (7 Cols) -->
+                <div class="lg:col-span-7 bg-[#202124] border border-zinc-700/80 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-5 text-left">
+                    <!-- Google Search Bar Mockup -->
+                    <div class="flex items-center gap-3 bg-[#303134] rounded-full px-4 py-2.5 border border-zinc-600/50 shadow-inner">
+                        <svg class="w-4 h-4 text-zinc-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                        <span class="text-xs text-zinc-200 font-medium">biolink windri</span>
+                        <div class="ml-auto flex items-center gap-2 text-zinc-400">
+                            <span class="text-[10px] font-mono bg-zinc-700/60 px-1.5 py-0.5 rounded text-zinc-300">Google Search</span>
+                        </div>
+                    </div>
+
+                    <!-- Search Result Item -->
+                    <div class="space-y-2 pt-2">
+                        <!-- Breadcrumb & Favicon -->
+                        <div class="flex items-center gap-2.5">
+                            <div class="w-6 h-6 rounded-full bg-zinc-800 flex items-center justify-center p-1 border border-zinc-700">
+                                <img src="{{ asset('favicon.svg') }}" alt="Favicon" class="w-full h-full">
+                            </div>
+                            <div class="text-xs leading-none">
+                                <span class="text-zinc-200 font-medium block">BioLink</span>
+                                <span class="text-[11px] text-zinc-400 font-mono">https://biolink.local › @windri</span>
+                            </div>
+                        </div>
+
+                        <!-- Clickable Title -->
+                        <h3 class="text-base sm:text-lg font-bold text-[#8ab4f8] hover:underline cursor-pointer leading-snug">
+                            Windri (@windri) • Senior Full-Stack Engineer | BioLink Resmi
+                        </h3>
+
+                        <!-- Snippet Description -->
+                        <p class="text-xs sm:text-sm text-[#bdc1c6] leading-relaxed">
+                            Hub profil resmi Windri. Temukan repositori GitHub windri-dev, live demo aplikasi SHOPPE, arsitektur server terdistribusi, dan kontak kolaborasi langsung via Telegram...
+                        </p>
+
+                        <!-- Google Sitelinks Rich Snippets -->
+                        <div class="grid grid-cols-2 gap-2 pt-3 border-t border-zinc-700/60">
+                            <div class="p-2.5 rounded-xl bg-zinc-800/40 hover:bg-zinc-800/80 transition-colors cursor-pointer">
+                                <span class="text-xs font-bold text-[#8ab4f8] block hover:underline">GitHub windri-dev</span>
+                                <span class="text-[11px] text-zinc-400">Jelajahi repositori open-source</span>
+                            </div>
+                            <div class="p-2.5 rounded-xl bg-zinc-800/40 hover:bg-zinc-800/80 transition-colors cursor-pointer">
+                                <span class="text-xs font-bold text-[#8ab4f8] block hover:underline">SHOPPE E-Commerce</span>
+                                <span class="text-[11px] text-zinc-400">Staging demo butik modern</span>
+                            </div>
+                            <div class="p-2.5 rounded-xl bg-zinc-800/40 hover:bg-zinc-800/80 transition-colors cursor-pointer">
+                                <span class="text-xs font-bold text-[#8ab4f8] block hover:underline">Kontak Telegram</span>
+                                <span class="text-[11px] text-zinc-400">Diskusi proyek & konsultasi</span>
+                            </div>
+                            <div class="p-2.5 rounded-xl bg-zinc-800/40 hover:bg-zinc-800/80 transition-colors cursor-pointer">
+                                <span class="text-xs font-bold text-[#8ab4f8] block hover:underline">Simpan Kontak vCard</span>
+                                <span class="text-[11px] text-zinc-400">Unduh nomor langsung ke ponsel</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: SEO Features Explanations (5 Cols) -->
+                <div class="lg:col-span-5 space-y-4 text-left">
+                    <div class="p-5 rounded-2xl bg-zinc-900/60 border border-zinc-800 space-y-2">
+                        <div class="w-8 h-8 rounded-lg bg-sky-500/10 border border-sky-500/20 text-sky-400 flex items-center justify-center">
+                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="m21 21-4.3-4.3"/><circle cx="11" cy="11" r="8"/></svg>
+                        </div>
+                        <h4 class="font-bold text-sm text-white">Google Rich Snippets Terbaca Otomatis</h4>
+                        <p class="text-xs text-zinc-400 leading-relaxed">
+                            Tag <code>Schema.org JSON-LD</code> disuntikkan langsung di setiap profil bio, memberitahu bot Google bahwa halaman ini adalah profil resmi seseorang atau entitas bisnis.
+                        </p>
+                    </div>
+
+                    <div class="p-5 rounded-2xl bg-zinc-900/60 border border-zinc-800 space-y-2">
+                        <div class="w-8 h-8 rounded-lg bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center">
+                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10"/><path d="M6 10h10"/></svg>
+                        </div>
+                        <h4 class="font-bold text-sm text-white">Sitemap XML Otomatis (/sitemap.xml)</h4>
+                        <p class="text-xs text-zinc-400 leading-relaxed">
+                            Setiap ada pengguna baru yang mendaftar atau memperbarui tautannya, sistem memperbarui sitemap XML secara instan sehingga crawler Google dapat merayapi halaman baru secara cepat.
+                        </p>
+                    </div>
+
+                    <div class="p-5 rounded-2xl bg-zinc-900/60 border border-zinc-800 space-y-2">
+                        <div class="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center">
+                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+                        </div>
+                        <h4 class="font-bold text-sm text-white">Kustomisasi Title & Meta Keywords Mandiri</h4>
+                        <p class="text-xs text-zinc-400 leading-relaxed">
+                            Pengguna dapat mengatur judul spesifik dan kata kunci di menu Profil Dasbor untuk mengincar kata kunci pencarian yang relevan dengan spesialisasi mereka.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- SECTION F: PERTANYAAN UMUM (FAQ) -->
         <section id="faq" class="py-24 px-6 sm:px-12 border-t border-zinc-800/80 max-w-4xl mx-auto w-full">
             <div class="text-center mb-16 space-y-3">
                 <span class="text-xs font-mono uppercase tracking-wider text-sky-400 font-bold block">FAQ</span>
@@ -832,6 +1022,74 @@
                 answer.classList.add('hidden');
                 icon.innerText = '+';
                 icon.classList.remove('text-sky-400');
+            }
+        }
+
+        function toggleHeroMockupChat() {
+            const box = document.getElementById('heroMockupChatBox');
+            const toggleText = document.getElementById('heroChatToggleText');
+            if (box.classList.contains('hidden')) {
+                box.classList.remove('hidden');
+                toggleText.innerText = 'Tutup ✕';
+            } else {
+                box.classList.add('hidden');
+                toggleText.innerText = 'Coba →';
+            }
+        }
+
+        function switchHeroMockupTheme(theme, btn) {
+            const card = document.getElementById('heroMockupCard');
+            const pills = document.querySelectorAll('.theme-pill');
+            pills.forEach(p => {
+                p.className = 'theme-pill px-3 py-1 rounded-full text-[11px] font-semibold bg-zinc-900 text-zinc-400 border border-zinc-800 hover:text-white transition-all';
+            });
+            btn.className = 'theme-pill px-3 py-1 rounded-full text-[11px] font-semibold bg-zinc-800 text-sky-400 border border-sky-500/50 shadow-sm transition-all';
+
+            const name = document.getElementById('mockupName');
+            const handle = document.getElementById('mockupHandle');
+            const bio = document.getElementById('mockupBio');
+            const linkCards = card.querySelectorAll('.mockup-link-card');
+
+            if (theme === 'dark') {
+                card.style.background = 'rgba(24, 24, 27, 0.9)';
+                card.style.borderColor = 'rgba(63, 63, 70, 0.8)';
+                name.style.color = '#ffffff';
+                handle.style.color = '#38bdf8';
+                bio.style.color = '#a1a1aa';
+                linkCards.forEach(c => {
+                    c.style.background = 'rgba(255, 255, 255, 0.05)';
+                    c.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+                });
+            } else if (theme === 'midnight') {
+                card.style.background = 'linear-gradient(180deg, #0f172a 0%, #020617 100%)';
+                card.style.borderColor = 'rgba(99, 102, 241, 0.4)';
+                name.style.color = '#ffffff';
+                handle.style.color = '#818cf8';
+                bio.style.color = '#94a3b8';
+                linkCards.forEach(c => {
+                    c.style.background = 'rgba(99, 102, 241, 0.1)';
+                    c.style.borderColor = 'rgba(99, 102, 241, 0.25)';
+                });
+            } else if (theme === 'emerald') {
+                card.style.background = 'linear-gradient(180deg, #064e3b 0%, #022c22 100%)';
+                card.style.borderColor = 'rgba(16, 185, 129, 0.4)';
+                name.style.color = '#ffffff';
+                handle.style.color = '#34d399';
+                bio.style.color = '#a7f3d0';
+                linkCards.forEach(c => {
+                    c.style.background = 'rgba(16, 185, 129, 0.12)';
+                    c.style.borderColor = 'rgba(16, 185, 129, 0.3)';
+                });
+            } else if (theme === 'minimal') {
+                card.style.background = '#f4f4f5';
+                card.style.borderColor = '#d4d4d8';
+                name.style.color = '#09090b';
+                handle.style.color = '#0284c7';
+                bio.style.color = '#52525b';
+                linkCards.forEach(c => {
+                    c.style.background = '#ffffff';
+                    c.style.borderColor = '#e4e4e7';
+                });
             }
         }
     </script>
