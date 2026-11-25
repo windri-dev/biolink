@@ -8,14 +8,20 @@ use App\Models\Profile;
 use App\Models\SocialLink;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class ProfileController
 {
+    protected function getProfile(): Profile
+    {
+        return Auth::user()->profile()->firstOrFail();
+    }
+
     public function index(): View
     {
-        $profile = Profile::with('socialLinks')->firstOrFail();
+        $profile = $this->getProfile()->load('socialLinks');
         $socialLinks = $profile->socialLinks;
 
         return view('admin.profile.index', [
@@ -26,11 +32,11 @@ class ProfileController
 
     public function update(Request $request): RedirectResponse
     {
-        $profile = Profile::firstOrFail();
+        $profile = $this->getProfile();
 
         $validated = $request->validate([
             'display_name' => 'required|string|max:255',
-            'handle' => 'required|string|max:64|unique:profiles,handle,' . $profile->id,
+            'handle' => 'required|string|min:3|max:30|regex:/^[a-zA-Z0-9_-]+$/|unique:profiles,handle,' . $profile->id,
             'tagline' => 'nullable|string|max:255',
             'location' => 'nullable|string|max:255',
             'bio' => 'nullable|string|max:1000',
@@ -55,6 +61,7 @@ class ProfileController
         $validated['is_verified'] = $request->boolean('is_verified');
         $validated['show_share_button'] = $request->boolean('show_share_button');
         $validated['ai_assistant_enabled'] = $request->boolean('ai_assistant_enabled');
+        $validated['handle'] = strtolower($validated['handle']);
 
         $profile->update($validated);
 
@@ -63,7 +70,7 @@ class ProfileController
 
     public function updateSocials(Request $request): RedirectResponse
     {
-        $profile = Profile::firstOrFail();
+        $profile = $this->getProfile();
 
         $socials = $request->input('socials', []);
 

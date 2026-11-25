@@ -18,32 +18,27 @@ class PublicBioController
     ) {}
 
     /**
-     * Display public bio page
+     * Display public bio page for a handle (e.g. @windri, @budi, @shoppe)
      */
-    public function show(?string $handle = null, Request $request): View
+    public function show(string $handle, Request $request): View
     {
-        // 1. Resolve profile by handle (or fallback to the first/primary profile)
-        $profile = null;
-        if ($handle) {
-            $cleanHandle = ltrim($handle, '@');
-            $profile = Profile::with(['theme', 'activeSocialLinks', 'activeBioLinks'])
-                ->where('handle', $cleanHandle)
-                ->orWhere('handle', '@' . $cleanHandle)
-                ->first();
-        }
+        $cleanHandle = strtolower(ltrim($handle, '@'));
+
+        $profile = Profile::with(['theme', 'activeSocialLinks', 'activeBioLinks'])
+            ->where('handle', $cleanHandle)
+            ->first();
 
         if (!$profile) {
-            $profile = Profile::with(['theme', 'activeSocialLinks', 'activeBioLinks'])->firstOrFail();
+            abort(404, "Profil @{$cleanHandle} belum terdaftar.");
         }
 
-        // 2. Record page view silently
+        // Record page view silently
         try {
             $this->analyticsService->recordPageView($profile, $request);
         } catch (\Throwable $e) {
-            // Do not block page rendering if analytics fails
+            // Do not block page rendering
         }
 
-        // 3. Render public bio template
         return view('public.bio', [
             'profile' => $profile,
             'theme' => $profile->theme,

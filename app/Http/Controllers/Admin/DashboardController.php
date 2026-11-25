@@ -8,13 +8,14 @@ use App\Models\BioLink;
 use App\Models\LinkClick;
 use App\Models\PageView;
 use App\Models\Profile;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class DashboardController
 {
     public function index(): View
     {
-        $profile = Profile::with(['theme', 'bioLinks', 'socialLinks'])->firstOrFail();
+        $profile = Auth::user()->profile()->with(['theme', 'bioLinks', 'socialLinks'])->firstOrFail();
 
         // 1. Metric Counts
         $totalViews = PageView::where('profile_id', $profile->id)->count();

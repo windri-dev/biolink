@@ -9,13 +9,14 @@ use App\Models\BioLink;
 use App\Models\LinkClick;
 use App\Models\PageView;
 use App\Models\Profile;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class AnalyticsController
 {
     public function index(): View
     {
-        $profile = Profile::firstOrFail();
+        $profile = Auth::user()->profile()->firstOrFail();
 
         $totalViews = PageView::where('profile_id', $profile->id)->count();
         $totalClicks = BioLink::where('profile_id', $profile->id)->sum('total_clicks');

@@ -8,13 +8,19 @@ use App\Models\Profile;
 use App\Models\Theme;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class ThemeController
 {
+    protected function getProfile(): Profile
+    {
+        return Auth::user()->profile()->firstOrFail();
+    }
+
     public function index(): View
     {
-        $profile = Profile::with('theme')->firstOrFail();
+        $profile = $this->getProfile()->load('theme');
         $themes = Theme::orderBy('is_preset', 'desc')->get();
 
         return view('admin.themes.index', [
@@ -26,7 +32,7 @@ class ThemeController
 
     public function apply(Request $request, int $id): RedirectResponse
     {
-        $profile = Profile::firstOrFail();
+        $profile = $this->getProfile();
         $theme = Theme::findOrFail($id);
 
         $profile->update(['theme_id' => $theme->id]);
@@ -36,7 +42,7 @@ class ThemeController
 
     public function storeCustom(Request $request): RedirectResponse
     {
-        $profile = Profile::firstOrFail();
+        $profile = $this->getProfile();
 
         $validated = $request->validate([
             'name' => 'required|string|max:100',
@@ -51,7 +57,7 @@ class ThemeController
             'button_shape' => 'required|string|in:rounded-lg,rounded-2xl,rounded-full',
         ]);
 
-        $slug = 'custom-' . time();
+        $slug = 'custom-' . time() . '-' . $profile->id;
 
         $theme = Theme::create([
             ...$validated,

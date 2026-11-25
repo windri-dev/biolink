@@ -8,13 +8,19 @@ use App\Models\AiKnowledge;
 use App\Models\Profile;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class AiKnowledgeController
 {
+    protected function getProfile(): Profile
+    {
+        return Auth::user()->profile()->firstOrFail();
+    }
+
     public function index(): View
     {
-        $profile = Profile::firstOrFail();
+        $profile = $this->getProfile();
         $knowledges = AiKnowledge::where('profile_id', $profile->id)->orderBy('sort_order')->get();
 
         return view('admin.ai-knowledge.index', [
@@ -25,7 +31,7 @@ class AiKnowledgeController
 
     public function store(Request $request): RedirectResponse
     {
-        $profile = Profile::firstOrFail();
+        $profile = $this->getProfile();
 
         $validated = $request->validate([
             'category' => 'required|string|in:bio,project,experience,contact,faq',
@@ -53,7 +59,8 @@ class AiKnowledgeController
 
     public function update(Request $request, int $id): RedirectResponse
     {
-        $knowledge = AiKnowledge::findOrFail($id);
+        $profile = $this->getProfile();
+        $knowledge = AiKnowledge::where('profile_id', $profile->id)->findOrFail($id);
 
         $validated = $request->validate([
             'category' => 'required|string|in:bio,project,experience,contact,faq',
@@ -78,7 +85,8 @@ class AiKnowledgeController
 
     public function destroy(int $id): RedirectResponse
     {
-        $knowledge = AiKnowledge::findOrFail($id);
+        $profile = $this->getProfile();
+        $knowledge = AiKnowledge::where('profile_id', $profile->id)->findOrFail($id);
         $knowledge->delete();
 
         return redirect()->route('admin.ai-knowledge.index')->with('success', 'Data pengetahuan berhasil dihapus.');

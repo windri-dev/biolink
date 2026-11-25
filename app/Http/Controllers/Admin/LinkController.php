@@ -9,13 +9,19 @@ use App\Models\Profile;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class LinkController
 {
+    protected function getProfile(): Profile
+    {
+        return Auth::user()->profile()->firstOrFail();
+    }
+
     public function index(): View
     {
-        $profile = Profile::firstOrFail();
+        $profile = $this->getProfile();
         $links = BioLink::where('profile_id', $profile->id)->orderBy('sort_order')->get();
 
         return view('admin.links.index', [
@@ -26,7 +32,7 @@ class LinkController
 
     public function store(Request $request): RedirectResponse
     {
-        $profile = Profile::firstOrFail();
+        $profile = $this->getProfile();
 
         $validated = $request->validate([
             'title' => 'required|string|max:255',
@@ -64,7 +70,8 @@ class LinkController
 
     public function update(Request $request, int $id): RedirectResponse
     {
-        $link = BioLink::findOrFail($id);
+        $profile = $this->getProfile();
+        $link = BioLink::where('profile_id', $profile->id)->findOrFail($id);
 
         $validated = $request->validate([
             'title' => 'required|string|max:255',
@@ -99,7 +106,8 @@ class LinkController
 
     public function toggle(int $id): JsonResponse
     {
-        $link = BioLink::findOrFail($id);
+        $profile = $this->getProfile();
+        $link = BioLink::where('profile_id', $profile->id)->findOrFail($id);
         $link->update(['is_active' => !$link->is_active]);
 
         return response()->json([
@@ -111,13 +119,15 @@ class LinkController
 
     public function reorder(Request $request): JsonResponse
     {
+        $profile = $this->getProfile();
+
         $request->validate([
             'order' => 'required|array',
-            'order.*' => 'integer|exists:bio_links,id',
+            'order.*' => 'integer',
         ]);
 
         foreach ($request->input('order') as $index => $id) {
-            BioLink::where('id', $id)->update(['sort_order' => $index + 1]);
+            BioLink::where('profile_id', $profile->id)->where('id', $id)->update(['sort_order' => $index + 1]);
         }
 
         return response()->json([
@@ -128,7 +138,8 @@ class LinkController
 
     public function destroy(int $id): RedirectResponse
     {
-        $link = BioLink::findOrFail($id);
+        $profile = $this->getProfile();
+        $link = BioLink::where('profile_id', $profile->id)->findOrFail($id);
         $link->delete();
 
         return redirect()->route('admin.links.index')->with('success', 'Tautan berhasil dihapus.');

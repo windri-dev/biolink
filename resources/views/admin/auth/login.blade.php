@@ -72,11 +72,17 @@
             </button>
         </form>
 
-        <div class="text-center pt-2 border-t border-zinc-800 text-[11px] text-zinc-500">
-            <a href="{{ route('public.bio') }}" class="hover:text-zinc-300 transition-colors inline-flex items-center gap-1">
-                <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
-                <span>Kembali ke Halaman Profil Bio</span>
-            </a>
+        <div class="text-center pt-2 border-t border-zinc-800 text-[11px] text-zinc-400 space-y-2">
+            <div>
+                Belum memiliki akun?
+                <a href="{{ route('register') }}" class="text-sky-400 hover:underline font-semibold ml-1">Daftar sekarang &bull; Gratis</a>
+            </div>
+            <div>
+                <a href="/" class="text-zinc-500 hover:text-zinc-300 transition-colors inline-flex items-center gap-1">
+                    <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+                    <span>Kembali ke Beranda Utama</span>
+                </a>
+            </div>
         </div>
 
     </div>
