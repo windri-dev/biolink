@@ -43,7 +43,7 @@ class AiKnowledgeController
         $profile = $this->getProfile();
 
         $validated = $request->validate([
-            'ai_provider' => 'required|string|in:local,openai,custom',
+            'ai_provider' => 'nullable|string|max:50',
             'ai_api_key' => 'nullable|string|max:500',
             'ai_api_base' => 'nullable|string|max:500',
             'ai_model' => 'nullable|string|max:100',
@@ -53,6 +53,8 @@ class AiKnowledgeController
             'ai_greeting_message' => 'nullable|string|max:500',
             'ai_assistant_enabled' => 'nullable|boolean',
         ]);
+
+        $validated['ai_provider'] = $request->input('ai_provider') ?: 'universal';
 
         $validated['ai_assistant_enabled'] = $request->boolean('ai_assistant_enabled', true);
         if (empty($validated['ai_api_base'])) {

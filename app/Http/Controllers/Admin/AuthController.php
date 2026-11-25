@@ -45,6 +45,6 @@ class AuthController
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->route('admin.login')->with('success', 'Berhasil keluar dari dashboard.');
+        return redirect()->route('login')->with('success', 'Berhasil keluar dari dashboard.');
     }
 }

@@ -25,13 +25,17 @@
                     <i data-lucide="cpu" class="w-5 h-5"></i>
                 </div>
                 <div>
-                    <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                    <h3 class="text-sm font-bold text-white flex items-center gap-2 flex-wrap">
                         <span>Konfigurasi Engine & Kunci API AI</span>
                         <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-zinc-800 text-sky-400 border border-zinc-700 uppercase">
-                            {{ $profile->ai_provider }}
+                            UNIVERSAL LLM
+                        </span>
+                        <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center gap-1 shadow-sm">
+                            <i data-lucide="shield-check" class="w-3 h-3"></i>
+                            <span>Anti-Spam Limit IP Aktif (Maks. 10/mnt)</span>
                         </span>
                     </h3>
-                    <p class="text-xs text-zinc-400">Pilih penyedia API yang ingin digunakan untuk mentenagai asisten obrolan di halaman bio Anda.</p>
+                    <p class="text-xs text-zinc-400">Satu konfigurasi fleksibel untuk semua penyedia LLM (OpenAI resmi, DeepSeek, Groq, Ollama, OpenRouter, dll).</p>
                 </div>
             </div>
 
@@ -45,38 +49,68 @@
         <form action="{{ route('admin.ai.settings.update') }}" method="POST" class="space-y-4 text-xs">
             @csrf
 
-            <!-- Provider Selection -->
-            <div>
-                <label class="block text-zinc-300 font-semibold mb-2">Penyedia AI Engine (Provider) *</label>
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                    <label class="p-3.5 rounded-2xl bg-zinc-800/40 border {{ $profile->ai_provider === 'local' ? 'border-sky-500 bg-sky-500/5' : 'border-zinc-800 hover:border-zinc-700' }} flex items-start gap-3 cursor-pointer transition-all">
-                        <input type="radio" name="ai_provider" value="local" {{ $profile->ai_provider === 'local' ? 'checked' : '' }} class="mt-0.5 text-sky-500 bg-zinc-900 border-zinc-700" onchange="toggleApiFields(this.value)">
-                        <div>
-                            <span class="font-bold text-white block">Offline / Engine Lokal</span>
-                            <span class="text-[11px] text-zinc-400">Gratis tanpa API Key. Menjawab murni dari data tabel pengetahuan di bawah.</span>
-                        </div>
-                    </label>
+            <input type="hidden" name="ai_provider" id="aiProviderInput" value="{{ $profile->ai_provider ?: 'universal' }}">
 
-                    <label class="p-3.5 rounded-2xl bg-zinc-800/40 border {{ $profile->ai_provider === 'openai' ? 'border-sky-500 bg-sky-500/5' : 'border-zinc-800 hover:border-zinc-700' }} flex items-start gap-3 cursor-pointer transition-all">
-                        <input type="radio" name="ai_provider" value="openai" {{ $profile->ai_provider === 'openai' ? 'checked' : '' }} class="mt-0.5 text-sky-500 bg-zinc-900 border-zinc-700" onchange="toggleApiFields(this.value)">
-                        <div>
-                            <span class="font-bold text-white block">OpenAI Resmi</span>
-                            <span class="text-[11px] text-zinc-400">Menggunakan model GPT-4o / GPT-4o-mini dengan API key resmi OpenAI.</span>
-                        </div>
-                    </label>
+            <!-- Unified AI Engine Selector & Presets -->
+            <div class="bg-zinc-800/40 border border-zinc-700/60 rounded-2xl p-4 space-y-3">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                    <div>
+                        <span class="text-xs font-bold text-white flex items-center gap-2">
+                            <i data-lucide="sparkles" class="w-4 h-4 text-sky-400"></i>
+                            <span>Universal LLM & API Engine</span>
+                        </span>
+                        <p class="text-[11px] text-zinc-400 mt-0.5">Mendukung OpenAI resmi dan seluruh provider LLM OpenAI-Compatible dalam satu pengaturan.</p>
+                    </div>
+                    <span class="text-[10px] font-mono px-2.5 py-1 rounded-lg bg-sky-500/10 text-sky-300 border border-sky-500/20 w-fit">
+                        OpenAI REST Protocol Compatible
+                    </span>
+                </div>
 
-                    <label class="p-3.5 rounded-2xl bg-zinc-800/40 border {{ $profile->ai_provider === 'custom' ? 'border-sky-500 bg-sky-500/5' : 'border-zinc-800 hover:border-zinc-700' }} flex items-start gap-3 cursor-pointer transition-all">
-                        <input type="radio" name="ai_provider" value="custom" {{ $profile->ai_provider === 'custom' ? 'checked' : '' }} class="mt-0.5 text-sky-500 bg-zinc-900 border-zinc-700" onchange="toggleApiFields(this.value)">
-                        <div>
-                            <span class="font-bold text-white block">OpenAI-Compatible</span>
-                            <span class="text-[11px] text-zinc-400">DeepSeek, Groq, OpenRouter, atau server Ollama lokal mandiri.</span>
-                        </div>
-                    </label>
+                <!-- Quick Preset Selector (1-Click Fill) -->
+                <div>
+                    <label class="block text-[11px] text-zinc-400 font-semibold mb-1.5">Preset Cepat (Klik untuk mengisi Base URL & Model otomatis):</label>
+                    <div class="grid grid-cols-2 sm:grid-cols-5 gap-2">
+                        <button type="button" onclick="applyAiEnginePreset('openai')" class="p-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 hover:border-sky-400 text-left transition-all group">
+                            <div class="flex items-center gap-1.5">
+                                <span class="text-xs">⚡</span>
+                                <span class="text-xs font-bold text-white group-hover:text-sky-300">OpenAI Resmi</span>
+                            </div>
+                            <span class="text-[10px] text-zinc-400 block truncate font-mono mt-0.5">gpt-4o-mini</span>
+                        </button>
+                        <button type="button" onclick="applyAiEnginePreset('deepseek')" class="p-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 hover:border-sky-400 text-left transition-all group">
+                            <div class="flex items-center gap-1.5">
+                                <span class="text-xs">🐋</span>
+                                <span class="text-xs font-bold text-white group-hover:text-sky-300">DeepSeek</span>
+                            </div>
+                            <span class="text-[10px] text-zinc-400 block truncate font-mono mt-0.5">deepseek-chat</span>
+                        </button>
+                        <button type="button" onclick="applyAiEnginePreset('groq')" class="p-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 hover:border-sky-400 text-left transition-all group">
+                            <div class="flex items-center gap-1.5">
+                                <span class="text-xs">🚀</span>
+                                <span class="text-xs font-bold text-white group-hover:text-sky-300">Groq (Cepat)</span>
+                            </div>
+                            <span class="text-[10px] text-zinc-400 block truncate font-mono mt-0.5">llama-3.3-70b</span>
+                        </button>
+                        <button type="button" onclick="applyAiEnginePreset('openrouter')" class="p-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 hover:border-sky-400 text-left transition-all group">
+                            <div class="flex items-center gap-1.5">
+                                <span class="text-xs">🌐</span>
+                                <span class="text-xs font-bold text-white group-hover:text-sky-300">OpenRouter</span>
+                            </div>
+                            <span class="text-[10px] text-zinc-400 block truncate font-mono mt-0.5">multi-model</span>
+                        </button>
+                        <button type="button" onclick="applyAiEnginePreset('ollama')" class="p-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 hover:border-sky-400 text-left transition-all group">
+                            <div class="flex items-center gap-1.5">
+                                <span class="text-xs">🦙</span>
+                                <span class="text-xs font-bold text-white group-hover:text-sky-300">Ollama Lokal</span>
+                            </div>
+                            <span class="text-[10px] text-zinc-400 block truncate font-mono mt-0.5">localhost:11434</span>
+                        </button>
+                    </div>
                 </div>
             </div>
 
             <!-- API Credentials Section -->
-            <div id="apiFieldsWrapper" class="space-y-4 pt-2 {{ $profile->ai_provider === 'local' ? 'hidden' : '' }}">
+            <div id="apiFieldsWrapper" class="space-y-4 pt-2">
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <!-- API Key -->
                     <div>
@@ -349,12 +383,36 @@
 </div>
 
 <script>
-    function toggleApiFields(val) {
-        const wrapper = document.getElementById('apiFieldsWrapper');
-        if (val === 'local') {
-            wrapper.classList.add('hidden');
-        } else {
-            wrapper.classList.remove('hidden');
+    function applyAiEnginePreset(type) {
+        const baseInput = document.getElementById('aiApiBaseInput');
+        const modelInput = document.getElementById('aiModelInput');
+        const providerInput = document.getElementById('aiProviderInput');
+
+        if (providerInput) {
+            providerInput.value = type;
+        }
+
+        switch(type) {
+            case 'openai':
+                baseInput.value = 'https://api.openai.com/v1';
+                modelInput.value = 'gpt-4o-mini';
+                break;
+            case 'deepseek':
+                baseInput.value = 'https://api.deepseek.com/v1';
+                modelInput.value = 'deepseek-chat';
+                break;
+            case 'groq':
+                baseInput.value = 'https://api.groq.com/openai/v1';
+                modelInput.value = 'llama-3.3-70b-versatile';
+                break;
+            case 'openrouter':
+                baseInput.value = 'https://openrouter.ai/api/v1';
+                modelInput.value = 'openai/gpt-4o-mini';
+                break;
+            case 'ollama':
+                baseInput.value = 'http://localhost:11434/v1';
+                modelInput.value = 'llama3';
+                break;
         }
     }
 

@@ -22,12 +22,12 @@
     <!-- Schema.org JSON-LD Structured Data (Google Rich Snippets) -->
     <script type="application/ld+json">
     {
-      "@context": "https://schema.org",
-      "@type": "ProfilePage",
+      "@@context": "https://schema.org",
+      "@@type": "ProfilePage",
       "dateCreated": "{{ $profile->created_at->toIso8601String() }}",
       "dateModified": "{{ $profile->updated_at->toIso8601String() }}",
       "mainEntity": {
-        "@type": "Person",
+        "@@type": "Person",
         "name": "{{ $profile->display_name }}",
         "alternateName": "{{ '@' . $profile->clean_handle }}",
         "identifier": "{{ $profile->clean_handle }}",
@@ -54,20 +54,24 @@
 
     <style>
         :root {
-            --theme-bg: {{ $theme->background_value ?? '#0d0d11' }};
-            --card-bg: {{ $theme->card_bg ?? 'rgba(255, 255, 255, 0.05)' }};
-            --card-border: {{ $theme->card_border ?? 'rgba(255, 255, 255, 0.12)' }};
-            --card-hover-bg: {{ $theme->card_hover_bg ?? 'rgba(255, 255, 255, 0.12)' }};
+            --theme-bg: {!! $theme->background_value ?? '#0d0d11' !!};
+            --card-bg: {!! $theme->card_bg ?? 'rgba(255, 255, 255, 0.05)' !!};
+            --card-border: {!! $theme->card_border ?? 'rgba(255, 255, 255, 0.12)' !!};
+            --card-hover-bg: {!! $theme->card_hover_bg ?? 'rgba(255, 255, 255, 0.12)' !!};
             --card-text: {{ $theme->card_text ?? '#ffffff' }};
             --text-main: {{ $theme->text_color ?? '#ffffff' }};
             --text-sub: {{ $theme->subtext_color ?? '#9ca3af' }};
             --accent: {{ $theme->accent_color ?? '#38bdf8' }};
-            --font-family: {{ $theme->font_family ?? 'Plus Jakarta Sans, sans-serif' }};
+            --font-family: {!! $theme->font_family ?? 'Plus Jakarta Sans, sans-serif' !!};
         }
 
         body {
             font-family: var(--font-family);
             background: var(--theme-bg);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
             color: var(--text-main);
             min-height: 100vh;
             overflow-x: hidden;
@@ -127,7 +131,9 @@
             <a href="{{ route('public.vcard', $profile->clean_handle) }}" 
                class="px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-white backdrop-blur-md border border-white/10 transition-all hover:scale-105 text-xs font-semibold inline-flex items-center gap-1.5 shadow-sm"
                title="Simpan Kontak ke HP">
-                <i data-lucide="user-plus" class="w-3.5 h-3.5 text-sky-400"></i>
+                <svg class="w-3.5 h-3.5 text-sky-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" x2="19" y1="8" y2="14"/><line x1="22" x2="16" y1="11" y2="11"/>
+                </svg>
                 <span class="hidden sm:inline">Simpan Kontak</span>
             </a>
         @else
@@ -137,13 +143,17 @@
         <div class="flex items-center gap-2">
             <!-- QR Code Button -->
             <button onclick="openQrModal()" class="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white backdrop-blur-md border border-white/10 transition-all hover:scale-105" title="Lihat QR Code">
-                <i data-lucide="qr-code" class="w-4 h-4"></i>
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect width="5" height="5" x="3" y="3" rx="1"/><rect width="5" height="5" x="16" y="3" rx="1"/><rect width="5" height="5" x="3" y="16" rx="1"/><path d="M21 16h-3a2 2 0 0 0-2 2v3"/><path d="M21 21v.01"/><path d="M12 7v3a2 2 0 0 1-2 2H7"/><path d="M3 12h.01"/><path d="M12 3h.01"/><path d="M12 16v.01"/><path d="M16 12h1"/><path d="M21 12v.01"/><path d="M12 21v-1"/>
+                </svg>
             </button>
 
             <!-- Share Button -->
             @if($profile->show_share_button)
                 <button onclick="shareProfile()" class="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white backdrop-blur-md border border-white/10 transition-all hover:scale-105" title="Bagikan Profil">
-                    <i data-lucide="share-2" class="w-4 h-4"></i>
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" x2="15.42" y1="13.51" y2="17.49"/><line x1="15.41" x2="8.59" y1="6.51" y2="10.49"/>
+                    </svg>
                 </button>
             @endif
         </div>

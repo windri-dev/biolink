@@ -180,7 +180,7 @@
             if (data.success) {
                 appendBotTypewriter(data.response, data.suggested_prompts);
             } else {
-                appendBotMessage('Maaf, terjadi kendala saat memproses jawaban. Silakan coba kembali sesaat lagi.');
+                appendBotMessage(data.message || 'Maaf, terjadi kendala saat memproses jawaban. Silakan coba kembali sesaat lagi.');
             }
         } catch (err) {
             indicator.classList.add('hidden');

@@ -33,9 +33,13 @@ Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->na
 Route::post('/register', [RegisterController::class, 'register'])->name('register.submit');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-// Link Click Tracker & AI Assistant API
+// Compatibility Aliases for Admin Login
+Route::get('/admin/login', [AuthController::class, 'showLogin'])->name('admin.login');
+Route::post('/admin/login', [AuthController::class, 'login'])->name('admin.login.submit');
+
+// Link Click Tracker & AI Assistant API (with anti-spam rate limiter)
 Route::get('/l/{id}', [PublicBioController::class, 'trackClick'])->name('public.click');
-Route::post('/api/ai-chat', [AiChatController::class, 'chat'])->name('api.ai.chat');
+Route::post('/api/ai-chat', [AiChatController::class, 'chat'])->middleware('throttle:30,1')->name('api.ai.chat');
 
 /*
 |--------------------------------------------------------------------------
@@ -60,6 +64,8 @@ Route::middleware('auth')->prefix('admin')->as('admin.')->group(function () {
     Route::get('/themes', [ThemeController::class, 'index'])->name('themes.index');
     Route::post('/themes/{id}/apply', [ThemeController::class, 'apply'])->name('themes.apply');
     Route::post('/themes/custom', [ThemeController::class, 'storeCustom'])->name('themes.custom');
+    Route::delete('/themes/{id}', [ThemeController::class, 'destroy'])->name('themes.destroy');
+    Route::post('/themes/reset-background', [ThemeController::class, 'resetBackground'])->name('themes.reset-background');
 
     // AI Knowledge Base & API Settings
     Route::post('/ai-knowledge/settings', [AiKnowledgeController::class, 'updateAiSettings'])->name('ai.settings.update');

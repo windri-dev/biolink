@@ -39,7 +39,7 @@
             </div>
         @endif
 
-        <form action="{{ route('admin.login.submit') }}" method="POST" class="space-y-4 text-xs">
+        <form action="{{ route('login.submit') }}" method="POST" class="space-y-4 text-xs">
             @csrf
 
             <div>

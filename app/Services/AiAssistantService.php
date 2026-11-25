@@ -57,16 +57,17 @@ class AiAssistantService
 
         // 4. If AI API Key is configured on the Profile (or system .env fallback), query the LLM API
         $apiKey = $profile->ai_api_key ?: config('services.openai.api_key') ?: env('OPENAI_API_KEY');
-        if (!empty($apiKey) && in_array($profile->ai_provider, ['openai', 'custom'], true)) {
+        if (!empty($apiKey)) {
             try {
                 $llmResponse = $this->queryLlmApi($profile, $knowledges, $messageClean, $apiKey);
                 if ($llmResponse) {
-                    $this->logChat($profile->id, $sessionId, $userMessage, $llmResponse, $profile->ai_provider . '_llm', $ipAddress);
+                    $providerTag = ($profile->ai_provider ?: 'llm') . '_llm';
+                    $this->logChat($profile->id, $sessionId, $userMessage, $llmResponse, $providerTag, $ipAddress);
 
                     return [
                         'success' => true,
                         'response' => $llmResponse,
-                        'matched_intent' => $profile->ai_provider . '_llm',
+                        'matched_intent' => $providerTag,
                         'suggested_prompts' => $this->getSuggestedPrompts($knowledges),
                     ];
                 }
