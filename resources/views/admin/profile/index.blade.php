@@ -117,6 +117,29 @@
                 </div>
             </div>
 
+            <!-- SEO & Meta Settings (Judul Tab Browser & Deskripsi Mesin Pencari) -->
+            <div class="border-t border-zinc-800 pt-5 space-y-3">
+                <div>
+                    <h4 class="text-sm font-bold text-white flex items-center gap-1.5">
+                        <i data-lucide="globe" class="w-4 h-4 text-sky-400"></i>
+                        <span>SEO & Judul Halaman (Browser Tab Title)</span>
+                    </h4>
+                    <p class="text-[11px] text-zinc-400">Atur judul yang tampil di tab browser pengunjung serta pratinjau di Google & media sosial.</p>
+                </div>
+
+                <div class="space-y-3 pt-1">
+                    <div>
+                        <label class="block text-zinc-300 font-semibold mb-1 text-xs">Judul Tab Browser (Meta Title)</label>
+                        <input type="text" name="meta_title" value="{{ $profile->meta_title }}" placeholder="Contoh: {{ $profile->display_name }} (@{{ $profile->clean_handle }}) • Portfolio" class="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-sky-400 text-sm">
+                        <span class="text-[10px] text-zinc-500 mt-1 block">Kosongkan jika ingin menggunakan judul default: {{ $profile->display_name }} (@{{ $profile->clean_handle }})</span>
+                    </div>
+                    <div>
+                        <label class="block text-zinc-300 font-semibold mb-1 text-xs">Deskripsi Halaman (Meta Description)</label>
+                        <textarea name="meta_description" rows="2" placeholder="Deskripsi singkat profil Anda yang tampil di hasil pencarian Google..." class="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-sky-400 text-sm">{{ $profile->meta_description }}</textarea>
+                    </div>
+                </div>
+            </div>
+
             <div class="flex justify-end pt-4 border-t border-zinc-800">
                 <button type="submit" class="px-5 py-2.5 rounded-xl bg-sky-500 hover:bg-sky-400 text-white font-bold transition-all shadow-lg shadow-sky-500/20">
                     Simpan Perubahan Profil
