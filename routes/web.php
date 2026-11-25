@@ -61,7 +61,9 @@ Route::middleware('auth')->prefix('admin')->as('admin.')->group(function () {
     Route::post('/themes/{id}/apply', [ThemeController::class, 'apply'])->name('themes.apply');
     Route::post('/themes/custom', [ThemeController::class, 'storeCustom'])->name('themes.custom');
 
-    // AI Knowledge Base
+    // AI Knowledge Base & API Settings
+    Route::post('/ai-knowledge/settings', [AiKnowledgeController::class, 'updateAiSettings'])->name('ai.settings.update');
+    Route::post('/ai-knowledge/test-api', [AiKnowledgeController::class, 'testConnection'])->name('ai.api.test');
     Route::resource('/ai-knowledge', AiKnowledgeController::class)->except(['create', 'show', 'edit']);
 
     // Analytics

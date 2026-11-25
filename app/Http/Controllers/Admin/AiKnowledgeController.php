@@ -6,6 +6,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\AiKnowledge;
 use App\Models\Profile;
+use App\Services\AiAssistantService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,6 +15,10 @@ use Illuminate\View\View;
 
 class AiKnowledgeController
 {
+    public function __construct(
+        protected AiAssistantService $aiService
+    ) {}
+
     protected function getProfile(): Profile
     {
         return Auth::user()->profile()->firstOrFail();
@@ -27,6 +33,58 @@ class AiKnowledgeController
             'profile' => $profile,
             'knowledges' => $knowledges,
         ]);
+    }
+
+    /**
+     * Update AI Assistant API Key, Base URL, Provider, Model & Prompt Settings
+     */
+    public function updateAiSettings(Request $request): RedirectResponse
+    {
+        $profile = $this->getProfile();
+
+        $validated = $request->validate([
+            'ai_provider' => 'required|string|in:local,openai,custom',
+            'ai_api_key' => 'nullable|string|max:500',
+            'ai_api_base' => 'nullable|string|max:500',
+            'ai_model' => 'nullable|string|max:100',
+            'ai_temperature' => 'nullable|numeric|min:0|max:2',
+            'ai_system_prompt' => 'nullable|string|max:3000',
+            'ai_assistant_name' => 'nullable|string|max:64',
+            'ai_greeting_message' => 'nullable|string|max:500',
+            'ai_assistant_enabled' => 'nullable|boolean',
+        ]);
+
+        $validated['ai_assistant_enabled'] = $request->boolean('ai_assistant_enabled', true);
+        if (empty($validated['ai_api_base'])) {
+            $validated['ai_api_base'] = 'https://api.openai.com/v1';
+        }
+        if (empty($validated['ai_model'])) {
+            $validated['ai_model'] = 'gpt-4o-mini';
+        }
+
+        $profile->update($validated);
+
+        return redirect()->route('admin.ai-knowledge.index')->with('success', 'Konfigurasi API AI Assistant berhasil disimpan!');
+    }
+
+    /**
+     * Test connection to custom AI API directly from dashboard
+     */
+    public function testConnection(Request $request): JsonResponse
+    {
+        $validated = $request->validate([
+            'api_key' => 'required|string',
+            'api_base' => 'nullable|string',
+            'model' => 'nullable|string',
+        ]);
+
+        $result = $this->aiService->testConnection(
+            $validated['api_key'],
+            $validated['api_base'] ?? 'https://api.openai.com/v1',
+            $validated['model'] ?? 'gpt-4o-mini'
+        );
+
+        return response()->json($result);
     }
 
     public function store(Request $request): RedirectResponse

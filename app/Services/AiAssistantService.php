@@ -55,23 +55,23 @@ class AiAssistantService
             ];
         }
 
-        // 4. If OPENAI_API_KEY is configured, forward to OpenAI LLM with grounded profile context
-        $apiKey = config('services.openai.api_key') ?? env('OPENAI_API_KEY');
-        if (!empty($apiKey)) {
+        // 4. If AI API Key is configured on the Profile (or system .env fallback), query the LLM API
+        $apiKey = $profile->ai_api_key ?: config('services.openai.api_key') ?: env('OPENAI_API_KEY');
+        if (!empty($apiKey) && in_array($profile->ai_provider, ['openai', 'custom'], true)) {
             try {
-                $llmResponse = $this->queryOpenAi($profile, $knowledges, $messageClean, $apiKey);
+                $llmResponse = $this->queryLlmApi($profile, $knowledges, $messageClean, $apiKey);
                 if ($llmResponse) {
-                    $this->logChat($profile->id, $sessionId, $userMessage, $llmResponse, 'openai_llm', $ipAddress);
+                    $this->logChat($profile->id, $sessionId, $userMessage, $llmResponse, $profile->ai_provider . '_llm', $ipAddress);
 
                     return [
                         'success' => true,
                         'response' => $llmResponse,
-                        'matched_intent' => 'openai_llm',
+                        'matched_intent' => $profile->ai_provider . '_llm',
                         'suggested_prompts' => $this->getSuggestedPrompts($knowledges),
                     ];
                 }
             } catch (\Throwable $e) {
-                Log::warning('OpenAI AI Assistant call failed: ' . $e->getMessage());
+                Log::warning('LLM AI Assistant call failed: ' . $e->getMessage());
             }
         }
 
@@ -161,33 +161,81 @@ class AiAssistantService
     }
 
     /**
-     * Query external OpenAI API if key provided
+     * Query external OpenAI or OpenAI-Compatible LLM API (DeepSeek, Groq, Ollama, OpenRouter)
      */
-    protected function queryOpenAi(Profile $profile, Collection $knowledges, string $userMessage, string $apiKey): ?string
+    public function queryLlmApi(Profile $profile, Collection $knowledges, string $userMessage, string $apiKey): ?string
     {
-        $context = "Anda adalah asisten AI ramah bernama {$profile->ai_assistant_name} untuk {$profile->display_name} ({$profile->tagline}). Berikut data pengetahuan resmi yang Anda ketahui:\n";
-        foreach ($knowledges as $k) {
-            $context .= "- {$k->title}: {$k->content}\n";
+        $systemPrompt = $profile->ai_system_prompt;
+        if (empty($systemPrompt)) {
+            $systemPrompt = "Anda adalah asisten AI ramah bernama {$profile->ai_assistant_name} untuk {$profile->display_name} ({$profile->tagline}). Berikut data pengetahuan resmi yang Anda ketahui:\n";
+            foreach ($knowledges as $k) {
+                $systemPrompt .= "- {$k->title}: {$k->content}\n";
+            }
+            $systemPrompt .= "\nJawab pertanyaan pengunjung dengan ringkas, sopan, bersahabat dalam Bahasa Indonesia, dan mengacu pada data di atas tanpa menggunakan emoji berlebih.";
         }
-        $context .= "\nJawab pertanyaan pengunjung dengan ringkas, sopan, bersahabat dalam Bahasa Indonesia, dan mengacu pada data di atas.";
+
+        $apiBase = rtrim($profile->ai_api_base ?: 'https://api.openai.com/v1', '/');
+        $endpoint = str_ends_with($apiBase, '/chat/completions') ? $apiBase : $apiBase . '/chat/completions';
+        $model = $profile->ai_model ?: 'gpt-4o-mini';
+        $temperature = (float) ($profile->ai_temperature ?: 0.7);
 
         $response = Http::withToken($apiKey)
-            ->timeout(15)
-            ->post('https://api.openai.com/v1/chat/completions', [
-                'model' => env('OPENAI_MODEL', 'gpt-4o-mini'),
+            ->timeout(20)
+            ->post($endpoint, [
+                'model' => $model,
                 'messages' => [
-                    ['role' => 'system', 'content' => $context],
+                    ['role' => 'system', 'content' => $systemPrompt],
                     ['role' => 'user', 'content' => $userMessage],
                 ],
-                'max_tokens' => 350,
-                'temperature' => 0.7,
+                'max_tokens' => 450,
+                'temperature' => $temperature,
             ]);
 
         if ($response->successful()) {
             return $response->json('choices.0.message.content');
         }
 
+        Log::warning('LLM API returned error: ' . $response->status() . ' - ' . $response->body());
+
         return null;
+    }
+
+    /**
+     * Test connection to a custom AI API
+     */
+    public function testConnection(string $apiKey, string $apiBase, string $model): array
+    {
+        $apiBase = rtrim($apiBase ?: 'https://api.openai.com/v1', '/');
+        $endpoint = str_ends_with($apiBase, '/chat/completions') ? $apiBase : $apiBase . '/chat/completions';
+
+        try {
+            $response = Http::withToken($apiKey)
+                ->timeout(10)
+                ->post($endpoint, [
+                    'model' => $model ?: 'gpt-4o-mini',
+                    'messages' => [
+                        ['role' => 'user', 'content' => 'Tes koneksi API: balas kata OK.']
+                    ],
+                    'max_tokens' => 20,
+                ]);
+
+            if ($response->successful()) {
+                return [
+                    'success' => true,
+                    'message' => 'Koneksi ke API AI berhasil! Model merespons: ' . trim((string) $response->json('choices.0.message.content')),
+                ];
+            }
+
+            return [
+                'success' => false,
+                'message' => 'Gagal terhubung ke API (HTTP ' . $response->status() . '): ' . substr($response->body(), 0, 200),
+            ];
+        } catch (\Throwable $e) {
+            return [
+                'success' => false,
+                'message' => 'Koneksi gagal: ' . $e->getMessage(),
+            ];
+        }
     }
 
     /**

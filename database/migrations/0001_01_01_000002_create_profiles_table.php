@@ -30,9 +30,18 @@ return new class extends Migration
             $table->string('badge_style')->default('blue'); // blue, gold, purple, emerald
             $table->boolean('show_share_button')->default(true);
             $table->boolean('show_subscribe_box')->default(false);
+            
+            // AI Assistant Core & API Settings
             $table->boolean('ai_assistant_enabled')->default(true);
             $table->string('ai_assistant_name')->default('Aura');
             $table->string('ai_greeting_message')->default('Halo, saya asisten AI. Ada yang bisa saya bantu terkait proyek, kolaborasi, atau kontak?');
+            $table->string('ai_provider')->default('local'); // local, openai, custom
+            $table->text('ai_api_key')->nullable();
+            $table->string('ai_api_base')->default('https://api.openai.com/v1')->nullable();
+            $table->string('ai_model')->default('gpt-4o-mini')->nullable();
+            $table->text('ai_system_prompt')->nullable();
+            $table->float('ai_temperature')->default(0.7);
+
             $table->string('meta_title')->nullable();
             $table->text('meta_description')->nullable();
             $table->text('custom_css')->nullable();

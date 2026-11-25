@@ -1,15 +1,15 @@
 @extends('layouts.admin')
 
-@section('title', 'Otak AI Assistant')
+@section('title', 'Otak AI & Konfigurasi API')
 
 @section('content')
 <div class="space-y-6">
 
     <!-- Header -->
-    <div class="flex items-center justify-between">
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-            <h2 class="text-lg font-bold text-white tracking-tight">Basis Pengetahuan AI (Brain Knowledge Base)</h2>
-            <p class="text-xs text-zinc-400">Ajarkan asisten AI Anda fakta tentang diri Anda, proyek, keahlian, dan instruksi jawaban otomatis.</p>
+            <h2 class="text-lg font-bold text-white tracking-tight">Otak AI Assistant & Konfigurasi API</h2>
+            <p class="text-xs text-zinc-400">Atur kunci API model kecerdasan buatan (OpenAI, DeepSeek, Groq, Ollama) dan kelola basis pengetahuan profil Anda.</p>
         </div>
         <button onclick="openAddKnowledgeModal()" class="px-4 py-2 rounded-xl bg-sky-500 hover:bg-sky-400 text-white text-xs font-bold transition-all shadow-lg shadow-sky-500/20 inline-flex items-center gap-1.5">
             <i data-lucide="plus" class="w-4 h-4"></i>
@@ -17,8 +17,154 @@
         </button>
     </div>
 
+    <!-- AI API Provider & Key Configuration Card -->
+    <div class="bg-zinc-900/80 border border-zinc-800 rounded-3xl p-6 space-y-5 shadow-xl">
+        <div class="flex items-center justify-between border-b border-zinc-800 pb-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-sky-500 to-indigo-600 flex items-center justify-center text-white shadow-md">
+                    <i data-lucide="cpu" class="w-5 h-5"></i>
+                </div>
+                <div>
+                    <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                        <span>Konfigurasi Engine & Kunci API AI</span>
+                        <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-zinc-800 text-sky-400 border border-zinc-700 uppercase">
+                            {{ $profile->ai_provider }}
+                        </span>
+                    </h3>
+                    <p class="text-xs text-zinc-400">Pilih penyedia API yang ingin digunakan untuk mentenagai asisten obrolan di halaman bio Anda.</p>
+                </div>
+            </div>
+
+            <!-- Active Status Badge -->
+            <div class="flex items-center gap-1.5 text-xs">
+                <span class="w-2.5 h-2.5 rounded-full {{ $profile->ai_assistant_enabled ? 'bg-emerald-400 animate-pulse' : 'bg-zinc-600' }}"></span>
+                <span class="text-zinc-300 font-semibold">{{ $profile->ai_assistant_enabled ? 'Aktif' : 'Nonaktif' }}</span>
+            </div>
+        </div>
+
+        <form action="{{ route('admin.ai.settings.update') }}" method="POST" class="space-y-4 text-xs">
+            @csrf
+
+            <!-- Provider Selection -->
+            <div>
+                <label class="block text-zinc-300 font-semibold mb-2">Penyedia AI Engine (Provider) *</label>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <label class="p-3.5 rounded-2xl bg-zinc-800/40 border {{ $profile->ai_provider === 'local' ? 'border-sky-500 bg-sky-500/5' : 'border-zinc-800 hover:border-zinc-700' }} flex items-start gap-3 cursor-pointer transition-all">
+                        <input type="radio" name="ai_provider" value="local" {{ $profile->ai_provider === 'local' ? 'checked' : '' }} class="mt-0.5 text-sky-500 bg-zinc-900 border-zinc-700" onchange="toggleApiFields(this.value)">
+                        <div>
+                            <span class="font-bold text-white block">Offline / Engine Lokal</span>
+                            <span class="text-[11px] text-zinc-400">Gratis tanpa API Key. Menjawab murni dari data tabel pengetahuan di bawah.</span>
+                        </div>
+                    </label>
+
+                    <label class="p-3.5 rounded-2xl bg-zinc-800/40 border {{ $profile->ai_provider === 'openai' ? 'border-sky-500 bg-sky-500/5' : 'border-zinc-800 hover:border-zinc-700' }} flex items-start gap-3 cursor-pointer transition-all">
+                        <input type="radio" name="ai_provider" value="openai" {{ $profile->ai_provider === 'openai' ? 'checked' : '' }} class="mt-0.5 text-sky-500 bg-zinc-900 border-zinc-700" onchange="toggleApiFields(this.value)">
+                        <div>
+                            <span class="font-bold text-white block">OpenAI Resmi</span>
+                            <span class="text-[11px] text-zinc-400">Menggunakan model GPT-4o / GPT-4o-mini dengan API key resmi OpenAI.</span>
+                        </div>
+                    </label>
+
+                    <label class="p-3.5 rounded-2xl bg-zinc-800/40 border {{ $profile->ai_provider === 'custom' ? 'border-sky-500 bg-sky-500/5' : 'border-zinc-800 hover:border-zinc-700' }} flex items-start gap-3 cursor-pointer transition-all">
+                        <input type="radio" name="ai_provider" value="custom" {{ $profile->ai_provider === 'custom' ? 'checked' : '' }} class="mt-0.5 text-sky-500 bg-zinc-900 border-zinc-700" onchange="toggleApiFields(this.value)">
+                        <div>
+                            <span class="font-bold text-white block">OpenAI-Compatible</span>
+                            <span class="text-[11px] text-zinc-400">DeepSeek, Groq, OpenRouter, atau server Ollama lokal mandiri.</span>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- API Credentials Section -->
+            <div id="apiFieldsWrapper" class="space-y-4 pt-2 {{ $profile->ai_provider === 'local' ? 'hidden' : '' }}">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <!-- API Key -->
+                    <div>
+                        <label class="block text-zinc-300 font-semibold mb-1">API Key *</label>
+                        <div class="relative">
+                            <span class="absolute left-3.5 top-2.5 text-zinc-500"><i data-lucide="key" class="w-4 h-4"></i></span>
+                            <input type="password" 
+                                   id="aiApiKeyInput" 
+                                   name="ai_api_key" 
+                                   value="{{ $profile->ai_api_key }}" 
+                                   placeholder="sk-proj-..." 
+                                   class="w-full bg-zinc-800 border border-zinc-700 rounded-xl py-2 pl-10 pr-10 text-white font-mono focus:outline-none focus:border-sky-400">
+                            <button type="button" onclick="togglePasswordVisibility('aiApiKeyInput', this)" class="absolute right-3 top-2.5 text-zinc-400 hover:text-white">
+                                <i data-lucide="eye" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Base URL Endpoint -->
+                    <div>
+                        <label class="block text-zinc-300 font-semibold mb-1">API Base URL</label>
+                        <input type="url" 
+                               id="aiApiBaseInput" 
+                               name="ai_api_base" 
+                               value="{{ $profile->ai_api_base ?: 'https://api.openai.com/v1' }}" 
+                               placeholder="https://api.openai.com/v1" 
+                               class="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-3 py-2 text-white font-mono focus:outline-none focus:border-sky-400">
+                        <span class="text-[10px] text-zinc-500 mt-0.5 block">Contoh: DeepSeek: <code>https://api.deepseek.com/v1</code> &bull; Groq: <code>https://api.groq.com/openai/v1</code></span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <!-- Model ID -->
+                    <div>
+                        <label class="block text-zinc-300 font-semibold mb-1">Nama Model (Model ID)</label>
+                        <input type="text" 
+                               id="aiModelInput" 
+                               name="ai_model" 
+                               value="{{ $profile->ai_model ?: 'gpt-4o-mini' }}" 
+                               placeholder="gpt-4o-mini / deepseek-chat" 
+                               class="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-3 py-2 text-white font-mono focus:outline-none focus:border-sky-400">
+                    </div>
+
+                    <!-- Temperature -->
+                    <div>
+                        <label class="block text-zinc-300 font-semibold mb-1">Temperature Kreativitas (0.0 - 1.5)</label>
+                        <input type="number" 
+                               step="0.1" 
+                               min="0" 
+                               max="1.5" 
+                               name="ai_temperature" 
+                               value="{{ $profile->ai_temperature ?? 0.7 }}" 
+                               class="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-3 py-2 text-white font-mono focus:outline-none focus:border-sky-400">
+                    </div>
+                </div>
+
+                <!-- Custom System Prompt -->
+                <div>
+                    <label class="block text-zinc-300 font-semibold mb-1">Kustomisasi Instruksi Sistem (System Prompt)</label>
+                    <textarea name="ai_system_prompt" 
+                              rows="3" 
+                              placeholder="Kosongkan untuk menggunakan instruksi bawaan sistem yang otomatis memadukan seluruh data pengetahuan Anda..." 
+                              class="w-full bg-zinc-800 border border-zinc-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-sky-400">{{ $profile->ai_system_prompt }}</textarea>
+                </div>
+            </div>
+
+            <!-- Action Buttons Row -->
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-3 border-t border-zinc-800">
+                <button type="button" 
+                        id="testApiBtn"
+                        onclick="testExternalApiConnection()" 
+                        class="w-full sm:w-auto px-4 py-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-300 hover:text-white border border-zinc-700 text-xs font-semibold transition-all inline-flex items-center justify-center gap-1.5 shadow-sm">
+                    <i data-lucide="zap" class="w-4 h-4 text-amber-400"></i>
+                    <span>Uji Koneksi API AI</span>
+                </button>
+
+                <button type="submit" class="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-sky-500 hover:bg-sky-400 text-white font-bold text-xs transition-all shadow-lg shadow-sky-500/20">
+                    Simpan Konfigurasi Engine AI
+                </button>
+            </div>
+
+            <!-- Test Connection Result Notification -->
+            <div id="testApiResult" class="hidden p-3 rounded-xl border text-xs"></div>
+        </form>
+    </div>
+
     <!-- Live AI Chat Simulator -->
-    <div class="bg-gradient-to-r from-indigo-950/40 via-zinc-900 to-zinc-900 border border-indigo-500/30 rounded-2xl p-5 space-y-3">
+    <div class="bg-gradient-to-r from-indigo-950/40 via-zinc-900 to-zinc-900 border border-indigo-500/30 rounded-3xl p-5 space-y-3 shadow-xl">
         <div class="flex items-center justify-between">
             <h3 class="text-xs font-bold uppercase tracking-wider text-indigo-400 flex items-center gap-2">
                 <i data-lucide="terminal" class="w-4 h-4"></i>
@@ -203,6 +349,74 @@
 </div>
 
 <script>
+    function toggleApiFields(val) {
+        const wrapper = document.getElementById('apiFieldsWrapper');
+        if (val === 'local') {
+            wrapper.classList.add('hidden');
+        } else {
+            wrapper.classList.remove('hidden');
+        }
+    }
+
+    function togglePasswordVisibility(inputId, btn) {
+        const input = document.getElementById(inputId);
+        if (input.type === 'password') {
+            input.type = 'text';
+            btn.innerHTML = '<i data-lucide="eye-off" class="w-4 h-4"></i>';
+        } else {
+            input.type = 'password';
+            btn.innerHTML = '<i data-lucide="eye" class="w-4 h-4"></i>';
+        }
+        lucide.createIcons();
+    }
+
+    async function testExternalApiConnection() {
+        const apiKey = document.getElementById('aiApiKeyInput').value.trim();
+        const apiBase = document.getElementById('aiApiBaseInput').value.trim();
+        const model = document.getElementById('aiModelInput').value.trim();
+        const resultBox = document.getElementById('testApiResult');
+        const testBtn = document.getElementById('testApiBtn');
+
+        if (!apiKey) {
+            alert('Silakan masukkan API Key terlebih dahulu.');
+            return;
+        }
+
+        testBtn.disabled = true;
+        resultBox.className = 'p-3 rounded-xl border border-zinc-700 bg-zinc-800/80 text-xs text-zinc-300';
+        resultBox.innerText = 'Sedang menguji koneksi ke endpoint API...';
+        resultBox.classList.remove('hidden');
+
+        try {
+            const res = await fetch('{{ route("admin.ai.api.test") }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                body: JSON.stringify({
+                    api_key: apiKey,
+                    api_base: apiBase,
+                    model: model
+                })
+            });
+
+            const data = await res.json();
+            if (data.success) {
+                resultBox.className = 'p-3 rounded-xl border border-emerald-500/30 bg-emerald-500/10 text-xs text-emerald-400 font-medium';
+                resultBox.innerText = data.message;
+            } else {
+                resultBox.className = 'p-3 rounded-xl border border-rose-500/30 bg-rose-500/10 text-xs text-rose-400 font-medium';
+                resultBox.innerText = data.message;
+            }
+        } catch (err) {
+            resultBox.className = 'p-3 rounded-xl border border-rose-500/30 bg-rose-500/10 text-xs text-rose-400 font-medium';
+            resultBox.innerText = 'Koneksi gagal: ' + err.message;
+        } finally {
+            testBtn.disabled = false;
+        }
+    }
+
     function openAddKnowledgeModal() {
         document.getElementById('addKnowledgeModal').classList.remove('hidden');
     }
