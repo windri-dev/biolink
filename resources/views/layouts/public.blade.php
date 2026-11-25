@@ -5,13 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>{{ $profile->meta_title ?: $profile->display_name . ' (@' . $profile->clean_handle . ')' }}</title>
     
-    <!-- Meta & OpenGraph SEO -->
+    <!-- Canonical & SEO Meta -->
+    <link rel="canonical" href="{{ url('/@' . $profile->clean_handle) }}">
     <meta name="description" content="{{ $profile->meta_description ?: $profile->bio }}">
+    <meta name="author" content="{{ $profile->display_name }}">
     <meta property="og:title" content="{{ $profile->meta_title ?: $profile->display_name }}">
     <meta property="og:description" content="{{ $profile->meta_description ?: $profile->bio }}">
     <meta property="og:image" content="{{ $profile->avatar_url }}">
+    <meta property="og:url" content="{{ url('/@' . $profile->clean_handle) }}">
     <meta property="og:type" content="profile">
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ $profile->display_name }}">
+    <meta name="twitter:description" content="{{ $profile->bio }}">
+    <meta name="twitter:image" content="{{ $profile->avatar_url }}">
+    
+    <!-- Schema.org JSON-LD Structured Data (Google Rich Snippets) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfilePage",
+      "dateCreated": "{{ $profile->created_at->toIso8601String() }}",
+      "dateModified": "{{ $profile->updated_at->toIso8601String() }}",
+      "mainEntity": {
+        "@type": "Person",
+        "name": "{{ $profile->display_name }}",
+        "alternateName": "{{ '@' . $profile->clean_handle }}",
+        "identifier": "{{ $profile->clean_handle }}",
+        "description": "{{ $profile->bio }}",
+        "image": "{{ $profile->avatar_url }}",
+        "jobTitle": "{{ $profile->job_title ?: $profile->tagline ?: 'Software Engineer' }}",
+        "url": "{{ url('/@' . $profile->clean_handle) }}"
+      }
+    }
+    </script>
     
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="{{ $profile->avatar_url ?: 'https://api.iconify.design/lucide:link-2.svg' }}">
@@ -94,13 +120,33 @@
 </head>
 <body class="antialiased flex flex-col justify-between selection:bg-sky-500 selection:text-white">
     
-    <!-- Top Action Bar (Share Button) -->
-    <header class="w-full max-w-xl mx-auto px-4 pt-4 flex justify-end items-center z-10">
-        @if($profile->show_share_button)
-            <button onclick="shareProfile()" class="p-2.5 rounded-full bg-white/10 hover:bg-white/20 text-white backdrop-blur-md border border-white/10 transition-all hover:scale-105" title="Bagikan Profil">
-                <i data-lucide="share-2" class="w-4 h-4"></i>
-            </button>
+    <!-- Top Action Bar (vCard, QR Code, Share Button) -->
+    <header class="w-full max-w-xl mx-auto px-4 pt-4 flex justify-between items-center z-10">
+        <!-- vCard Save Contact Button -->
+        @if($profile->enable_vcard)
+            <a href="{{ route('public.vcard', $profile->clean_handle) }}" 
+               class="px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-white backdrop-blur-md border border-white/10 transition-all hover:scale-105 text-xs font-semibold inline-flex items-center gap-1.5 shadow-sm"
+               title="Simpan Kontak ke HP">
+                <i data-lucide="user-plus" class="w-3.5 h-3.5 text-sky-400"></i>
+                <span class="hidden sm:inline">Simpan Kontak</span>
+            </a>
+        @else
+            <div></div>
         @endif
+
+        <div class="flex items-center gap-2">
+            <!-- QR Code Button -->
+            <button onclick="openQrModal()" class="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white backdrop-blur-md border border-white/10 transition-all hover:scale-105" title="Lihat QR Code">
+                <i data-lucide="qr-code" class="w-4 h-4"></i>
+            </button>
+
+            <!-- Share Button -->
+            @if($profile->show_share_button)
+                <button onclick="shareProfile()" class="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white backdrop-blur-md border border-white/10 transition-all hover:scale-105" title="Bagikan Profil">
+                    <i data-lucide="share-2" class="w-4 h-4"></i>
+                </button>
+            @endif
+        </div>
     </header>
 
     <!-- Main Bio Container -->
@@ -110,12 +156,12 @@
 
     <!-- Footer -->
     <footer class="w-full text-center py-6 text-xs text-white/40 flex flex-col items-center gap-1.5 z-0">
-        <a href="{{ route('admin.login') }}" class="hover:text-white/80 transition-colors inline-flex items-center gap-1">
+        <a href="{{ route('login') }}" class="hover:text-white/80 transition-colors inline-flex items-center gap-1">
             <i data-lucide="shield" class="w-3.5 h-3.5"></i>
-            <span>Admin Dashboard</span>
+            <span>Studio Dasbor</span>
         </a>
         <p class="font-medium tracking-wide">
-            Powered by <span class="text-white/70 font-bold">BioLink</span> &bull; 
+            Powered by <a href="/" class="text-white/70 font-bold hover:text-white">BioLink</a> &bull; 
             <a href="https://github.com/windri-dev/biolink" target="_blank" class="hover:text-white underline">windri-dev</a>
         </p>
     </footer>
@@ -124,6 +170,39 @@
     @if($profile->ai_assistant_enabled)
         <x-ai-widget :profile="$profile" />
     @endif
+
+    <!-- QR Code Modal Dialog -->
+    <div id="qrModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-zinc-900 border border-zinc-800 rounded-3xl max-w-xs w-full p-6 text-center space-y-4 shadow-2xl">
+            <div class="flex items-center justify-between pb-2 border-b border-zinc-800">
+                <span class="text-xs font-bold text-white flex items-center gap-1.5">
+                    <i data-lucide="qr-code" class="w-4 h-4 text-sky-400"></i>
+                    <span>QR Code Profil</span>
+                </span>
+                <button onclick="closeQrModal()" class="text-zinc-400 hover:text-white"><i data-lucide="x" class="w-4 h-4"></i></button>
+            </div>
+
+            <div class="bg-white p-3 rounded-2xl inline-block shadow-md">
+                <img id="qrImage" 
+                     src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data={{ urlencode(url('/@' . $profile->clean_handle)) }}&margin=4" 
+                     alt="QR Code {{ $profile->display_name }}" 
+                     class="w-48 h-48 mx-auto">
+            </div>
+
+            <div>
+                <p class="text-xs font-bold text-white">{{ $profile->display_name }}</p>
+                <p class="text-[11px] font-mono text-sky-400">/@ {{ $profile->clean_handle }}</p>
+            </div>
+
+            <a href="https://api.qrserver.com/v1/create-qr-code/?size=500x500&data={{ urlencode(url('/@' . $profile->clean_handle)) }}" 
+               download="qr_{{ $profile->clean_handle }}.png" 
+               target="_blank"
+               class="w-full py-2.5 rounded-xl bg-sky-500 hover:bg-sky-400 text-white font-bold text-xs transition-all shadow-md inline-flex items-center justify-center gap-1.5">
+                <i data-lucide="download" class="w-3.5 h-3.5"></i>
+                <span>Unduh Gambar QR</span>
+            </a>
+        </div>
+    </div>
 
     <!-- Share Toast Notification Modal -->
     <div id="shareToast" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-zinc-900 text-white px-5 py-3 rounded-full border border-white/20 shadow-2xl flex items-center gap-3 text-sm opacity-0 pointer-events-none transition-all duration-300 z-50">
@@ -147,6 +226,14 @@
                     showToast('Tautan profil disalin ke clipboard!');
                 });
             }
+        }
+
+        function openQrModal() {
+            document.getElementById('qrModal').classList.remove('hidden');
+        }
+
+        function closeQrModal() {
+            document.getElementById('qrModal').classList.add('hidden');
         }
 
         function showToast(text) {

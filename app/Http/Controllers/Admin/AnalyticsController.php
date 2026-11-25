@@ -48,6 +48,15 @@ class AnalyticsController
             ->pluck('count', 'device_type')
             ->all();
 
+        // GEO Countries Breakdown
+        $countries = PageView::where('profile_id', $profile->id)
+            ->whereNotNull('country_name')
+            ->selectRaw('country_code, country_name, count(*) as count')
+            ->groupBy('country_code', 'country_name')
+            ->orderByDesc('count')
+            ->take(6)
+            ->get();
+
         // Top Referrers
         $referrers = PageView::where('profile_id', $profile->id)
             ->whereNotNull('referer')
@@ -72,6 +81,7 @@ class AnalyticsController
             'trafficTrend' => $trafficTrend,
             'linksStats' => $linksStats,
             'devices' => $devices,
+            'countries' => $countries,
             'referrers' => $referrers,
             'recentChats' => $recentChats,
         ]);

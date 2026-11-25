@@ -10,11 +10,14 @@ return new class extends Migration
 {
     public function up(): void
     {
-        // 1. Page views log
+        // 1. Page views log with Geolocation
         Schema::create('page_views', function (Blueprint $table) {
             $table->id();
             $table->foreignId('profile_id')->constrained()->cascadeOnDelete();
             $table->string('ip_address', 45)->nullable();
+            $table->string('country_code', 4)->nullable()->index(); // ID, US, SG, etc.
+            $table->string('country_name', 100)->nullable();
+            $table->string('city', 100)->nullable();
             $table->text('user_agent')->nullable();
             $table->string('referer')->nullable();
             $table->string('device_type')->default('mobile'); // mobile, desktop, tablet
@@ -25,11 +28,14 @@ return new class extends Migration
             $table->index(['profile_id', 'viewed_at']);
         });
 
-        // 2. Link clicks log
+        // 2. Link clicks log with Geolocation
         Schema::create('link_clicks', function (Blueprint $table) {
             $table->id();
             $table->foreignId('bio_link_id')->constrained()->cascadeOnDelete();
             $table->string('ip_address', 45)->nullable();
+            $table->string('country_code', 4)->nullable()->index();
+            $table->string('country_name', 100)->nullable();
+            $table->string('city', 100)->nullable();
             $table->text('user_agent')->nullable();
             $table->string('referer')->nullable();
             $table->string('device_type')->default('mobile');

@@ -28,6 +28,11 @@ class ProfileSeeder extends Seeder
                 'bio' => 'Senior Full-Stack Software Engineer & Builder. Focusing on distributed systems, AI agent workflows, and clean web engineering.',
                 'tagline' => 'Full-Stack Software Engineer',
                 'location' => 'Jakarta, Indonesia',
+                'phone' => '+628123456789',
+                'job_title' => 'Senior Full-Stack Engineer',
+                'company' => 'windri-dev',
+                'enable_vcard' => true,
+                'enable_bento_grid' => true,
                 'is_verified' => true,
                 'verified_title' => 'Verified Engineer',
                 'badge_style' => 'blue',
@@ -55,7 +60,7 @@ class ProfileSeeder extends Seeder
             );
         }
 
-        // Bio Links
+        // Bio Links (Demonstrating Full Width & Modular Bento Grid Cards)
         $links = [
             [
                 'type' => 'link',
@@ -63,6 +68,7 @@ class ProfileSeeder extends Seeder
                 'subtitle' => 'Jelajahi repositori open-source & proyek aktif',
                 'url' => 'https://github.com/windri-dev',
                 'icon' => 'github',
+                'card_size' => 'full',
                 'badge_text' => 'OFFICIAL',
                 'badge_color' => 'sky',
                 'is_highlighted' => true,
@@ -75,6 +81,7 @@ class ProfileSeeder extends Seeder
                 'subtitle' => 'Platform butik modern dengan AI Fashion Concierge',
                 'url' => 'https://shoppe-staging.wn-cdn.net',
                 'icon' => 'shopping-bag',
+                'card_size' => 'full',
                 'badge_text' => 'LIVE DEMO',
                 'badge_color' => 'emerald',
                 'is_highlighted' => false,
@@ -87,6 +94,7 @@ class ProfileSeeder extends Seeder
                 'subtitle' => 'Aplikasi web interaktif ucapan spesial',
                 'url' => 'https://hbd.wn-cdn.net',
                 'icon' => 'sparkles',
+                'card_size' => 'half',
                 'badge_text' => 'CREATIVE',
                 'badge_color' => 'amber',
                 'is_highlighted' => false,
@@ -96,10 +104,11 @@ class ProfileSeeder extends Seeder
             [
                 'type' => 'link',
                 'title' => 'Hubungi via Telegram',
-                'subtitle' => 'Diskusi peluang kolaborasi atau konsultasi teknis',
+                'subtitle' => 'Diskusi kolaborasi & konsultasi',
                 'url' => 'https://t.me/windri',
                 'icon' => 'send',
-                'badge_text' => 'FAST RESPONSE',
+                'card_size' => 'half',
+                'badge_text' => 'FAST CHAT',
                 'badge_color' => 'purple',
                 'is_highlighted' => false,
                 'animation_type' => 'none',

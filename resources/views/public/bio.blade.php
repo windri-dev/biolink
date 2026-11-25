@@ -27,7 +27,7 @@
         </h1>
     </div>
 
-    <span class="text-xs md:text-sm font-semibold text-sky-400 tracking-wide mb-2 block">
+    <span class="text-xs md:text-sm font-semibold text-sky-400 tracking-wide mb-2 block font-mono">
         {{ '@' . $profile->clean_handle }}
     </span>
 
@@ -87,12 +87,16 @@
         </div>
     @endif
 
-    <!-- Bio Links Stack -->
-    <div class="w-full space-y-3.5 mb-10">
+    <!-- Bio Links Stack (Modular Bento Grid Supported) -->
+    <div class="w-full grid grid-cols-1 sm:grid-cols-2 gap-3.5 mb-10 text-left">
         @forelse($links as $link)
+            @php
+                $colSpan = ($link->card_size === 'half') ? 'sm:col-span-1' : 'col-span-full';
+            @endphp
+
             @if($link->type === 'header')
-                <!-- Section Header Divider -->
-                <div class="pt-4 pb-1 text-left">
+                <!-- Section Header Divider (Full width) -->
+                <div class="col-span-full pt-4 pb-1 text-left">
                     <h3 class="text-xs uppercase tracking-wider font-bold text-zinc-400/80 px-2 flex items-center gap-2">
                         <span>{{ $link->title }}</span>
                         <div class="flex-grow h-px bg-white/10"></div>
@@ -100,7 +104,7 @@
                 </div>
             @elseif($link->type === 'embed_youtube' && $link->url)
                 <!-- YouTube Embed Video Card -->
-                <div class="bio-card rounded-2xl p-3 text-left overflow-hidden">
+                <div class="{{ $colSpan }} bio-card rounded-2xl p-3 overflow-hidden">
                     <p class="text-xs font-semibold text-zinc-300 mb-2 px-1 flex items-center gap-1.5">
                         <i data-lucide="youtube" class="w-3.5 h-3.5 text-red-500"></i>
                         {{ $link->title }}
@@ -120,9 +124,9 @@
                 <a href="{{ route('public.click', $link->id) }}" 
                    {{ $link->open_in_new_tab ? 'target="_blank"' : '' }} 
                    rel="noopener noreferrer"
-                   class="bio-card {{ $theme->button_shape ?? 'rounded-2xl' }} p-4 flex items-center justify-between gap-3 group relative overflow-hidden {{ $link->is_highlighted ? 'anim-pulse ring-1 ring-sky-400/30' : '' }}">
+                   class="{{ $colSpan }} bio-card {{ $theme->button_shape ?? 'rounded-2xl' }} p-4 flex items-center justify-between gap-3 group relative overflow-hidden {{ $link->is_highlighted ? 'anim-pulse ring-1 ring-sky-400/30' : '' }}">
                     
-                    <div class="flex items-center gap-3.5 min-w-0 text-left">
+                    <div class="flex items-center gap-3.5 min-w-0">
                         <!-- Icon or Thumbnail -->
                         <div class="w-10 h-10 rounded-xl bg-white/10 border border-white/15 flex items-center justify-center flex-shrink-0 text-white transition-colors group-hover:bg-white/20">
                             @if($link->icon === 'shopping-bag')
@@ -172,7 +176,7 @@
                 </a>
             @endif
         @empty
-            <div class="py-12 text-zinc-500 text-sm">
+            <div class="col-span-full py-12 text-zinc-500 text-sm text-center">
                 Belum ada tautan yang ditambahkan.
             </div>
         @endforelse

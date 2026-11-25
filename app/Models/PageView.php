@@ -17,6 +17,9 @@ class PageView extends Model
     protected $fillable = [
         'profile_id',
         'ip_address',
+        'country_code',
+        'country_name',
+        'city',
         'user_agent',
         'referer',
         'device_type',

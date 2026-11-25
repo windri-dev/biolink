@@ -21,6 +21,7 @@ class BioLink extends Model
         'url',
         'icon',
         'thumbnail_url',
+        'card_size',
         'badge_text',
         'badge_color',
         'is_highlighted',

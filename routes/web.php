@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\AiKnowledgeController;
 use App\Http\Controllers\Admin\AnalyticsController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\DataExportController;
 use App\Http\Controllers\Admin\LinkController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\ThemeController;
@@ -13,14 +14,17 @@ use App\Http\Controllers\AiChatController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\PublicBioController;
+use App\Http\Controllers\SitemapController;
+use App\Http\Controllers\VcardController;
 use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
-| Homepage & SaaS Marketing Routes
+| Homepage & SEO Sitemap Routes
 |--------------------------------------------------------------------------
 */
 Route::get('/', [LandingPageController::class, 'index'])->name('home');
+Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('seo.sitemap');
 
 // Authentication Routes (Login & Register for Multi-User)
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
@@ -63,6 +67,10 @@ Route::middleware('auth')->prefix('admin')->as('admin.')->group(function () {
     // Analytics
     Route::get('/analytics', [AnalyticsController::class, 'index'])->name('analytics.index');
 
+    // Data Export & Backup
+    Route::get('/export/json', [DataExportController::class, 'exportJson'])->name('export.json');
+    Route::get('/export/csv', [DataExportController::class, 'exportCsv'])->name('export.csv');
+
     // Logout alias inside admin prefix
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
@@ -72,6 +80,10 @@ Route::middleware('auth')->prefix('admin')->as('admin.')->group(function () {
 | Public Bio Profile Routing (Supports /@username and /username)
 |--------------------------------------------------------------------------
 */
+Route::get('/@{handle}/vcard', [VcardController::class, 'download'])
+    ->where('handle', '[a-zA-Z0-9_-]+')
+    ->name('public.vcard');
+
 Route::get('/@{handle}', [PublicBioController::class, 'show'])
     ->where('handle', '[a-zA-Z0-9_-]+')
     ->name('public.bio.at');

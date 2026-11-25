@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 class AnalyticsService
 {
     /**
-     * Record a public profile page view
+     * Record a public profile page view with Geo & Device data
      */
     public function recordPageView(Profile $profile, Request $request): PageView
     {
@@ -21,10 +21,14 @@ class AnalyticsService
         $deviceType = $this->detectDevice($userAgent);
         $browser = $this->detectBrowser($userAgent);
         $platform = $this->detectPlatform($userAgent);
+        $geo = $this->resolveGeoLocation($request);
 
         return PageView::create([
             'profile_id' => $profile->id,
             'ip_address' => $request->ip(),
+            'country_code' => $geo['country_code'],
+            'country_name' => $geo['country_name'],
+            'city' => $geo['city'],
             'user_agent' => substr($userAgent, 0, 500),
             'referer' => substr((string) $request->header('referer'), 0, 255),
             'device_type' => $deviceType,
@@ -35,16 +39,20 @@ class AnalyticsService
     }
 
     /**
-     * Record a link click
+     * Record a link click with Geo data
      */
     public function recordLinkClick(BioLink $link, Request $request): LinkClick
     {
         $userAgent = $request->userAgent() ?? '';
         $deviceType = $this->detectDevice($userAgent);
+        $geo = $this->resolveGeoLocation($request);
 
         $click = LinkClick::create([
             'bio_link_id' => $link->id,
             'ip_address' => $request->ip(),
+            'country_code' => $geo['country_code'],
+            'country_name' => $geo['country_name'],
+            'city' => $geo['city'],
             'user_agent' => substr($userAgent, 0, 500),
             'referer' => substr((string) $request->header('referer'), 0, 255),
             'device_type' => $deviceType,
@@ -54,6 +62,47 @@ class AnalyticsService
         $link->recordClick();
 
         return $click;
+    }
+
+    /**
+     * Resolve GEO Location (Country code, country name, city)
+     */
+    public function resolveGeoLocation(Request $request): array
+    {
+        // 1. Cloudflare IPCountry header
+        $countryCode = strtoupper((string) ($request->header('CF-IPCountry') ?? $request->header('X-Country-Code') ?? ''));
+
+        // If local IP (private or loopback)
+        $ip = $request->ip();
+        if (empty($countryCode) || $countryCode === 'XX' || $countryCode === 'T1') {
+            if ($ip === '127.0.0.1' || str_starts_with((string) $ip, '192.168.') || str_starts_with((string) $ip, '10.')) {
+                return [
+                    'country_code' => 'ID',
+                    'country_name' => 'Indonesia (Local)',
+                    'city' => 'Jakarta',
+                ];
+            }
+            $countryCode = 'ID'; // Default fallback
+        }
+
+        $countryMap = [
+            'ID' => 'Indonesia',
+            'SG' => 'Singapore',
+            'MY' => 'Malaysia',
+            'US' => 'United States',
+            'GB' => 'United Kingdom',
+            'JP' => 'Japan',
+            'AU' => 'Australia',
+            'DE' => 'Germany',
+            'NL' => 'Netherlands',
+            'IN' => 'India',
+        ];
+
+        return [
+            'country_code' => substr($countryCode, 0, 4),
+            'country_name' => $countryMap[$countryCode] ?? $countryCode,
+            'city' => (string) ($request->header('CF-IPCity') ?? 'Direct Visitor'),
+        ];
     }
 
     /**

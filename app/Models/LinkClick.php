@@ -17,6 +17,9 @@ class LinkClick extends Model
     protected $fillable = [
         'bio_link_id',
         'ip_address',
+        'country_code',
+        'country_name',
+        'city',
         'user_agent',
         'referer',
         'device_type',

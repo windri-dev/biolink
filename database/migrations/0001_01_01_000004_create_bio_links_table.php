@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('url')->nullable();
             $table->string('icon')->nullable(); // Lucide icon or custom SVG
             $table->string('thumbnail_url')->nullable();
+            $table->string('card_size')->default('full'); // full (100%), half (50% 2-col bento), featured (large prominent)
             $table->string('badge_text')->nullable(); // "NEW", "HOT", "PROMO", "STAGING", etc.
             $table->string('badge_color')->default('emerald'); // emerald, amber, rose, sky, purple
             $table->boolean('is_highlighted')->default(false); // subtle pulse/glow animation

@@ -22,6 +22,11 @@ class Profile extends Model
         'bio',
         'tagline',
         'location',
+        'phone',
+        'job_title',
+        'company',
+        'enable_vcard',
+        'enable_bento_grid',
         'is_verified',
         'verified_title',
         'badge_style',
@@ -42,6 +47,8 @@ class Profile extends Model
     {
         return [
             'is_verified' => 'boolean',
+            'enable_vcard' => 'boolean',
+            'enable_bento_grid' => 'boolean',
             'show_share_button' => 'boolean',
             'show_subscribe_box' => 'boolean',
             'ai_assistant_enabled' => 'boolean',
