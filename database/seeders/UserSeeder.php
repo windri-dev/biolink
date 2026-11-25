@@ -18,6 +18,8 @@ class UserSeeder extends Seeder
                 'name' => 'Windri',
                 'password' => Hash::make('password123'),
                 'email_verified_at' => now(),
+                'is_super_admin' => true,
+                'status' => 'active',
             ]
         );
     }

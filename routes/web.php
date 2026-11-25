@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DataExportController;
 use App\Http\Controllers\Admin\LinkController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\SuperAdminController;
 use App\Http\Controllers\Admin\ThemeController;
 use App\Http\Controllers\AiChatController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -16,6 +17,7 @@ use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\PublicBioController;
 use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\VcardController;
+use App\Http\Middleware\EnsureSuperAdmin;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -82,6 +84,17 @@ Route::middleware('auth')->prefix('admin')->as('admin.')->group(function () {
     // Data Export & Backup
     Route::get('/export/json', [DataExportController::class, 'exportJson'])->name('export.json');
     Route::get('/export/csv', [DataExportController::class, 'exportCsv'])->name('export.csv');
+
+    // Super Admin Master Control Routes
+    Route::middleware([EnsureSuperAdmin::class])->prefix('master-control')->as('master.')->group(function () {
+        Route::get('/', [SuperAdminController::class, 'index'])->name('index');
+        Route::get('/links', [SuperAdminController::class, 'links'])->name('links');
+        Route::get('/users/{id}', [SuperAdminController::class, 'showUser'])->name('user.show');
+        Route::post('/users/{id}/toggle-status', [SuperAdminController::class, 'toggleUserStatus'])->name('user.toggle-status');
+        Route::delete('/users/{id}', [SuperAdminController::class, 'destroyUser'])->name('user.destroy');
+        Route::post('/links/{id}/toggle', [SuperAdminController::class, 'toggleLinkStatus'])->name('link.toggle');
+        Route::delete('/links/{id}', [SuperAdminController::class, 'destroyLink'])->name('link.destroy');
+    });
 
     // Logout alias inside admin prefix
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');

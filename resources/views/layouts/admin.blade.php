@@ -91,6 +91,22 @@
                     <i data-lucide="bar-chart-3" class="w-4 h-4"></i>
                     <span>Statistik & Log</span>
                 </a>
+
+                @if(auth()->user()->isSuperAdmin())
+                    <div class="pt-3 pb-1 px-3">
+                        <span class="text-[10px] font-mono font-bold uppercase tracking-wider text-amber-400/90 flex items-center gap-1.5">
+                            <i data-lucide="shield-check" class="w-3.5 h-3.5"></i>
+                            <span>Super Admin</span>
+                        </span>
+                    </div>
+                    <a href="{{ route('admin.master.index') }}" class="admin-nav-item flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-amber-300/90 hover:text-white hover:bg-amber-500/10 transition-colors border border-amber-500/20 {{ request()->routeIs('admin.master.*') ? 'active bg-amber-500/15 border-amber-500/40 text-amber-200' : '' }}">
+                        <div class="flex items-center gap-3">
+                            <i data-lucide="shield-alert" class="w-4 h-4 text-amber-400"></i>
+                            <span>Master Kontrol</span>
+                        </div>
+                        <span class="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300">SUPER</span>
+                    </a>
+                @endif
             </nav>
         </aside>
 

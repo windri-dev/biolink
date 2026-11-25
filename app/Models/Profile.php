@@ -50,6 +50,8 @@ class Profile extends Model
         'meta_title',
         'meta_description',
         'custom_css',
+        'is_flagged',
+        'admin_notes',
     ];
 
     /**
@@ -58,6 +60,7 @@ class Profile extends Model
     protected function casts(): array
     {
         return [
+            'is_flagged' => 'boolean',
             'is_verified' => 'boolean',
             'enable_vcard' => 'boolean',
             'enable_bento_grid' => 'boolean',

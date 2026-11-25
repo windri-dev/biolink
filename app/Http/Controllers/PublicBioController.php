@@ -24,12 +24,18 @@ class PublicBioController
     {
         $cleanHandle = strtolower(ltrim($handle, '@'));
 
-        $profile = Profile::with(['theme', 'activeSocialLinks', 'activeBioLinks'])
+        $profile = Profile::with(['theme', 'activeSocialLinks', 'activeBioLinks', 'user'])
             ->where('handle', $cleanHandle)
             ->first();
 
         if (!$profile) {
             abort(404, "Profil @{$cleanHandle} belum terdaftar.");
+        }
+
+        if ($profile->user && $profile->user->isSuspended()) {
+            return view('public.suspended', [
+                'profile' => $profile,
+            ]);
         }
 
         // Record page view silently
