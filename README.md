@@ -126,6 +126,38 @@ Aplikasi Anda kini aktif di: **`http://localhost:8000`**
 
 ---
 
+## 🐳 Menjalankan dengan Docker & Docker Compose (Rekomendasi Cepat)
+
+Jika komputer Bos memiliki Docker, seluruh aplikasi (Web Server Nginx + PHP 8.4-FPM + Database MariaDB) dapat dijalankan dalam 1 perintah tanpa perlu memasang PHP atau MySQL di host:
+
+### 1. Salin Environment
+```bash
+cp .env.example .env
+```
+
+### 2. Jalankan Container
+```bash
+docker compose up -d --build
+```
+
+Container akan otomatis melakukan:
+- Build PHP 8.4-FPM Alpine & ekstensi lengkap.
+- Mengaktifkan Nginx & Supervisor.
+- Menjalankan healthcheck database MariaDB 11.4.
+- Menjalankan migration database secara otomatis.
+
+Aplikasi BioLink dapat langsung diakses di:
+* **Beranda / Landing Page**: **`http://localhost:8006`**
+* **Profil Bawaan Windri**: **`http://localhost:8006/@windri`**
+* **Studio Dasbor**: **`http://localhost:8006/login`**
+
+### 3. Menghentikan Container
+```bash
+docker compose down
+```
+
+---
+
 ## Alur Penggunaan Multi-User
 
 1. **Pengunjung Umum**:

@@ -1,0 +1,61 @@
+services:
+  biolink-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: biolink-app
+    restart: unless-stopped
+    ports:
+      - "${APP_PORT:-8006}:80"
+    environment:
+      APP_NAME: "BioLink"
+      APP_ENV: "${APP_ENV:-production}"
+      APP_DEBUG: "${APP_DEBUG:-false}"
+      APP_URL: "${APP_URL:-http://localhost:8006}"
+      DB_CONNECTION: mysql
+      DB_HOST: biolink-db
+      DB_PORT: 3306
+      DB_DATABASE: ${DB_DATABASE:-biolink_db}
+      DB_USERNAME: ${DB_USERNAME:-biolink_user}
+      DB_PASSWORD: ${DB_PASSWORD:-biolink_secret}
+      SESSION_DRIVER: database
+      CACHE_STORE: database
+      FILESYSTEM_DISK: public
+    volumes:
+      - biolink_storage:/var/www/html/storage/app/public
+    depends_on:
+      biolink-db:
+        condition: service_healthy
+    networks:
+      - biolink-network
+
+  biolink-db:
+    image: mariadb:11.4
+    container_name: biolink-db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE:-biolink_db}
+      MYSQL_USER: ${DB_USERNAME:-biolink_user}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-biolink_secret}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-biolink_root_secret}
+    volumes:
+      - biolink_mysql_data:/var/lib/mysql
+    networks:
+      - biolink-network
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+
+volumes:
+  biolink_storage:
+    name: biolink_storage
+  biolink_mysql_data:
+    name: biolink_mysql_data
+
+networks:
+  biolink-network:
+    name: biolink-network
+    driver: bridge
