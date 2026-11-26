@@ -156,6 +156,19 @@ class CvController
     }
 
     /**
+     * Quick toggle CV active / inactive
+     */
+    public function toggle(Request $request): RedirectResponse
+    {
+        $profile = $this->getProfile();
+        $newState = !$profile->enable_cv;
+        $profile->update(['enable_cv' => $newState]);
+
+        $statusText = $newState ? 'diaktifkan dan dapat diakses publik.' : 'dinonaktifkan (tersembunyi dari publik).';
+        return back()->with('success', "Curriculum Vitae (CV) berhasil {$statusText}");
+    }
+
+    /**
      * 1-Click Load standard professional CV preset template
      */
     public function loadTemplate(): RedirectResponse

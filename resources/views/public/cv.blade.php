@@ -115,6 +115,23 @@
 </head>
 <body class="min-h-screen selection:bg-sky-500 selection:text-white flex flex-col justify-between">
 
+    @if(!$profile->enable_cv && auth()->check() && auth()->id() === $profile->user_id)
+        <div class="no-print bg-amber-500/15 border-b border-amber-500/30 px-4 py-2 text-xs text-amber-300">
+            <div class="max-w-4xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                <div class="flex items-center gap-2">
+                    <i data-lucide="alert-triangle" class="w-4 h-4 text-amber-400 flex-shrink-0"></i>
+                    <span><strong>Status CV: Nonaktif (Draf / Tersembunyi)</strong> &mdash; Hanya Anda yang dapat melihat pratinjau ini. Pengunjung umum akan dialihkan ke bio.</span>
+                </div>
+                <form action="{{ route('admin.cv.toggle') }}" method="POST" class="inline">
+                    @csrf
+                    <button type="submit" class="px-3 py-1 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-white font-bold text-xs shadow transition-all">
+                        Aktifkan Sekarang
+                    </button>
+                </form>
+            </div>
+        </div>
+    @endif
+
     <!-- Top Floating Toolbar (Hidden on Print) -->
     <header class="no-print sticky top-0 z-40 bg-[#0b0f17]/85 backdrop-blur-md border-b border-white/10 px-4 py-3">
         <div class="max-w-4xl mx-auto flex items-center justify-between gap-4">

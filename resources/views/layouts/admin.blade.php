@@ -154,10 +154,10 @@
                 </div>
             @endif
 
-            @if(session('error') || $errors->any())
+            @if(session('error') || (isset($errors) && $errors->any()))
                 <div class="mb-5 bg-rose-500/10 border border-rose-500/30 text-rose-400 px-4 py-3 rounded-xl text-xs font-medium flex items-center gap-2">
                     <i data-lucide="alert-circle" class="w-4 h-4 flex-shrink-0"></i>
-                    <span>{{ session('error') ?: $errors->first() }}</span>
+                    <span>{{ session('error') ?: (isset($errors) ? $errors->first() : '') }}</span>
                 </div>
             @endif
 

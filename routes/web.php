@@ -101,6 +101,7 @@ Route::middleware('auth')->prefix('admin')->as('admin.')->group(function () {
     // Curriculum Vitae (CV) & Career Builder
     Route::get('/cv', [AdminCvController::class, 'index'])->name('cv.index');
     Route::post('/cv', [AdminCvController::class, 'update'])->name('cv.update');
+    Route::post('/cv/toggle', [AdminCvController::class, 'toggle'])->name('cv.toggle');
     Route::post('/cv/template', [AdminCvController::class, 'loadTemplate'])->name('cv.template');
     Route::delete('/cv/file', [AdminCvController::class, 'deleteFile'])->name('cv.delete-file');
 
