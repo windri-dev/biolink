@@ -35,7 +35,7 @@
     <header class="h-16 border-b border-zinc-800/80 bg-zinc-900/50 backdrop-blur-md sticky top-0 z-30 px-4 sm:px-8 flex items-center justify-between">
         <div class="flex items-center gap-3">
             <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-2.5 font-black text-lg tracking-tight text-white">
-                <img src="{{ asset('Logo.png') }}" alt="Logo" class="h-8 w-auto object-contain">
+                <img src="{{ asset('Logo.png') }}" alt="Logo" class="h-9 w-auto object-contain">
                 <span>BioLink<span class="text-sky-400">.</span></span>
             </a>
             <span class="text-[11px] font-mono uppercase bg-zinc-800 text-zinc-400 px-2 py-0.5 rounded border border-zinc-700">Studio</span>

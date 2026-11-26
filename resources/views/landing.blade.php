@@ -117,7 +117,7 @@
             
             <!-- Brand Logo -->
             <a href="/" class="flex items-center gap-3 font-black text-xl tracking-tight text-white group" aria-label="BioLink Homepage">
-                <img src="{{ asset('Logo.png') }}" alt="Logo" class="h-10 w-auto object-contain transition-transform group-hover:scale-105">
+                <img src="{{ asset('Logo.png') }}" alt="Logo" class="h-11 w-auto object-contain transition-transform group-hover:scale-105">
                 <span class="flex items-center">
                     <span>BioLink</span>
                     <span class="text-sky-400">.</span>

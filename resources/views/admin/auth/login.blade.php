@@ -30,7 +30,7 @@
         
         <div class="text-center space-y-3">
             <a href="/" class="inline-block">
-                <img src="{{ asset('Logo.png') }}" alt="Logo" class="h-12 w-auto object-contain mx-auto">
+                <img src="{{ asset('Logo.png') }}" alt="Logo" class="h-16 w-auto object-contain mx-auto drop-shadow-md">
             </a>
             <h1 class="text-2xl font-black text-white tracking-tight">BioLink<span class="text-sky-400">.</span></h1>
             <p class="text-xs text-zinc-400">Masuk ke studio dasbor untuk mengelola profil dan tautan Anda.</p>
