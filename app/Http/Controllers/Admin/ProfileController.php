@@ -150,6 +150,25 @@ class ProfileController
         return redirect()->route('admin.profile.index')->with('success', 'Akun media sosial berhasil diperbarui!');
     }
 
+    public function reorderSocial(Request $request): JsonResponse
+    {
+        $profile = $this->getProfile();
+
+        $request->validate([
+            'order' => 'required|array',
+            'order.*' => 'integer',
+        ]);
+
+        foreach ($request->input('order') as $index => $id) {
+            SocialLink::where('profile_id', $profile->id)->where('id', $id)->update(['sort_order' => $index + 1]);
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Urutan media sosial berhasil disimpan.',
+        ]);
+    }
+
     public function toggleSocial(int $id): JsonResponse
     {
         $profile = $this->getProfile();

@@ -72,6 +72,7 @@ Route::middleware('auth')->prefix('admin')->as('admin.')->group(function () {
     Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::post('/profile/socials', [ProfileController::class, 'updateSocials'])->name('profile.socials');
     Route::post('/profile/socials/add', [ProfileController::class, 'storeSocial'])->name('profile.socials.store');
+    Route::post('/profile/socials/reorder', [ProfileController::class, 'reorderSocial'])->name('profile.socials.reorder');
     Route::put('/profile/socials/{id}', [ProfileController::class, 'updateSocial'])->name('profile.socials.update');
     Route::post('/profile/socials/{id}/toggle', [ProfileController::class, 'toggleSocial'])->name('profile.socials.toggle');
     Route::delete('/profile/socials/{id}', [ProfileController::class, 'destroySocial'])->name('profile.socials.destroy');
