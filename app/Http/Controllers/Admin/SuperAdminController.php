@@ -220,4 +220,77 @@ class SuperAdminController
 
         return back()->with('success', "Pengguna {$name} dan seluruh data tautannya berhasil dihapus.");
     }
+
+    /**
+     * Register New User Exclusively by Master Admin
+     */
+    public function createUser(Request $request): RedirectResponse
+    {
+        $validated = $request->validate([
+            'handle' => [
+                'required',
+                'string',
+                'min:3',
+                'max:30',
+                'regex:/^[a-zA-Z0-9_-]+$/',
+                'unique:profiles,handle',
+                function ($attribute, $value, $fail) {
+                    $reserved = ['admin', 'login', 'register', 'logout', 'api', 'dashboard', 'settings', 'public', 'home', 'app'];
+                    if (in_array(strtolower($value), $reserved, true)) {
+                        $fail("Handle '{$value}' dicadangkan untuk sistem.");
+                    }
+                },
+            ],
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6',
+        ], [
+            'handle.regex' => 'Username hanya boleh berisi huruf, angka, garis hubung (-), dan garis bawah (_).',
+            'handle.unique' => 'Username ini sudah terdaftar oleh pengguna lain.',
+            'email.unique' => 'Alamat email ini sudah terdaftar.',
+        ]);
+
+        $defaultTheme = \App\Models\Theme::where('slug', 'dark-luxury')->first();
+
+        \Illuminate\Support\Facades\DB::transaction(function () use ($validated, $defaultTheme) {
+            $user = User::create([
+                'name' => $validated['name'],
+                'email' => $validated['email'],
+                'password' => \Illuminate\Support\Facades\Hash::make($validated['password']),
+                'role' => 'user',
+                'status' => 'active',
+            ]);
+
+            $cleanHandle = strtolower($validated['handle']);
+            $profile = \App\Models\Profile::create([
+                'user_id' => $user->id,
+                'theme_id' => $defaultTheme?->id,
+                'handle' => $cleanHandle,
+                'display_name' => $validated['name'],
+                'avatar_url' => 'https://ui-avatars.com/api/?name=' . urlencode($validated['name']) . '&background=0284c7&color=fff&size=200',
+                'bio' => 'Selamat datang di halaman bio resmi saya.',
+                'tagline' => 'Digital Creator',
+                'is_verified' => false,
+                'show_share_button' => true,
+                'ai_assistant_enabled' => true,
+                'ai_assistant_name' => 'Aura',
+                'ai_greeting_message' => "Halo, saya asisten pintar {$validated['name']}. Ada yang bisa saya bantu?",
+                'meta_title' => "{$validated['name']} (@{$cleanHandle}) • BioLink",
+                'meta_description' => "Profil dan kumpulan tautan resmi {$validated['name']}.",
+            ]);
+
+            BioLink::create([
+                'profile_id' => $profile->id,
+                'type' => 'link',
+                'title' => 'Tautan Portofolio',
+                'subtitle' => 'Koleksi hasil karya dan proyek',
+                'url' => 'https://github.com',
+                'icon' => 'globe',
+                'is_active' => true,
+                'sort_order' => 1,
+            ]);
+        });
+
+        return back()->with('success', "Pengguna baru @{$validated['handle']} berhasil didaftarkan oleh Master Admin!");
+    }
 }

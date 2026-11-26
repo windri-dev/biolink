@@ -17,6 +17,10 @@
         </div>
 
         <div class="flex items-center gap-2">
+            <button type="button" onclick="openCreateUserModal()" class="px-3.5 py-2 rounded-xl bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-400 hover:to-indigo-500 text-white text-xs font-bold transition-all shadow-md shadow-sky-500/20 inline-flex items-center gap-1.5">
+                <i data-lucide="user-plus" class="w-4 h-4"></i>
+                <span>Tambah Pengguna Baru</span>
+            </button>
             <a href="{{ route('admin.master.links') }}" class="px-3.5 py-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-300 hover:text-white text-xs font-semibold border border-zinc-700 transition-colors inline-flex items-center gap-1.5">
                 <i data-lucide="list-filter" class="w-4 h-4 text-sky-400"></i>
                 <span>Audit Seluruh Tautan ({{ $totalLinks }})</span>
@@ -426,5 +430,64 @@
     function closeAuditModal() {
         document.getElementById('userAuditModal').classList.add('hidden');
     }
+
+    function openCreateUserModal() {
+        document.getElementById('createUserModal').classList.remove('hidden');
+    }
+
+    function closeCreateUserModal() {
+        document.getElementById('createUserModal').classList.add('hidden');
+    }
 </script>
+
+<!-- Modal Daftarkan Pengguna Baru oleh Master Admin -->
+<div id="createUserModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-zinc-900 border border-zinc-800 rounded-3xl max-w-md w-full p-6 shadow-2xl space-y-4">
+        <div class="flex items-center justify-between border-b border-zinc-800 pb-3">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-xl bg-sky-500/10 text-sky-400 flex items-center justify-center">
+                    <i data-lucide="user-plus" class="w-4 h-4"></i>
+                </div>
+                <div>
+                    <h3 class="text-sm font-bold text-white">Daftarkan Pengguna Baru</h3>
+                    <p class="text-[10px] text-zinc-400">Didaftarkan secara resmi oleh Master Admin</p>
+                </div>
+            </div>
+            <button onclick="closeCreateUserModal()" class="text-zinc-400 hover:text-white p-1">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+        </div>
+
+        <form action="{{ route('admin.master.user.create') }}" method="POST" class="space-y-3.5 text-xs">
+            @csrf
+            <div>
+                <label class="block font-bold text-zinc-300 mb-1">Username / Handle Bio</label>
+                <div class="flex items-center bg-zinc-950 border border-zinc-800 rounded-xl px-3 py-2">
+                    <span class="text-zinc-500 font-mono pr-1 select-none">@</span>
+                    <input type="text" name="handle" required placeholder="username" class="bg-transparent flex-grow text-white font-mono focus:outline-none text-xs">
+                </div>
+            </div>
+
+            <div>
+                <label class="block font-bold text-zinc-300 mb-1">Nama Lengkap</label>
+                <input type="text" name="name" required placeholder="Contoh: Budi Santoso" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-sky-500 text-xs">
+            </div>
+
+            <div>
+                <label class="block font-bold text-zinc-300 mb-1">Alamat Email</label>
+                <input type="email" name="email" required placeholder="user@domain.com" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-sky-500 text-xs">
+            </div>
+
+            <div>
+                <label class="block font-bold text-zinc-300 mb-1">Kata Sandi Awal</label>
+                <input type="password" name="password" required placeholder="Minimal 6 karakter" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-sky-500 text-xs">
+            </div>
+
+            <div class="pt-2 flex items-center justify-end gap-2 border-t border-zinc-800">
+                <button type="button" onclick="closeCreateUserModal()" class="px-4 py-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-xs font-semibold">Batal</button>
+                <button type="submit" class="px-4 py-2 rounded-xl bg-sky-500 hover:bg-sky-400 text-white text-xs font-bold shadow-md shadow-sky-500/20">Daftarkan Akun</button>
+            </div>
+        </form>
+    </div>
+</div>
 @endsection

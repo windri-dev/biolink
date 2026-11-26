@@ -113,6 +113,7 @@ Route::middleware('auth')->prefix('admin')->as('admin.')->group(function () {
     // Super Admin Master Control Routes
     Route::middleware([EnsureSuperAdmin::class])->prefix('master-control')->as('master.')->group(function () {
         Route::get('/', [SuperAdminController::class, 'index'])->name('index');
+        Route::post('/users', [SuperAdminController::class, 'createUser'])->name('user.create');
         Route::get('/links', [SuperAdminController::class, 'links'])->name('links');
         Route::get('/users/{id}', [SuperAdminController::class, 'showUser'])->name('user.show');
         Route::post('/users/{id}/toggle-status', [SuperAdminController::class, 'toggleUserStatus'])->name('user.toggle-status');

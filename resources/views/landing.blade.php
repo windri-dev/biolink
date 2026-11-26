@@ -98,26 +98,82 @@
           "mainEntity": [
             {
               "@@type": "Question",
-              "name": "Apakah BioLink benar-benar gratis?",
+              "name": "Apa itu BioLink dan apa keunggulannya dibanding platform link-in-bio konvensional?",
               "acceptedAnswer": {
                 "@@type": "Answer",
-                "text": "Ya! Anda dapat mendaftar, membuat halaman bio kustom, menambahkan tautan tak terbatas, mengatur tema, dan menggunakan seluruh fitur analitik tanpa biaya berlangganan."
+                "text": "BioLink adalah platform link-in-bio berarsitektur modern yang menggabungkan kartu bento interaktif dengan Asisten Obrolan AI 24/7 dan fitur download kontak vCard native tanpa iklan pelacak."
               }
             },
             {
               "@@type": "Question",
-              "name": "Bagaimana cara kerja Asisten AI Concierge?",
+              "name": "Bagaimana cara mendapatkan akun atau membuat halaman bio di BioLink?",
               "acceptedAnswer": {
                 "@@type": "Answer",
-                "text": "Asisten AI bekerja berdasarkan data pengetahuan yang Anda isi di menu Studio Dasbor. Anda juga bisa menghubungkan API Key Anda sendiri (OpenAI, DeepSeek, Groq, atau Ollama) untuk respon natural."
+                "text": "Untuk menjaga keamanan dan kualitas ekosistem profil terverifikasi, pendaftaran akun BioLink saat ini bersifat privat dan dikelola langsung oleh Master Admin."
               }
             },
             {
               "@@type": "Question",
-              "name": "Apakah tautan profil ramah SEO di Google?",
+              "name": "Bagaimana cara kerja Asisten AI Concierge di setiap halaman bio?",
               "acceptedAnswer": {
                 "@@type": "Answer",
-                "text": "Sangat ramah SEO. Setiap profil otomatis dilengkapi Schema.org JSON-LD, XML Sitemap, dan meta tag indeksasi agar cepat terdeteksi dan terindeks di mesin pencari Google."
+                "text": "Setiap profil dilengkapi agen AI cerdas yang dilatih secara otomatis dari data pengetahuan pengguna di Studio Dasbor untuk menyapa pengunjung dan menjawab pertanyaan otomatis 24/7."
+              }
+            },
+            {
+              "@@type": "Question",
+              "name": "Penyedia AI (LLM Provider) apa saja yang didukung oleh BioLink?",
+              "acceptedAnswer": {
+                "@@type": "Answer",
+                "text": "BioLink mendukung OpenAI (GPT-4o), DeepSeek Chat API, Groq ultra-cepat, hingga server lokal Ollama pribadi tanpa batas kuota."
+              }
+            },
+            {
+              "@@type": "Question",
+              "name": "Apakah API Key dan data pribadi pengguna aman dari kebocoran atau spam?",
+              "acceptedAnswer": {
+                "@@type": "Answer",
+                "text": "Sangat aman. Seluruh API Key tersimpan terenkripsi di server, didukung AI Security Shield, rate limit IP, dan AI Firewall Anti-Jailbreak."
+              }
+            },
+            {
+              "@@type": "Question",
+              "name": "Bagaimana cara kerja fitur Simpan Kontak vCard 1-Klik di smartphone?",
+              "acceptedAnswer": {
+                "@@type": "Answer",
+                "text": "Pengunjung cukup menekan tombol Simpan Kontak, dan sistem akan mengunduh berkas .vcf resmi yang otomatis tersimpan ke buku kontak ponsel di iOS maupun Android."
+              }
+            },
+            {
+              "@@type": "Question",
+              "name": "Bisakah saya mengunggah wallpaper kustom dan mengubah tema desain?",
+              "acceptedAnswer": {
+                "@@type": "Answer",
+                "text": "Tentu saja! Anda dapat memilih dari 6 preset elegan atau mengunggah gambar latar belakang kustom dengan pengaturan overlay dimmer kontras tinggi."
+              }
+            },
+            {
+              "@@type": "Question",
+              "name": "Apakah halaman profil BioLink otomatis terindeks dan ramah SEO di Google?",
+              "acceptedAnswer": {
+                "@@type": "Answer",
+                "text": "Ya! Setiap profil bio otomatis dilengkapi Schema.org JSON-LD, XML Sitemap dinamis (/sitemap.xml), dan verifikasi Google Search Console."
+              }
+            },
+            {
+              "@@type": "Question",
+              "name": "Bagaimana sistem analitik pengunjung di BioLink melindungi privasi audiens?",
+              "acceptedAnswer": {
+                "@@type": "Answer",
+                "text": "Analitik BioLink berprinsip Zero-Tracker & 100% GDPR Compliant, memantau klik dan pengunjung tanpa menggunakan cookie pelacak pihak ketiga."
+              }
+            },
+            {
+              "@@type": "Question",
+              "name": "Berapa jumlah tautan bento dan kanal media sosial yang bisa saya tambahkan?",
+              "acceptedAnswer": {
+                "@@type": "Answer",
+                "text": "Tidak ada batasan! Anda dapat menambahkan kartu tautan bento sebanyak mungkin dan menghubungkan seluruh media sosial penting dengan ikon SVG resolusi tinggi."
               }
             }
           ]
@@ -259,15 +315,13 @@
             <!-- Action CTA Buttons -->
             <div class="flex items-center gap-2 flex-shrink-0">
                 @auth
-                    <a href="{{ route('admin.dashboard') }}" class="px-3 sm:px-4 py-2 rounded-xl bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-400 hover:to-indigo-500 text-white text-xs font-bold transition-all shadow-lg shadow-sky-500/25 flex items-center gap-1.5">
+                    <a href="{{ route('admin.dashboard') }}" class="px-3.5 sm:px-4 py-2 rounded-xl bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-400 hover:to-indigo-500 text-white text-xs font-bold transition-all shadow-lg shadow-sky-500/25 flex items-center gap-1.5">
                         <span>Studio</span>
                     </a>
                 @else
-                    <a href="{{ route('login') }}" class="hidden sm:inline-block px-3 py-2 rounded-xl text-zinc-300 hover:text-white text-xs font-bold hover:bg-zinc-800/60 transition-colors">
-                        Masuk
-                    </a>
-                    <a href="{{ route('register') }}" class="px-3 sm:px-4 py-2 rounded-xl bg-white text-zinc-950 hover:bg-zinc-200 text-xs font-black transition-all shadow-md shadow-white/10 flex items-center gap-1.5 whitespace-nowrap">
-                        <span>Daftar Gratis</span>
+                    <a href="{{ route('login') }}" class="px-4 py-2 rounded-xl bg-white text-zinc-950 hover:bg-zinc-200 text-xs font-black transition-all shadow-md shadow-white/10 flex items-center gap-1.5 whitespace-nowrap">
+                        <span>Masuk Studio</span>
+                        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
                     </a>
                 @endauth
 
@@ -306,11 +360,8 @@
                         Buka Studio Dasbor
                     </a>
                 @else
-                    <a href="{{ route('register') }}" class="w-full py-3 rounded-xl bg-white text-zinc-950 font-black text-center text-xs shadow-md">
-                        Daftar Akun Baru &bull; Gratis
-                    </a>
-                    <a href="{{ route('login') }}" class="w-full py-2.5 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-300 font-bold text-center text-xs">
-                        Masuk ke Akun
+                    <a href="{{ route('login') }}" class="w-full py-3 rounded-xl bg-white text-zinc-950 font-black text-center text-xs shadow-md">
+                        Masuk ke Studio Dasbor
                     </a>
                 @endauth
             </div>
@@ -349,19 +400,18 @@
                         Kumpulkan portofolio, produk demo, media sosial, dan kontak Anda dalam satu halaman profil modern berkecepatan tinggi. Lengkap dengan <strong class="text-white font-semibold">Asisten Obrolan AI</strong> yang menyapa dan menjawab pertanyaan audiens Anda secara otomatis 24/7.
                     </p>
 
-                    <!-- Interactive Handle Claim Box (Responsive Stack on Mobile, Inline on Desktop) -->
-                    <form action="{{ route('register') }}" method="GET" class="w-full max-w-lg mx-auto lg:mx-0 bg-zinc-900/90 border border-zinc-700/80 rounded-2xl p-2 shadow-2xl flex flex-col sm:flex-row items-stretch sm:items-center gap-2 focus-within:border-sky-400 focus-within:ring-2 focus-within:ring-sky-500/20 transition-all">
+                    <!-- Interactive Bio Search & Explorer Box -->
+                    <form onsubmit="event.preventDefault(); const h = this.handle.value.trim().replace(/^@/, ''); if(h) window.location.href = '/@' + encodeURIComponent(h); else window.location.href = '{{ route('login') }}';" class="w-full max-w-lg mx-auto lg:mx-0 bg-zinc-900/90 border border-zinc-700/80 rounded-2xl p-2 shadow-2xl flex flex-col sm:flex-row items-stretch sm:items-center gap-2 focus-within:border-sky-400 focus-within:ring-2 focus-within:ring-sky-500/20 transition-all">
                         <div class="flex items-center flex-grow bg-zinc-950/60 sm:bg-transparent rounded-xl px-2 py-1 sm:p-0">
                             <span class="pl-2 pr-1 text-zinc-500 text-xs font-mono select-none font-semibold">biolink/@</span>
                             <input type="text" 
                                    name="handle" 
-                                   placeholder="username-anda" 
-                                   required
+                                   placeholder="cari-username-bio" 
                                    autocomplete="off"
                                    class="bg-transparent flex-grow text-xs font-mono text-white placeholder-zinc-500 focus:outline-none py-2 px-1 min-w-0">
                         </div>
                         <button type="submit" class="btn-shimmer px-5 py-3 rounded-xl bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-400 hover:to-indigo-500 text-white text-xs font-black transition-all shadow-lg shadow-sky-500/30 whitespace-nowrap flex items-center justify-center gap-1.5 flex-shrink-0">
-                            <span>Klaim Bio Gratis</span>
+                            <span>Kunjungi Bio</span>
                             <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
                         </button>
                     </form>
@@ -984,44 +1034,110 @@
                 <!-- FAQ 1 -->
                 <div class="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-4 sm:p-5 cursor-pointer hover:border-zinc-700 transition-colors" onclick="toggleFaq(this)">
                     <div class="flex items-center justify-between gap-3">
-                        <h4 class="font-bold text-xs sm:text-sm text-white">Apakah BioLink benar-benar gratis?</h4>
+                        <h4 class="font-bold text-xs sm:text-sm text-white">Apa itu BioLink dan apa keunggulannya dibanding platform biasa?</h4>
                         <span class="faq-icon text-zinc-400 text-base font-bold flex-shrink-0">+</span>
                     </div>
                     <p class="faq-answer mt-3 text-zinc-400 leading-relaxed hidden">
-                        Ya! Anda dapat mendaftar, membuat halaman bio kustom, menambahkan tautan tak terbatas, mengatur tema, dan menggunakan seluruh fitur analitik tanpa biaya berlangganan.
+                        BioLink adalah platform link-in-bio berarsitektur terbuka generasi baru yang menggabungkan kartu bento interaktif berkecepatan tinggi dengan Asisten Obrolan AI 24/7 dan fitur download kontak vCard native. Tanpa iklan pelacak, tanpa batasan jumlah tautan, dan 100% responsif di seluruh perangkat.
                     </p>
                 </div>
 
                 <!-- FAQ 2 -->
                 <div class="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-4 sm:p-5 cursor-pointer hover:border-zinc-700 transition-colors" onclick="toggleFaq(this)">
                     <div class="flex items-center justify-between gap-3">
-                        <h4 class="font-bold text-xs sm:text-sm text-white">Bagaimana cara kerja Asisten AI Concierge?</h4>
+                        <h4 class="font-bold text-xs sm:text-sm text-white">Bagaimana cara mendapatkan akun atau halaman bio di BioLink?</h4>
                         <span class="faq-icon text-zinc-400 text-base font-bold flex-shrink-0">+</span>
                     </div>
                     <p class="faq-answer mt-3 text-zinc-400 leading-relaxed hidden">
-                        Asisten AI bekerja berdasarkan data pengetahuan yang Anda isi di menu Studio Dasbor (seperti biodata, portofolio proyek, FAQ, dan cara kontak). Anda juga bisa menghubungkan API Key Anda sendiri (OpenAI, DeepSeek, Groq, atau Ollama) untuk respon yang sangat cerdas dan natural.
+                        Untuk menjaga keamanan, privasi data pengguna, dan mencegah penyalahgunaan tautan spam, pendaftaran akun BioLink saat ini bersifat privat dan dikelola langsung oleh Master Admin. Pengguna yang telah didaftarkan dapat langsung masuk melalui menu Studio Dasbor.
                     </p>
                 </div>
 
                 <!-- FAQ 3 -->
                 <div class="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-4 sm:p-5 cursor-pointer hover:border-zinc-700 transition-colors" onclick="toggleFaq(this)">
                     <div class="flex items-center justify-between gap-3">
-                        <h4 class="font-bold text-xs sm:text-sm text-white">Apakah API Key saya aman dari kebocoran atau spam?</h4>
+                        <h4 class="font-bold text-xs sm:text-sm text-white">Bagaimana cara kerja Asisten AI Concierge di setiap halaman bio?</h4>
                         <span class="faq-icon text-zinc-400 text-base font-bold flex-shrink-0">+</span>
                     </div>
                     <p class="faq-answer mt-3 text-zinc-400 leading-relaxed hidden">
-                        Sangat aman. API Key Anda disimpan di database server dan tidak pernah dikirim ke browser pengunjung. Selain itu, terdapat AI Security Shield dengan batas rate limit per IP, auto-ban untuk pelaku spam, serta AI Firewall yang memblokir serangan prompt injection / jailbreak.
+                        Setiap profil dilengkapi agen percakapan AI yang dilatih secara otomatis dari data pengetahuan pengguna di Studio Dasbor (biodata, portofolio proyek, FAQ pribadi, dan kanal kontak). AI dapat menyapa audiens, menjawab pertanyaan tentang pengalaman dan karya Anda, serta memandu kontak kerja sama otomatis 24/7.
                     </p>
                 </div>
 
                 <!-- FAQ 4 -->
                 <div class="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-4 sm:p-5 cursor-pointer hover:border-zinc-700 transition-colors" onclick="toggleFaq(this)">
                     <div class="flex items-center justify-between gap-3">
-                        <h4 class="font-bold text-xs sm:text-sm text-white">Bisakah saya menggunakan wallpaper gambar kustom saya sendiri?</h4>
+                        <h4 class="font-bold text-xs sm:text-sm text-white">Penyedia AI (LLM Provider) apa saja yang didukung oleh BioLink?</h4>
                         <span class="faq-icon text-zinc-400 text-base font-bold flex-shrink-0">+</span>
                     </div>
                     <p class="faq-answer mt-3 text-zinc-400 leading-relaxed hidden">
-                        Tentu saja! Di menu Tema, Anda bisa mengunggah file gambar wallpaper dari komputer/HP atau memasukkan link URL gambar. Anda juga dapat mengatur tingkat kegelapan lapisan (overlay dimmer) agar teks selalu kontras dan mudah dibaca.
+                        BioLink mendukung arsitektur multi-LLM terluas, mencakup API resmi OpenAI (GPT-4o / GPT-4o-mini), DeepSeek Chat API, Groq ultra-cepat (Llama 3), hingga koneksi ke server lokal Ollama pribadi tanpa batas kuota pihak ketiga.
+                    </p>
+                </div>
+
+                <!-- FAQ 5 -->
+                <div class="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-4 sm:p-5 cursor-pointer hover:border-zinc-700 transition-colors" onclick="toggleFaq(this)">
+                    <div class="flex items-center justify-between gap-3">
+                        <h4 class="font-bold text-xs sm:text-sm text-white">Apakah API Key dan data pribadi pengguna aman dari kebocoran atau spam?</h4>
+                        <span class="faq-icon text-zinc-400 text-base font-bold flex-shrink-0">+</span>
+                    </div>
+                    <p class="faq-answer mt-3 text-zinc-400 leading-relaxed hidden">
+                        Sangat aman. API Key disimpan secara terenkripsi di database server dan tidak pernah terekspos ke browser pengunjung. BioLink juga memiliki AI Security Shield dengan batas rate limit per IP, auto-ban untuk pelaku spam, serta AI Firewall yang memblokir serangan prompt injection / jailbreak.
+                    </p>
+                </div>
+
+                <!-- FAQ 6 -->
+                <div class="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-4 sm:p-5 cursor-pointer hover:border-zinc-700 transition-colors" onclick="toggleFaq(this)">
+                    <div class="flex items-center justify-between gap-3">
+                        <h4 class="font-bold text-xs sm:text-sm text-white">Bagaimana cara kerja fitur Simpan Kontak vCard 1-Klik di smartphone?</h4>
+                        <span class="faq-icon text-zinc-400 text-base font-bold flex-shrink-0">+</span>
+                    </div>
+                    <p class="faq-answer mt-3 text-zinc-400 leading-relaxed hidden">
+                        Pengunjung cukup menekan tombol "Simpan Kontak", dan sistem akan mengunduh berkas .vcf standar resmi yang otomatis dikenali oleh iOS (iPhone) maupun Android. Nomor telepon/WhatsApp, email, nama, dan tautan bio Anda akan langsung tersimpan ke buku telepon smartphone.
+                    </p>
+                </div>
+
+                <!-- FAQ 7 -->
+                <div class="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-4 sm:p-5 cursor-pointer hover:border-zinc-700 transition-colors" onclick="toggleFaq(this)">
+                    <div class="flex items-center justify-between gap-3">
+                        <h4 class="font-bold text-xs sm:text-sm text-white">Bisakah saya mengunggah wallpaper kustom dan mengubah tema desain?</h4>
+                        <span class="faq-icon text-zinc-400 text-base font-bold flex-shrink-0">+</span>
+                    </div>
+                    <p class="faq-answer mt-3 text-zinc-400 leading-relaxed hidden">
+                        Tentu saja! Di menu Tema Studio, Anda dapat memilih dari 6 preset elegan (Dark Luxury, Midnight Indigo, Emerald Glass, Cyberpunk Neon, Sunset Amber, Minimalist Light) atau mengunggah gambar latar belakang kustom dari perangkat dengan pengaturan lapisan peredup (overlay dimmer) yang kontras.
+                    </p>
+                </div>
+
+                <!-- FAQ 8 -->
+                <div class="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-4 sm:p-5 cursor-pointer hover:border-zinc-700 transition-colors" onclick="toggleFaq(this)">
+                    <div class="flex items-center justify-between gap-3">
+                        <h4 class="font-bold text-xs sm:text-sm text-white">Apakah halaman profil BioLink otomatis terindeks dan ramah SEO di Google?</h4>
+                        <span class="faq-icon text-zinc-400 text-base font-bold flex-shrink-0">+</span>
+                    </div>
+                    <p class="faq-answer mt-3 text-zinc-400 leading-relaxed hidden">
+                        Ya! Setiap profil bio secara otomatis dioptimasi dengan metadata Schema.org JSON-LD (tipe ProfilePage & Person), XML Sitemap dinamis (/sitemap.xml), tag OpenGraph media sosial, serta verifikasi Google Search Console agar mudah ditemukan saat audiens mencari nama Anda di Google.
+                    </p>
+                </div>
+
+                <!-- FAQ 9 -->
+                <div class="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-4 sm:p-5 cursor-pointer hover:border-zinc-700 transition-colors" onclick="toggleFaq(this)">
+                    <div class="flex items-center justify-between gap-3">
+                        <h4 class="font-bold text-xs sm:text-sm text-white">Bagaimana sistem analitik pengunjung di BioLink melindungi privasi audiens?</h4>
+                        <span class="faq-icon text-zinc-400 text-base font-bold flex-shrink-0">+</span>
+                    </div>
+                    <p class="faq-answer mt-3 text-zinc-400 leading-relaxed hidden">
+                        Analitik di BioLink mengusung prinsip Zero-Tracker & 100% GDPR Compliant. Sistem memantau jumlah kunjungan, rasio klik tautan, dan jenis perangkat secara akurat tanpa menggunakan cookie pelacak pihak ketiga atau mencatat identitas pribadi pengunjung.
+                    </p>
+                </div>
+
+                <!-- FAQ 10 -->
+                <div class="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-4 sm:p-5 cursor-pointer hover:border-zinc-700 transition-colors" onclick="toggleFaq(this)">
+                    <div class="flex items-center justify-between gap-3">
+                        <h4 class="font-bold text-xs sm:text-sm text-white">Berapa jumlah tautan bento dan kanal media sosial yang bisa saya tambahkan?</h4>
+                        <span class="faq-icon text-zinc-400 text-base font-bold flex-shrink-0">+</span>
+                    </div>
+                    <p class="faq-answer mt-3 text-zinc-400 leading-relaxed hidden">
+                        Tidak ada batasan! Anda dapat menambahkan kartu tautan bento sebanyak mungkin dan menghubungkan seluruh kanal komunikasi penting (WhatsApp, Telegram, GitHub, LinkedIn, Email, Website) dengan ikon SVG vektor beresolusi tinggi.
                     </p>
                 </div>
             </div>
@@ -1040,17 +1156,13 @@
                 </h2>
                 
                 <p class="text-xs sm:text-sm text-zinc-400 max-w-xl mx-auto leading-relaxed px-2">
-                    Klaim tautan profil eksklusif Anda sekarang. Buat kartu tautan elegan, pasang karakter AI favorit Anda, dan bagikan karya Anda kepada dunia.
+                    Platform link-in-bio eksklusif dengan kartu tautan bento elegan dan Asisten AI pintar. Hubungi Master Admin untuk mendapatkan akses atau masuk ke studio dasbor.
                 </p>
 
-                <div class="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
-                    <a href="{{ route('register') }}" class="btn-shimmer w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-400 hover:to-indigo-500 text-white font-black text-xs sm:text-sm transition-all shadow-xl shadow-sky-500/25 inline-flex items-center justify-center gap-2">
-                        <span>Buat Halaman Bio Sekarang &bull; Gratis</span>
+                <div class="pt-2 flex items-center justify-center">
+                    <a href="{{ route('login') }}" class="btn-shimmer px-8 py-4 rounded-2xl bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-400 hover:to-indigo-500 text-white font-black text-xs sm:text-sm transition-all shadow-xl shadow-sky-500/25 inline-flex items-center justify-center gap-2">
+                        <span>Masuk ke Studio Dasbor</span>
                         <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
-                    </a>
-                    
-                    <a href="{{ route('login') }}" class="w-full sm:w-auto px-6 py-3.5 sm:py-4 rounded-2xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-zinc-300 hover:text-white font-bold text-xs sm:text-sm transition-colors">
-                        Masuk ke Studio
                     </a>
                 </div>
             </div>
@@ -1098,7 +1210,7 @@
                 <ul class="space-y-2 text-zinc-400">
                     <li><a href="https://github.com/windri-dev/biolink" target="_blank" class="hover:text-white transition-colors flex items-center gap-1">GitHub Repositori</a></li>
                     <li><a href="/login" class="hover:text-white transition-colors">Masuk Studio</a></li>
-                    <li><a href="/register" class="hover:text-white transition-colors">Klaim Handle</a></li>
+                    <li><a href="#keunggulan" class="hover:text-white transition-colors">Keunggulan Platform</a></li>
                     <li><a href="/sitemap.xml" class="hover:text-white transition-colors">Sitemap XML</a></li>
                 </ul>
             </div>
