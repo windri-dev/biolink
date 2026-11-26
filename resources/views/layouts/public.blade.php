@@ -133,51 +133,23 @@
 </head>
 <body class="antialiased flex flex-col justify-between selection:bg-sky-500 selection:text-white">
     
-    <!-- Top Action Bar (vCard, CV, QR Code, Share Button) -->
-    <header class="w-full max-w-xl mx-auto px-4 pt-4 flex justify-between items-center z-10">
-        <div class="flex items-center gap-2">
-            <!-- vCard Save Contact Button -->
-            @if($profile->enable_vcard)
-                <a href="{{ route('public.vcard', $profile->clean_handle) }}" 
-                   class="px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-white backdrop-blur-md border border-white/10 transition-all hover:scale-105 text-xs font-semibold inline-flex items-center gap-1.5 shadow-sm"
-                   title="Simpan Kontak ke HP">
-                    <svg class="w-3.5 h-3.5 text-sky-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" x2="19" y1="8" y2="14"/><line x1="22" x2="16" y1="11" y2="11"/>
-                    </svg>
-                    <span class="hidden sm:inline">Simpan Kontak</span>
-                </a>
-            @endif
+    <!-- Top Action Bar (QR Code & Share Button) -->
+    <header class="w-full max-w-xl mx-auto px-4 pt-4 flex justify-end items-center gap-2 z-10">
+        <!-- QR Code Button -->
+        <button onclick="openQrModal()" class="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white backdrop-blur-md border border-white/10 transition-all hover:scale-105" title="Lihat QR Code">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect width="5" height="5" x="3" y="3" rx="1"/><rect width="5" height="5" x="16" y="3" rx="1"/><rect width="5" height="5" x="3" y="16" rx="1"/><path d="M21 16h-3a2 2 0 0 0-2 2v3"/><path d="M21 21v.01"/><path d="M12 7v3a2 2 0 0 1-2 2H7"/><path d="M3 12h.01"/><path d="M12 3h.01"/><path d="M12 16v.01"/><path d="M16 12h1"/><path d="M21 12v.01"/><path d="M12 21v-1"/>
+            </svg>
+        </button>
 
-            <!-- Professional CV / Resume Button -->
-            @if($profile->enable_cv)
-                <a href="{{ route('public.cv', $profile->clean_handle) }}" 
-                   class="px-3 py-1.5 rounded-full bg-sky-500/15 hover:bg-sky-500/25 text-sky-300 backdrop-blur-md border border-sky-400/30 transition-all hover:scale-105 text-xs font-semibold inline-flex items-center gap-1.5 shadow-sm"
-                   title="Lihat Curriculum Vitae (CV) & Riwayat Karir">
-                    <svg class="w-3.5 h-3.5 text-sky-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/>
-                    </svg>
-                    <span>Lihat CV</span>
-                </a>
-            @endif
-        </div>
-
-        <div class="flex items-center gap-2">
-            <!-- QR Code Button -->
-            <button onclick="openQrModal()" class="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white backdrop-blur-md border border-white/10 transition-all hover:scale-105" title="Lihat QR Code">
+        <!-- Share Button -->
+        @if($profile->show_share_button)
+            <button onclick="shareProfile()" class="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white backdrop-blur-md border border-white/10 transition-all hover:scale-105" title="Bagikan Profil">
                 <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <rect width="5" height="5" x="3" y="3" rx="1"/><rect width="5" height="5" x="16" y="3" rx="1"/><rect width="5" height="5" x="3" y="16" rx="1"/><path d="M21 16h-3a2 2 0 0 0-2 2v3"/><path d="M21 21v.01"/><path d="M12 7v3a2 2 0 0 1-2 2H7"/><path d="M3 12h.01"/><path d="M12 3h.01"/><path d="M12 16v.01"/><path d="M16 12h1"/><path d="M21 12v.01"/><path d="M12 21v-1"/>
+                    <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" x2="15.42" y1="13.51" y2="17.49"/><line x1="15.41" x2="8.59" y1="6.51" y2="10.49"/>
                 </svg>
             </button>
-
-            <!-- Share Button -->
-            @if($profile->show_share_button)
-                <button onclick="shareProfile()" class="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white backdrop-blur-md border border-white/10 transition-all hover:scale-105" title="Bagikan Profil">
-                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" x2="15.42" y1="13.51" y2="17.49"/><line x1="15.41" x2="8.59" y1="6.51" y2="10.49"/>
-                    </svg>
-                </button>
-            @endif
-        </div>
+        @endif
     </header>
 
     <!-- Main Bio Container -->
