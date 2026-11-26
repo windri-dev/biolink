@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Admin Dashboard') • BioLink</title>
 
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-    <link rel="alternate icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}">
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
+    <link rel="apple-touch-icon" href="{{ asset('apple-touch-icon.png') }}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,10 +34,8 @@
     <!-- Top Navbar -->
     <header class="h-16 border-b border-zinc-800/80 bg-zinc-900/50 backdrop-blur-md sticky top-0 z-30 px-4 sm:px-8 flex items-center justify-between">
         <div class="flex items-center gap-3">
-            <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-2 font-black text-lg tracking-tight text-white">
-                <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-sky-400 to-indigo-600 flex items-center justify-center text-white shadow-md">
-                    <i data-lucide="link-2" class="w-4 h-4"></i>
-                </div>
+            <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-2.5 font-black text-lg tracking-tight text-white">
+                <img src="{{ asset('Logo.png') }}" alt="Logo" class="h-8 w-auto object-contain">
                 <span>BioLink<span class="text-sky-400">.</span></span>
             </a>
             <span class="text-[11px] font-mono uppercase bg-zinc-800 text-zinc-400 px-2 py-0.5 rounded border border-zinc-700">Studio</span>

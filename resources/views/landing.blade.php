@@ -15,9 +15,10 @@
     <meta name="author" content="BioLink">
 
     <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-    <link rel="alternate icon" href="/favicon.ico">
-    <link rel="apple-touch-icon" href="/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}">
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
+    <link rel="apple-touch-icon" href="{{ asset('apple-touch-icon.png') }}">
 
     <!-- OpenGraph & Twitter Meta -->
     <meta property="og:site_name" content="BioLink">
@@ -116,13 +117,7 @@
             
             <!-- Brand Logo -->
             <a href="/" class="flex items-center gap-3 font-black text-xl tracking-tight text-white group" aria-label="BioLink Homepage">
-                <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-sky-400 via-indigo-500 to-purple-600 flex items-center justify-center text-white shadow-lg shadow-sky-500/25 transition-transform group-hover:scale-105">
-                    <!-- SVG Link Icon -->
-                    <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
-                        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
-                    </svg>
-                </div>
+                <img src="{{ asset('Logo.png') }}" alt="Logo" class="h-10 w-auto object-contain transition-transform group-hover:scale-105">
                 <span class="flex items-center">
                     <span>BioLink</span>
                     <span class="text-sky-400">.</span>
@@ -931,9 +926,7 @@
             <!-- Col 1: Brand & Mission -->
             <div class="md:col-span-2 space-y-4 text-left">
                 <a href="/" class="flex items-center gap-2.5 font-black text-lg text-white">
-                    <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-sky-400 to-indigo-600 flex items-center justify-center text-white shadow-md">
-                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-                    </div>
+                    <img src="{{ asset('Logo.png') }}" alt="Logo" class="h-8 w-auto object-contain">
                     <span>BioLink<span class="text-sky-400">.</span></span>
                 </a>
                 <p class="text-zinc-400 max-w-sm leading-relaxed text-xs">

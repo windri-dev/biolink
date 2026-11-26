@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Masuk Admin • BioLink</title>
 
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-    <link rel="alternate icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}">
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
+    <link rel="apple-touch-icon" href="{{ asset('apple-touch-icon.png') }}">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,10 +28,10 @@
 
     <div class="max-w-md w-full bg-zinc-900/80 border border-zinc-800/80 rounded-3xl p-8 backdrop-blur-xl shadow-2xl space-y-6">
         
-        <div class="text-center space-y-2">
-            <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-sky-400 to-indigo-600 flex items-center justify-center text-white mx-auto shadow-lg shadow-sky-500/20">
-                <i data-lucide="link-2" class="w-6 h-6"></i>
-            </div>
+        <div class="text-center space-y-3">
+            <a href="/" class="inline-block">
+                <img src="{{ asset('Logo.png') }}" alt="Logo" class="h-12 w-auto object-contain mx-auto">
+            </a>
             <h1 class="text-2xl font-black text-white tracking-tight">BioLink<span class="text-sky-400">.</span></h1>
             <p class="text-xs text-zinc-400">Masuk ke studio dasbor untuk mengelola profil dan tautan Anda.</p>
         </div>

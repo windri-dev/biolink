@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daftar Akun Baru • BioLink</title>
 
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-    <link rel="alternate icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}">
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
+    <link rel="apple-touch-icon" href="{{ asset('apple-touch-icon.png') }}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,11 +28,9 @@
 
     <div class="max-w-md w-full bg-zinc-900/80 border border-zinc-800/80 rounded-3xl p-8 backdrop-blur-xl shadow-2xl space-y-6">
         
-        <div class="text-center space-y-2">
+        <div class="text-center space-y-3">
             <a href="/" class="inline-flex items-center gap-2 font-black text-xl tracking-tight text-white mb-1">
-                <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-sky-400 to-indigo-600 flex items-center justify-center text-white shadow-lg shadow-sky-500/20">
-                    <i data-lucide="link-2" class="w-5 h-5"></i>
-                </div>
+                <img src="{{ asset('Logo.png') }}" alt="Logo" class="h-10 w-auto object-contain">
                 <span>BioLink<span class="text-sky-400">.</span></span>
             </a>
             <h1 class="text-xl font-black text-white tracking-tight">Klaim Halaman Bio Anda</h1>

@@ -1,6 +1,6 @@
 {
-  "name": "PUTRIJALVA Contemporary Ready-to-Wear",
-  "short_name": "PUTRIJALVA",
+  "name": "BioLink Platform",
+  "short_name": "BioLink",
   "icons": [
     {
       "src": "/favicon-16x16.png",
@@ -28,8 +28,8 @@
       "type": "image/png"
     }
   ],
-  "theme_color": "#A18A68",
-  "background_color": "#ffffff",
+  "theme_color": "#09090b",
+  "background_color": "#09090b",
   "display": "standalone"
 }
 
