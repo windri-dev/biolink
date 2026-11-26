@@ -420,16 +420,16 @@
                         <!-- Avatar & Verified Badge -->
                         <div class="flex flex-col items-center text-center mb-5">
                             <div class="relative w-18 h-18 sm:w-20 sm:h-20 rounded-full p-1 bg-gradient-to-tr from-sky-400 via-indigo-500 to-purple-500 shadow-xl mb-3">
-                                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop&q=80" alt="Avatar Windri" class="w-full h-full object-cover rounded-full bg-zinc-950">
+                                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop&q=80" alt="Avatar Profil" class="w-full h-full object-cover rounded-full bg-zinc-950">
                                 <span class="absolute bottom-0 right-0 w-5 h-5 rounded-full bg-sky-500 border-2 border-zinc-950 text-white flex items-center justify-center p-0.5 shadow-md" title="Verified Creator">
                                     <svg class="w-3 h-3 fill-current" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
                                 </span>
                             </div>
 
-                            <h3 id="mockupName" class="font-black text-lg text-white">Windri</h3>
-                            <p id="mockupHandle" class="text-xs font-mono text-sky-400 font-semibold mb-1">@windri</p>
+                            <h3 id="mockupName" class="font-black text-lg text-white">Alex Pratama</h3>
+                            <p id="mockupHandle" class="text-xs font-mono text-sky-400 font-semibold mb-1">@alexpratama</p>
                             <p id="mockupBio" class="text-[11px] text-zinc-400 max-w-xs mx-auto leading-relaxed">
-                                Senior Full-Stack Software Engineer & Builder. Distributed systems, modern web, & AI autonomous agents.
+                                Digital Creator & Full-Stack Developer. Membangun produk web modern, desain antarmuka, & inovasi AI.
                             </p>
                         </div>
 
@@ -441,11 +441,11 @@
                                         <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
                                     </div>
                                     <div class="min-w-0">
-                                        <span class="mockup-link-title font-bold text-white block text-xs truncate">GitHub windri-dev</span>
-                                        <span class="mockup-link-desc text-[10px] text-zinc-400 block truncate">Jelajahi repositori open-source</span>
+                                        <span class="mockup-link-title font-bold text-white block text-xs truncate">Portofolio Proyek</span>
+                                        <span class="mockup-link-desc text-[10px] text-zinc-400 block truncate">Koleksi source code & hasil karya</span>
                                     </div>
                                 </div>
-                                <span class="text-[9px] bg-sky-500/20 text-sky-300 px-2 py-0.5 rounded-full font-mono font-bold border border-sky-500/30 flex-shrink-0">OFFICIAL</span>
+                                <span class="text-[9px] bg-sky-500/20 text-sky-300 px-2 py-0.5 rounded-full font-mono font-bold border border-sky-500/30 flex-shrink-0">PROYEK</span>
                             </div>
 
                             <div class="mockup-link-card p-3 rounded-2xl bg-white/5 border border-white/10 hover:border-emerald-400/40 transition-all flex items-center justify-between group/card cursor-pointer">
@@ -454,8 +454,8 @@
                                         <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
                                     </div>
                                     <div class="min-w-0">
-                                        <span class="mockup-link-title font-bold text-white block text-xs truncate">SHOPPE E-Commerce</span>
-                                        <span class="mockup-link-desc text-[10px] text-zinc-400 block truncate">Staging demo butik modern</span>
+                                        <span class="mockup-link-title font-bold text-white block text-xs truncate">Demo Aplikasi & Toko</span>
+                                        <span class="mockup-link-desc text-[10px] text-zinc-400 block truncate">Staging butik digital & template modern</span>
                                     </div>
                                 </div>
                                 <span class="text-[9px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-full font-mono font-bold border border-emerald-500/30 flex-shrink-0">DEMO</span>
@@ -477,7 +477,7 @@
                                             <span>Tanya Aura</span>
                                             <span class="text-[8px] font-mono px-1 py-0.2 bg-sky-500/20 text-sky-300 rounded font-bold">AI</span>
                                         </span>
-                                        <p class="text-[10px] text-zinc-400 truncate max-w-[160px] sm:max-w-xs">"Halo! Saya siap memandu tentang proyek Windri."</p>
+                                        <p class="text-[10px] text-zinc-400 truncate max-w-[160px] sm:max-w-xs">"Halo! Saya siap memandu tentang karya dan profil ini."</p>
                                     </div>
                                 </div>
                                 <span id="heroChatToggleText" class="text-[10px] text-sky-400 font-semibold flex-shrink-0 whitespace-nowrap">Coba &rarr;</span>
@@ -488,15 +488,15 @@
                                 <div class="flex items-start gap-2">
                                     <span class="w-5 h-5 rounded-full bg-zinc-800 text-zinc-300 flex items-center justify-center text-[10px] font-bold flex-shrink-0">U</span>
                                     <div class="bg-zinc-800/90 text-zinc-200 px-2.5 py-1.5 rounded-xl rounded-tl-none">
-                                        Apa keahlian utama Windri?
+                                        Apa keahlian dan karya yang tersedia?
                                     </div>
                                 </div>
                                 <div class="flex items-start gap-2">
                                     <div class="w-5 h-5 rounded-full bg-sky-500/20 text-sky-400 flex items-center justify-center flex-shrink-0">
                                         <svg class="w-3 h-3 fill-current" viewBox="0 0 24 24"><path d="M12 2a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2 2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Z"/></svg>
                                     </div>
-                                    <div class="bg-sky-500/10 border border-sky-500/20 text-sky-200 px-2.5 py-1.5 rounded-xl rounded-tl-none">
-                                        Windri adalah Senior Full-Stack Engineer yang ahli di Modern PHP & Laravel, arsitektur server Linux terdistribusi, serta integrasi AI autonomous agents.
+                                    <div class="bg-sky-500/10 border border-sky-500/20 text-sky-200 px-2.5 py-1.5 rounded-xl rounded-tl-none leading-relaxed">
+                                        Alex adalah Digital Creator & Full-Stack Developer yang fokus pada pengembangan aplikasi web modern, UI/UX elegan, serta integrasi AI autonomous agents.
                                     </div>
                                 </div>
                             </div>
@@ -556,7 +556,7 @@
                                 </div>
                                 <div class="flex items-center gap-2 text-emerald-400 text-[11px]">
                                     <span class="text-emerald-300 font-bold">AI Concierge:</span>
-                                    <span>"Tentu! Windri membangun SHOPPE Staging, e-commerce modern dengan checkout interaktif. Silakan klik kartu SHOPPE di atas."</span>
+                                    <span>"Tentu! Anda dapat mengeksplorasi portofolio proyek dan demo butik e-commerce pada kartu tautan di atas."</span>
                                 </div>
                             </div>
                         </div>
@@ -729,7 +729,7 @@
                             <div class="flex items-start gap-2.5">
                                 <div class="w-7 h-7 rounded-full bg-zinc-800 text-zinc-300 flex items-center justify-center text-xs font-bold flex-shrink-0">T</div>
                                 <div class="p-3 rounded-2xl rounded-tl-none bg-zinc-800 text-zinc-200 max-w-sm">
-                                    Halo! Apakah Windri sedang membuka lowongan konsultasi arsitektur cloud?
+                                    Halo! Apakah Anda sedang membuka lowongan konsultasi proyek?
                                 </div>
                             </div>
 
@@ -738,8 +738,8 @@
                                     <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 2a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2 2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Z"/></svg>
                                 </div>
                                 <div class="p-3 rounded-2xl rounded-tl-none bg-sky-500/10 border border-sky-500/20 text-sky-100 max-w-sm space-y-1.5 leading-relaxed">
-                                    <p>Tentu saja! Windri saat ini terbuka untuk konsultasi arsitektur cloud private, automasi Proxmox, dan orkestrasi bot otonom.</p>
-                                    <p class="text-[11px] text-zinc-400">Anda dapat menghubungi beliau langsung via Telegram <strong>@windri</strong> atau mengklik tombol Simpan Kontak di bio.</p>
+                                    <p>Tentu saja! Kami saat ini terbuka untuk konsultasi teknis, kolaborasi proyek kreatif, dan pengembangan aplikasi web modern.</p>
+                                    <p class="text-[11px] text-zinc-400">Anda dapat menghubungi langsung via saluran pesan atau mengklik tombol Simpan Kontak di bio.</p>
                                 </div>
                             </div>
                         </div>
@@ -983,7 +983,7 @@
             <div class="rounded-3xl border border-zinc-800 bg-zinc-900/80 p-5 sm:p-8 shadow-2xl backdrop-blur-xl space-y-4 max-w-3xl mx-auto">
                 <div class="flex items-center gap-2 border-b border-zinc-800 pb-3 text-xs text-zinc-400">
                     <svg class="w-4 h-4 text-sky-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                    <span class="font-mono text-[11px] truncate min-w-0">Google Search &bull; "Windri BioLink Indonesia"</span>
+                    <span class="font-mono text-[11px] truncate min-w-0">Google Search &bull; "Alex Pratama BioLink Indonesia"</span>
                 </div>
 
                 <div class="space-y-2 text-left">
@@ -992,33 +992,33 @@
                         <img src="{{ asset('Logo.png') }}" alt="Favicon" class="w-4 h-4 object-contain">
                         <div class="flex flex-col">
                             <span class="text-xs font-medium text-white">BioLink</span>
-                            <span class="text-[11px] text-zinc-500 font-mono">https://bio.wn-cdn.net/@windri</span>
+                            <span class="text-[11px] text-zinc-500 font-mono">https://bio.wn-cdn.net/@alexpratama</span>
                         </div>
                     </div>
 
                     <!-- Clickable Title -->
                     <h3 class="text-base sm:text-lg font-bold text-[#8ab4f8] hover:underline cursor-pointer leading-snug">
-                        Windri (@windri) &bull; Senior Full-Stack Engineer | BioLink Resmi
+                        Alex Pratama (@alexpratama) &bull; Digital Creator & Developer | BioLink Resmi
                     </h3>
 
                     <!-- Snippet Description -->
                     <p class="text-xs sm:text-sm text-[#bdc1c6] leading-relaxed">
-                        Hub profil resmi Windri. Temukan repositori GitHub windri-dev, live demo aplikasi SHOPPE, arsitektur server terdistribusi, dan kontak kolaborasi langsung via Telegram...
+                        Hub profil resmi Alex Pratama. Temukan tautan portofolio, demo proyek aplikasi, karya kreatif, dan kontak kolaborasi langsung via tautan bio resmi...
                     </p>
 
                     <!-- Google Sitelinks Rich Snippets (Responsive Grid) -->
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-3 border-t border-zinc-700/60">
                         <div class="p-2.5 rounded-xl bg-zinc-800/40 hover:bg-zinc-800/80 transition-colors cursor-pointer">
-                            <span class="text-xs font-bold text-[#8ab4f8] block hover:underline truncate">GitHub windri-dev</span>
-                            <span class="text-[11px] text-zinc-400 block truncate">Jelajahi repositori open-source</span>
+                            <span class="text-xs font-bold text-[#8ab4f8] block hover:underline truncate">Portofolio Proyek</span>
+                            <span class="text-[11px] text-zinc-400 block truncate">Jelajahi karya & repositori</span>
                         </div>
                         <div class="p-2.5 rounded-xl bg-zinc-800/40 hover:bg-zinc-800/80 transition-colors cursor-pointer">
-                            <span class="text-xs font-bold text-[#8ab4f8] block hover:underline truncate">SHOPPE E-Commerce</span>
-                            <span class="text-[11px] text-zinc-400 block truncate">Staging demo butik modern</span>
+                            <span class="text-xs font-bold text-[#8ab4f8] block hover:underline truncate">Demo Aplikasi Web</span>
+                            <span class="text-[11px] text-zinc-400 block truncate">Staging butik & template digital</span>
                         </div>
                         <div class="p-2.5 rounded-xl bg-zinc-800/40 hover:bg-zinc-800/80 transition-colors cursor-pointer">
-                            <span class="text-xs font-bold text-[#8ab4f8] block hover:underline truncate">Kontak Telegram</span>
-                            <span class="text-[11px] text-zinc-400 block truncate">Diskusi proyek & konsultasi</span>
+                            <span class="text-xs font-bold text-[#8ab4f8] block hover:underline truncate">Kontak Kolaborasi</span>
+                            <span class="text-[11px] text-zinc-400 block truncate">Diskusi proyek & kerja sama</span>
                         </div>
                         <div class="p-2.5 rounded-xl bg-zinc-800/40 hover:bg-zinc-800/80 transition-colors cursor-pointer">
                             <span class="text-xs font-bold text-[#8ab4f8] block hover:underline truncate">Simpan Kontak vCard</span>
@@ -1166,7 +1166,7 @@
             <div class="space-y-3 text-left">
                 <h4 class="font-bold text-white uppercase tracking-wider text-[11px]">Pengembang</h4>
                 <ul class="space-y-2 text-zinc-400">
-                    <li><a href="https://github.com/windri-dev/biolink" target="_blank" class="hover:text-white transition-colors flex items-center gap-1">GitHub @windri-dev</a></li>
+                    <li><a href="https://github.com/windri-dev/biolink" target="_blank" class="hover:text-white transition-colors flex items-center gap-1">GitHub Repositori</a></li>
                     <li><a href="/login" class="hover:text-white transition-colors">Masuk Studio</a></li>
                     <li><a href="/register" class="hover:text-white transition-colors">Klaim Handle</a></li>
                     <li><a href="/sitemap.xml" class="hover:text-white transition-colors">Sitemap XML</a></li>
@@ -1177,8 +1177,8 @@
             <div class="space-y-3 text-left">
                 <h4 class="font-bold text-white uppercase tracking-wider text-[11px]">Ekosistem Node</h4>
                 <ul class="space-y-2 text-zinc-400">
-                    <li><a href="https://t.me/windri" target="_blank" class="hover:text-white transition-colors">Telegram Resmi</a></li>
-                    <li><a href="https://shoppe-staging.wn-cdn.net" target="_blank" class="hover:text-white transition-colors">SHOPPE Staging</a></li>
+                    <li><a href="https://t.me/" target="_blank" class="hover:text-white transition-colors">Komunitas Pengguna</a></li>
+                    <li><a href="https://shoppe-staging.wn-cdn.net" target="_blank" class="hover:text-white transition-colors">SHOPPE Demo</a></li>
                     <li><span class="text-zinc-500 font-mono text-[10px]">Cloudflare Edge</span></li>
                     <li><span class="text-zinc-500 font-mono text-[10px]">Node v2.0-Prod</span></li>
                 </ul>
@@ -1192,8 +1192,8 @@
             <p class="flex items-center gap-1.5">
                 <span>Dibuat dengan</span>
                 <span class="text-rose-500">&hearts;</span>
-                <span>oleh</span>
-                <a href="https://github.com/windri-dev" target="_blank" class="text-zinc-300 hover:text-white underline font-semibold">windri-dev</a>
+                <span>untuk</span>
+                <span class="text-zinc-300 font-semibold">Komunitas Kreator & Developer</span>
             </p>
         </div>
     </footer>
