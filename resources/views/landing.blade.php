@@ -228,7 +228,6 @@
                 <span class="flex items-center">
                     <span>BioLink</span>
                     <span class="text-sky-400">.</span>
-                    <span class="ml-2 text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-sky-500/15 text-sky-300 border border-sky-500/25 hidden sm:inline-block">AI v2.0</span>
                 </span>
             </a>
 

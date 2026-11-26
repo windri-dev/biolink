@@ -39,11 +39,17 @@
                 </div>
             </div>
 
-            <!-- Active Status Badge -->
-            <div class="flex items-center gap-1.5 text-xs">
-                <span class="w-2.5 h-2.5 rounded-full {{ $profile->ai_assistant_enabled ? 'bg-emerald-400 animate-pulse' : 'bg-zinc-600' }}"></span>
-                <span class="text-zinc-300 font-semibold">{{ $profile->ai_assistant_enabled ? 'Aktif' : 'Nonaktif' }}</span>
-            </div>
+            <!-- Active Status Badge & Quick 1-Click Toggle -->
+            <form action="{{ route('admin.ai.toggle-quick') }}" method="POST" class="inline">
+                @csrf
+                <button type="submit" 
+                        class="px-3.5 py-1.5 rounded-xl border {{ $profile->ai_assistant_enabled ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/20' : 'bg-zinc-800 border-zinc-700 text-zinc-400 hover:bg-zinc-700 hover:text-white' }} text-xs font-bold transition-all flex items-center gap-2 shadow-sm"
+                        title="Klik untuk {{ $profile->ai_assistant_enabled ? 'menonaktifkan / menyembunyikan' : 'mengaktifkan / menampilkan' }} AI">
+                    <span class="w-2.5 h-2.5 rounded-full {{ $profile->ai_assistant_enabled ? 'bg-emerald-400 animate-pulse' : 'bg-zinc-500' }}"></span>
+                    <span>Widget AI: {{ $profile->ai_assistant_enabled ? 'Tampil di Bio (ON)' : 'Disembunyikan (OFF)' }}</span>
+                    <span class="text-[10px] text-zinc-500 font-normal underline">(Klik Ganti)</span>
+                </button>
+            </form>
         </div>
 
         <form action="{{ route('admin.ai.settings.update') }}" method="POST" enctype="multipart/form-data" class="space-y-6 text-xs">
@@ -60,11 +66,18 @@
                         <p class="text-[11px] text-zinc-400 mt-0.5">Ubah avatar gambar/maskot figuran pada tombol mengambang dan jendela chat agar terlihat menarik dan tidak polos.</p>
                     </div>
 
-                    <!-- Toggle Enable/Disable AI Widget -->
-                    <label class="flex items-center gap-2 cursor-pointer select-none">
-                        <input type="checkbox" name="ai_assistant_enabled" value="1" {{ $profile->ai_assistant_enabled ? 'checked' : '' }} class="rounded border-zinc-700 bg-zinc-800 text-sky-500 focus:ring-sky-500">
-                        <span class="text-xs font-semibold text-zinc-200">Aktifkan Obrolan AI di Bio</span>
-                    </label>
+                    <!-- Toggle Enable/Disable AI Widget with explicit hidden fallback -->
+                    <div class="flex items-center gap-3 bg-zinc-900/90 border border-zinc-700/80 px-4 py-2 rounded-2xl shadow-inner">
+                        <div>
+                            <span class="text-xs font-bold text-white block">Tampilkan Widget AI di Halaman Bio</span>
+                            <span class="text-[10px] text-zinc-400">Jika dimatikan, tombol mengambang AI tidak akan muncul bagi pengunjung</span>
+                        </div>
+                        <label class="relative inline-flex items-center cursor-pointer ml-auto">
+                            <input type="hidden" name="ai_assistant_enabled" value="0">
+                            <input type="checkbox" name="ai_assistant_enabled" value="1" {{ $profile->ai_assistant_enabled ? 'checked' : '' }} class="sr-only peer">
+                            <div class="w-11 h-6 bg-zinc-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-zinc-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-500"></div>
+                        </label>
+                    </div>
                 </div>
 
                 <!-- Live Preview of Floating Launcher Button (Desktop & Mobile) -->

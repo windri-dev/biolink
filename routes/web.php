@@ -83,6 +83,7 @@ Route::middleware('auth')->prefix('admin')->as('admin.')->group(function () {
 
     // AI Knowledge Base & API Settings
     Route::post('/ai-knowledge/settings', [AiKnowledgeController::class, 'updateAiSettings'])->name('ai.settings.update');
+    Route::post('/ai-knowledge/toggle-quick', [AiKnowledgeController::class, 'toggleQuick'])->name('ai.toggle-quick');
     Route::post('/ai-knowledge/test-api', [AiKnowledgeController::class, 'testConnection'])->name('ai.api.test');
     Route::resource('/ai-knowledge', AiKnowledgeController::class)->except(['create', 'show', 'edit']);
 

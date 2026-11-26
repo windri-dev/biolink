@@ -69,7 +69,7 @@ class AiKnowledgeController
         unset($validated['ai_avatar_file']);
 
         $validated['ai_provider'] = $request->input('ai_provider') ?: 'universal';
-        $validated['ai_assistant_enabled'] = $request->boolean('ai_assistant_enabled', true);
+        $validated['ai_assistant_enabled'] = $request->boolean('ai_assistant_enabled');
         $validated['ai_security_guard'] = $request->boolean('ai_security_guard', true);
         $validated['ai_content_filter'] = $request->boolean('ai_content_filter', true);
         $validated['ai_rate_limit_per_minute'] = (int) ($request->input('ai_rate_limit_per_minute') ?: 10);
@@ -85,6 +85,19 @@ class AiKnowledgeController
         $profile->update($validated);
 
         return redirect()->route('admin.ai-knowledge.index')->with('success', 'Konfigurasi API AI Assistant berhasil disimpan!');
+    }
+
+    /**
+     * Quick toggle to show or hide the AI widget on public bio
+     */
+    public function toggleQuick(): RedirectResponse
+    {
+        $profile = $this->getProfile();
+        $newState = !$profile->ai_assistant_enabled;
+        $profile->update(['ai_assistant_enabled' => $newState]);
+
+        $statusText = $newState ? 'diaktifkan & ditampilkan' : 'dinonaktifkan & disembunyikan';
+        return back()->with('success', "Widget AI Assistant berhasil {$statusText} dari halaman bio!");
     }
 
     /**

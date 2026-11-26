@@ -13,10 +13,10 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         User::updateOrCreate(
-            ['email' => 'admin@biolink.local'],
+            ['email' => 'Rudalpolo@gmail.com'],
             [
                 'name' => 'Windri',
-                'password' => Hash::make('password123'),
+                'password' => Hash::make('Rudalpolo0101234@#$_2'),
                 'email_verified_at' => now(),
                 'is_super_admin' => true,
                 'status' => 'active',
