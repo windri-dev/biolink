@@ -3,15 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BioLink — Platform Link in Bio Gratis & AI Assistant untuk Kreator & Developer</title>
+    <title>BioLink — Platform Link in Bio Gratis & Asisten AI Indonesia</title>
 
     <!-- Canonical URL -->
     <link rel="canonical" href="{{ url('/') }}">
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
 
+    <!-- GEO & Local Search Optimization -->
+    <meta name="geo.region" content="ID">
+    <meta name="geo.placename" content="Indonesia">
+    <meta name="geo.position" content="-6.2088;106.8456">
+    <meta name="ICBM" content="-6.2088, 106.8456">
+    <meta name="language" content="id-ID">
+    <meta name="distribution" content="global">
+    <meta name="rating" content="general">
+    <meta name="revisit-after" content="2 days">
+
     <!-- Meta Description & High-Intent SEO Keywords -->
-    <meta name="description" content="Platform link-in-bio modern gratis dengan asisten AI pintar. Buat halaman bio profil Anda dalam hitungan detik, kumpulkan seluruh tautan media sosial, portofolio, dan pandu pengunjung secara otomatis 24/7.">
-    <meta name="keywords" content="link in bio, biolink, bio link, link bio, alternatif linktree, linktree clone, buat link bio, website bio link, biolink indonesia, kartu nama digital, vcard, bio link gratis, ai assistant bio, bio link creator, portfolio link">
+    <meta name="description" content="Platform link in bio modern gratis dengan asisten AI pintar di Indonesia. Buat kartu tautan elegan, kumpulkan portofolio, media sosial, dan pandu pengunjung otomatis 24/7. Alternatif Linktree terbaik.">
+    <meta name="keywords" content="biolink, link in bio, bio link indonesia, link bio gratis, alternatif linktree indonesia, biolink indonesia, buat link bio, website bio link, kartu nama digital, vcard digital, ai assistant link, linktree clone, portfolio link creator">
     <meta name="author" content="BioLink">
 
     <!-- Favicon -->
@@ -22,15 +32,15 @@
 
     <!-- OpenGraph & Twitter Meta -->
     <meta property="og:site_name" content="BioLink">
-    <meta property="og:title" content="BioLink — Platform Link in Bio Gratis & AI Assistant untuk Kreator & Developer">
+    <meta property="og:title" content="BioLink — Platform Link in Bio Gratis & Asisten AI Indonesia">
     <meta property="og:description" content="Kumpulkan seluruh portofolio, tautan proyek, dan media sosial Anda dalam satu URL elegan. Dilengkapi Asisten AI pintar yang menyapa dan memandu pengunjung Anda 24/7.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ url('/') }}">
-    <meta property="og:image" content="{{ asset('favicon.svg') }}">
+    <meta property="og:image" content="{{ asset('Logo.png') }}">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="BioLink — Platform Link in Bio Gratis & AI Assistant">
     <meta name="twitter:description" content="Platform link-in-bio modern dengan kecerdasan buatan, tema kustom tanpa batas, dan analitik real-time.">
-    <meta name="twitter:image" content="{{ asset('favicon.svg') }}">
+    <meta name="twitter:image" content="{{ asset('Logo.png') }}">
 
     <!-- Schema.org JSON-LD Structured Data for Google Search -->
     <script type="application/ld+json">
@@ -38,10 +48,20 @@
       "@context": "https://schema.org",
       "@graph": [
         {
+          "@type": "Organization",
+          "@id": "{{ url('/') }}/#organization",
+          "name": "BioLink",
+          "url": "{{ url('/') }}",
+          "logo": "{{ asset('Logo.png') }}",
+          "description": "Platform SaaS Link in Bio Multi-User dengan Asisten AI",
+          "areaServed": "ID"
+        },
+        {
           "@type": "WebSite",
           "@id": "{{ url('/') }}/#website",
           "url": "{{ url('/') }}",
           "name": "BioLink",
+          "publisher": { "@id": "{{ url('/') }}/#organization" },
           "description": "Platform Link in Bio Modern dengan Asisten AI untuk Kreator dan Developer",
           "potentialAction": {
             "@type": "SearchAction",
@@ -70,6 +90,35 @@
             "vCard Contact Download",
             "High-resolution QR Code Generator",
             "Geolocation Analytics"
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Apakah BioLink benar-benar gratis?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Ya! Anda dapat mendaftar, membuat halaman bio kustom, menambahkan tautan tak terbatas, mengatur tema, dan menggunakan seluruh fitur analitik tanpa biaya berlangganan."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Bagaimana cara kerja Asisten AI Concierge?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Asisten AI bekerja berdasarkan data pengetahuan yang Anda isi di menu Studio Dasbor. Anda juga bisa menghubungkan API Key Anda sendiri (OpenAI, DeepSeek, Groq, atau Ollama) untuk respon natural."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Apakah tautan profil ramah SEO di Google?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Sangat ramah SEO. Setiap profil otomatis dilengkapi Schema.org JSON-LD, XML Sitemap, dan meta tag indeksasi agar cepat terdeteksi dan terindeks di mesin pencari Google."
+              }
+            }
           ]
         }
       ]

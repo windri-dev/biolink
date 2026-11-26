@@ -9,8 +9,13 @@
     <link rel="canonical" href="{{ url('/@' . $profile->clean_handle) }}">
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
     <meta name="description" content="{{ $profile->meta_description ?: $profile->bio }}">
-    <meta name="keywords" content="{{ $profile->meta_keywords ?: 'biolink, link in bio, ' . $profile->display_name . ', ' . $profile->clean_handle }}">
+    <meta name="keywords" content="{{ $profile->meta_keywords ?: 'biolink, link in bio, bio link indonesia, ' . $profile->display_name . ', ' . $profile->clean_handle }}">
     <meta name="author" content="{{ $profile->display_name }}">
+
+    <!-- GEO & Region Metadata -->
+    <meta name="geo.region" content="ID">
+    <meta name="geo.placename" content="{{ $profile->location ?: 'Indonesia' }}">
+    <meta name="language" content="id-ID">
     <meta property="og:title" content="{{ $profile->meta_title ?: $profile->display_name }}">
     <meta property="og:description" content="{{ $profile->meta_description ?: $profile->bio }}">
     <meta property="og:image" content="{{ $profile->avatar_url }}">
