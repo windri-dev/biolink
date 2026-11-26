@@ -38,6 +38,8 @@ class PublicBioController
             ]);
         }
 
+        $profile->syncCvBioLink();
+
         // Record page view silently
         try {
             $this->analyticsService->recordPageView($profile, $request);

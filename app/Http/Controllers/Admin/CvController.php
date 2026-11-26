@@ -152,6 +152,7 @@ class CvController
         }
 
         $profile->update($data);
+        $profile->syncCvBioLink();
 
         return redirect()->route('admin.cv.index')->with('success', 'Curriculum Vitae berhasil diperbarui!');
     }
@@ -164,6 +165,7 @@ class CvController
         $profile = $this->getProfile();
         $newState = !$profile->enable_cv;
         $profile->update(['enable_cv' => $newState]);
+        $profile->syncCvBioLink();
 
         $statusText = $newState ? 'diaktifkan dan dapat diakses publik.' : 'dinonaktifkan (tersembunyi dari publik).';
 
@@ -195,6 +197,7 @@ class CvController
             'cv_experiences' => $preset['cv_experiences'],
             'cv_educations' => $preset['cv_educations'],
         ]);
+        $profile->syncCvBioLink();
 
         return redirect()->route('admin.cv.index')->with('success', '✨ Templet CV Profesional Siap Pakai berhasil dimuat ke profil Anda!');
     }

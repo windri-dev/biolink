@@ -22,6 +22,7 @@ class LinkController
     public function index(): View
     {
         $profile = $this->getProfile();
+        $profile->syncCvBioLink();
         $links = BioLink::where('profile_id', $profile->id)->orderBy('sort_order')->get();
 
         return view('admin.links.index', [
@@ -113,6 +114,10 @@ class LinkController
         $profile = $this->getProfile();
         $link = BioLink::where('profile_id', $profile->id)->findOrFail($id);
         $link->update(['is_active' => !$link->is_active]);
+
+        if ($link->type === 'cv') {
+            $profile->update(['enable_cv' => $link->is_active]);
+        }
 
         return response()->json([
             'success' => true,

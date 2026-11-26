@@ -73,37 +73,6 @@
         </div>
     @endif
 
-    <!-- Professional Curriculum Vitae (CV) Card Banner -->
-    @if($profile->enable_cv)
-        <a href="{{ route('public.cv', $profile->clean_handle) }}" 
-           class="w-full bio-card {{ $theme->button_shape ?? 'rounded-2xl' }} p-4 mb-4 flex items-center justify-between gap-3 group relative overflow-hidden border border-sky-500/30 bg-gradient-to-r from-sky-500/10 via-indigo-500/10 to-transparent hover:border-sky-400/50 transition-all hover:scale-[1.01] shadow-lg text-left">
-            <div class="flex items-center gap-3.5 min-w-0">
-                <div class="w-10 h-10 rounded-xl bg-sky-500/20 border border-sky-400/30 flex items-center justify-center flex-shrink-0 text-sky-400 group-hover:bg-sky-500/30 transition-colors">
-                    <svg class="w-5 h-5 text-sky-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/>
-                    </svg>
-                </div>
-                <div class="min-w-0">
-                    <div class="flex items-center gap-2 flex-wrap">
-                        <span class="font-bold text-sm tracking-tight text-white group-hover:text-sky-300 transition-colors">
-                            Curriculum Vitae & Riwayat Karir
-                        </span>
-                        <span class="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full tracking-wider bg-sky-500/20 text-sky-300 border border-sky-500/30">
-                            RESUME
-                        </span>
-                    </div>
-                    <p class="text-xs text-zinc-300/80 mt-0.5 truncate font-normal">
-                        {{ $profile->cv_headline ?: $profile->tagline ?: 'Lihat riwayat karir, keahlian teknis & portofolio resmi' }}
-                    </p>
-                </div>
-            </div>
-            <div class="p-1.5 rounded-lg text-sky-400/50 group-hover:text-sky-300 group-hover:translate-x-1 transition-all flex-shrink-0">
-                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="m9 18 6-6-6-6"/>
-                </svg>
-            </div>
-        </a>
-    @endif
 
     <!-- Bio Links Stack (Modular Bento Grid Supported) -->
     <div class="w-full grid grid-cols-1 sm:grid-cols-2 gap-3.5 mb-10 text-left">
@@ -112,7 +81,37 @@
                 $colSpan = ($link->card_size === 'half') ? 'sm:col-span-1' : 'col-span-full';
             @endphp
 
-            @if($link->type === 'header')
+            @if($link->type === 'cv')
+                <!-- Professional Curriculum Vitae (CV) Card Banner (Reorderable) -->
+                <a href="{{ route('public.cv', $profile->clean_handle) }}" 
+                   class="col-span-full bio-card {{ $theme->button_shape ?? 'rounded-2xl' }} p-4 flex items-center justify-between gap-3 group relative overflow-hidden border border-sky-500/30 bg-gradient-to-r from-sky-500/10 via-indigo-500/10 to-transparent hover:border-sky-400/50 transition-all hover:scale-[1.01] shadow-lg text-left">
+                    <div class="flex items-center gap-3.5 min-w-0">
+                        <div class="w-10 h-10 rounded-xl bg-sky-500/20 border border-sky-400/30 flex items-center justify-center flex-shrink-0 text-sky-400 group-hover:bg-sky-500/30 transition-colors">
+                            <svg class="w-5 h-5 text-sky-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/>
+                            </svg>
+                        </div>
+                        <div class="min-w-0">
+                            <div class="flex items-center gap-2 flex-wrap">
+                                <span class="font-bold text-sm tracking-tight text-white group-hover:text-sky-300 transition-colors">
+                                    {{ $link->title ?: 'Curriculum Vitae & Riwayat Karir' }}
+                                </span>
+                                <span class="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full tracking-wider bg-sky-500/20 text-sky-300 border border-sky-500/30">
+                                    {{ $link->badge_text ?: 'RESUME' }}
+                                </span>
+                            </div>
+                            <p class="text-xs text-zinc-300/80 mt-0.5 truncate font-normal">
+                                {{ $profile->cv_headline ?: $profile->tagline ?: 'Lihat riwayat karir, keahlian teknis & portofolio resmi' }}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-1.5 rounded-lg text-sky-400/50 group-hover:text-sky-300 group-hover:translate-x-1 transition-all flex-shrink-0">
+                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m9 18 6-6-6-6"/>
+                        </svg>
+                    </div>
+                </a>
+            @elseif($link->type === 'header')
                 <!-- Section Header Divider (Full width) -->
                 <div class="col-span-full pt-4 pb-1 text-left">
                     <h3 class="text-xs uppercase tracking-wider font-bold text-zinc-400/80 px-2 flex items-center gap-2">

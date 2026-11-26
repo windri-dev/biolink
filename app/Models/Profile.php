@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Str;
 
 class Profile extends Model
 {
@@ -154,6 +155,46 @@ class Profile extends Model
             || !empty($this->cv_summary) 
             || !empty($this->cv_skills) 
             || !empty($this->cv_experiences);
+    }
+
+    /**
+     * Synchronize CV as a native BioLink item for flexible ordering
+     */
+    public function syncCvBioLink(): ?BioLink
+    {
+        if (!$this->hasConfiguredCv()) {
+            BioLink::where('profile_id', $this->id)->where('type', 'cv')->delete();
+            return null;
+        }
+
+        $link = BioLink::where('profile_id', $this->id)->where('type', 'cv')->first();
+
+        if (!$link) {
+            // Shift existing links by 1 so CV sits at the top initially
+            BioLink::where('profile_id', $this->id)->increment('sort_order');
+
+            $link = BioLink::create([
+                'profile_id' => $this->id,
+                'type' => 'cv',
+                'title' => $this->cv_headline ?: 'Curriculum Vitae & Riwayat Karir',
+                'subtitle' => Str::limit($this->cv_summary ?: 'Lihat riwayat karir, keahlian teknis & portofolio resmi', 120),
+                'url' => route('public.cv', $this->clean_handle),
+                'icon' => 'file-badge',
+                'badge_text' => 'RESUME',
+                'badge_color' => 'sky',
+                'is_active' => (bool) $this->enable_cv,
+                'sort_order' => 1,
+            ]);
+        } else {
+            $link->update([
+                'title' => $this->cv_headline ?: 'Curriculum Vitae & Riwayat Karir',
+                'subtitle' => Str::limit($this->cv_summary ?: 'Lihat riwayat karir, keahlian teknis & portofolio resmi', 120),
+                'url' => route('public.cv', $this->clean_handle),
+                'is_active' => (bool) $this->enable_cv,
+            ]);
+        }
+
+        return $link;
     }
 
     /**

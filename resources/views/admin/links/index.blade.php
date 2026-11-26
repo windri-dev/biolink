@@ -27,72 +27,87 @@
                     <i data-lucide="arrow-up-down" class="w-3.5 h-3.5 text-sky-400"></i>
                     <span>Tahan & geser icon grip atau klik panah untuk mengatur urutan tautan</span>
                 </span>
-                <span class="font-mono text-zinc-500">{{ count($links) + ($profile->hasConfiguredCv() ? 1 : 0) }} Item Konten</span>
+                <span class="font-mono text-zinc-500">{{ count($links) }} Item Konten</span>
             </div>
-
-            <!-- Professional Curriculum Vitae (CV) Card -->
-            @if($profile->hasConfiguredCv())
-                <div id="cvCardInLinks" class="bg-gradient-to-r from-sky-500/10 via-zinc-900/90 to-zinc-900/90 border {{ $profile->enable_cv ? 'border-sky-500/40' : 'border-zinc-800' }} rounded-2xl p-3.5 sm:p-4 flex items-center justify-between gap-3 sm:gap-4 transition-all hover:border-sky-400/50 shadow-md relative overflow-hidden group">
-                    <div class="absolute left-0 top-0 bottom-0 w-1.5 {{ $profile->enable_cv ? 'bg-gradient-to-b from-sky-400 to-indigo-500' : 'bg-zinc-700' }}" id="cvCardBar"></div>
-
-                    <div class="flex items-center gap-2.5 sm:gap-3.5 min-w-0 pl-1">
-                        <!-- Icon Indicator -->
-                        <div class="w-10 h-10 rounded-xl bg-sky-500/20 border border-sky-400/30 flex items-center justify-center flex-shrink-0 text-sky-400 shadow-sm">
-                            <i data-lucide="file-badge" class="w-5 h-5"></i>
-                        </div>
-
-                        <div class="min-w-0">
-                            <div class="flex items-center gap-2 flex-wrap">
-                                <span class="font-bold text-sm text-white truncate">
-                                    {{ $profile->cv_headline ?: 'Curriculum Vitae & Riwayat Karir' }}
-                                </span>
-                                <span class="text-[9px] font-mono font-bold uppercase px-2 py-0.5 rounded-full bg-sky-500/20 text-sky-300 border border-sky-400/30">
-                                    RESUME CV
-                                </span>
-                                <span id="cvActiveBadge" class="text-[9px] font-mono font-bold uppercase px-2 py-0.5 rounded-full flex items-center gap-1 {{ $profile->enable_cv ? 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/30' : 'bg-zinc-800 text-zinc-500 border border-zinc-700' }}">
-                                    <span class="w-1.5 h-1.5 rounded-full {{ $profile->enable_cv ? 'bg-emerald-400 animate-pulse' : 'bg-zinc-500' }}" id="cvActiveDot"></span>
-                                    <span id="cvActiveText">{{ $profile->enable_cv ? 'Aktif di Bio' : 'Nonaktif' }}</span>
-                                </span>
-                            </div>
-                            <p class="text-xs text-zinc-400 truncate mt-0.5 font-mono text-[11px]">
-                                {{ route('public.cv', $profile->clean_handle) }}
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Action Controls -->
-                    <div class="flex items-center gap-2 flex-shrink-0">
-                        <!-- Fast Toggle Aktif / Nonaktif -->
-                        <button type="button" 
-                                id="cvToggleBtn"
-                                onclick="toggleCvStatus(this)" 
-                                class="px-2.5 py-1.5 rounded-lg text-xs font-semibold border transition-all {{ $profile->enable_cv ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30 hover:bg-emerald-500/20' : 'bg-zinc-800 text-zinc-400 border-zinc-700 hover:bg-zinc-700' }}"
-                                title="Klik untuk mengaktifkan / menonaktifkan tampilan CV di Bio">
-                            {{ $profile->enable_cv ? 'Aktif' : 'Mati' }}
-                        </button>
-
-                        <!-- Edit Button (Direct to CV Builder) -->
-                        <a href="{{ route('admin.cv.index') }}" 
-                           class="p-2 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-300 hover:text-white border border-zinc-700 transition-colors flex items-center gap-1 text-xs font-semibold"
-                           title="Buka CV Builder untuk edit riwayat & keahlian">
-                            <i data-lucide="edit-3" class="w-4 h-4"></i>
-                            <span class="hidden sm:inline">Kelola CV</span>
-                        </a>
-
-                        <!-- External Preview -->
-                        <a href="{{ route('public.cv', $profile->clean_handle) }}" 
-                           target="_blank" 
-                           class="p-2 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-300 hover:text-white border border-zinc-700 transition-colors"
-                           title="Lihat Halaman CV Publik">
-                            <i data-lucide="external-link" class="w-4 h-4"></i>
-                        </a>
-                    </div>
-                </div>
-            @endif
 
             <div class="space-y-3" id="linksContainer">
                 @forelse($links as $link)
-                    <div class="bg-zinc-900/70 border border-zinc-800 rounded-2xl p-3.5 sm:p-4 flex items-center justify-between gap-3 sm:gap-4 transition-all hover:border-zinc-700 select-none group" data-id="{{ $link->id }}">
+                    @if($link->type === 'cv')
+                        <!-- Professional Curriculum Vitae (CV) Card (Reorderable) -->
+                        <div class="bg-gradient-to-r from-sky-500/10 via-zinc-900/90 to-zinc-900/90 border {{ $link->is_active ? 'border-sky-500/40' : 'border-zinc-800' }} rounded-2xl p-3.5 sm:p-4 flex items-center justify-between gap-3 sm:gap-4 transition-all hover:border-sky-400/50 shadow-md relative overflow-hidden select-none group" data-id="{{ $link->id }}">
+                            <div class="absolute left-0 top-0 bottom-0 w-1.5 {{ $link->is_active ? 'bg-gradient-to-b from-sky-400 to-indigo-500' : 'bg-zinc-700' }}"></div>
+
+                            <div class="flex items-center gap-2.5 sm:gap-3.5 min-w-0 pl-1">
+                                <!-- Drag Handle & Up/Down Arrows -->
+                                <div class="flex items-center gap-1 flex-shrink-0">
+                                    <div class="drag-handle p-1.5 rounded-lg text-zinc-500 hover:text-white hover:bg-zinc-800 cursor-grab active:cursor-grabbing transition-colors" title="Geser (Drag & Drop) untuk mengatur urutan">
+                                        <i data-lucide="grip-vertical" class="w-4 h-4"></i>
+                                    </div>
+                                    <div class="flex flex-col -space-y-0.5">
+                                        <button type="button" onclick="moveLinkUp(this)" class="p-0.5 rounded text-zinc-500 hover:text-sky-400 hover:bg-zinc-800 transition-colors" title="Pindahkan ke atas">
+                                            <i data-lucide="chevron-up" class="w-3.5 h-3.5"></i>
+                                        </button>
+                                        <button type="button" onclick="moveLinkDown(this)" class="p-0.5 rounded text-zinc-500 hover:text-sky-400 hover:bg-zinc-800 transition-colors" title="Pindahkan ke bawah">
+                                            <i data-lucide="chevron-down" class="w-3.5 h-3.5"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Icon Indicator -->
+                                <div class="w-10 h-10 rounded-xl bg-sky-500/20 border border-sky-400/30 flex items-center justify-center flex-shrink-0 text-sky-400 shadow-sm">
+                                    <i data-lucide="file-badge" class="w-5 h-5"></i>
+                                </div>
+
+                                <div class="min-w-0">
+                                    <div class="flex items-center gap-2 flex-wrap">
+                                        <span class="font-bold text-sm text-white truncate">{{ $link->title }}</span>
+                                        <span class="text-[9px] font-mono font-bold uppercase px-2 py-0.5 rounded-full bg-sky-500/20 text-sky-300 border border-sky-400/30">
+                                            RESUME CV
+                                        </span>
+                                        @if(!$link->is_active)
+                                            <span class="text-[10px] font-bold uppercase px-2 py-0.5 rounded-full bg-rose-500/10 text-rose-400 border border-rose-500/20">
+                                                Nonaktif
+                                            </span>
+                                        @else
+                                            <span class="text-[9px] font-mono font-bold uppercase px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 flex items-center gap-1">
+                                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                                                <span>Aktif di Bio</span>
+                                            </span>
+                                        @endif
+                                    </div>
+                                    <p class="text-xs text-zinc-400 truncate mt-0.5 font-mono text-[11px]">
+                                        {{ route('public.cv', $profile->clean_handle) }}
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center gap-2 flex-shrink-0">
+                                <!-- Active Toggle Button -->
+                                <button onclick="toggleLinkActive({{ $link->id }}, this)" 
+                                        class="px-2.5 py-1.5 rounded-lg text-xs font-semibold border transition-colors {{ $link->is_active ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30 hover:bg-emerald-500/20' : 'bg-zinc-800 text-zinc-400 border-zinc-700 hover:bg-zinc-700' }}"
+                                        title="Status CV Publik">
+                                    {{ $link->is_active ? 'Aktif' : 'Mati' }}
+                                </button>
+
+                                <!-- Edit CV Button (Go to CV Builder) -->
+                                <a href="{{ route('admin.cv.index') }}" 
+                                   class="p-2 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-300 hover:text-white border border-zinc-700 transition-colors flex items-center gap-1 text-xs font-semibold"
+                                   title="Buka CV Builder untuk edit data riwayat & keahlian">
+                                    <i data-lucide="edit-3" class="w-4 h-4"></i>
+                                    <span class="hidden sm:inline">Kelola CV</span>
+                                </a>
+
+                                <!-- Preview CV -->
+                                <a href="{{ route('public.cv', $profile->clean_handle) }}" 
+                                   target="_blank" 
+                                   class="p-2 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-300 hover:text-white border border-zinc-700 transition-colors"
+                                   title="Lihat Halaman CV Publik">
+                                    <i data-lucide="external-link" class="w-4 h-4"></i>
+                                </a>
+                            </div>
+                        </div>
+                    @else
+                        <div class="bg-zinc-900/70 border border-zinc-800 rounded-2xl p-3.5 sm:p-4 flex items-center justify-between gap-3 sm:gap-4 transition-all hover:border-zinc-700 select-none group" data-id="{{ $link->id }}">
                         <div class="flex items-center gap-2.5 sm:gap-3.5 min-w-0">
                             <!-- Drag Handle & Up/Down Arrows -->
                             <div class="flex items-center gap-1 flex-shrink-0">
@@ -180,6 +195,7 @@
                         </form>
                     </div>
                 </div>
+                    @endif
             @empty
                 <div class="bg-zinc-900/40 border border-dashed border-zinc-800 rounded-2xl p-12 text-center text-zinc-500">
                     <i data-lucide="link" class="w-8 h-8 mx-auto mb-2 opacity-50"></i>
@@ -534,61 +550,6 @@
             }
         } catch (err) {
             console.error('Failed to save order:', err);
-        }
-    }
-
-    // Fast Toggle CV Status from Links page
-    async function toggleCvStatus(btn) {
-        btn.disabled = true;
-        try {
-            const res = await fetch('{{ route('admin.cv.toggle') }}', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json',
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                }
-            });
-            const data = await res.json();
-            if (data.success) {
-                const isActive = Boolean(data.enable_cv);
-                const badge = document.getElementById('cvActiveBadge');
-                const text = document.getElementById('cvActiveText');
-                const dot = document.getElementById('cvActiveDot');
-                const bar = document.getElementById('cvCardBar');
-                const card = document.getElementById('cvCardInLinks');
-
-                if (isActive) {
-                    btn.className = 'px-2.5 py-1.5 rounded-lg text-xs font-semibold border transition-all bg-emerald-500/10 text-emerald-400 border-emerald-500/30 hover:bg-emerald-500/20';
-                    btn.innerText = 'Aktif';
-                    if (badge) badge.className = 'text-[9px] font-mono font-bold uppercase px-2 py-0.5 rounded-full flex items-center gap-1 bg-emerald-500/15 text-emerald-400 border border-emerald-500/30';
-                    if (text) text.innerText = 'Aktif di Bio';
-                    if (dot) dot.className = 'w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse';
-                    if (bar) bar.className = 'absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-sky-400 to-indigo-500';
-                    if (card) {
-                        card.classList.remove('border-zinc-800');
-                        card.classList.add('border-sky-500/40');
-                    }
-                } else {
-                    btn.className = 'px-2.5 py-1.5 rounded-lg text-xs font-semibold border transition-all bg-zinc-800 text-zinc-400 border-zinc-700 hover:bg-zinc-700';
-                    btn.innerText = 'Mati';
-                    if (badge) badge.className = 'text-[9px] font-mono font-bold uppercase px-2 py-0.5 rounded-full flex items-center gap-1 bg-zinc-800 text-zinc-500 border border-zinc-700';
-                    if (text) text.innerText = 'Nonaktif';
-                    if (dot) dot.className = 'w-1.5 h-1.5 rounded-full bg-zinc-500';
-                    if (bar) bar.className = 'absolute left-0 top-0 bottom-0 w-1.5 bg-zinc-700';
-                    if (card) {
-                        card.classList.remove('border-sky-500/40');
-                        card.classList.add('border-zinc-800');
-                    }
-                }
-
-                refreshPreview();
-            }
-        } catch (err) {
-            console.error('Error toggling CV:', err);
-            alert('Gagal mengubah status CV.');
-        } finally {
-            btn.disabled = false;
         }
     }
 
