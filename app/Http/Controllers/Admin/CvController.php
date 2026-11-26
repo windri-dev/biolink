@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Profile;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -158,13 +159,22 @@ class CvController
     /**
      * Quick toggle CV active / inactive
      */
-    public function toggle(Request $request): RedirectResponse
+    public function toggle(Request $request): RedirectResponse|JsonResponse
     {
         $profile = $this->getProfile();
         $newState = !$profile->enable_cv;
         $profile->update(['enable_cv' => $newState]);
 
         $statusText = $newState ? 'diaktifkan dan dapat diakses publik.' : 'dinonaktifkan (tersembunyi dari publik).';
+
+        if ($request->wantsJson() || $request->ajax()) {
+            return response()->json([
+                'success' => true,
+                'enable_cv' => $newState,
+                'message' => "Curriculum Vitae (CV) berhasil {$statusText}",
+            ]);
+        }
+
         return back()->with('success', "Curriculum Vitae (CV) berhasil {$statusText}");
     }
 

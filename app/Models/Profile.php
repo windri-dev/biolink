@@ -146,6 +146,17 @@ class Profile extends Model
     }
 
     /**
+     * Check if user has configured CV content
+     */
+    public function hasConfiguredCv(): bool
+    {
+        return !empty($this->cv_headline) 
+            || !empty($this->cv_summary) 
+            || !empty($this->cv_skills) 
+            || !empty($this->cv_experiences);
+    }
+
+    /**
      * Returns professional default CV template preset data
      *
      * @return array<string, mixed>
