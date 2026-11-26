@@ -51,4 +51,45 @@ class SitemapController
             'Content-Type' => 'application/xml',
         ]);
     }
+
+    /**
+     * Generate dynamic XML sitemap for a specific profile (for sub-property in GSC)
+     */
+    public function profileSitemap(string $handle): Response
+    {
+        $cleanHandle = ltrim($handle, '@');
+        $profile = Profile::where('handle', $cleanHandle)
+            ->orWhere('handle', '@' . $cleanHandle)
+            ->first();
+
+        if (!$profile) {
+            return $this->index();
+        }
+
+        $xml = '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
+        $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
+
+        // Bio Profile Page
+        $xml .= "  <url>\n";
+        $xml .= '    <loc>' . url('/@' . $profile->clean_handle) . "</loc>\n";
+        $xml .= '    <lastmod>' . $profile->updated_at->toAtomString() . "</lastmod>\n";
+        $xml .= '    <changefreq>weekly</changefreq>' . "\n";
+        $xml .= "    <priority>1.0</priority>\n";
+        $xml .= "  </url>\n";
+
+        if ($profile->enable_cv) {
+            $xml .= "  <url>\n";
+            $xml .= '    <loc>' . url('/@' . $profile->clean_handle . '/cv') . "</loc>\n";
+            $xml .= '    <lastmod>' . $profile->updated_at->toAtomString() . "</lastmod>\n";
+            $xml .= '    <changefreq>weekly</changefreq>' . "\n";
+            $xml .= "    <priority>0.8</priority>\n";
+            $xml .= "  </url>\n";
+        }
+
+        $xml .= '</urlset>';
+
+        return response($xml, 200, [
+            'Content-Type' => 'application/xml; charset=UTF-8',
+        ]);
+    }
 }
