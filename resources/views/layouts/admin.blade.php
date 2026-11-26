@@ -97,6 +97,13 @@
                     <i data-lucide="user" class="w-4 h-4"></i>
                     <span>Profil & Medsos</span>
                 </a>
+                <a href="{{ route('admin.cv.index') }}" class="admin-nav-item flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-zinc-300 hover:text-white hover:bg-zinc-800/60 transition-colors {{ request()->routeIs('admin.cv.*') ? 'active' : '' }}">
+                    <div class="flex items-center gap-3">
+                        <i data-lucide="file-badge" class="w-4 h-4 text-sky-400"></i>
+                        <span>Curriculum Vitae (CV)</span>
+                    </div>
+                    <span class="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded bg-sky-500/20 text-sky-300">NEW</span>
+                </a>
                 <a href="{{ route('admin.themes.index') }}" class="admin-nav-item flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-zinc-300 hover:text-white hover:bg-zinc-800/60 transition-colors {{ request()->routeIs('admin.themes.*') ? 'active' : '' }}">
                     <i data-lucide="palette" class="w-4 h-4"></i>
                     <span>Tema & Tampilan</span>

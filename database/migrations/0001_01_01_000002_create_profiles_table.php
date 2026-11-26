@@ -48,6 +48,17 @@ return new class extends Migration {
             $table->boolean('ai_security_guard')->default(true); // Anti Prompt-Injection & Jailbreak
             $table->boolean('ai_content_filter')->default(true); // Filter kata kasar & pelecehan
             $table->integer('ai_block_duration_minutes')->default(15); // Durasi cooldown auto-ban IP
+
+            // Professional Curriculum Vitae (CV) & Career Builder
+            $table->boolean('enable_cv')->default(true);
+            $table->string('cv_headline')->nullable();
+            $table->text('cv_summary')->nullable();
+            $table->json('cv_skills')->nullable();
+            $table->json('cv_experiences')->nullable();
+            $table->json('cv_educations')->nullable();
+            $table->string('cv_file_url', 1000)->nullable();
+            $table->string('cv_template')->default('modern');
+
             $table->string('meta_title')->nullable();
             $table->text('meta_description')->nullable();
             $table->text('custom_css')->nullable();

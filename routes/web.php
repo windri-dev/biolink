@@ -5,6 +5,7 @@ declare(strict_types=1);
 use App\Http\Controllers\Admin\AiKnowledgeController;
 use App\Http\Controllers\Admin\AnalyticsController;
 use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\CvController as AdminCvController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DataExportController;
 use App\Http\Controllers\Admin\LinkController;
@@ -14,6 +15,7 @@ use App\Http\Controllers\Admin\ThemeController;
 use App\Http\Controllers\Admin\TwoFactorAuthController;
 use App\Http\Controllers\AiChatController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\CvController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\PublicBioController;
 use App\Http\Controllers\SitemapController;
@@ -96,6 +98,12 @@ Route::middleware('auth')->prefix('admin')->as('admin.')->group(function () {
     Route::post('/security/2fa/disable', [TwoFactorAuthController::class, 'disable'])->name('security.2fa.disable');
     Route::post('/security/2fa/regenerate', [TwoFactorAuthController::class, 'regenerateRecoveryCodes'])->name('security.2fa.regenerate');
 
+    // Curriculum Vitae (CV) & Career Builder
+    Route::get('/cv', [AdminCvController::class, 'index'])->name('cv.index');
+    Route::post('/cv', [AdminCvController::class, 'update'])->name('cv.update');
+    Route::post('/cv/template', [AdminCvController::class, 'loadTemplate'])->name('cv.template');
+    Route::delete('/cv/file', [AdminCvController::class, 'deleteFile'])->name('cv.delete-file');
+
     // Data Export & Backup
     Route::get('/export/json', [DataExportController::class, 'exportJson'])->name('export.json');
     Route::get('/export/csv', [DataExportController::class, 'exportCsv'])->name('export.csv');
@@ -123,6 +131,14 @@ Route::middleware('auth')->prefix('admin')->as('admin.')->group(function () {
 Route::get('/@{handle}/vcard', [VcardController::class, 'download'])
     ->where('handle', '[a-zA-Z0-9_-]+')
     ->name('public.vcard');
+
+Route::get('/@{handle}/cv', [CvController::class, 'show'])
+    ->where('handle', '[a-zA-Z0-9_-]+')
+    ->name('public.cv');
+
+Route::get('/{handle}/cv', [CvController::class, 'show'])
+    ->where('handle', '[a-zA-Z0-9_-]+')
+    ->name('public.cv.plain');
 
 Route::get('/@{handle}', [PublicBioController::class, 'show'])
     ->where('handle', '[a-zA-Z0-9_-]+')

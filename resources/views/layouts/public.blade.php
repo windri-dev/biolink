@@ -133,21 +133,33 @@
 </head>
 <body class="antialiased flex flex-col justify-between selection:bg-sky-500 selection:text-white">
     
-    <!-- Top Action Bar (vCard, QR Code, Share Button) -->
+    <!-- Top Action Bar (vCard, CV, QR Code, Share Button) -->
     <header class="w-full max-w-xl mx-auto px-4 pt-4 flex justify-between items-center z-10">
-        <!-- vCard Save Contact Button -->
-        @if($profile->enable_vcard)
-            <a href="{{ route('public.vcard', $profile->clean_handle) }}" 
-               class="px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-white backdrop-blur-md border border-white/10 transition-all hover:scale-105 text-xs font-semibold inline-flex items-center gap-1.5 shadow-sm"
-               title="Simpan Kontak ke HP">
-                <svg class="w-3.5 h-3.5 text-sky-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" x2="19" y1="8" y2="14"/><line x1="22" x2="16" y1="11" y2="11"/>
-                </svg>
-                <span class="hidden sm:inline">Simpan Kontak</span>
-            </a>
-        @else
-            <div></div>
-        @endif
+        <div class="flex items-center gap-2">
+            <!-- vCard Save Contact Button -->
+            @if($profile->enable_vcard)
+                <a href="{{ route('public.vcard', $profile->clean_handle) }}" 
+                   class="px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-white backdrop-blur-md border border-white/10 transition-all hover:scale-105 text-xs font-semibold inline-flex items-center gap-1.5 shadow-sm"
+                   title="Simpan Kontak ke HP">
+                    <svg class="w-3.5 h-3.5 text-sky-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" x2="19" y1="8" y2="14"/><line x1="22" x2="16" y1="11" y2="11"/>
+                    </svg>
+                    <span class="hidden sm:inline">Simpan Kontak</span>
+                </a>
+            @endif
+
+            <!-- Professional CV / Resume Button -->
+            @if($profile->enable_cv)
+                <a href="{{ route('public.cv', $profile->clean_handle) }}" 
+                   class="px-3 py-1.5 rounded-full bg-sky-500/15 hover:bg-sky-500/25 text-sky-300 backdrop-blur-md border border-sky-400/30 transition-all hover:scale-105 text-xs font-semibold inline-flex items-center gap-1.5 shadow-sm"
+                   title="Lihat Curriculum Vitae (CV) & Riwayat Karir">
+                    <svg class="w-3.5 h-3.5 text-sky-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/>
+                    </svg>
+                    <span>Lihat CV</span>
+                </a>
+            @endif
+        </div>
 
         <div class="flex items-center gap-2">
             <!-- QR Code Button -->
