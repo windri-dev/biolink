@@ -45,7 +45,7 @@
     <!-- Schema.org JSON-LD Structured Data for Google Search -->
     <script type="application/ld+json">
     {
-      "@context": "https://schema.org",
+      "@@context": "https://schema.org",
       "@graph": [
         {
           "@type": "Organization",
