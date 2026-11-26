@@ -971,65 +971,6 @@
         </section>
 
 
-        <!-- SECTION: GOOGLE SEARCH & SEO READINESS -->
-        <section id="seo-google" class="py-14 sm:py-24 px-4 sm:px-12 border-t border-zinc-800/80 max-w-6xl mx-auto w-full">
-            <div class="text-center mb-10 sm:mb-16 space-y-3">
-                <span class="text-xs font-mono uppercase tracking-wider text-sky-400 font-bold block">OPTIMASI MESIN PENCARI (SEO & GOOGLE INDEXING)</span>
-                <h2 class="text-2xl sm:text-5xl font-black text-white tracking-tight">Mudah Ditemukan saat Audiens Mencari Anda di Google</h2>
-                <p class="text-xs sm:text-sm text-zinc-400 max-w-2xl mx-auto">Setiap profil bio secara otomatis dioptimasi dengan metadata Schema.org JSON-LD, XML Sitemap, dan protokol OpenGraph sehingga nama dan karya Anda langsung tampil rapi di hasil pencarian Google.</p>
-            </div>
-
-            <!-- Realistic Google SERP Preview Card -->
-            <div class="rounded-3xl border border-zinc-800 bg-zinc-900/80 p-5 sm:p-8 shadow-2xl backdrop-blur-xl space-y-4 max-w-3xl mx-auto">
-                <div class="flex items-center gap-2 border-b border-zinc-800 pb-3 text-xs text-zinc-400">
-                    <svg class="w-4 h-4 text-sky-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                    <span class="font-mono text-[11px] truncate min-w-0">Google Search &bull; "Alex Pratama BioLink Indonesia"</span>
-                </div>
-
-                <div class="space-y-2 text-left">
-                    <!-- Favicon & URL Breadcrumb -->
-                    <div class="flex items-center gap-2 text-xs text-zinc-400">
-                        <img src="{{ asset('Logo.png') }}" alt="Favicon" class="w-4 h-4 object-contain">
-                        <div class="flex flex-col">
-                            <span class="text-xs font-medium text-white">BioLink</span>
-                            <span class="text-[11px] text-zinc-500 font-mono">https://bio.wn-cdn.net/@alexpratama</span>
-                        </div>
-                    </div>
-
-                    <!-- Clickable Title -->
-                    <h3 class="text-base sm:text-lg font-bold text-[#8ab4f8] hover:underline cursor-pointer leading-snug">
-                        Alex Pratama (@alexpratama) &bull; Digital Creator & Developer | BioLink Resmi
-                    </h3>
-
-                    <!-- Snippet Description -->
-                    <p class="text-xs sm:text-sm text-[#bdc1c6] leading-relaxed">
-                        Hub profil resmi Alex Pratama. Temukan tautan portofolio, demo proyek aplikasi, karya kreatif, dan kontak kolaborasi langsung via tautan bio resmi...
-                    </p>
-
-                    <!-- Google Sitelinks Rich Snippets (Responsive Grid) -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-3 border-t border-zinc-700/60">
-                        <div class="p-2.5 rounded-xl bg-zinc-800/40 hover:bg-zinc-800/80 transition-colors cursor-pointer">
-                            <span class="text-xs font-bold text-[#8ab4f8] block hover:underline truncate">Portofolio Proyek</span>
-                            <span class="text-[11px] text-zinc-400 block truncate">Jelajahi karya & repositori</span>
-                        </div>
-                        <div class="p-2.5 rounded-xl bg-zinc-800/40 hover:bg-zinc-800/80 transition-colors cursor-pointer">
-                            <span class="text-xs font-bold text-[#8ab4f8] block hover:underline truncate">Demo Aplikasi Web</span>
-                            <span class="text-[11px] text-zinc-400 block truncate">Staging butik & template digital</span>
-                        </div>
-                        <div class="p-2.5 rounded-xl bg-zinc-800/40 hover:bg-zinc-800/80 transition-colors cursor-pointer">
-                            <span class="text-xs font-bold text-[#8ab4f8] block hover:underline truncate">Kontak Kolaborasi</span>
-                            <span class="text-[11px] text-zinc-400 block truncate">Diskusi proyek & kerja sama</span>
-                        </div>
-                        <div class="p-2.5 rounded-xl bg-zinc-800/40 hover:bg-zinc-800/80 transition-colors cursor-pointer">
-                            <span class="text-xs font-bold text-[#8ab4f8] block hover:underline truncate">Simpan Kontak vCard</span>
-                            <span class="text-[11px] text-zinc-400 block truncate">Unduh nomor langsung ke ponsel</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-
         <!-- SECTION F: PERTANYAAN UMUM (FAQ ACCORDION) -->
         <section id="faq" class="py-14 sm:py-20 px-4 sm:px-12 border-t border-zinc-800/80 max-w-4xl mx-auto w-full">
             <div class="text-center mb-10 sm:mb-16 space-y-3">
@@ -1121,10 +1062,10 @@
     <!-- 3. FOOTER (SEMANTIC STRUCTURED FOOTER)                                    -->
     <!-- ========================================================================= -->
     <footer class="border-t border-zinc-800/80 bg-zinc-950 px-4 sm:px-12 pt-12 sm:pt-16 pb-12 text-xs text-zinc-400">
-        <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-6 gap-8 sm:gap-10 pb-12 border-b border-zinc-850">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 sm:gap-10 pb-12 border-b border-zinc-850">
             
             <!-- Col 1: Brand & Mission -->
-            <div class="col-span-2 md:col-span-2 space-y-3 sm:space-y-4 text-left">
+            <div class="sm:col-span-2 space-y-3 sm:space-y-4 text-left">
                 <a href="/" class="flex items-center gap-2.5 font-black text-lg text-white">
                     <img src="{{ asset('Logo.png') }}" alt="Logo" class="h-8 w-auto object-contain">
                     <span>BioLink<span class="text-sky-400">.</span></span>
@@ -1150,19 +1091,7 @@
                 </ul>
             </div>
 
-            <!-- Col 3: Integrasi & AI -->
-            <div class="space-y-3 text-left">
-                <h4 class="font-bold text-white uppercase tracking-wider text-[11px]">Integrasi AI</h4>
-                <ul class="space-y-2 text-zinc-400">
-                    <li><span class="text-zinc-400">OpenAI (GPT-4o)</span></li>
-                    <li><span class="text-zinc-400">DeepSeek Chat</span></li>
-                    <li><span class="text-zinc-400">Groq High Speed</span></li>
-                    <li><span class="text-zinc-400">Ollama Lokal</span></li>
-                    <li><span class="text-zinc-400">AI Firewall Shield</span></li>
-                </ul>
-            </div>
-
-            <!-- Col 4: Pengembang -->
+            <!-- Col 3: Pengembang -->
             <div class="space-y-3 text-left">
                 <h4 class="font-bold text-white uppercase tracking-wider text-[11px]">Pengembang</h4>
                 <ul class="space-y-2 text-zinc-400">
@@ -1170,17 +1099,6 @@
                     <li><a href="/login" class="hover:text-white transition-colors">Masuk Studio</a></li>
                     <li><a href="/register" class="hover:text-white transition-colors">Klaim Handle</a></li>
                     <li><a href="/sitemap.xml" class="hover:text-white transition-colors">Sitemap XML</a></li>
-                </ul>
-            </div>
-
-            <!-- Col 5: Ekosistem & Node -->
-            <div class="space-y-3 text-left">
-                <h4 class="font-bold text-white uppercase tracking-wider text-[11px]">Ekosistem Node</h4>
-                <ul class="space-y-2 text-zinc-400">
-                    <li><a href="https://t.me/" target="_blank" class="hover:text-white transition-colors">Komunitas Pengguna</a></li>
-                    <li><a href="https://shoppe-staging.wn-cdn.net" target="_blank" class="hover:text-white transition-colors">SHOPPE Demo</a></li>
-                    <li><span class="text-zinc-500 font-mono text-[10px]">Cloudflare Edge</span></li>
-                    <li><span class="text-zinc-500 font-mono text-[10px]">Node v2.0-Prod</span></li>
                 </ul>
             </div>
 
