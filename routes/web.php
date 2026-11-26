@@ -139,6 +139,9 @@ Route::get('/@{handle}/sitemap.xml', [SitemapController::class, 'profileSitemap'
     ->where('handle', '[a-zA-Z0-9_-]+')
     ->name('seo.profile.sitemap');
 
+Route::get('/@{handle}//sitemap.xml', [SitemapController::class, 'profileSitemap'])
+    ->where('handle', '[a-zA-Z0-9_-]+');
+
 Route::get('/{handle}/sitemap.xml', [SitemapController::class, 'profileSitemap'])
     ->where('handle', '[a-zA-Z0-9_-]+')
     ->name('seo.profile.sitemap.plain');
