@@ -91,6 +91,15 @@
                     <i data-lucide="bar-chart-3" class="w-4 h-4"></i>
                     <span>Statistik & Log</span>
                 </a>
+                <a href="{{ route('admin.security.2fa.index') }}" class="admin-nav-item flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-zinc-300 hover:text-white hover:bg-zinc-800/60 transition-colors {{ request()->routeIs('admin.security.2fa.*') ? 'active' : '' }}">
+                    <div class="flex items-center gap-3">
+                        <i data-lucide="shield-check" class="w-4 h-4 text-emerald-400"></i>
+                        <span>Keamanan (2FA)</span>
+                    </div>
+                    @if(auth()->user()->hasTwoFactorEnabled())
+                        <span class="w-2 h-2 rounded-full bg-emerald-400" title="2FA Aktif"></span>
+                    @endif
+                </a>
 
                 @if(auth()->user()->isSuperAdmin())
                     <div class="pt-3 pb-1 px-3">

@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\LinkController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\SuperAdminController;
 use App\Http\Controllers\Admin\ThemeController;
+use App\Http\Controllers\Admin\TwoFactorAuthController;
 use App\Http\Controllers\AiChatController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\LandingPageController;
@@ -31,6 +32,8 @@ Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('seo.sitem
 // Authentication Routes (Login & Register for Multi-User)
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
+Route::get('/login/2fa', [AuthController::class, 'show2faChallenge'])->name('2fa.challenge');
+Route::post('/login/2fa', [AuthController::class, 'verify2faChallenge'])->name('2fa.challenge.verify');
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [RegisterController::class, 'register'])->name('register.submit');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
@@ -80,6 +83,12 @@ Route::middleware('auth')->prefix('admin')->as('admin.')->group(function () {
 
     // Analytics
     Route::get('/analytics', [AnalyticsController::class, 'index'])->name('analytics.index');
+
+    // Two-Factor Authenticator (2FA) Security
+    Route::get('/security/2fa', [TwoFactorAuthController::class, 'index'])->name('security.2fa.index');
+    Route::post('/security/2fa/confirm', [TwoFactorAuthController::class, 'confirm'])->name('security.2fa.confirm');
+    Route::post('/security/2fa/disable', [TwoFactorAuthController::class, 'disable'])->name('security.2fa.disable');
+    Route::post('/security/2fa/regenerate', [TwoFactorAuthController::class, 'regenerateRecoveryCodes'])->name('security.2fa.regenerate');
 
     // Data Export & Backup
     Route::get('/export/json', [DataExportController::class, 'exportJson'])->name('export.json');
