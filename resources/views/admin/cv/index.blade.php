@@ -345,131 +345,69 @@
         <!-- ================================================================= -->
         <div class="lg:col-span-5 sticky top-20 space-y-4">
             
-            <div class="bg-zinc-900/90 border border-zinc-800 rounded-3xl p-5 shadow-2xl space-y-4">
+            <div class="bg-zinc-950 border border-zinc-800 rounded-3xl overflow-hidden shadow-2xl space-y-0">
                 
-                <!-- Status & Action Header -->
-                <div class="flex items-center justify-between pb-3 border-b border-zinc-800">
-                    <div class="flex items-center gap-2">
-                        <div class="w-2.5 h-2.5 rounded-full {{ $profile->enable_cv ? 'bg-emerald-400 animate-pulse' : 'bg-zinc-600' }}"></div>
-                        <span class="text-xs font-bold text-white">Hasil Pratinjau CV</span>
+                <!-- Browser Window Top Chrome Bar -->
+                <div class="bg-zinc-900/90 px-4 py-3 border-b border-zinc-800 flex items-center justify-between gap-3">
+                    <div class="flex items-center gap-1.5 flex-shrink-0">
+                        <span class="w-2.5 h-2.5 rounded-full bg-rose-500/80"></span>
+                        <span class="w-2.5 h-2.5 rounded-full bg-amber-500/80"></span>
+                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500/80"></span>
                     </div>
 
-                    <div class="flex items-center gap-2">
-                        <form action="{{ route('admin.cv.toggle') }}" method="POST">
-                            @csrf
-                            <button type="submit" 
-                                    class="text-[11px] font-bold px-2.5 py-1 rounded-lg transition-colors border {{ $profile->enable_cv ? 'bg-emerald-500/10 text-emerald-300 border-emerald-500/30 hover:bg-red-500/10 hover:text-red-300 hover:border-red-500/30' : 'bg-zinc-800 text-zinc-400 border-zinc-700 hover:bg-emerald-500/15 hover:text-emerald-300' }}"
-                                    title="Klik untuk langsung ubah status aktif/nonaktif">
-                                {{ $profile->enable_cv ? '● Publik (Klik Nonaktif)' : '○ Nonaktif (Klik Aktif)' }}
-                            </button>
-                        </form>
-                    </div>
-                </div>
-
-                <!-- Live Mini Resume Render -->
-                <div class="bg-zinc-950 rounded-2xl border border-zinc-800/90 p-4 space-y-4 max-h-[calc(100vh-220px)] overflow-y-auto">
-                    
-                    <!-- Identity Header -->
-                    <div class="flex items-start gap-3">
-                        <img src="{{ $profile->avatar_url ?: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100' }}" 
-                             alt="{{ $profile->display_name }}" 
-                             class="w-12 h-12 rounded-xl object-cover border border-white/10 flex-shrink-0">
-                        <div class="min-w-0">
-                            <h3 class="text-sm font-bold text-white flex items-center gap-1.5 truncate">
-                                <span>{{ $profile->display_name }}</span>
-                                @if($profile->is_verified)
-                                    <svg class="w-3.5 h-3.5 text-sky-400 fill-current inline flex-shrink-0" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
-                                @endif
-                            </h3>
-                            <p class="text-xs font-semibold text-sky-400 truncate">
-                                {{ $profile->cv_headline ?: $profile->tagline ?: 'Professional Engineer' }}
-                            </p>
-                            @if($profile->location)
-                                <p class="text-[11px] text-zinc-400 flex items-center gap-1 mt-0.5">
-                                    <i data-lucide="map-pin" class="w-3 h-3 text-rose-400"></i>
-                                    <span>{{ $profile->location }}</span>
-                                </p>
-                            @endif
-                        </div>
+                    <!-- URL Bar Mockup -->
+                    <div class="flex-grow max-w-xs mx-auto bg-zinc-950 border border-zinc-800 rounded-xl px-3 py-1 text-[11px] font-mono text-zinc-400 flex items-center justify-center gap-1.5 truncate">
+                        <i data-lucide="lock" class="w-3 h-3 text-emerald-400 flex-shrink-0"></i>
+                        <span class="truncate">{{ url('/@' . $profile->clean_handle . '/cv') }}</span>
                     </div>
 
-                    <!-- Summary Preview -->
-                    @if($profile->cv_summary || $profile->bio)
-                        <div class="text-[11px] text-zinc-300 leading-relaxed bg-white/5 p-3 rounded-xl border border-white/5">
-                            <span class="text-[10px] font-mono font-bold uppercase text-sky-400 block mb-1">Ringkasan:</span>
-                            <p class="line-clamp-3">{{ $profile->cv_summary ?: $profile->bio }}</p>
-                        </div>
-                    @endif
-
-                    <!-- Experiences Preview -->
-                    <div class="space-y-2">
-                        <div class="flex items-center justify-between text-[11px] font-mono font-bold text-zinc-400">
-                            <span>PENGALAMAN KERJA ({{ count($profile->cv_experiences ?? []) }})</span>
-                        </div>
-
-                        <div class="space-y-2">
-                            @forelse(array_slice($profile->cv_experiences ?? [], 0, 3) as $exp)
-                                <div class="p-2.5 rounded-xl bg-zinc-900 border border-zinc-800 text-xs space-y-1">
-                                    <div class="flex items-center justify-between gap-1">
-                                        <strong class="text-white truncate">{{ $exp['role'] ?? 'Role' }}</strong>
-                                        <span class="text-[10px] font-mono px-1.5 py-0.2 rounded bg-sky-500/10 text-sky-300 border border-sky-500/20 whitespace-nowrap">
-                                            {{ $exp['period'] ?? '' }}
-                                        </span>
-                                    </div>
-                                    <p class="text-[11px] text-zinc-400 truncate">{{ $exp['company'] ?? 'Perusahaan' }}</p>
-                                </div>
-                            @empty
-                                <p class="text-[11px] text-zinc-500 italic">Belum ada pengalaman terdaftar.</p>
-                            @endforelse
-                        </div>
-                    </div>
-
-                    <!-- Skills Badges Preview -->
-                    @if(!empty($profile->cv_skills))
-                        <div class="space-y-1.5">
-                            <span class="text-[10px] font-mono font-bold uppercase text-zinc-400 block">KEAHLIAN UTAMA:</span>
-                            <div class="flex flex-wrap gap-1">
-                                @php
-                                    $allSkills = [];
-                                    foreach ($profile->cv_skills as $c => $sList) {
-                                        $allSkills = array_merge($allSkills, (array)$sList);
-                                    }
-                                    $previewSkills = array_slice($allSkills, 0, 6);
-                                @endphp
-                                @foreach($previewSkills as $sk)
-                                    <span class="text-[10px] px-2 py-0.5 rounded-md bg-white/5 text-zinc-300 border border-white/10 font-mono">
-                                        {{ $sk }}
-                                    </span>
-                                @endforeach
-                                @if(count($allSkills) > 6)
-                                    <span class="text-[10px] px-1.5 py-0.5 text-zinc-500 font-mono">+{{ count($allSkills) - 6 }} lainnya</span>
-                                @endif
-                            </div>
-                        </div>
-                    @endif
-
-                    <!-- Educations Preview -->
-                    @if(!empty($profile->cv_educations))
-                        <div class="space-y-1.5 pt-1">
-                            <span class="text-[10px] font-mono font-bold uppercase text-zinc-400 block">PENDIDIKAN:</span>
-                            @foreach(array_slice($profile->cv_educations, 0, 2) as $edu)
-                                <div class="text-[11px] p-2 rounded-lg bg-zinc-900/60 border border-zinc-800 text-zinc-300">
-                                    <span class="font-bold text-white">{{ $edu['degree'] ?? '' }}</span>
-                                    <span class="text-zinc-400">&bull; {{ $edu['school'] ?? '' }} ({{ $edu['period'] ?? '' }})</span>
-                                </div>
-                            @endforeach
-                        </div>
-                    @endif
-
-                </div>
-
-                <!-- Footer Quick Links -->
-                <div class="pt-2 flex items-center gap-2">
                     <a href="{{ route('public.cv', $profile->clean_handle) }}" 
                        target="_blank" 
-                       class="flex-1 py-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-white text-xs font-bold transition-all border border-zinc-700 flex items-center justify-center gap-1.5 shadow-sm">
+                       class="text-zinc-400 hover:text-white p-1 rounded-lg hover:bg-zinc-800 transition-colors flex-shrink-0"
+                       title="Buka Halaman CV di Tab Baru">
                         <i data-lucide="external-link" class="w-3.5 h-3.5 text-sky-400"></i>
-                        <span>Buka Halaman Lengkap</span>
+                    </a>
+                </div>
+
+                <!-- Status & Fast Actions Bar -->
+                <div class="px-4 py-2.5 bg-zinc-900/60 border-b border-zinc-800 flex items-center justify-between gap-2">
+                    <div class="flex items-center gap-2">
+                        <div class="w-2 h-2 rounded-full {{ $profile->enable_cv ? 'bg-emerald-400 animate-pulse' : 'bg-zinc-600' }}"></div>
+                        <span class="text-xs font-bold text-white">Hasil Pratinjau CV</span>
+                        <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded {{ $profile->enable_cv ? 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/30' : 'bg-zinc-800 text-zinc-500' }}">
+                            {{ $profile->enable_cv ? 'PUBLIK' : 'NONAKTIF' }}
+                        </span>
+                    </div>
+
+                    <form action="{{ route('admin.cv.toggle') }}" method="POST">
+                        @csrf
+                        <button type="submit" 
+                                class="text-[11px] font-bold px-2.5 py-1 rounded-lg border transition-colors {{ $profile->enable_cv ? 'bg-red-500/10 text-red-300 border-red-500/20 hover:bg-red-500/20' : 'bg-emerald-500/15 text-emerald-300 border-emerald-500/30 hover:bg-emerald-500/25' }}"
+                                title="Klik untuk langsung ubah status aktif/nonaktif">
+                            {{ $profile->enable_cv ? 'Klik Nonaktifkan' : 'Klik Aktifkan' }}
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Scrollable Authentic CV Document Viewport (Serupa dengan /@handle/cv) -->
+                <div class="p-3 sm:p-4 bg-[#0b0f17] max-h-[calc(100vh-230px)] overflow-y-auto space-y-4">
+                    <x-cv-sheet 
+                        :profile="$profile" 
+                        :experiences="$experiences" 
+                        :educations="$educations" 
+                        :skills="$skills" 
+                        :socialLinks="$profile->activeSocialLinks" 
+                    />
+                </div>
+
+                <!-- Footer Quick Link -->
+                <div class="p-3 bg-zinc-900/90 border-t border-zinc-800 flex items-center justify-between gap-2">
+                    <span class="text-[11px] text-zinc-400">Pratinjau identik dengan halaman publik</span>
+                    <a href="{{ route('public.cv', $profile->clean_handle) }}" 
+                       target="_blank" 
+                       class="px-3 py-1.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-white text-xs font-bold transition-all border border-zinc-700 flex items-center gap-1.5 shadow-sm">
+                        <i data-lucide="external-link" class="w-3.5 h-3.5 text-sky-400"></i>
+                        <span>Buka Lembar Penuh</span>
                     </a>
                 </div>
 
