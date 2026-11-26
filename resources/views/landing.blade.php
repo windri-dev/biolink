@@ -409,22 +409,22 @@
                 <!-- Mascot Figurine Floating Button Preview with Interactive Chat Drawer -->
                 <div class="mt-4 space-y-2">
                     <div onclick="toggleHeroMockupChat()" class="p-3 rounded-2xl bg-zinc-950/80 border border-sky-400/30 flex items-center justify-between shadow-lg cursor-pointer hover:border-sky-400/60 transition-all">
-                        <div class="flex items-center gap-2.5">
-                            <div class="relative">
-                                <div class="w-9 h-9 rounded-full p-0.5 bg-gradient-to-tr from-sky-400 via-indigo-500 to-pink-500 overflow-hidden">
-                                    <img src="https://api.dicebear.com/7.x/bottts-neutral/svg?seed=AuraBot&backgroundColor=0284c7" alt="Aura Figurine" class="w-full h-full object-cover rounded-full">
+                            <div class="flex items-center gap-2.5 min-w-0 flex-grow">
+                                <div class="relative flex-shrink-0">
+                                    <div class="w-9 h-9 rounded-full p-0.5 bg-gradient-to-tr from-sky-400 via-indigo-500 to-pink-500 overflow-hidden">
+                                        <img src="https://api.dicebear.com/7.x/bottts-neutral/svg?seed=AuraBot&backgroundColor=0284c7" alt="Aura Figurine" class="w-full h-full object-cover rounded-full">
+                                    </div>
+                                    <span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-400 rounded-full border border-zinc-950 animate-pulse"></span>
                                 </div>
-                                <span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-400 rounded-full border border-zinc-950 animate-pulse"></span>
+                                <div class="min-w-0 flex-grow">
+                                    <span class="text-[11px] font-bold text-white flex items-center gap-1">
+                                        <span>Tanya Aura</span>
+                                        <span class="text-[8px] font-mono px-1 py-0.2 bg-sky-500/20 text-sky-300 rounded font-bold">AI</span>
+                                    </span>
+                                    <p class="text-[10px] text-zinc-400 truncate max-w-[170px] sm:max-w-xs">"Halo! Saya siap memandu tentang proyek Windri."</p>
+                                </div>
                             </div>
-                            <div>
-                                <span class="text-[11px] font-bold text-white flex items-center gap-1">
-                                    Tanya Aura
-                                    <span class="text-[8px] font-mono px-1 py-0.2 bg-sky-500/20 text-sky-300 rounded">AI</span>
-                                </span>
-                                <p class="text-[10px] text-zinc-400">"Halo! Saya siap memandu tentang proyek Windri."</p>
-                            </div>
-                        </div>
-                        <span id="heroChatToggleText" class="text-[10px] text-sky-400 font-semibold">Coba &rarr;</span>
+                            <span id="heroChatToggleText" class="text-[10px] text-sky-400 font-semibold flex-shrink-0 whitespace-nowrap">Coba &rarr;</span>
                     </div>
 
                     <!-- Interactive Simulated Chat Dialog inside Mockup -->
@@ -451,7 +451,7 @@
 
 
         <!-- SECTION B: FITUR UTAMA (FEATURE GRID) -->
-        <section id="fitur" class="py-24 px-6 sm:px-12 border-t border-zinc-800/80 max-w-7xl mx-auto w-full">
+        <section id="fitur" class="py-14 sm:py-24 px-4 sm:px-12 border-t border-zinc-800/80 max-w-7xl mx-auto w-full">
             <div class="text-center mb-16 space-y-3">
                 <span class="text-xs font-mono uppercase tracking-wider text-sky-400 font-bold block">FITUR LENGKAP & MANDIRI</span>
                 <h2 class="text-3xl sm:text-5xl font-black text-white tracking-tight">Semua Fitur Premium, Tanpa Biaya Berlangganan</h2>
@@ -568,7 +568,7 @@
 
 
         <!-- SECTION C: AI ASSISTANT CONCIERGE HIGHLIGHT -->
-        <section id="ai-concierge" class="py-24 px-6 sm:px-12 border-t border-zinc-800/80 bg-gradient-to-b from-zinc-950 via-zinc-900/40 to-zinc-950">
+        <section id="ai-concierge" class="py-14 sm:py-24 px-4 sm:px-12 border-t border-zinc-800/80 bg-gradient-to-b from-zinc-950 via-zinc-900/40 to-zinc-950">
             <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-12">
                 
                 <!-- Left Details -->
@@ -671,8 +671,8 @@
         </section>
 
 
-        <!-- SECTION D: PRESET TEMA (THEMES SHOWCASE) -->
-        <section id="tema" class="py-24 px-6 sm:px-12 border-t border-zinc-800/80 max-w-7xl mx-auto w-full">
+        <!-- SECTION D: PRESET TEMA (THEMES GALLERY) -->
+        <section id="tema" class="py-14 sm:py-24 px-4 sm:px-12 border-t border-zinc-800/80 max-w-7xl mx-auto w-full">
             <div class="text-center mb-16 space-y-3">
                 <span class="text-xs font-mono uppercase tracking-wider text-purple-400 font-bold block">PRESET TEMA SIAP PAKAI</span>
                 <h2 class="text-3xl sm:text-5xl font-black text-white tracking-tight">Pilih Gaya yang Sesuai dengan Persona Anda</h2>
@@ -780,14 +780,48 @@
 
 
         <!-- SECTION E: KEUNGGULAN / COMPARISON -->
-        <section id="keunggulan" class="py-24 px-6 sm:px-12 border-t border-zinc-800/80 max-w-6xl mx-auto w-full">
-            <div class="text-center mb-16 space-y-3">
+        <section id="keunggulan" class="py-14 sm:py-24 px-4 sm:px-12 border-t border-zinc-800/80 max-w-6xl mx-auto w-full">
+            <div class="text-center mb-10 sm:mb-16 space-y-3">
                 <span class="text-xs font-mono uppercase tracking-wider text-emerald-400 font-bold block">PERBANDINGAN</span>
-                <h2 class="text-3xl sm:text-5xl font-black text-white tracking-tight">Mengapa Memilih BioLink?</h2>
+                <h2 class="text-2xl sm:text-5xl font-black text-white tracking-tight">Mengapa Memilih BioLink?</h2>
                 <p class="text-xs sm:text-sm text-zinc-400 max-w-xl mx-auto">Lihat bagaimana BioLink memberikan nilai jauh lebih tinggi dibandingkan platform konvensional.</p>
             </div>
 
-            <div class="overflow-x-auto rounded-3xl border border-zinc-800 bg-zinc-900/60 shadow-xl">
+            <!-- Mobile Card-Based Feature Comparison (Clean Stacked on Phones) -->
+            <div class="md:hidden space-y-3 text-xs">
+                @php
+                    $comparisons = [
+                        ['title' => 'Biaya & Langganan Bulanan', 'biolink' => '100% Gratis Tanpa Langganan', 'other' => '$5 – $24 per bulan'],
+                        ['title' => 'Asisten Obrolan AI (Concierge)', 'biolink' => 'Tersedia 24/7 (OpenAI, DeepSeek, Groq)', 'other' => 'Tidak ada (Hanya link statis)'],
+                        ['title' => 'Keamanan AI & Limit Anti-Spam IP', 'biolink' => 'Lengkap (Anti-Jailbreak, Rate Limit, Honeypot)', 'other' => 'Tidak ada proteksi'],
+                        ['title' => 'Kustomisasi Wallpaper & Figuran', 'biolink' => 'Bebas Upload File & Kostum Maskot', 'other' => 'Terkunci di tier Pro berbayar'],
+                        ['title' => 'Privasi Data & Analitik Real-Time', 'biolink' => 'Privasi Penuh, Bebas Iklan Pelacak', 'other' => 'Pelacak iklan pihak ke-3 aktif'],
+                        ['title' => 'Simpan Kontak vCard Native', 'biolink' => '1-Klik Download Kontak Ponsel (.vcf)', 'other' => 'Jarang tersedia'],
+                    ];
+                @endphp
+
+                @foreach($comparisons as $item)
+                    <div class="p-4 rounded-2xl bg-zinc-900/80 border border-zinc-800 space-y-2.5">
+                        <div class="font-bold text-white text-xs flex items-center justify-between">
+                            <span>{{ $item['title'] }}</span>
+                            <span class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-sky-500/20 text-sky-300 font-bold">KOMPARASI</span>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2 text-[11px]">
+                            <div class="p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/25 text-emerald-400 font-bold leading-snug">
+                                <span class="text-[9px] font-mono text-emerald-300/80 block uppercase tracking-wider mb-0.5">BioLink AI:</span>
+                                <span>&check; {{ $item['biolink'] }}</span>
+                            </div>
+                            <div class="p-2.5 rounded-xl bg-zinc-800/40 border border-zinc-800 text-zinc-400 leading-snug">
+                                <span class="text-[9px] font-mono text-zinc-500 block uppercase tracking-wider mb-0.5">Platform Lain:</span>
+                                <span>&cross; {{ $item['other'] }}</span>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+
+            <!-- Desktop 3-Column Table -->
+            <div class="hidden md:block overflow-x-auto rounded-3xl border border-zinc-800 bg-zinc-900/60 shadow-xl">
                 <table class="w-full text-left border-collapse text-xs">
                     <thead>
                         <tr class="border-b border-zinc-800 bg-zinc-900">
@@ -834,7 +868,7 @@
 
 
         <!-- SECTION: GOOGLE SEARCH & SEO READINESS -->
-        <section id="seo-google" class="py-24 px-6 sm:px-12 border-t border-zinc-800/80 max-w-6xl mx-auto w-full">
+        <section id="seo-google" class="py-14 sm:py-24 px-4 sm:px-12 border-t border-zinc-800/80 max-w-6xl mx-auto w-full">
             <div class="text-center mb-16 space-y-3">
                 <span class="text-xs font-mono uppercase tracking-wider text-sky-400 font-bold block">OPTIMASI MESIN PENCARI (SEO & GOOGLE INDEXING)</span>
                 <h2 class="text-3xl sm:text-5xl font-black text-white tracking-tight">Mudah Ditemukan saat Audiens Mencari Anda di Google</h2>
@@ -876,23 +910,23 @@
                             Hub profil resmi Windri. Temukan repositori GitHub windri-dev, live demo aplikasi SHOPPE, arsitektur server terdistribusi, dan kontak kolaborasi langsung via Telegram...
                         </p>
 
-                        <!-- Google Sitelinks Rich Snippets -->
-                        <div class="grid grid-cols-2 gap-2 pt-3 border-t border-zinc-700/60">
+                        <!-- Google Sitelinks Rich Snippets (Responsive Grid) -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-3 border-t border-zinc-700/60">
                             <div class="p-2.5 rounded-xl bg-zinc-800/40 hover:bg-zinc-800/80 transition-colors cursor-pointer">
-                                <span class="text-xs font-bold text-[#8ab4f8] block hover:underline">GitHub windri-dev</span>
-                                <span class="text-[11px] text-zinc-400">Jelajahi repositori open-source</span>
+                                <span class="text-xs font-bold text-[#8ab4f8] block hover:underline truncate">GitHub windri-dev</span>
+                                <span class="text-[11px] text-zinc-400 block truncate">Jelajahi repositori open-source</span>
                             </div>
                             <div class="p-2.5 rounded-xl bg-zinc-800/40 hover:bg-zinc-800/80 transition-colors cursor-pointer">
-                                <span class="text-xs font-bold text-[#8ab4f8] block hover:underline">SHOPPE E-Commerce</span>
-                                <span class="text-[11px] text-zinc-400">Staging demo butik modern</span>
+                                <span class="text-xs font-bold text-[#8ab4f8] block hover:underline truncate">SHOPPE E-Commerce</span>
+                                <span class="text-[11px] text-zinc-400 block truncate">Staging demo butik modern</span>
                             </div>
                             <div class="p-2.5 rounded-xl bg-zinc-800/40 hover:bg-zinc-800/80 transition-colors cursor-pointer">
-                                <span class="text-xs font-bold text-[#8ab4f8] block hover:underline">Kontak Telegram</span>
-                                <span class="text-[11px] text-zinc-400">Diskusi proyek & konsultasi</span>
+                                <span class="text-xs font-bold text-[#8ab4f8] block hover:underline truncate">Kontak Telegram</span>
+                                <span class="text-[11px] text-zinc-400 block truncate">Diskusi proyek & konsultasi</span>
                             </div>
                             <div class="p-2.5 rounded-xl bg-zinc-800/40 hover:bg-zinc-800/80 transition-colors cursor-pointer">
-                                <span class="text-xs font-bold text-[#8ab4f8] block hover:underline">Simpan Kontak vCard</span>
-                                <span class="text-[11px] text-zinc-400">Unduh nomor langsung ke ponsel</span>
+                                <span class="text-xs font-bold text-[#8ab4f8] block hover:underline truncate">Simpan Kontak vCard</span>
+                                <span class="text-[11px] text-zinc-400 block truncate">Unduh nomor langsung ke ponsel</span>
                             </div>
                         </div>
                     </div>
@@ -934,20 +968,20 @@
         </section>
 
 
-        <!-- SECTION F: PERTANYAAN UMUM (FAQ) -->
-        <section id="faq" class="py-24 px-6 sm:px-12 border-t border-zinc-800/80 max-w-4xl mx-auto w-full">
-            <div class="text-center mb-16 space-y-3">
+        <!-- SECTION F: PERTANYAAN UMUM (FAQ ACCORDION) -->
+        <section id="faq" class="py-14 sm:py-20 px-4 sm:px-12 border-t border-zinc-800/80 max-w-4xl mx-auto w-full">
+            <div class="text-center mb-10 sm:mb-16 space-y-3">
                 <span class="text-xs font-mono uppercase tracking-wider text-sky-400 font-bold block">FAQ</span>
-                <h2 class="text-3xl sm:text-5xl font-black text-white tracking-tight">Pertanyaan yang Sering Diajukan</h2>
+                <h2 class="text-2xl sm:text-5xl font-black text-white tracking-tight">Pertanyaan yang Sering Diajukan</h2>
                 <p class="text-xs sm:text-sm text-zinc-400">Punya pertanyaan seputar cara kerja platform BioLink? Temukan jawabannya di sini.</p>
             </div>
 
-            <div class="space-y-3.5 text-xs">
+            <div class="space-y-3 text-xs">
                 <!-- FAQ 1 -->
-                <div class="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-5 cursor-pointer hover:border-zinc-700 transition-colors" onclick="toggleFaq(this)">
-                    <div class="flex items-center justify-between">
-                        <h4 class="font-bold text-sm text-white">Apakah BioLink benar-benar gratis?</h4>
-                        <span class="faq-icon text-zinc-400 text-base font-bold">+</span>
+                <div class="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-4 sm:p-5 cursor-pointer hover:border-zinc-700 transition-colors" onclick="toggleFaq(this)">
+                    <div class="flex items-center justify-between gap-3">
+                        <h4 class="font-bold text-xs sm:text-sm text-white">Apakah BioLink benar-benar gratis?</h4>
+                        <span class="faq-icon text-zinc-400 text-base font-bold flex-shrink-0">+</span>
                     </div>
                     <p class="faq-answer mt-3 text-zinc-400 leading-relaxed hidden">
                         Ya! Anda dapat mendaftar, membuat halaman bio kustom, menambahkan tautan tak terbatas, mengatur tema, dan menggunakan seluruh fitur analitik tanpa biaya berlangganan.
@@ -955,10 +989,10 @@
                 </div>
 
                 <!-- FAQ 2 -->
-                <div class="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-5 cursor-pointer hover:border-zinc-700 transition-colors" onclick="toggleFaq(this)">
-                    <div class="flex items-center justify-between">
-                        <h4 class="font-bold text-sm text-white">Bagaimana cara kerja Asisten AI Concierge?</h4>
-                        <span class="faq-icon text-zinc-400 text-base font-bold">+</span>
+                <div class="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-4 sm:p-5 cursor-pointer hover:border-zinc-700 transition-colors" onclick="toggleFaq(this)">
+                    <div class="flex items-center justify-between gap-3">
+                        <h4 class="font-bold text-xs sm:text-sm text-white">Bagaimana cara kerja Asisten AI Concierge?</h4>
+                        <span class="faq-icon text-zinc-400 text-base font-bold flex-shrink-0">+</span>
                     </div>
                     <p class="faq-answer mt-3 text-zinc-400 leading-relaxed hidden">
                         Asisten AI bekerja berdasarkan data pengetahuan yang Anda isi di menu Studio Dasbor (seperti biodata, portofolio proyek, FAQ, dan cara kontak). Anda juga bisa menghubungkan API Key Anda sendiri (OpenAI, DeepSeek, Groq, atau Ollama) untuk respon yang sangat cerdas dan natural.
@@ -966,10 +1000,10 @@
                 </div>
 
                 <!-- FAQ 3 -->
-                <div class="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-5 cursor-pointer hover:border-zinc-700 transition-colors" onclick="toggleFaq(this)">
-                    <div class="flex items-center justify-between">
-                        <h4 class="font-bold text-sm text-white">Apakah API Key saya aman dari kebocoran atau spam?</h4>
-                        <span class="faq-icon text-zinc-400 text-base font-bold">+</span>
+                <div class="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-4 sm:p-5 cursor-pointer hover:border-zinc-700 transition-colors" onclick="toggleFaq(this)">
+                    <div class="flex items-center justify-between gap-3">
+                        <h4 class="font-bold text-xs sm:text-sm text-white">Apakah API Key saya aman dari kebocoran atau spam?</h4>
+                        <span class="faq-icon text-zinc-400 text-base font-bold flex-shrink-0">+</span>
                     </div>
                     <p class="faq-answer mt-3 text-zinc-400 leading-relaxed hidden">
                         Sangat aman. API Key Anda disimpan di database server dan tidak pernah dikirim ke browser pengunjung. Selain itu, terdapat AI Security Shield dengan batas rate limit per IP, auto-ban untuk pelaku spam, serta AI Firewall yang memblokir serangan prompt injection / jailbreak.
@@ -977,10 +1011,10 @@
                 </div>
 
                 <!-- FAQ 4 -->
-                <div class="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-5 cursor-pointer hover:border-zinc-700 transition-colors" onclick="toggleFaq(this)">
-                    <div class="flex items-center justify-between">
-                        <h4 class="font-bold text-sm text-white">Bisakah saya menggunakan wallpaper gambar kustom saya sendiri?</h4>
-                        <span class="faq-icon text-zinc-400 text-base font-bold">+</span>
+                <div class="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-4 sm:p-5 cursor-pointer hover:border-zinc-700 transition-colors" onclick="toggleFaq(this)">
+                    <div class="flex items-center justify-between gap-3">
+                        <h4 class="font-bold text-xs sm:text-sm text-white">Bisakah saya menggunakan wallpaper gambar kustom saya sendiri?</h4>
+                        <span class="faq-icon text-zinc-400 text-base font-bold flex-shrink-0">+</span>
                     </div>
                     <p class="faq-answer mt-3 text-zinc-400 leading-relaxed hidden">
                         Tentu saja! Di menu Tema, Anda bisa mengunggah file gambar wallpaper dari komputer/HP atau memasukkan link URL gambar. Anda juga dapat mengatur tingkat kegelapan lapisan (overlay dimmer) agar teks selalu kontras dan mudah dibaca.
@@ -991,27 +1025,27 @@
 
 
         <!-- SECTION G: FINAL CALL TO ACTION (CTA BANNER) -->
-        <section class="py-24 px-6 sm:px-12 bg-gradient-to-b from-zinc-900/40 via-zinc-950 to-zinc-950 border-t border-zinc-800/80 text-center relative overflow-hidden">
-            <div class="max-w-3xl mx-auto space-y-6 relative z-10">
-                <span class="w-12 h-12 rounded-2xl bg-sky-500/10 border border-sky-400/25 text-sky-400 flex items-center justify-center mx-auto mb-2 shadow-lg">
-                    <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+        <section class="py-14 sm:py-20 px-4 sm:px-12 bg-gradient-to-b from-zinc-900/40 via-zinc-950 to-zinc-950 border-t border-zinc-800/80 text-center relative overflow-hidden">
+            <div class="max-w-3xl mx-auto space-y-5 sm:space-y-6 relative z-10">
+                <span class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-sky-500/10 border border-sky-400/25 text-sky-400 flex items-center justify-center mx-auto mb-2 shadow-lg">
+                    <svg class="w-5 h-5 sm:w-6 sm:h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
                 </span>
                 
-                <h2 class="text-3xl sm:text-6xl font-black text-white tracking-tight leading-tight">
+                <h2 class="text-2xl sm:text-5xl font-black text-white tracking-tight leading-tight">
                     Siap Membawa Link-in-Bio Anda ke Tingkat Berikutnya?
                 </h2>
                 
-                <p class="text-xs sm:text-sm text-zinc-400 max-w-xl mx-auto leading-relaxed">
+                <p class="text-xs sm:text-sm text-zinc-400 max-w-xl mx-auto leading-relaxed px-2">
                     Klaim tautan profil eksklusif Anda sekarang. Buat kartu tautan elegan, pasang karakter AI favorit Anda, dan bagikan karya Anda kepada dunia.
                 </p>
 
-                <div class="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4">
-                    <a href="{{ route('register') }}" class="w-full sm:w-auto px-8 py-4 rounded-2xl bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-400 hover:to-indigo-500 text-white font-black text-sm transition-all shadow-2xl shadow-sky-500/30 inline-flex items-center justify-center gap-2">
+                <div class="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+                    <a href="{{ route('register') }}" class="btn-shimmer w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-400 hover:to-indigo-500 text-white font-black text-xs sm:text-sm transition-all shadow-xl shadow-sky-500/25 inline-flex items-center justify-center gap-2">
                         <span>Buat Halaman Bio Sekarang &bull; Gratis</span>
                         <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
                     </a>
                     
-                    <a href="{{ route('login') }}" class="w-full sm:w-auto px-6 py-4 rounded-2xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-zinc-300 hover:text-white font-bold text-sm transition-colors">
+                    <a href="{{ route('login') }}" class="w-full sm:w-auto px-6 py-3.5 sm:py-4 rounded-2xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-zinc-300 hover:text-white font-bold text-xs sm:text-sm transition-colors">
                         Masuk ke Studio
                     </a>
                 </div>
@@ -1024,11 +1058,11 @@
     <!-- ========================================================================= -->
     <!-- 3. FOOTER (SEMANTIC STRUCTURED FOOTER)                                    -->
     <!-- ========================================================================= -->
-    <footer class="border-t border-zinc-800/80 bg-zinc-950 px-6 sm:px-12 pt-16 pb-12 text-xs text-zinc-400">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-5 gap-10 pb-12 border-b border-zinc-850">
+    <footer class="border-t border-zinc-800/80 bg-zinc-950 px-4 sm:px-12 pt-12 sm:pt-16 pb-12 text-xs text-zinc-400">
+        <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-5 gap-8 sm:gap-10 pb-12 border-b border-zinc-850">
             
             <!-- Col 1: Brand & Mission -->
-            <div class="md:col-span-2 space-y-4 text-left">
+            <div class="col-span-2 md:col-span-2 space-y-3 sm:space-y-4 text-left">
                 <a href="/" class="flex items-center gap-2.5 font-black text-lg text-white">
                     <img src="{{ asset('Logo.png') }}" alt="Logo" class="h-8 w-auto object-contain">
                     <span>BioLink<span class="text-sky-400">.</span></span>
@@ -1049,25 +1083,25 @@
                     <li><a href="#fitur" class="hover:text-white transition-colors">Bento Card Links</a></li>
                     <li><a href="#ai-concierge" class="hover:text-white transition-colors">Smart AI Concierge</a></li>
                     <li><a href="#tema" class="hover:text-white transition-colors">Koleksi 6 Tema</a></li>
-                    <li><a href="#fitur" class="hover:text-white transition-colors">Simpan vCard Kontak</a></li>
-                    <li><a href="#fitur" class="hover:text-white transition-colors">Analitik Tanpa Iklan</a></li>
+                    <li><a href="#fitur" class="hover:text-white transition-colors">Simpan vCard</a></li>
+                    <li><a href="#fitur" class="hover:text-white transition-colors">Analitik Privasi</a></li>
                 </ul>
             </div>
 
             <!-- Col 3: Integrasi & AI -->
             <div class="space-y-3 text-left">
-                <h4 class="font-bold text-white uppercase tracking-wider text-[11px]">Integrasi AI & Engine</h4>
+                <h4 class="font-bold text-white uppercase tracking-wider text-[11px]">Integrasi AI</h4>
                 <ul class="space-y-2 text-zinc-400">
-                    <li><span class="text-zinc-500">OpenAI Resmi (GPT-4o)</span></li>
-                    <li><span class="text-zinc-500">DeepSeek Chat API</span></li>
-                    <li><span class="text-zinc-500">Groq High Speed LLM</span></li>
-                    <li><span class="text-zinc-500">Ollama Local Server</span></li>
-                    <li><span class="text-zinc-500">AI Firewall Anti-Jailbreak</span></li>
+                    <li><span class="text-zinc-400">OpenAI (GPT-4o)</span></li>
+                    <li><span class="text-zinc-400">DeepSeek Chat</span></li>
+                    <li><span class="text-zinc-400">Groq High Speed</span></li>
+                    <li><span class="text-zinc-400">Ollama Lokal</span></li>
+                    <li><span class="text-zinc-400">AI Firewall Shield</span></li>
                 </ul>
             </div>
 
             <!-- Col 4: Pengembang & Komunitas -->
-            <div class="space-y-3 text-left">
+            <div class="col-span-2 sm:col-span-1 space-y-3 text-left">
                 <h4 class="font-bold text-white uppercase tracking-wider text-[11px]">Pengembang</h4>
                 <ul class="space-y-2 text-zinc-400">
                     <li><a href="https://github.com/windri-dev/biolink" target="_blank" class="hover:text-white transition-colors flex items-center gap-1">GitHub @windri-dev</a></li>
@@ -1080,7 +1114,7 @@
         </div>
 
         <!-- Bottom Copyright Row -->
-        <div class="max-w-7xl mx-auto pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-zinc-500 text-[11px]">
+        <div class="max-w-7xl mx-auto pt-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-zinc-500 text-[11px] text-center sm:text-left">
             <p>&copy; {{ date('Y') }} BioLink Platform. Hak cipta dilindungi undang-undang.</p>
             <p class="flex items-center gap-1.5">
                 <span>Dibuat dengan</span>
