@@ -79,14 +79,14 @@
 
             <!-- Social / Professional Links -->
             @if(!empty($socialLinks) && count($socialLinks) > 0)
-                <div class="flex flex-wrap items-center justify-center md:justify-start gap-1.5 sm:gap-2 pt-2">
+                <div class="grid grid-cols-2 sm:flex sm:flex-wrap items-center justify-center md:justify-start gap-2 pt-2">
                     @foreach($socialLinks as $soc)
                         <a href="{{ $soc->url }}" 
                            target="_blank" 
                            rel="noopener noreferrer"
-                           class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] font-semibold text-zinc-400 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 transition-colors print-badge">
+                           class="inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-xl text-[11px] font-semibold text-zinc-300 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 transition-colors print-badge">
                             <i data-lucide="external-link" class="w-3 h-3 text-sky-400 flex-shrink-0"></i>
-                            <span>{{ $soc->label ?: ucfirst($soc->platform) }}</span>
+                            <span class="truncate">{{ $soc->label ?: ucfirst($soc->platform) }}</span>
                         </a>
                     @endforeach
                 </div>
