@@ -219,12 +219,12 @@
     <!-- ========================================================================= -->
     <!-- 1. HEADER & NAVBAR                                                        -->
     <!-- ========================================================================= -->
-    <header class="h-20 border-b border-zinc-800/80 bg-zinc-950/85 backdrop-blur-xl sticky top-0 z-50 px-6 sm:px-12 transition-all">
-        <nav class="max-w-7xl mx-auto h-full flex items-center justify-between">
+    <header class="h-16 sm:h-20 border-b border-zinc-800/80 bg-zinc-950/90 backdrop-blur-xl sticky top-0 z-50 px-4 sm:px-12 transition-all">
+        <nav class="max-w-7xl mx-auto h-full flex items-center justify-between gap-3">
             
             <!-- Brand Logo -->
-            <a href="/" class="flex items-center gap-3 font-black text-xl tracking-tight text-white group" aria-label="BioLink Homepage">
-                <img src="{{ asset('Logo.png') }}" alt="Logo" class="h-11 w-auto object-contain transition-transform group-hover:scale-105">
+            <a href="/" class="flex items-center gap-2.5 font-black text-lg sm:text-xl tracking-tight text-white group flex-shrink-0" aria-label="BioLink Homepage">
+                <img src="{{ asset('Logo.png') }}" alt="Logo" class="h-8 sm:h-11 w-auto object-contain transition-transform group-hover:scale-105">
                 <span class="flex items-center">
                     <span>BioLink</span>
                     <span class="text-sky-400">.</span>
@@ -244,26 +244,24 @@
             </div>
 
             <!-- Action CTA Buttons -->
-            <div class="flex items-center gap-3">
+            <div class="flex items-center gap-2 flex-shrink-0">
                 @auth
-                    <a href="{{ route('admin.dashboard') }}" class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-400 hover:to-indigo-500 text-white text-xs font-bold transition-all shadow-lg shadow-sky-500/25 flex items-center gap-1.5">
-                        <span>Studio Dasbor</span>
-                        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+                    <a href="{{ route('admin.dashboard') }}" class="px-3 sm:px-4 py-2 rounded-xl bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-400 hover:to-indigo-500 text-white text-xs font-bold transition-all shadow-lg shadow-sky-500/25 flex items-center gap-1.5">
+                        <span>Studio</span>
                     </a>
                 @else
-                    <a href="{{ route('login') }}" class="px-3.5 py-2 rounded-xl text-zinc-300 hover:text-white text-xs font-bold hover:bg-zinc-800/60 transition-colors">
+                    <a href="{{ route('login') }}" class="hidden sm:inline-block px-3 py-2 rounded-xl text-zinc-300 hover:text-white text-xs font-bold hover:bg-zinc-800/60 transition-colors">
                         Masuk
                     </a>
-                    <a href="{{ route('register') }}" class="px-4 py-2.5 rounded-xl bg-white text-zinc-950 hover:bg-zinc-200 text-xs font-black transition-all shadow-md shadow-white/10 flex items-center gap-1.5">
+                    <a href="{{ route('register') }}" class="px-3 sm:px-4 py-2 rounded-xl bg-white text-zinc-950 hover:bg-zinc-200 text-xs font-black transition-all shadow-md shadow-white/10 flex items-center gap-1.5 whitespace-nowrap">
                         <span>Daftar Gratis</span>
-                        <svg class="w-3.5 h-3.5 text-zinc-950" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
                     </a>
                 @endauth
 
                 <!-- Mobile Hamburger Button -->
                 <button type="button" 
                         onclick="toggleMobileMenu()" 
-                        class="p-2 rounded-xl text-zinc-400 hover:text-white hover:bg-zinc-800 md:hidden transition-colors" 
+                        class="p-2 rounded-xl text-zinc-300 hover:text-white hover:bg-zinc-800 md:hidden transition-colors border border-zinc-800/80" 
                         aria-label="Toggle Navigation Menu">
                     <svg id="hamburgerIcon" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
@@ -313,16 +311,16 @@
     <main class="flex-grow">
 
         <!-- SECTION A: HERO HEADER & CLAIM HANDLE -->
-        <section class="relative pt-16 sm:pt-24 pb-20 px-6 sm:px-12 glow-radial-top flex flex-col items-center text-center">
+        <section class="relative pt-10 sm:pt-24 pb-16 sm:pb-20 px-4 sm:px-12 glow-radial-top flex flex-col items-center text-center">
             
             <!-- Launch Pill Badge -->
-            <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-gradient-to-r from-sky-500/10 via-indigo-500/10 to-purple-500/10 border border-sky-400/30 text-sky-300 text-xs font-bold mb-8 shadow-sm">
-                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                <span>BioLink v2.0 Multi-User &bull; Ditenagai Universal AI Engine</span>
+            <div class="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 rounded-full bg-gradient-to-r from-sky-500/10 via-indigo-500/10 to-purple-500/10 border border-sky-400/30 text-sky-300 text-[11px] sm:text-xs font-bold mb-6 sm:mb-8 shadow-sm max-w-full">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse flex-shrink-0"></span>
+                <span class="truncate">BioLink v2.0 &bull; Ditenagai Universal AI Engine</span>
             </div>
 
             <!-- Big Impactful Headline -->
-            <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black text-white tracking-tight max-w-4xl leading-[1.12] mb-6">
+            <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight max-w-4xl leading-tight sm:leading-[1.15] mb-4 sm:mb-6 [text-wrap:balance]">
                 Satu tautan untuk semua karya Anda,<br>
                 <span class="bg-clip-text text-transparent bg-gradient-to-r from-sky-400 via-indigo-400 to-purple-400">
                     kini ditenagai asisten AI pintar.
@@ -330,22 +328,22 @@
             </h1>
 
             <!-- Subtitle -->
-            <p class="text-sm sm:text-base text-zinc-400 max-w-2xl leading-relaxed mb-10">
-                Kumpulkan seluruh tautan proyek, portofolio, dan media sosial Anda dalam satu halaman profil modern berkecepatan tinggi. Lengkap dengan <strong class="text-zinc-100 font-semibold">Asisten Obrolan AI</strong> yang menyapa dan menjawab pertanyaan audiens Anda secara otomatis 24/7.
+            <p class="text-xs sm:text-base text-zinc-300/90 max-w-2xl leading-relaxed mb-8 sm:mb-10 px-2">
+                Kumpulkan seluruh tautan proyek, portofolio, dan media sosial Anda dalam satu halaman profil modern berkecepatan tinggi. Lengkap dengan <strong class="text-white font-semibold">Asisten Obrolan AI</strong> yang menyapa dan menjawab pertanyaan audiens Anda secara otomatis 24/7.
             </p>
 
-            <!-- Interactive Handle Claim Box -->
-            <form action="{{ route('register') }}" method="GET" class="w-full max-w-lg bg-zinc-900/90 border border-zinc-700/80 rounded-2xl p-2 shadow-2xl flex items-center gap-2 mb-14 focus-within:border-sky-400 focus-within:ring-2 focus-within:ring-sky-500/20 transition-all">
-                <div class="flex items-center pl-3 text-zinc-500 text-xs font-mono select-none font-semibold">
-                    <span>biolink/@</span>
+            <!-- Interactive Handle Claim Box (Responsive Stack on Mobile) -->
+            <form action="{{ route('register') }}" method="GET" class="w-full max-w-lg bg-zinc-900/90 border border-zinc-700/80 rounded-2xl p-2 shadow-2xl flex flex-col sm:flex-row items-stretch sm:items-center gap-2 mb-10 sm:mb-14 focus-within:border-sky-400 focus-within:ring-2 focus-within:ring-sky-500/20 transition-all">
+                <div class="flex items-center flex-grow bg-zinc-950/60 sm:bg-transparent rounded-xl px-2 py-1 sm:p-0">
+                    <span class="pl-2 pr-1 text-zinc-500 text-xs font-mono select-none font-semibold">biolink/@</span>
+                    <input type="text" 
+                           name="handle" 
+                           placeholder="username-anda" 
+                           required
+                           autocomplete="off"
+                           class="bg-transparent flex-grow text-xs font-mono text-white placeholder-zinc-500 focus:outline-none py-2 px-1 min-w-0">
                 </div>
-                <input type="text" 
-                       name="handle" 
-                       placeholder="username-anda" 
-                       required
-                       autocomplete="off"
-                       class="bg-transparent flex-grow text-xs font-mono text-white placeholder-zinc-500 focus:outline-none py-2 px-1">
-                <button type="submit" class="px-5 py-3 rounded-xl bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-400 hover:to-indigo-500 text-white text-xs font-black transition-all shadow-lg shadow-sky-500/30 whitespace-nowrap flex items-center gap-1.5">
+                <button type="submit" class="btn-shimmer px-5 py-3 rounded-xl bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-400 hover:to-indigo-500 text-white text-xs font-black transition-all shadow-lg shadow-sky-500/30 whitespace-nowrap flex items-center justify-center gap-1.5 flex-shrink-0">
                     <span>Klaim Bio</span>
                     <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
                 </button>
