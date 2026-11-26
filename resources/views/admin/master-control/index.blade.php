@@ -26,7 +26,7 @@
 
     <!-- Global Platform Overview Metrics -->
     <div class="grid grid-cols-2 sm:grid-cols-5 gap-3.5">
-        <div class="p-4 rounded-2xl bg-zinc-900/80 border border-zinc-800">
+        <div class="spotlight-card p-4 rounded-2xl bg-zinc-900/80 border border-zinc-800">
             <span class="text-[11px] font-medium text-zinc-400 block mb-1">Total Pengguna</span>
             <div class="flex items-baseline gap-2">
                 <span class="text-xl font-black text-white">{{ number_format($totalUsers) }}</span>
@@ -34,7 +34,7 @@
             </div>
         </div>
 
-        <div class="p-4 rounded-2xl bg-zinc-900/80 border border-zinc-800">
+        <div class="spotlight-card p-4 rounded-2xl bg-zinc-900/80 border border-zinc-800">
             <span class="text-[11px] font-medium text-zinc-400 block mb-1">Total Tautan Dibuat</span>
             <div class="flex items-baseline gap-2">
                 <span class="text-xl font-black text-sky-400">{{ number_format($totalLinks) }}</span>
@@ -42,7 +42,7 @@
             </div>
         </div>
 
-        <div class="p-4 rounded-2xl bg-zinc-900/80 border border-zinc-800">
+        <div class="spotlight-card p-4 rounded-2xl bg-zinc-900/80 border border-zinc-800">
             <span class="text-[11px] font-medium text-zinc-400 block mb-1">Total Tayangan Profil</span>
             <div class="flex items-baseline gap-2">
                 <span class="text-xl font-black text-emerald-400">{{ number_format($totalViews) }}</span>
@@ -50,7 +50,7 @@
             </div>
         </div>
 
-        <div class="p-4 rounded-2xl bg-zinc-900/80 border border-zinc-800">
+        <div class="spotlight-card p-4 rounded-2xl bg-zinc-900/80 border border-zinc-800">
             <span class="text-[11px] font-medium text-zinc-400 block mb-1">Total Klik Tautan</span>
             <div class="flex items-baseline gap-2">
                 <span class="text-xl font-black text-indigo-400">{{ number_format($totalClicks) }}</span>
@@ -58,7 +58,7 @@
             </div>
         </div>
 
-        <div class="p-4 rounded-2xl bg-zinc-900/80 border border-zinc-800 col-span-2 sm:col-span-1">
+        <div class="spotlight-card p-4 rounded-2xl bg-zinc-900/80 border border-zinc-800 col-span-2 sm:col-span-1">
             <span class="text-[11px] font-medium text-zinc-400 block mb-1">Ditangguhkan / Suspend</span>
             <div class="flex items-baseline gap-2">
                 <span class="text-xl font-black {{ $suspendedUsersCount > 0 ? 'text-rose-400' : 'text-zinc-400' }}">{{ $suspendedUsersCount }}</span>

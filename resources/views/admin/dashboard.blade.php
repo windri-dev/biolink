@@ -137,7 +137,7 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
 
         <!-- Card 1: Total Views -->
-        <div class="bg-zinc-900/70 border border-zinc-800 hover:border-zinc-700/80 rounded-3xl p-5 relative overflow-hidden transition-all duration-300 shadow-xl group">
+        <div class="spotlight-card bg-zinc-900/70 border border-zinc-800 hover:border-zinc-700/80 rounded-3xl p-5 relative overflow-hidden transition-all duration-300 shadow-xl group">
             <div class="flex items-center justify-between text-zinc-400 text-xs mb-3">
                 <span class="font-semibold text-zinc-300">Total Kunjungan</span>
                 <div class="w-8 h-8 rounded-xl bg-sky-500/10 border border-sky-500/20 text-sky-400 flex items-center justify-center group-hover:scale-110 transition-transform">
@@ -169,7 +169,7 @@
         </div>
 
         <!-- Card 2: Total Clicks -->
-        <div class="bg-zinc-900/70 border border-zinc-800 hover:border-zinc-700/80 rounded-3xl p-5 relative overflow-hidden transition-all duration-300 shadow-xl group">
+        <div class="spotlight-card bg-zinc-900/70 border border-zinc-800 hover:border-zinc-700/80 rounded-3xl p-5 relative overflow-hidden transition-all duration-300 shadow-xl group">
             <div class="flex items-center justify-between text-zinc-400 text-xs mb-3">
                 <span class="font-semibold text-zinc-300">Total Klik Tautan</span>
                 <div class="w-8 h-8 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center group-hover:scale-110 transition-transform">
@@ -191,7 +191,7 @@
         </div>
 
         <!-- Card 3: Click-Through Rate (CTR) -->
-        <div class="bg-zinc-900/70 border border-zinc-800 hover:border-zinc-700/80 rounded-3xl p-5 relative overflow-hidden transition-all duration-300 shadow-xl group">
+        <div class="spotlight-card bg-zinc-900/70 border border-zinc-800 hover:border-zinc-700/80 rounded-3xl p-5 relative overflow-hidden transition-all duration-300 shadow-xl group">
             <div class="flex items-center justify-between text-zinc-400 text-xs mb-3">
                 <span class="font-semibold text-zinc-300">Rasio Interaksi (CTR)</span>
                 <div class="w-8 h-8 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400 flex items-center justify-center group-hover:scale-110 transition-transform">
@@ -223,7 +223,7 @@
         </div>
 
         <!-- Card 4: AI Concierge Assistant -->
-        <div class="bg-zinc-900/70 border border-zinc-800 hover:border-zinc-700/80 rounded-3xl p-5 relative overflow-hidden transition-all duration-300 shadow-xl group">
+        <div class="spotlight-card bg-zinc-900/70 border border-zinc-800 hover:border-zinc-700/80 rounded-3xl p-5 relative overflow-hidden transition-all duration-300 shadow-xl group">
             <div class="flex items-center justify-between text-zinc-400 text-xs mb-3">
                 <span class="font-semibold text-zinc-300">Asisten Pintar AI</span>
                 <div class="w-8 h-8 rounded-xl bg-purple-500/10 border border-purple-500/20 text-purple-400 flex items-center justify-center group-hover:scale-110 transition-transform">

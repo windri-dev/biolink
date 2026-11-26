@@ -27,6 +27,25 @@
             color: #38bdf8;
             border-left: 3px solid #38bdf8;
         }
+
+        /* 21st-inspired Spotlight Hover */
+        .spotlight-card {
+            position: relative;
+            overflow: hidden;
+        }
+        .spotlight-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: radial-gradient(350px circle at var(--mouse-x, -999px) var(--mouse-y, -999px), rgba(56, 189, 248, 0.12), transparent 45%);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .spotlight-card:hover::before {
+            opacity: 1;
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col bg-zinc-950 text-zinc-100 antialiased">
@@ -142,6 +161,18 @@
 
     <script>
         lucide.createIcons();
+
+        // 21st-inspired Spotlight Hover Tracker
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.spotlight-card');
+            cards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+                    card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+                });
+            });
+        });
     </script>
 </body>
 </html>

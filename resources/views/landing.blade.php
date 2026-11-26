@@ -154,6 +154,64 @@
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
         }
+
+        /* 21st-inspired Design Patterns: Animated Border Beam */
+        @property --angle {
+            syntax: "<angle>";
+            initial-value: 0deg;
+            inherits: false;
+        }
+        @keyframes border-beam-spin {
+            from { --angle: 0deg; }
+            to { --angle: 360deg; }
+        }
+        .border-beam-card {
+            position: relative;
+            overflow: hidden;
+        }
+        .border-beam-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 1.5px;
+            background: linear-gradient(var(--angle, 0deg), transparent 0%, transparent 30%, #38bdf8 50%, #818cf8 70%, transparent 85%, transparent 100%);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            animation: border-beam-spin 8s linear infinite;
+            pointer-events: none;
+        }
+
+        /* 21st-inspired Design Patterns: Cursor Spotlight Halo */
+        .spotlight-card {
+            position: relative;
+            overflow: hidden;
+        }
+        .spotlight-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: radial-gradient(350px circle at var(--mouse-x, -999px) var(--mouse-y, -999px), rgba(56, 189, 248, 0.12), transparent 45%);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .spotlight-card:hover::before {
+            opacity: 1;
+        }
+
+        /* 21st-inspired Design Patterns: Shimmer Button */
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        .btn-shimmer {
+            background-size: 200% auto;
+            animation: shimmer 4s linear infinite;
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col bg-zinc-950 text-zinc-100 antialiased selection:bg-sky-500 selection:text-white">
@@ -304,7 +362,7 @@
             </div>
 
             <!-- Live Mockup Visual Showcase -->
-            <div id="heroMockupCard" class="w-full max-w-md bg-zinc-900/90 border border-zinc-800 rounded-3xl p-6 sm:p-7 shadow-2xl backdrop-blur-xl relative group text-left mx-auto transition-all duration-500">
+            <div id="heroMockupCard" class="border-beam-card w-full max-w-md bg-zinc-900/90 border border-zinc-800 rounded-3xl p-6 sm:p-7 shadow-2xl backdrop-blur-xl relative group text-left mx-auto transition-all duration-500">
                 
                 <!-- Avatar & Verified Badge -->
                 <div class="flex flex-col items-center text-center mb-5">
@@ -406,7 +464,7 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 
                 <!-- Feature 1: AI Assistant & Security Shield -->
-                <div class="p-7 rounded-3xl bg-zinc-900/60 border border-zinc-800 hover:border-sky-500/40 transition-all space-y-4 group">
+                <div class="spotlight-card p-7 rounded-3xl bg-zinc-900/60 border border-zinc-800 hover:border-sky-500/40 transition-all space-y-4 group">
                     <div class="w-12 h-12 rounded-2xl bg-sky-500/10 border border-sky-500/20 text-sky-400 flex items-center justify-center group-hover:scale-105 transition-transform">
                         <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <rect x="3" y="11" width="18" height="10" rx="2"></rect>
@@ -424,7 +482,7 @@
                 </div>
 
                 <!-- Feature 2: 6 Preset Themes & Custom Editor -->
-                <div class="p-7 rounded-3xl bg-zinc-900/60 border border-zinc-800 hover:border-purple-500/40 transition-all space-y-4 group">
+                <div class="spotlight-card p-7 rounded-3xl bg-zinc-900/60 border border-zinc-800 hover:border-purple-500/40 transition-all space-y-4 group">
                     <div class="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/20 text-purple-400 flex items-center justify-center group-hover:scale-105 transition-transform">
                         <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <circle cx="13.5" cy="6.5" r=".5" fill="currentColor"></circle>
@@ -442,7 +500,7 @@
                 </div>
 
                 <!-- Feature 3: Anti-Spam Rate Limiter per IP -->
-                <div class="p-7 rounded-3xl bg-zinc-900/60 border border-zinc-800 hover:border-emerald-500/40 transition-all space-y-4 group">
+                <div class="spotlight-card p-7 rounded-3xl bg-zinc-900/60 border border-zinc-800 hover:border-emerald-500/40 transition-all space-y-4 group">
                     <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center group-hover:scale-105 transition-transform">
                         <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
@@ -457,7 +515,7 @@
                 </div>
 
                 <!-- Feature 4: Privacy Analytics -->
-                <div class="p-7 rounded-3xl bg-zinc-900/60 border border-zinc-800 hover:border-amber-500/40 transition-all space-y-4 group">
+                <div class="spotlight-card p-7 rounded-3xl bg-zinc-900/60 border border-zinc-800 hover:border-amber-500/40 transition-all space-y-4 group">
                     <div class="w-12 h-12 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-amber-400 flex items-center justify-center group-hover:scale-105 transition-transform">
                         <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <line x1="12" y1="20" x2="12" y2="10"></line>
@@ -1134,6 +1192,18 @@
                 });
             }
         }
+
+        // 21st-inspired Cursor Spotlight Tracking
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.spotlight-card');
+            cards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+                    card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+                });
+            });
+        });
     </script>
 </body>
 </html>
