@@ -45,11 +45,11 @@
     <!-- Schema.org JSON-LD Structured Data for Google Search -->
     <script type="application/ld+json">
     {
-      "@context": "https://schema.org",
-      "@graph": [
+      "@@context": "https://schema.org",
+      "@@graph": [
         {
-          "@type": "Organization",
-          "@id": "{{ url('/') }}/#organization",
+          "@@type": "Organization",
+          "@@id": "{{ url('/') }}/#organization",
           "name": "BioLink",
           "url": "{{ url('/') }}",
           "logo": "{{ asset('Logo.png') }}",
@@ -57,16 +57,16 @@
           "areaServed": "ID"
         },
         {
-          "@type": "WebSite",
-          "@id": "{{ url('/') }}/#website",
+          "@@type": "WebSite",
+          "@@id": "{{ url('/') }}/#website",
           "url": "{{ url('/') }}",
           "name": "BioLink",
-          "publisher": { "@id": "{{ url('/') }}/#organization" },
+          "publisher": { "@@id": "{{ url('/') }}/#organization" },
           "description": "Platform Link in Bio Modern dengan Asisten AI untuk Kreator dan Developer",
           "potentialAction": {
-            "@type": "SearchAction",
+            "@@type": "SearchAction",
             "target": {
-              "@type": "EntryPoint",
+              "@@type": "EntryPoint",
               "urlTemplate": "{{ url('/') }}/@{search_term_string}"
             },
             "query-input": "required name=search_term_string"
@@ -74,12 +74,12 @@
           "inLanguage": "id-ID"
         },
         {
-          "@type": "SoftwareApplication",
+          "@@type": "SoftwareApplication",
           "name": "BioLink",
           "applicationCategory": "BusinessApplication",
           "operatingSystem": "All",
           "offers": {
-            "@type": "Offer",
+            "@@type": "Offer",
             "price": "0",
             "priceCurrency": "IDR"
           },
@@ -93,29 +93,29 @@
           ]
         },
         {
-          "@type": "FAQPage",
+          "@@type": "FAQPage",
           "mainEntity": [
             {
-              "@type": "Question",
+              "@@type": "Question",
               "name": "Apakah BioLink benar-benar gratis?",
               "acceptedAnswer": {
-                "@type": "Answer",
+                "@@type": "Answer",
                 "text": "Ya! Anda dapat mendaftar, membuat halaman bio kustom, menambahkan tautan tak terbatas, mengatur tema, dan menggunakan seluruh fitur analitik tanpa biaya berlangganan."
               }
             },
             {
-              "@type": "Question",
+              "@@type": "Question",
               "name": "Bagaimana cara kerja Asisten AI Concierge?",
               "acceptedAnswer": {
-                "@type": "Answer",
+                "@@type": "Answer",
                 "text": "Asisten AI bekerja berdasarkan data pengetahuan yang Anda isi di menu Studio Dasbor. Anda juga bisa menghubungkan API Key Anda sendiri (OpenAI, DeepSeek, Groq, atau Ollama) untuk respon natural."
               }
             },
             {
-              "@type": "Question",
+              "@@type": "Question",
               "name": "Apakah tautan profil ramah SEO di Google?",
               "acceptedAnswer": {
-                "@type": "Answer",
+                "@@type": "Answer",
                 "text": "Sangat ramah SEO. Setiap profil otomatis dilengkapi Schema.org JSON-LD, XML Sitemap, dan meta tag indeksasi agar cepat terdeteksi dan terindeks di mesin pencari Google."
               }
             }
