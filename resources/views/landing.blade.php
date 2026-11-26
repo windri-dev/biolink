@@ -1187,14 +1187,8 @@
         </div>
 
         <!-- Bottom Copyright Row -->
-        <div class="max-w-7xl mx-auto pt-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-zinc-500 text-[11px] text-center sm:text-left">
+        <div class="max-w-7xl mx-auto pt-8 flex items-center justify-center sm:justify-between text-zinc-500 text-[11px] text-center sm:text-left">
             <p>&copy; {{ date('Y') }} BioLink Platform. Hak cipta dilindungi undang-undang.</p>
-            <p class="flex items-center gap-1.5">
-                <span>Dibuat dengan</span>
-                <span class="text-rose-500">&hearts;</span>
-                <span>untuk</span>
-                <span class="text-zinc-300 font-semibold">Komunitas Kreator & Developer</span>
-            </p>
         </div>
     </footer>
 
