@@ -143,21 +143,72 @@
                     </div>
                 </div>
 
-                <!-- Card 2: Headline & Ringkasan Profesional -->
+                <!-- Card 2: Identitas, Kontak & Ringkasan CV -->
                 <div class="bg-zinc-900/60 border border-zinc-800 rounded-3xl p-6 space-y-4">
-                    <h2 class="text-sm font-bold text-white flex items-center gap-2">
-                        <i data-lucide="user-check" class="w-4 h-4 text-sky-400"></i>
-                        <span>Headline & Ringkasan Profesional</span>
-                    </h2>
-
-                    <div>
-                        <label for="cv_headline" class="block text-xs font-bold text-zinc-300 mb-1">Judul Posisi / Profesional Headline</label>
-                        <input type="text" name="cv_headline" id="cv_headline" 
-                               value="{{ old('cv_headline', $profile->cv_headline ?: $profile->tagline) }}" 
-                               placeholder="Contoh: Senior Full-Stack Software Engineer & System Architect"
-                               class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-sky-500">
+                    <div class="flex items-center justify-between">
+                        <h2 class="text-sm font-bold text-white flex items-center gap-2">
+                            <i data-lucide="user-check" class="w-4 h-4 text-sky-400"></i>
+                            <span>Identitas & Informasi Kontak Utama CV</span>
+                        </h2>
+                        <span class="text-[11px] font-mono text-zinc-400">Tampil di Header Lembar CV</span>
                     </div>
 
+                    <!-- Row 1: Nama Lengkap & Headline Posisi -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label for="display_name" class="block text-xs font-bold text-zinc-300 mb-1">Nama Lengkap di CV</label>
+                            <input type="text" name="display_name" id="display_name" 
+                                   value="{{ old('display_name', $profile->display_name) }}" 
+                                   placeholder="Contoh: Windri"
+                                   class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-sky-500">
+                        </div>
+
+                        <div>
+                            <label for="cv_headline" class="block text-xs font-bold text-zinc-300 mb-1">Judul Posisi / Profesional Headline</label>
+                            <input type="text" name="cv_headline" id="cv_headline" 
+                                   value="{{ old('cv_headline', $profile->cv_headline ?: $profile->tagline) }}" 
+                                   placeholder="Contoh: Full-Stack Software Engineer & System Architect"
+                                   class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-sky-500">
+                        </div>
+                    </div>
+
+                    <!-- Row 2: Lokasi Domisili, Nomor Telepon/WhatsApp, dan Email Kontak -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div>
+                            <label for="location" class="block text-xs font-bold text-zinc-300 mb-1 flex items-center gap-1.5">
+                                <i data-lucide="map-pin" class="w-3.5 h-3.5 text-rose-400"></i>
+                                <span>Lokasi Domisili</span>
+                            </label>
+                            <input type="text" name="location" id="location" 
+                                   value="{{ old('location', $profile->location) }}" 
+                                   placeholder="Contoh: Batam, Indonesia"
+                                   class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-sky-500">
+                        </div>
+
+                        <div>
+                            <label for="phone" class="block text-xs font-bold text-zinc-300 mb-1 flex items-center gap-1.5">
+                                <i data-lucide="phone" class="w-3.5 h-3.5 text-emerald-400"></i>
+                                <span>Nomor Telepon / WhatsApp</span>
+                            </label>
+                            <input type="text" name="phone" id="phone" 
+                                   value="{{ old('phone', $profile->phone) }}" 
+                                   placeholder="Contoh: +628123456789"
+                                   class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-sky-500 font-mono">
+                        </div>
+
+                        <div>
+                            <label for="email" class="block text-xs font-bold text-zinc-300 mb-1 flex items-center gap-1.5">
+                                <i data-lucide="mail" class="w-3.5 h-3.5 text-amber-400"></i>
+                                <span>Email Kontak CV</span>
+                            </label>
+                            <input type="email" name="email" id="email" 
+                                   value="{{ old('email', $profile->user?->email) }}" 
+                                   placeholder="Contoh: Rudalpolo@gmail.com"
+                                   class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-sky-500 font-mono">
+                        </div>
+                    </div>
+
+                    <!-- Row 3: Ringkasan Karir -->
                     <div>
                         <label for="cv_summary" class="block text-xs font-bold text-zinc-300 mb-1">Ringkasan Karir / Career Summary</label>
                         <textarea name="cv_summary" id="cv_summary" rows="4" 

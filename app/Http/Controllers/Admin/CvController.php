@@ -48,6 +48,10 @@ class CvController
         $profile = $this->getProfile();
 
         $validated = $request->validate([
+            'display_name' => 'nullable|string|max:100',
+            'location' => 'nullable|string|max:255',
+            'phone' => 'nullable|string|max:50',
+            'email' => 'nullable|email|max:255',
             'cv_headline' => 'nullable|string|max:255',
             'cv_summary' => 'nullable|string|max:3000',
             'cv_template' => 'nullable|string|in:modern,minimal,executive',
@@ -73,7 +77,17 @@ class CvController
             'cv_headline' => $validated['cv_headline'] ?? $profile->tagline,
             'cv_summary' => $validated['cv_summary'] ?? null,
             'cv_template' => $validated['cv_template'] ?? 'modern',
+            'location' => $validated['location'] ?? $profile->location,
+            'phone' => $validated['phone'] ?? $profile->phone,
         ];
+
+        if (!empty($validated['display_name'])) {
+            $data['display_name'] = trim((string)$validated['display_name']);
+        }
+
+        if (!empty($validated['email']) && $profile->user) {
+            $profile->user->update(['email' => trim((string)$validated['email'])]);
+        }
 
         // Process experiences
         if (isset($validated['experiences']) && is_array($validated['experiences'])) {
