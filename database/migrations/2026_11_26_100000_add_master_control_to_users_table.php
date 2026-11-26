@@ -11,13 +11,21 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->boolean('is_super_admin')->default(false)->after('password');
-            $table->string('status')->default('active')->index()->after('is_super_admin');
+            if (!Schema::hasColumn('users', 'is_super_admin')) {
+                $table->boolean('is_super_admin')->default(false)->after('password');
+            }
+            if (!Schema::hasColumn('users', 'status')) {
+                $table->string('status')->default('active')->index()->after('is_super_admin');
+            }
         });
 
         Schema::table('profiles', function (Blueprint $table) {
-            $table->boolean('is_flagged')->default(false)->after('is_active');
-            $table->text('admin_notes')->nullable()->after('is_flagged');
+            if (!Schema::hasColumn('profiles', 'is_flagged')) {
+                $table->boolean('is_flagged')->default(false);
+            }
+            if (!Schema::hasColumn('profiles', 'admin_notes')) {
+                $table->text('admin_notes')->nullable();
+            }
         });
     }
 

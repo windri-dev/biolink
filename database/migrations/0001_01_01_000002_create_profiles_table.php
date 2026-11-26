@@ -33,6 +33,7 @@ return new class extends Migration {
             // AI Assistant Core & API Settings
             $table->boolean('ai_assistant_enabled')->default(true);
             $table->string('ai_assistant_name')->default('Aura');
+            $table->string('ai_avatar_url', 1000)->nullable();
             $table->string('ai_greeting_message')->default('Halo, saya asisten AI. Ada yang bisa saya bantu terkait proyek, kolaborasi, atau kontak?');
             $table->string('ai_provider')->default('local'); // local, openai, custom
             $table->text('ai_api_key')->nullable();
@@ -40,12 +41,13 @@ return new class extends Migration {
             $table->string('ai_model')->default('gpt-4o-mini')->nullable();
             $table->text('ai_system_prompt')->nullable();
             $table->float('ai_temperature')->default(0.7);
-            $table->string('ai_avatar_url', 1000)->nullable()->after('ai_assistant_name');
-            $table->integer('ai_rate_limit_per_minute')->default(10)->after('ai_temperature');
-            $table->integer('ai_rate_limit_per_hour')->default(60)->after('ai_rate_limit_per_minute');
-            $table->boolean('ai_security_guard')->default(true)->after('ai_rate_limit_per_hour'); // Anti Prompt-Injection & Jailbreak
-            $table->boolean('ai_content_filter')->default(true)->after('ai_security_guard'); // Filter kata kasar & pelecehan
-            $table->integer('ai_block_duration_minutes')->default(15)->after('ai_content_filter'); // Durasi cooldown auto-ban IP
+
+            // AI Rate Limiting & Security Guardrails
+            $table->integer('ai_rate_limit_per_minute')->default(10);
+            $table->integer('ai_rate_limit_per_hour')->default(60);
+            $table->boolean('ai_security_guard')->default(true); // Anti Prompt-Injection & Jailbreak
+            $table->boolean('ai_content_filter')->default(true); // Filter kata kasar & pelecehan
+            $table->integer('ai_block_duration_minutes')->default(15); // Durasi cooldown auto-ban IP
             $table->string('meta_title')->nullable();
             $table->text('meta_description')->nullable();
             $table->text('custom_css')->nullable();
