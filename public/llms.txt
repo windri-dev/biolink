@@ -1,0 +1,19 @@
+# BioLink Platform
+
+> Platform Link-in-Bio Modern Gratis & Asisten AI Pintar di Indonesia.
+
+## Overview
+BioLink adalah platform SaaS link-in-bio open-architecture yang memungkinkan para kreator, software engineer, agensi, dan profesional modern mengumpulkan seluruh portofolio, tautan proyek, profil media sosial, dan kontak resmi dalam satu halaman bento interaktif yang elegan. Dilengkapi dengan asisten percakapan AI 24/7 dan fitur download vCard smartphone native.
+
+## Core Features
+- Bento Grid Links: Tata letak kartu interaktif modern berkecepatan tinggi tanpa batasan jumlah tautan.
+- Smart AI Concierge: Asisten obrolan AI yang dilatih dari profil pengguna untuk menyapa dan memandu audiens otomatis 24/7 (kompatibel dengan OpenAI, DeepSeek, Groq, dan Ollama lokal).
+- vCard 1-Klik Native: Pengunjung dapat langsung mengunduh file `.vcf` untuk menyimpan kontak ke buku telepon smartphone.
+- 6 Preset Tema & Wallpaper Bebas: Desain kustom elegan (Dark Luxury, Midnight Indigo, Emerald Glass, Cyberpunk Neon, Sunset Amber, Minimalist Light) dengan pengaturan overlay dimmer kontras tinggi.
+- Analitik Privasi Real-Time: Pelacakan klik dan pengunjung tanpa pelacak pihak ketiga (Zero-Tracker, 100% GDPR compliant).
+- Full SEO & GEO Readiness: Dilengkapi metadata Schema.org JSON-LD otomatis, sitemap XML dinamis, dan tag canonical untuk mesin pencari Google.
+
+## Verification
+- Google Site Verification: GMlaNYsY0JoaH7udJaVoyV5cg3bF08Jb3Pcx0pdQd1U
+- Canonical Domain: https://bio.wn-cdn.net
+- Sitemap XML: https://bio.wn-cdn.net/sitemap.xml

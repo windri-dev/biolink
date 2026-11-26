@@ -42,7 +42,12 @@
         "description": "{{ $profile->bio }}",
         "image": "{{ $profile->avatar_url }}",
         "jobTitle": "{{ $profile->job_title ?: $profile->tagline ?: 'Software Engineer' }}",
-        "url": "{{ url('/@' . $profile->clean_handle) }}"
+        "url": "{{ url('/@' . $profile->clean_handle) }}"@if(!empty($profile->activeSocialLinks) && count($profile->activeSocialLinks) > 0),
+        "sameAs": [
+            @foreach($profile->activeSocialLinks as $soc)
+                "{{ $soc->url }}"{{ !$loop->last ? ',' : '' }}
+            @endforeach
+        ]@endif
       }
     }
     </script>
