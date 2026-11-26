@@ -51,6 +51,8 @@ return new class extends Migration {
             $table->string('meta_title')->nullable();
             $table->text('meta_description')->nullable();
             $table->text('custom_css')->nullable();
+            $table->boolean('is_flagged')->default(false);
+            $table->text('admin_notes')->nullable();
             $table->timestamps();
         });
     }
