@@ -1059,7 +1059,7 @@
     <!-- 3. FOOTER (SEMANTIC STRUCTURED FOOTER)                                    -->
     <!-- ========================================================================= -->
     <footer class="border-t border-zinc-800/80 bg-zinc-950 px-4 sm:px-12 pt-12 sm:pt-16 pb-12 text-xs text-zinc-400">
-        <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-5 gap-8 sm:gap-10 pb-12 border-b border-zinc-850">
+        <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-6 gap-8 sm:gap-10 pb-12 border-b border-zinc-850">
             
             <!-- Col 1: Brand & Mission -->
             <div class="col-span-2 md:col-span-2 space-y-3 sm:space-y-4 text-left">
@@ -1100,14 +1100,25 @@
                 </ul>
             </div>
 
-            <!-- Col 4: Pengembang & Komunitas -->
-            <div class="col-span-2 sm:col-span-1 space-y-3 text-left">
+            <!-- Col 4: Pengembang -->
+            <div class="space-y-3 text-left">
                 <h4 class="font-bold text-white uppercase tracking-wider text-[11px]">Pengembang</h4>
                 <ul class="space-y-2 text-zinc-400">
                     <li><a href="https://github.com/windri-dev/biolink" target="_blank" class="hover:text-white transition-colors flex items-center gap-1">GitHub @windri-dev</a></li>
                     <li><a href="/login" class="hover:text-white transition-colors">Masuk Studio</a></li>
                     <li><a href="/register" class="hover:text-white transition-colors">Klaim Handle</a></li>
                     <li><a href="/sitemap.xml" class="hover:text-white transition-colors">Sitemap XML</a></li>
+                </ul>
+            </div>
+
+            <!-- Col 5: Ekosistem & Node -->
+            <div class="space-y-3 text-left">
+                <h4 class="font-bold text-white uppercase tracking-wider text-[11px]">Ekosistem Node</h4>
+                <ul class="space-y-2 text-zinc-400">
+                    <li><a href="https://t.me/windri" target="_blank" class="hover:text-white transition-colors">Telegram Resmi</a></li>
+                    <li><a href="https://shoppe-staging.wn-cdn.net" target="_blank" class="hover:text-white transition-colors">SHOPPE Staging</a></li>
+                    <li><span class="text-zinc-500 font-mono text-[10px]">Cloudflare Edge</span></li>
+                    <li><span class="text-zinc-500 font-mono text-[10px]">Node v2.0-Prod</span></li>
                 </ul>
             </div>
 
