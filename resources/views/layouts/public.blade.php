@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="google-site-verification" content="GMlaNYsY0JoaH7udJaVoyV5cg3bF08Jb3Pcx0pdQd1U" />
     <title>{{ $profile->meta_title ?: $profile->display_name . ' (@' . $profile->clean_handle . ')' }}</title>
     
     <!-- Canonical & SEO Meta -->

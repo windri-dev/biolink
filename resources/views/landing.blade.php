@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="GMlaNYsY0JoaH7udJaVoyV5cg3bF08Jb3Pcx0pdQd1U" />
     <title>BioLink — Platform Link in Bio Gratis & Asisten AI Indonesia</title>
 
     <!-- Canonical URL -->
