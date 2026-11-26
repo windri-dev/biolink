@@ -20,7 +20,7 @@
     <meta name="revisit-after" content="2 days">
 
     <!-- Meta Description & High-Intent SEO Keywords -->
-    <meta name="description" content="Platform link in bio modern gratis dengan asisten AI pintar di Indonesia. Buat kartu tautan elegan, kumpulkan portofolio, media sosial, dan pandu pengunjung otomatis 24/7. Alternatif Linktree terbaik.">
+    <meta name="description" content="Platform link in bio modern gratis dengan asisten AI pintar di Indonesia. Buat kartu tautan bento elegan, kumpulkan portofolio, media sosial, dan pandu pengunjung otomatis 24/7. Alternatif Linktree terbaik.">
     <meta name="keywords" content="biolink, link in bio, bio link indonesia, link bio gratis, alternatif linktree indonesia, biolink indonesia, buat link bio, website bio link, kartu nama digital, vcard digital, ai assistant link, linktree clone, portfolio link creator">
     <meta name="author" content="BioLink">
 
@@ -45,7 +45,7 @@
     <!-- Schema.org JSON-LD Structured Data for Google Search -->
     <script type="application/ld+json">
     {
-      "@@context": "https://schema.org",
+      "@context": "https://schema.org",
       "@graph": [
         {
           "@type": "Organization",
@@ -84,7 +84,7 @@
             "priceCurrency": "IDR"
           },
           "featureList": [
-            "Link-in-bio builder",
+            "Bento Grid Link Builder",
             "Custom Themes and CSS",
             "Interactive AI Assistant",
             "vCard Contact Download",
@@ -125,7 +125,7 @@
     }
     </script>
 
-    <!-- Google Fonts -->
+    <!-- Google Fonts: Plus Jakarta Sans & DM Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=DM+Mono:wght@500;700&display=swap" rel="stylesheet">
@@ -144,7 +144,7 @@
             font-family: 'DM Mono', monospace;
         }
         .glow-radial-top {
-            background: radial-gradient(circle at 50% 0%, rgba(14, 165, 233, 0.18) 0%, rgba(99, 102, 241, 0.10) 35%, transparent 70%);
+            background: radial-gradient(circle at 50% 0%, rgba(14, 165, 233, 0.16) 0%, rgba(99, 102, 241, 0.08) 35%, transparent 70%);
         }
         .glow-radial-card {
             background: radial-gradient(circle at 50% 50%, rgba(56, 189, 248, 0.08) 0%, transparent 70%);
@@ -211,6 +211,18 @@
         .btn-shimmer {
             background-size: 200% auto;
             animation: shimmer 4s linear infinite;
+        }
+
+        /* Float Animation for Bento Chips */
+        @keyframes float-gentle {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-6px); }
+        }
+        .animate-float {
+            animation: float-gentle 4s ease-in-out infinite;
+        }
+        .animate-float-delayed {
+            animation: float-gentle 5s ease-in-out 2s infinite;
         }
     </style>
 </head>
@@ -310,139 +322,186 @@
     <!-- ========================================================================= -->
     <main class="flex-grow">
 
-        <!-- SECTION A: HERO HEADER & CLAIM HANDLE -->
-        <section class="relative pt-10 sm:pt-24 pb-16 sm:pb-20 px-4 sm:px-12 glow-radial-top flex flex-col items-center text-center">
-            
-            <!-- Launch Pill Badge -->
-            <div class="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 rounded-full bg-gradient-to-r from-sky-500/10 via-indigo-500/10 to-purple-500/10 border border-sky-400/30 text-sky-300 text-[11px] sm:text-xs font-bold mb-6 sm:mb-8 shadow-sm max-w-full">
-                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse flex-shrink-0"></span>
-                <span class="truncate">BioLink v2.0 &bull; Ditenagai Universal AI Engine</span>
-            </div>
-
-            <!-- Big Impactful Headline -->
-            <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight max-w-4xl leading-tight sm:leading-[1.15] mb-4 sm:mb-6 [text-wrap:balance]">
-                Satu tautan untuk semua karya Anda,<br>
-                <span class="bg-clip-text text-transparent bg-gradient-to-r from-sky-400 via-indigo-400 to-purple-400">
-                    kini ditenagai asisten AI pintar.
-                </span>
-            </h1>
-
-            <!-- Subtitle -->
-            <p class="text-xs sm:text-base text-zinc-300/90 max-w-2xl leading-relaxed mb-8 sm:mb-10 px-2">
-                Kumpulkan seluruh tautan proyek, portofolio, dan media sosial Anda dalam satu halaman profil modern berkecepatan tinggi. Lengkap dengan <strong class="text-white font-semibold">Asisten Obrolan AI</strong> yang menyapa dan menjawab pertanyaan audiens Anda secara otomatis 24/7.
-            </p>
-
-            <!-- Interactive Handle Claim Box (Responsive Stack on Mobile) -->
-            <form action="{{ route('register') }}" method="GET" class="w-full max-w-lg bg-zinc-900/90 border border-zinc-700/80 rounded-2xl p-2 shadow-2xl flex flex-col sm:flex-row items-stretch sm:items-center gap-2 mb-10 sm:mb-14 focus-within:border-sky-400 focus-within:ring-2 focus-within:ring-sky-500/20 transition-all">
-                <div class="flex items-center flex-grow bg-zinc-950/60 sm:bg-transparent rounded-xl px-2 py-1 sm:p-0">
-                    <span class="pl-2 pr-1 text-zinc-500 text-xs font-mono select-none font-semibold">biolink/@</span>
-                    <input type="text" 
-                           name="handle" 
-                           placeholder="username-anda" 
-                           required
-                           autocomplete="off"
-                           class="bg-transparent flex-grow text-xs font-mono text-white placeholder-zinc-500 focus:outline-none py-2 px-1 min-w-0">
-                </div>
-                <button type="submit" class="btn-shimmer px-5 py-3 rounded-xl bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-400 hover:to-indigo-500 text-white text-xs font-black transition-all shadow-lg shadow-sky-500/30 whitespace-nowrap flex items-center justify-center gap-1.5 flex-shrink-0">
-                    <span>Klaim Bio</span>
-                    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
-                </button>
-            </form>
-
-            <!-- Interactive Theme Switcher Pills -->
-            <div class="flex items-center justify-center gap-2 flex-wrap text-xs pb-1">
-                <span class="text-[11px] text-zinc-400 font-medium">Uji Coba Tema Mockup:</span>
-                <button type="button" onclick="switchHeroMockupTheme('dark', this)" class="theme-pill px-3 py-1 rounded-full text-[11px] font-semibold bg-zinc-800 text-sky-400 border border-sky-500/50 shadow-sm transition-all">Dark Luxury</button>
-                <button type="button" onclick="switchHeroMockupTheme('midnight', this)" class="theme-pill px-3 py-1 rounded-full text-[11px] font-semibold bg-zinc-900 text-zinc-400 border border-zinc-800 hover:text-white transition-all">Midnight Indigo</button>
-                <button type="button" onclick="switchHeroMockupTheme('emerald', this)" class="theme-pill px-3 py-1 rounded-full text-[11px] font-semibold bg-zinc-900 text-zinc-400 border border-zinc-800 hover:text-white transition-all">Emerald Glass</button>
-                <button type="button" onclick="switchHeroMockupTheme('minimal', this)" class="theme-pill px-3 py-1 rounded-full text-[11px] font-semibold bg-zinc-900 text-zinc-400 border border-zinc-800 hover:text-white transition-all">Minimal Light</button>
-            </div>
-
-            <!-- Live Mockup Visual Showcase -->
-            <div id="heroMockupCard" class="border-beam-card w-full max-w-md bg-zinc-900/90 border border-zinc-800 rounded-3xl p-6 sm:p-7 shadow-2xl backdrop-blur-xl relative group text-left mx-auto transition-all duration-500">
+        <!-- SECTION A: 21ST-INSPIRED BENTO PRODUCT HERO -->
+        <section class="relative pt-10 sm:pt-20 pb-14 sm:pb-24 px-4 sm:px-12 glow-radial-top max-w-7xl mx-auto w-full">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
                 
-                <!-- Avatar & Verified Badge -->
-                <div class="flex flex-col items-center text-center mb-5">
-                    <div class="relative w-20 h-20 rounded-full p-1 bg-gradient-to-tr from-sky-400 via-indigo-500 to-purple-500 shadow-xl mb-3">
-                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop&q=80" alt="Avatar Windri" class="w-full h-full object-cover rounded-full bg-zinc-950">
-                        <span class="absolute bottom-0 right-0 w-6 h-6 rounded-full bg-sky-500 border-2 border-zinc-950 text-white flex items-center justify-center p-0.5 shadow-md" title="Verified Creator">
-                            <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+                <!-- Left Column: Copywriting & High-Intent Action -->
+                <div class="lg:col-span-7 text-center lg:text-left space-y-6">
+                    
+                    <!-- Launch Pill Badge -->
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-gradient-to-r from-sky-500/10 via-indigo-500/10 to-purple-500/10 border border-sky-400/30 text-sky-300 text-[11px] sm:text-xs font-bold shadow-sm max-w-full">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse flex-shrink-0"></span>
+                        <span class="truncate">BioLink v2.0 &bull; Ditenagai Universal AI Engine</span>
+                    </div>
+
+                    <!-- Big Impactful Headline -->
+                    <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight sm:leading-[1.12] [text-wrap:balance]">
+                        Satu tautan untuk semua karya Anda,<br>
+                        <span class="bg-clip-text text-transparent bg-gradient-to-r from-sky-400 via-indigo-400 to-purple-400">
+                            kini ditenagai asisten AI pintar.
+                        </span>
+                    </h1>
+
+                    <!-- Subtitle -->
+                    <p class="text-xs sm:text-base text-zinc-300/90 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                        Kumpulkan portofolio, produk demo, media sosial, dan kontak Anda dalam satu halaman profil modern berkecepatan tinggi. Lengkap dengan <strong class="text-white font-semibold">Asisten Obrolan AI</strong> yang menyapa dan menjawab pertanyaan audiens Anda secara otomatis 24/7.
+                    </p>
+
+                    <!-- Interactive Handle Claim Box (Responsive Stack on Mobile, Inline on Desktop) -->
+                    <form action="{{ route('register') }}" method="GET" class="w-full max-w-lg mx-auto lg:mx-0 bg-zinc-900/90 border border-zinc-700/80 rounded-2xl p-2 shadow-2xl flex flex-col sm:flex-row items-stretch sm:items-center gap-2 focus-within:border-sky-400 focus-within:ring-2 focus-within:ring-sky-500/20 transition-all">
+                        <div class="flex items-center flex-grow bg-zinc-950/60 sm:bg-transparent rounded-xl px-2 py-1 sm:p-0">
+                            <span class="pl-2 pr-1 text-zinc-500 text-xs font-mono select-none font-semibold">biolink/@</span>
+                            <input type="text" 
+                                   name="handle" 
+                                   placeholder="username-anda" 
+                                   required
+                                   autocomplete="off"
+                                   class="bg-transparent flex-grow text-xs font-mono text-white placeholder-zinc-500 focus:outline-none py-2 px-1 min-w-0">
+                        </div>
+                        <button type="submit" class="btn-shimmer px-5 py-3 rounded-xl bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-400 hover:to-indigo-500 text-white text-xs font-black transition-all shadow-lg shadow-sky-500/30 whitespace-nowrap flex items-center justify-center gap-1.5 flex-shrink-0">
+                            <span>Klaim Bio Gratis</span>
+                            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+                        </button>
+                    </form>
+
+                    <!-- Micro-Metrics Social Proof Strip -->
+                    <div class="pt-2 flex items-center justify-center lg:justify-start gap-4 sm:gap-6 text-zinc-400 text-[11px] font-mono flex-wrap">
+                        <span class="flex items-center gap-1.5">
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                            <span>100% Gratis</span>
+                        </span>
+                        <span class="flex items-center gap-1.5">
+                            <span class="w-1.5 h-1.5 rounded-full bg-sky-400"></span>
+                            <span>Universal AI Engine</span>
+                        </span>
+                        <span class="flex items-center gap-1.5">
+                            <span class="w-1.5 h-1.5 rounded-full bg-purple-400"></span>
+                            <span>Simpan vCard Native</span>
                         </span>
                     </div>
 
-                    <h3 id="mockupName" class="font-black text-lg text-white">Windri</h3>
-                    <p id="mockupHandle" class="text-xs font-mono text-sky-400 font-semibold mb-1">@windri</p>
-                    <p id="mockupBio" class="text-[11px] text-zinc-400 max-w-xs mx-auto leading-relaxed">
-                        Senior Full-Stack Software Engineer & Builder. Focusing on distributed systems, modern web, & AI agents.
-                    </p>
                 </div>
 
-                <!-- Sample Bento Cards -->
-                <div class="space-y-2.5 text-xs">
-                    <div class="mockup-link-card p-3.5 rounded-2xl bg-white/5 border border-white/10 hover:border-sky-400/40 transition-all flex items-center justify-between group/card cursor-pointer">
-                        <div class="flex items-center gap-3">
-                            <div class="w-8 h-8 rounded-xl bg-white/10 flex items-center justify-center text-white">
-                                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-                            </div>
-                            <div>
-                                <span class="mockup-link-title font-bold text-white block">GitHub windri-dev</span>
-                                <span class="mockup-link-desc text-[10px] text-zinc-400">Jelajahi repositori open-source</span>
-                            </div>
+                <!-- Right Column: Interactive Live Bento Showcase with Floating Metric Cards -->
+                <div class="lg:col-span-5 relative w-full max-w-md mx-auto">
+                    
+                    <!-- Floating Metric Card 1: Live Clicks (Top-Right Offset on Desktop) -->
+                    <div class="hidden sm:flex items-center gap-3 p-3 rounded-2xl bg-zinc-900/90 border border-zinc-700/80 shadow-2xl backdrop-blur-xl absolute -top-5 -right-6 z-20 animate-float text-left">
+                        <div class="w-9 h-9 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center flex-shrink-0">
+                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
                         </div>
-                        <span class="text-[9px] bg-sky-500/20 text-sky-300 px-2 py-0.5 rounded-full font-mono font-bold border border-sky-500/30">OFFICIAL</span>
+                        <div class="text-[11px]">
+                            <span class="font-bold text-white block">Real-Time Clicks</span>
+                            <span class="text-emerald-400 font-mono font-bold">+1,840 Minggu Ini</span>
+                        </div>
                     </div>
 
-                    <div class="mockup-link-card p-3.5 rounded-2xl bg-white/5 border border-white/10 hover:border-emerald-400/40 transition-all flex items-center justify-between group/card cursor-pointer">
-                        <div class="flex items-center gap-3">
-                            <div class="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center">
-                                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-                            </div>
-                            <div>
-                                <span class="mockup-link-title font-bold text-white block">SHOPPE E-Commerce</span>
-                                <span class="mockup-link-desc text-[10px] text-zinc-400">Staging demo modern boutique</span>
-                            </div>
+                    <!-- Floating Metric Card 2: AI Status (Bottom-Left Offset on Desktop) -->
+                    <div class="hidden sm:flex items-center gap-2.5 p-3 rounded-2xl bg-zinc-900/90 border border-zinc-700/80 shadow-2xl backdrop-blur-xl absolute -bottom-5 -left-6 z-20 animate-float-delayed text-left">
+                        <div class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse flex-shrink-0"></div>
+                        <div class="text-[11px]">
+                            <span class="font-bold text-white block">Aura AI Concierge</span>
+                            <span class="text-zinc-400 font-mono text-[10px]">Aktif 24/7 &bull; Siap Menyapa</span>
                         </div>
-                        <span class="text-[9px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-full font-mono font-bold border border-emerald-500/30">LIVE</span>
                     </div>
-                </div>
 
-                <!-- Mascot Figurine Floating Button Preview with Interactive Chat Drawer -->
-                <div class="mt-4 space-y-2">
-                    <div onclick="toggleHeroMockupChat()" class="p-3 rounded-2xl bg-zinc-950/80 border border-sky-400/30 flex items-center justify-between shadow-lg cursor-pointer hover:border-sky-400/60 transition-all">
-                            <div class="flex items-center gap-2.5 min-w-0 flex-grow">
-                                <div class="relative flex-shrink-0">
-                                    <div class="w-9 h-9 rounded-full p-0.5 bg-gradient-to-tr from-sky-400 via-indigo-500 to-pink-500 overflow-hidden">
-                                        <img src="https://api.dicebear.com/7.x/bottts-neutral/svg?seed=AuraBot&backgroundColor=0284c7" alt="Aura Figurine" class="w-full h-full object-cover rounded-full">
+                    <!-- Theme Switcher Pills Above Mockup -->
+                    <div class="flex items-center justify-center gap-1.5 flex-wrap text-xs pb-3">
+                        <button type="button" onclick="switchHeroMockupTheme('dark', this)" class="theme-pill px-2.5 py-1 rounded-full text-[10px] font-semibold bg-zinc-800 text-sky-400 border border-sky-500/50 shadow-sm transition-all">Dark Luxury</button>
+                        <button type="button" onclick="switchHeroMockupTheme('midnight', this)" class="theme-pill px-2.5 py-1 rounded-full text-[10px] font-semibold bg-zinc-900 text-zinc-400 border border-zinc-800 hover:text-white transition-all">Midnight</button>
+                        <button type="button" onclick="switchHeroMockupTheme('emerald', this)" class="theme-pill px-2.5 py-1 rounded-full text-[10px] font-semibold bg-zinc-900 text-zinc-400 border border-zinc-800 hover:text-white transition-all">Emerald</button>
+                        <button type="button" onclick="switchHeroMockupTheme('minimal', this)" class="theme-pill px-2.5 py-1 rounded-full text-[10px] font-semibold bg-zinc-900 text-zinc-400 border border-zinc-800 hover:text-white transition-all">Minimal</button>
+                    </div>
+
+                    <!-- Live Mockup Visual Showcase -->
+                    <div id="heroMockupCard" class="border-beam-card w-full bg-zinc-900/95 border border-zinc-800 rounded-3xl p-6 shadow-2xl backdrop-blur-xl relative group text-left transition-all duration-500">
+                        
+                        <!-- Avatar & Verified Badge -->
+                        <div class="flex flex-col items-center text-center mb-5">
+                            <div class="relative w-18 h-18 sm:w-20 sm:h-20 rounded-full p-1 bg-gradient-to-tr from-sky-400 via-indigo-500 to-purple-500 shadow-xl mb-3">
+                                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop&q=80" alt="Avatar Windri" class="w-full h-full object-cover rounded-full bg-zinc-950">
+                                <span class="absolute bottom-0 right-0 w-5 h-5 rounded-full bg-sky-500 border-2 border-zinc-950 text-white flex items-center justify-center p-0.5 shadow-md" title="Verified Creator">
+                                    <svg class="w-3 h-3 fill-current" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+                                </span>
+                            </div>
+
+                            <h3 id="mockupName" class="font-black text-lg text-white">Windri</h3>
+                            <p id="mockupHandle" class="text-xs font-mono text-sky-400 font-semibold mb-1">@windri</p>
+                            <p id="mockupBio" class="text-[11px] text-zinc-400 max-w-xs mx-auto leading-relaxed">
+                                Senior Full-Stack Software Engineer & Builder. Distributed systems, modern web, & AI autonomous agents.
+                            </p>
+                        </div>
+
+                        <!-- Sample Bento Cards inside Mockup -->
+                        <div class="space-y-2.5 text-xs">
+                            <div class="mockup-link-card p-3 rounded-2xl bg-white/5 border border-white/10 hover:border-sky-400/40 transition-all flex items-center justify-between group/card cursor-pointer">
+                                <div class="flex items-center gap-2.5">
+                                    <div class="w-7 h-7 rounded-xl bg-white/10 flex items-center justify-center text-white flex-shrink-0">
+                                        <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
                                     </div>
-                                    <span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-400 rounded-full border border-zinc-950 animate-pulse"></span>
+                                    <div class="min-w-0">
+                                        <span class="mockup-link-title font-bold text-white block text-xs truncate">GitHub windri-dev</span>
+                                        <span class="mockup-link-desc text-[10px] text-zinc-400 block truncate">Jelajahi repositori open-source</span>
+                                    </div>
                                 </div>
-                                <div class="min-w-0 flex-grow">
-                                    <span class="text-[11px] font-bold text-white flex items-center gap-1">
-                                        <span>Tanya Aura</span>
-                                        <span class="text-[8px] font-mono px-1 py-0.2 bg-sky-500/20 text-sky-300 rounded font-bold">AI</span>
-                                    </span>
-                                    <p class="text-[10px] text-zinc-400 truncate max-w-[170px] sm:max-w-xs">"Halo! Saya siap memandu tentang proyek Windri."</p>
-                                </div>
+                                <span class="text-[9px] bg-sky-500/20 text-sky-300 px-2 py-0.5 rounded-full font-mono font-bold border border-sky-500/30 flex-shrink-0">OFFICIAL</span>
                             </div>
-                            <span id="heroChatToggleText" class="text-[10px] text-sky-400 font-semibold flex-shrink-0 whitespace-nowrap">Coba &rarr;</span>
-                    </div>
 
-                    <!-- Interactive Simulated Chat Dialog inside Mockup -->
-                    <div id="heroMockupChatBox" class="hidden p-3 rounded-2xl bg-zinc-950 border border-indigo-500/30 text-[11px] space-y-2 animate-fadeIn">
-                        <div class="flex items-start gap-2">
-                            <span class="w-5 h-5 rounded-full bg-zinc-800 text-zinc-300 flex items-center justify-center text-[10px] font-bold flex-shrink-0">U</span>
-                            <div class="bg-zinc-800/90 text-zinc-200 px-2.5 py-1.5 rounded-xl rounded-tl-none">
-                                Apa keahlian utama Windri?
+                            <div class="mockup-link-card p-3 rounded-2xl bg-white/5 border border-white/10 hover:border-emerald-400/40 transition-all flex items-center justify-between group/card cursor-pointer">
+                                <div class="flex items-center gap-2.5">
+                                    <div class="w-7 h-7 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center flex-shrink-0">
+                                        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                                    </div>
+                                    <div class="min-w-0">
+                                        <span class="mockup-link-title font-bold text-white block text-xs truncate">SHOPPE E-Commerce</span>
+                                        <span class="mockup-link-desc text-[10px] text-zinc-400 block truncate">Staging demo butik modern</span>
+                                    </div>
+                                </div>
+                                <span class="text-[9px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-full font-mono font-bold border border-emerald-500/30 flex-shrink-0">DEMO</span>
                             </div>
                         </div>
-                        <div class="flex items-start gap-2">
-                            <div class="w-5 h-5 rounded-full bg-sky-500/20 text-sky-400 flex items-center justify-center flex-shrink-0">
-                                <svg class="w-3 h-3 fill-current" viewBox="0 0 24 24"><path d="M12 2a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2 2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Z"/></svg>
+
+                        <!-- Mascot Figurine Floating Button Preview with Interactive Chat Drawer -->
+                        <div class="mt-3.5 space-y-2">
+                            <div onclick="toggleHeroMockupChat()" class="p-2.5 rounded-2xl bg-zinc-950/80 border border-sky-400/30 flex items-center justify-between shadow-lg cursor-pointer hover:border-sky-400/60 transition-all">
+                                <div class="flex items-center gap-2 min-w-0 flex-grow pr-1">
+                                    <div class="relative flex-shrink-0">
+                                        <div class="w-8 h-8 rounded-full p-0.5 bg-gradient-to-tr from-sky-400 via-indigo-500 to-pink-500 overflow-hidden">
+                                            <img src="https://api.dicebear.com/7.x/bottts-neutral/svg?seed=AuraBot&backgroundColor=0284c7" alt="Aura Figurine" class="w-full h-full object-cover rounded-full">
+                                        </div>
+                                        <span class="absolute bottom-0 right-0 w-2 h-2 bg-emerald-400 rounded-full border border-zinc-950 animate-pulse"></span>
+                                    </div>
+                                    <div class="min-w-0 flex-grow">
+                                        <span class="text-[11px] font-bold text-white flex items-center gap-1">
+                                            <span>Tanya Aura</span>
+                                            <span class="text-[8px] font-mono px-1 py-0.2 bg-sky-500/20 text-sky-300 rounded font-bold">AI</span>
+                                        </span>
+                                        <p class="text-[10px] text-zinc-400 truncate max-w-[160px] sm:max-w-xs">"Halo! Saya siap memandu tentang proyek Windri."</p>
+                                    </div>
+                                </div>
+                                <span id="heroChatToggleText" class="text-[10px] text-sky-400 font-semibold flex-shrink-0 whitespace-nowrap">Coba &rarr;</span>
                             </div>
-                            <div class="bg-sky-500/10 border border-sky-500/20 text-sky-200 px-2.5 py-1.5 rounded-xl rounded-tl-none">
-                                Windri adalah Senior Full-Stack Engineer yang ahli di Modern PHP & Laravel, Vue/Tailwind, arsitektur server Linux terdistribusi, serta integrasi AI autonomous agents.
+
+                            <!-- Interactive Simulated Chat Dialog inside Mockup -->
+                            <div id="heroMockupChatBox" class="hidden p-3 rounded-2xl bg-zinc-950 border border-indigo-500/30 text-[11px] space-y-2 animate-fadeIn">
+                                <div class="flex items-start gap-2">
+                                    <span class="w-5 h-5 rounded-full bg-zinc-800 text-zinc-300 flex items-center justify-center text-[10px] font-bold flex-shrink-0">U</span>
+                                    <div class="bg-zinc-800/90 text-zinc-200 px-2.5 py-1.5 rounded-xl rounded-tl-none">
+                                        Apa keahlian utama Windri?
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-2">
+                                    <div class="w-5 h-5 rounded-full bg-sky-500/20 text-sky-400 flex items-center justify-center flex-shrink-0">
+                                        <svg class="w-3 h-3 fill-current" viewBox="0 0 24 24"><path d="M12 2a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2 2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Z"/></svg>
+                                    </div>
+                                    <div class="bg-sky-500/10 border border-sky-500/20 text-sky-200 px-2.5 py-1.5 rounded-xl rounded-tl-none">
+                                        Windri adalah Senior Full-Stack Engineer yang ahli di Modern PHP & Laravel, arsitektur server Linux terdistribusi, serta integrasi AI autonomous agents.
+                                    </div>
+                                </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
 
@@ -450,117 +509,160 @@
         </section>
 
 
-        <!-- SECTION B: FITUR UTAMA (FEATURE GRID) -->
+        <!-- SECTION B: ASYMMETRICAL BENTO GRID FEATURE SHOWCASE -->
         <section id="fitur" class="py-14 sm:py-24 px-4 sm:px-12 border-t border-zinc-800/80 max-w-7xl mx-auto w-full">
-            <div class="text-center mb-16 space-y-3">
-                <span class="text-xs font-mono uppercase tracking-wider text-sky-400 font-bold block">FITUR LENGKAP & MANDIRI</span>
-                <h2 class="text-3xl sm:text-5xl font-black text-white tracking-tight">Semua Fitur Premium, Tanpa Biaya Berlangganan</h2>
+            <div class="text-center mb-10 sm:mb-16 space-y-3">
+                <span class="text-xs font-mono uppercase tracking-wider text-sky-400 font-bold block">ARSITEKTUR BENTO MODERN</span>
+                <h2 class="text-2xl sm:text-5xl font-black text-white tracking-tight">Semua Fitur Premium, Tanpa Biaya Berlangganan</h2>
                 <p class="text-xs sm:text-sm text-zinc-400 max-w-2xl mx-auto">Dirancang untuk kebutuhan creator, software engineer, agensi, dan profesional modern yang membutuhkan kontrol penuh.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Bento Asymmetric Tiles (Inspired by 21st.dev Bento Architecture) -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6">
                 
-                <!-- Feature 1: AI Assistant & Security Shield -->
-                <div class="spotlight-card p-7 rounded-3xl bg-zinc-900/60 border border-zinc-800 hover:border-sky-500/40 transition-all space-y-4 group">
-                    <div class="w-12 h-12 rounded-2xl bg-sky-500/10 border border-sky-500/20 text-sky-400 flex items-center justify-center group-hover:scale-105 transition-transform">
-                        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <rect x="3" y="11" width="18" height="10" rx="2"></rect>
-                            <circle cx="12" cy="5" r="2"></circle>
-                            <path d="M12 7v4"></path>
-                            <line x1="8" y1="16" x2="8" y2="16"></line>
-                            <line x1="16" y1="16" x2="16" y2="16"></line>
-                        </svg>
+                <!-- Tile 1 (Large 2-Column Bento Card): Smart AI Assistant Concierge -->
+                <div class="md:col-span-2 spotlight-card p-6 sm:p-8 rounded-3xl bg-zinc-900/60 border border-zinc-800 hover:border-sky-500/40 transition-all flex flex-col justify-between group relative overflow-hidden">
+                    <div class="space-y-4 relative z-10">
+                        <div class="flex items-center justify-between">
+                            <div class="w-12 h-12 rounded-2xl bg-sky-500/10 border border-sky-500/20 text-sky-400 flex items-center justify-center group-hover:scale-105 transition-transform">
+                                <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <rect x="3" y="11" width="18" height="10" rx="2"></rect>
+                                    <circle cx="12" cy="5" r="2"></circle>
+                                    <path d="M12 7v4"></path>
+                                    <line x1="8" y1="16" x2="8" y2="16"></line>
+                                    <line x1="16" y1="16" x2="16" y2="16"></line>
+                                </svg>
+                            </div>
+                            <span class="text-[10px] font-mono px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 font-bold border border-emerald-500/20">
+                                4 AI ENGINE TERSAMBUNG
+                            </span>
+                        </div>
+
+                        <h3 class="font-black text-xl sm:text-2xl text-white">Smart AI Concierge 24/7</h3>
+                        <p class="text-xs sm:text-sm text-zinc-400 leading-relaxed max-w-xl">
+                            Setiap profil dilengkapi dengan asisten AI pintar yang dilatih dari basis pengetahuan Anda (biodata, portofolio, FAQ, dan kontak). Menyapa pengunjung, menjawab pertanyaan, dan mengarahkan audiens ke karya terbaik Anda.
+                        </p>
+
+                        <!-- Simulated Interactive Chat Widget Inside Bento Tile -->
+                        <div class="pt-2">
+                            <div class="p-3.5 rounded-2xl bg-zinc-950/80 border border-zinc-800 text-xs space-y-2.5 font-mono">
+                                <div class="flex items-center justify-between text-[11px] text-zinc-500 border-b border-zinc-850 pb-2">
+                                    <span>Simulasi Percakapan Pengunjung</span>
+                                    <span class="text-emerald-400 font-bold">&bull; Live</span>
+                                </div>
+                                <div class="flex items-center gap-2 text-zinc-300 text-[11px]">
+                                    <span class="text-sky-400 font-bold">User:</span>
+                                    <span>"Bisa lihat studi kasus aplikasi e-commerce yang pernah dibuat?"</span>
+                                </div>
+                                <div class="flex items-center gap-2 text-emerald-400 text-[11px]">
+                                    <span class="text-emerald-300 font-bold">AI Concierge:</span>
+                                    <span>"Tentu! Windri membangun SHOPPE Staging, e-commerce modern dengan checkout interaktif. Silakan klik kartu SHOPPE di atas."</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <h3 class="font-bold text-lg text-white">Smart AI Assistant Concierge</h3>
-                    <p class="text-xs text-zinc-400 leading-relaxed">
-                        Setiap profil memiliki asisten AI 24/7 yang dilatih dari basis pengetahuan Anda (FAQ, biodata, keahlian). Dilengkapi kostum maskot kustom dan AI Firewall Anti-Jailbreak.
-                    </p>
-                    <span class="inline-flex text-[11px] font-semibold text-sky-400 items-center gap-1">Universal LLM Engine &bull; OpenAI &bull; DeepSeek &bull; Groq</span>
+
+                    <div class="pt-5 flex items-center gap-2 flex-wrap text-[11px] font-semibold text-sky-400 border-t border-zinc-800/80 mt-4">
+                        <span class="px-2 py-0.5 rounded-md bg-zinc-800 text-zinc-300">OpenAI GPT-4o</span>
+                        <span class="px-2 py-0.5 rounded-md bg-zinc-800 text-zinc-300">DeepSeek Chat</span>
+                        <span class="px-2 py-0.5 rounded-md bg-zinc-800 text-zinc-300">Groq LLM</span>
+                        <span class="px-2 py-0.5 rounded-md bg-zinc-800 text-zinc-300">Ollama Lokal</span>
+                    </div>
                 </div>
 
-                <!-- Feature 2: 6 Preset Themes & Custom Editor -->
-                <div class="spotlight-card p-7 rounded-3xl bg-zinc-900/60 border border-zinc-800 hover:border-purple-500/40 transition-all space-y-4 group">
-                    <div class="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/20 text-purple-400 flex items-center justify-center group-hover:scale-105 transition-transform">
-                        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <circle cx="13.5" cy="6.5" r=".5" fill="currentColor"></circle>
-                            <circle cx="17.5" cy="10.5" r=".5" fill="currentColor"></circle>
-                            <circle cx="8.5" cy="7.5" r=".5" fill="currentColor"></circle>
-                            <circle cx="6.5" cy="12.5" r=".5" fill="currentColor"></circle>
-                            <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.563-2.512 5.563-5.563C21.996 6.5 17.5 2 12 2Z"></path>
-                        </svg>
+                <!-- Tile 2: Rate Limiter IP & AI Firewall Shield -->
+                <div class="spotlight-card p-6 sm:p-7 rounded-3xl bg-zinc-900/60 border border-zinc-800 hover:border-emerald-500/40 transition-all flex flex-col justify-between group">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center group-hover:scale-105 transition-transform">
+                            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                                <path d="m9 12 2 2 4-4"/>
+                            </svg>
+                        </div>
+                        <h3 class="font-bold text-lg text-white">Rate Limiter IP & AI Shield</h3>
+                        <p class="text-xs text-zinc-400 leading-relaxed">
+                            Lindungi kunci API Anda dari spam dan pengurasan kuota. Dilengkapi batas pesan per menit, deteksi bot honeypot, dan AI Firewall Anti-Jailbreak.
+                        </p>
                     </div>
-                    <h3 class="font-bold text-lg text-white">Preset Tema & Wallpaper Bebas</h3>
-                    <p class="text-xs text-zinc-400 leading-relaxed">
-                        Pilih dari 6 preset elegan (Dark Luxury, Emerald, Cyberpunk, Sunset, Cream) atau unggah gambar wallpaper Anda sendiri dengan overlay dimmer kontras tinggi.
-                    </p>
-                    <span class="inline-flex text-[11px] font-semibold text-purple-400 items-center gap-1">Custom CSS &bull; Gradient &bull; Rounded Bento Style</span>
+                    <div class="pt-4 border-t border-zinc-800/60">
+                        <span class="text-[11px] font-semibold text-emerald-400 flex items-center gap-1.5">
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                            <span>Auto-Ban IP &bull; Honeypot Anti-Bot</span>
+                        </span>
+                    </div>
                 </div>
 
-                <!-- Feature 3: Anti-Spam Rate Limiter per IP -->
-                <div class="spotlight-card p-7 rounded-3xl bg-zinc-900/60 border border-zinc-800 hover:border-emerald-500/40 transition-all space-y-4 group">
-                    <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center group-hover:scale-105 transition-transform">
-                        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                            <path d="m9 12 2 2 4-4"/>
-                        </svg>
+                <!-- Tile 3: Simpan Kontak vCard 1-Klik Native -->
+                <div class="spotlight-card p-6 sm:p-7 rounded-3xl bg-zinc-900/60 border border-zinc-800 hover:border-sky-500/40 transition-all flex flex-col justify-between group">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 rounded-2xl bg-sky-500/10 border border-sky-500/20 text-sky-400 flex items-center justify-center group-hover:scale-105 transition-transform">
+                            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path d="M16 2v4"></path>
+                                <path d="M8 2v4"></path>
+                                <rect width="18" height="18" x="3" y="4" rx="2"></rect>
+                                <path d="M3 10h18"></path>
+                                <circle cx="12" cy="15" r="2"></circle>
+                            </svg>
+                        </div>
+                        <h3 class="font-bold text-lg text-white">Simpan Kontak vCard Native</h3>
+                        <p class="text-xs text-zinc-400 leading-relaxed">
+                            Pengunjung dapat langsung mengunduh file `.vcf` untuk menyimpan nomor WhatsApp, email, dan jabatan Anda ke kontak smartphone hanya dengan 1 sentuhan.
+                        </p>
                     </div>
-                    <h3 class="font-bold text-lg text-white">Rate Limiter IP & AI Firewall</h3>
-                    <p class="text-xs text-zinc-400 leading-relaxed">
-                        Lindungi kunci API Anda dari pengurasan kuota. Atur batas pesan per menit, pesan per jam, auto-ban IP bagi pelaku spam, serta sensor kata-kata kasar.
-                    </p>
-                    <span class="inline-flex text-[11px] font-semibold text-emerald-400 items-center gap-1">Multi-Layer Rate Limiting &bull; Honeypot Anti-Bot</span>
+                    <div class="pt-4 border-t border-zinc-800/60">
+                        <span class="text-[11px] font-semibold text-sky-400 flex items-center gap-1.5">
+                            <span class="w-1.5 h-1.5 rounded-full bg-sky-400"></span>
+                            <span>Mobile Native &bull; QR Code Profil</span>
+                        </span>
+                    </div>
                 </div>
 
-                <!-- Feature 4: Privacy Analytics -->
-                <div class="spotlight-card p-7 rounded-3xl bg-zinc-900/60 border border-zinc-800 hover:border-amber-500/40 transition-all space-y-4 group">
-                    <div class="w-12 h-12 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-amber-400 flex items-center justify-center group-hover:scale-105 transition-transform">
-                        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <line x1="12" y1="20" x2="12" y2="10"></line>
-                            <line x1="18" y1="20" x2="18" y2="4"></line>
-                            <line x1="6" y1="20" x2="6" y2="16"></line>
-                        </svg>
+                <!-- Tile 4: Analitik Real-Time Privasi -->
+                <div class="spotlight-card p-6 sm:p-7 rounded-3xl bg-zinc-900/60 border border-zinc-800 hover:border-amber-500/40 transition-all flex flex-col justify-between group">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-amber-400 flex items-center justify-center group-hover:scale-105 transition-transform">
+                            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <line x1="12" y1="20" x2="12" y2="10"></line>
+                                <line x1="18" y1="20" x2="18" y2="4"></line>
+                                <line x1="6" y1="20" x2="6" y2="16"></line>
+                            </svg>
+                        </div>
+                        <h3 class="font-bold text-lg text-white">Analitik Tanpa Iklan Pelacak</h3>
+                        <p class="text-xs text-zinc-400 leading-relaxed">
+                            Pantau jumlah pengunjung profil, link paling populer, dan jenis perangkat audiens secara akurat tanpa melacak identitas pribadi pengunjung (Zero-Tracker).
+                        </p>
                     </div>
-                    <h3 class="font-bold text-lg text-white">Analitik Real-Time Tanpa Iklan</h3>
-                    <p class="text-xs text-zinc-400 leading-relaxed">
-                        Pantau jumlah pengunjung profil, link yang paling banyak diklik, serta jenis perangkat audiens secara akurat tanpa melacak data pribadi pengunjung.
-                    </p>
-                    <span class="inline-flex text-[11px] font-semibold text-amber-400 items-center gap-1">Privasi Terjaga &bull; Zero Tracker &bull; Export CSV</span>
+                    <div class="pt-4 border-t border-zinc-800/60">
+                        <span class="text-[11px] font-semibold text-amber-400 flex items-center gap-1.5">
+                            <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+                            <span>100% GDPR Compliant &bull; Export CSV</span>
+                        </span>
+                    </div>
                 </div>
 
-                <!-- Feature 5: One-Click vCard Contact -->
-                <div class="p-7 rounded-3xl bg-zinc-900/60 border border-zinc-800 hover:border-sky-500/40 transition-all space-y-4 group">
-                    <div class="w-12 h-12 rounded-2xl bg-sky-500/10 border border-sky-500/20 text-sky-400 flex items-center justify-center group-hover:scale-105 transition-transform">
-                        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path d="M16 2v4"></path>
-                            <path d="M8 2v4"></path>
-                            <rect width="18" height="18" x="3" y="4" rx="2"></rect>
-                            <path d="M3 10h18"></path>
-                            <circle cx="12" cy="15" r="2"></circle>
-                        </svg>
+                <!-- Tile 5: Kustomisasi Wallpaper & Figuran Maskot -->
+                <div class="spotlight-card p-6 sm:p-7 rounded-3xl bg-zinc-900/60 border border-zinc-800 hover:border-purple-500/40 transition-all flex flex-col justify-between group">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/20 text-purple-400 flex items-center justify-center group-hover:scale-105 transition-transform">
+                            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <circle cx="13.5" cy="6.5" r=".5" fill="currentColor"></circle>
+                                <circle cx="17.5" cy="10.5" r=".5" fill="currentColor"></circle>
+                                <circle cx="8.5" cy="7.5" r=".5" fill="currentColor"></circle>
+                                <circle cx="6.5" cy="12.5" r=".5" fill="currentColor"></circle>
+                                <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.563-2.512 5.563-5.563C21.996 6.5 17.5 2 12 2Z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="font-bold text-lg text-white">Preset Tema & Wallpaper Bebas</h3>
+                        <p class="text-xs text-zinc-400 leading-relaxed">
+                            Pilih gaya visual dari 6 preset elegan atau unggah gambar wallpaper Anda sendiri dengan lapisan pengatur kegelapan (overlay dimmer) yang kontras.
+                        </p>
                     </div>
-                    <h3 class="font-bold text-lg text-white">Simpan Kontak vCard 1-Klik</h3>
-                    <p class="text-xs text-zinc-400 leading-relaxed">
-                        Pengunjung dapat langsung mendownload file kontak `.vcf` untuk menyimpan nomor telepon, email, nama, dan jabatan Anda ke buku kontak smartphone mereka.
-                    </p>
-                    <span class="inline-flex text-[11px] font-semibold text-sky-400 items-center gap-1">Mobile Native Contact &bull; QR Code Profil</span>
-                </div>
-
-                <!-- Feature 6: Flexible Social Channels -->
-                <div class="p-7 rounded-3xl bg-zinc-900/60 border border-zinc-800 hover:border-pink-500/40 transition-all space-y-4 group">
-                    <div class="w-12 h-12 rounded-2xl bg-pink-500/10 border border-pink-500/20 text-pink-400 flex items-center justify-center group-hover:scale-105 transition-transform">
-                        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <circle cx="18" cy="5" r="3"></circle>
-                            <circle cx="6" cy="12" r="3"></circle>
-                            <circle cx="18" cy="19" r="3"></circle>
-                            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
-                            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
-                        </svg>
+                    <div class="pt-4 border-t border-zinc-800/60">
+                        <span class="text-[11px] font-semibold text-purple-400 flex items-center gap-1.5">
+                            <span class="w-1.5 h-1.5 rounded-full bg-purple-400"></span>
+                            <span>Bebas Upload File &bull; Figuran Kustom</span>
+                        </span>
                     </div>
-                    <h3 class="font-bold text-lg text-white">Kanal Komunikasi & Ikon SVG</h3>
-                    <p class="text-xs text-zinc-400 leading-relaxed">
-                        Tambah, ubah, atau nonaktifkan platform media sosial sesuai kebutuhan (Telegram, WhatsApp, GitHub, LinkedIn, Email) menggunakan ikon SVG murni.
-                    </p>
-                    <span class="inline-flex text-[11px] font-semibold text-pink-400 items-center gap-1">Dynamic Social Links &bull; Switch On/Off Instan</span>
                 </div>
 
             </div>
@@ -569,101 +671,88 @@
 
         <!-- SECTION C: AI ASSISTANT CONCIERGE HIGHLIGHT -->
         <section id="ai-concierge" class="py-14 sm:py-24 px-4 sm:px-12 border-t border-zinc-800/80 bg-gradient-to-b from-zinc-950 via-zinc-900/40 to-zinc-950">
-            <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-12">
+            <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-10 lg:gap-12">
                 
                 <!-- Left Details -->
-                <div class="flex-1 space-y-6 text-left">
-                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-500/10 border border-sky-400/25 text-sky-400 text-xs font-bold">
-                        <span>FITUR UNGGULAN EKSKLUSIF</span>
-                    </div>
-
-                    <h2 class="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
-                        Asisten AI yang mewakili Anda secara profesional.
+                <div class="lg:w-1/2 space-y-6 text-left">
+                    <span class="text-xs font-mono uppercase tracking-wider text-sky-400 font-bold block">ASISTEN PINTAR PRIBADI</span>
+                    <h2 class="text-2xl sm:text-5xl font-black text-white tracking-tight leading-tight">
+                        Asisten AI yang Bekerja Menyapa Audiens Anda 24/7
                     </h2>
-
-                    <p class="text-sm text-zinc-300 leading-relaxed">
-                        Bukan sekadar tautan mati. Pengunjung halaman bio Anda dapat bertanya tentang portofolio yang pernah Anda buat, pengalaman kerja, keahlian teknis, hingga jadwal kolaborasi.
+                    <p class="text-xs sm:text-sm text-zinc-400 leading-relaxed">
+                        Pengunjung situs bio Anda tidak lagi hanya menatap daftar tautan bisu. Mereka dapat berdialog langsung dengan Asisten AI yang Anda berdayakan. AI dapat menjelaskan detail portofolio, membagikan kontak penting, hingga menjawab penawaran kerja sama.
                     </p>
 
-                    <div class="space-y-3.5 pt-2">
+                    <div class="space-y-3 pt-2">
                         <div class="flex items-start gap-3">
-                            <div class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center flex-shrink-0 mt-0.5">
-                                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                            </div>
+                            <span class="w-5 h-5 rounded-full bg-sky-500/20 text-sky-400 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">&check;</span>
                             <div>
-                                <h4 class="text-xs font-bold text-white">Universal REST LLM Compatible</h4>
-                                <p class="text-[11px] text-zinc-400">Gunakan API resmi OpenAI (GPT-4o-mini), DeepSeek, Groq, Ollama Lokal, atau OpenRouter dalam 1 klik.</p>
+                                <h4 class="font-bold text-xs sm:text-sm text-white">Basis Pengetahuan Kustom</h4>
+                                <p class="text-xs text-zinc-400">Atur instruksi sistem, FAQ pribadi, ringkasan CV, dan batasan topik obrolan langsung dari dasbor.</p>
                             </div>
                         </div>
-
                         <div class="flex items-start gap-3">
-                            <div class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center flex-shrink-0 mt-0.5">
-                                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                            </div>
+                            <span class="w-5 h-5 rounded-full bg-sky-500/20 text-sky-400 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">&check;</span>
                             <div>
-                                <h4 class="text-xs font-bold text-white">Figuran & Kostum Maskot AI</h4>
-                                <p class="text-[11px] text-zinc-400">Pilih dari preset maskot 3D futuristik atau upload gambar avatar maskot Anda sendiri agar tombol floating tampil menarik.</p>
+                                <h4 class="font-bold text-xs sm:text-sm text-white">Karakter & Figuran Maskot Interaktif</h4>
+                                <p class="text-xs text-zinc-400">Pilih dari avatar robot, desainer, figur kartun, atau pasang foto profil Anda sendiri untuk menyapa pengunjung.</p>
                             </div>
                         </div>
-
                         <div class="flex items-start gap-3">
-                            <div class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center flex-shrink-0 mt-0.5">
-                                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                            </div>
+                            <span class="w-5 h-5 rounded-full bg-sky-500/20 text-sky-400 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">&check;</span>
                             <div>
-                                <h4 class="text-xs font-bold text-white">Strict Context & AI Firewall Shield</h4>
-                                <p class="text-[11px] text-zinc-400">AI dijaga ketat agar tidak keluar konteks profil Anda dan kebal terhadap serangan prompt injection / jailbreak.</p>
+                                <h4 class="font-bold text-xs sm:text-sm text-white">Multi-LLM Provider API</h4>
+                                <p class="text-xs text-zinc-400">Gunakan API OpenAI (GPT-4o), DeepSeek Chat, Groq ultra-cepat, atau koneksikan server Ollama lokal milik Anda.</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Right Visual Chat Dialog Box -->
-                <div class="flex-1 w-full max-w-lg bg-zinc-900 border border-zinc-800 rounded-3xl p-6 shadow-2xl relative">
-                    <div class="flex items-center justify-between pb-4 border-b border-zinc-800">
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full p-0.5 bg-gradient-to-tr from-sky-400 to-indigo-500 overflow-hidden">
-                                <img src="https://api.dicebear.com/7.x/bottts-neutral/svg?seed=AuraBot&backgroundColor=0284c7" alt="Aura" class="w-full h-full object-cover rounded-full">
+                <!-- Right Visual: Interactive Chat Simulation Bento Card -->
+                <div class="lg:w-1/2 w-full">
+                    <div class="rounded-3xl border border-zinc-800 bg-zinc-900/80 p-5 sm:p-6 shadow-2xl space-y-4">
+                        <div class="flex items-center justify-between border-b border-zinc-800 pb-3">
+                            <div class="flex items-center gap-3">
+                                <div class="w-9 h-9 rounded-full bg-gradient-to-tr from-sky-400 to-indigo-500 p-0.5">
+                                    <img src="https://api.dicebear.com/7.x/bottts-neutral/svg?seed=AuraBot&backgroundColor=0284c7" alt="Aura Figurine" class="w-full h-full object-cover rounded-full">
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-xs sm:text-sm text-white">Aura Concierge AI</h4>
+                                    <p class="text-[10px] text-emerald-400 font-mono">Ditenagai DeepSeek &bull; Responsif &bull; Aktif</p>
+                                </div>
                             </div>
-                            <div>
-                                <h4 class="text-xs font-bold text-white flex items-center gap-1.5">
-                                    <span>Aura</span>
-                                    <span class="text-[9px] font-medium text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded-full border border-emerald-500/20">Online</span>
-                                </h4>
-                                <p class="text-[10px] text-zinc-400">Asisten Pintar Windri</p>
-                            </div>
-                        </div>
-                        <span class="text-[10px] font-mono text-zinc-500">Live Simulator</span>
-                    </div>
-
-                    <!-- Chat Bubbles -->
-                    <div class="py-5 space-y-4 text-xs">
-                        <div class="flex justify-end">
-                            <div class="bg-sky-600 text-white rounded-2xl rounded-tr-sm px-4 py-2.5 max-w-[85%] leading-relaxed shadow-sm">
-                                kamu bisa apa ?
-                            </div>
+                            <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-zinc-800 text-zinc-400">Kecepatan: ~240ms</span>
                         </div>
 
-                        <div class="flex items-start gap-2.5">
-                            <div class="w-7 h-7 rounded-full overflow-hidden flex-shrink-0 border border-sky-400/30 mt-0.5">
-                                <img src="https://api.dicebear.com/7.x/bottts-neutral/svg?seed=AuraBot&backgroundColor=0284c7" alt="Aura" class="w-full h-full object-cover">
+                        <!-- Chat Bubbles Simulation -->
+                        <div class="space-y-3 text-xs">
+                            <div class="flex items-start gap-2.5">
+                                <div class="w-7 h-7 rounded-full bg-zinc-800 text-zinc-300 flex items-center justify-center text-xs font-bold flex-shrink-0">T</div>
+                                <div class="p-3 rounded-2xl rounded-tl-none bg-zinc-800 text-zinc-200 max-w-sm">
+                                    Halo! Apakah Windri sedang membuka lowongan konsultasi arsitektur cloud?
+                                </div>
                             </div>
-                            <div class="bg-white/10 border border-white/10 rounded-2xl rounded-tl-sm px-4 py-3 text-zinc-200 leading-relaxed max-w-[85%] shadow-sm space-y-2">
-                                <p>Halo! Saya <strong>Aura</strong>, asisten AI resmi yang mewakili <strong>Windri</strong>.</p>
-                                <p class="text-zinc-300">Saya siap membantu Anda:</p>
-                                <ul class="list-disc pl-4 space-y-1 text-zinc-300">
-                                    <li>Mengenal keahlian & stack teknologi Windri</li>
-                                    <li>Mengeksplorasi portofolio & proyek open-source</li>
-                                    <li>Jalur kontak dan diskusi kolaborasi proyek</li>
-                                </ul>
+
+                            <div class="flex items-start gap-2.5">
+                                <div class="w-7 h-7 rounded-full bg-sky-500/20 text-sky-400 flex items-center justify-center text-xs font-bold flex-shrink-0">
+                                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 2a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2 2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Z"/></svg>
+                                </div>
+                                <div class="p-3 rounded-2xl rounded-tl-none bg-sky-500/10 border border-sky-500/20 text-sky-100 max-w-sm space-y-1.5 leading-relaxed">
+                                    <p>Tentu saja! Windri saat ini terbuka untuk konsultasi arsitektur cloud private, automasi Proxmox, dan orkestrasi bot otonom.</p>
+                                    <p class="text-[11px] text-zinc-400">Anda dapat menghubungi beliau langsung via Telegram <strong>@windri</strong> atau mengklik tombol Simpan Kontak di bio.</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Prompt Suggestion Chips -->
-                    <div class="pt-3 border-t border-zinc-800 flex items-center gap-2 overflow-x-auto">
-                        <span class="text-[10px] px-2.5 py-1 rounded-lg bg-zinc-800 border border-zinc-700 text-sky-300 whitespace-nowrap">Siapa itu Windri?</span>
-                        <span class="text-[10px] px-2.5 py-1 rounded-lg bg-zinc-800 border border-zinc-700 text-sky-300 whitespace-nowrap">Apa saja proyeknya?</span>
+                        <!-- Quick Action Chips -->
+                        <div class="flex items-center gap-2 pt-2 flex-wrap">
+                            <button type="button" class="text-[11px] px-3 py-1.5 rounded-full bg-zinc-800/80 hover:bg-zinc-800 text-zinc-300 border border-zinc-700/60 transition-colors">
+                                "Apa proyek terbarunya?"
+                            </button>
+                            <button type="button" class="text-[11px] px-3 py-1.5 rounded-full bg-zinc-800/80 hover:bg-zinc-800 text-zinc-300 border border-zinc-700/60 transition-colors">
+                                "Bagaimana cara kerja vCard?"
+                            </button>
+                        </div>
                     </div>
                 </div>
 
@@ -673,108 +762,123 @@
 
         <!-- SECTION D: PRESET TEMA (THEMES GALLERY) -->
         <section id="tema" class="py-14 sm:py-24 px-4 sm:px-12 border-t border-zinc-800/80 max-w-7xl mx-auto w-full">
-            <div class="text-center mb-16 space-y-3">
+            <div class="text-center mb-10 sm:mb-16 space-y-3">
                 <span class="text-xs font-mono uppercase tracking-wider text-purple-400 font-bold block">PRESET TEMA SIAP PAKAI</span>
-                <h2 class="text-3xl sm:text-5xl font-black text-white tracking-tight">Pilih Gaya yang Sesuai dengan Persona Anda</h2>
-                <p class="text-xs sm:text-sm text-zinc-400 max-w-xl mx-auto">Dari gaya Dark Luxury hingga Cyberpunk Neon, Anda dapat menerapkan tema dalam 1-klik atau menyesuaikannya sendiri.</p>
+                <h2 class="text-2xl sm:text-5xl font-black text-white tracking-tight">Pilih Gaya yang Sesuai dengan Persona Anda</h2>
+                <p class="text-xs sm:text-sm text-zinc-400 max-w-xl mx-auto">Tersedia beragam preset tema dengan palet warna dan efek visual khas yang siap digunakan dalam 1-klik.</p>
             </div>
 
+            <!-- Theme Cards Grid -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Theme 1 -->
-                <div class="p-5 rounded-3xl bg-zinc-900/80 border border-zinc-800 space-y-3">
-                    <div class="h-32 rounded-2xl bg-gradient-to-b from-zinc-900 to-black p-4 flex flex-col justify-end border border-zinc-800">
-                        <div class="p-2.5 rounded-xl bg-white/10 backdrop-blur-sm border border-white/15 text-center text-xs font-bold text-white">
-                            Tombol BioLink Preview
+                
+                <!-- Theme 1: Dark Luxury -->
+                <div class="p-5 rounded-3xl bg-zinc-900 border border-zinc-800 hover:border-zinc-600 transition-all space-y-3 group">
+                    <div class="h-32 rounded-2xl bg-gradient-to-br from-zinc-950 via-zinc-900 to-zinc-950 border border-zinc-800 flex items-center justify-center p-4">
+                        <div class="w-full max-w-[180px] p-2.5 rounded-xl bg-white/5 border border-white/10 text-center">
+                            <span class="text-xs font-bold text-white block">Dark Luxury</span>
+                            <span class="text-[10px] text-sky-400 font-mono">Modern &bull; Clean</span>
                         </div>
                     </div>
                     <div class="flex items-center justify-between">
-                        <div>
-                            <h4 class="text-sm font-bold text-white">Dark Luxury (Default)</h4>
-                            <p class="text-[10px] text-zinc-400 font-mono">Plus Jakarta Sans &bull; Gradient</p>
+                        <span class="font-bold text-sm text-white">Dark Luxury</span>
+                        <div class="flex items-center gap-1.5">
+                            <span class="w-3 h-3 rounded-full bg-zinc-950 border border-zinc-700"></span>
+                            <span class="w-3 h-3 rounded-full bg-sky-400"></span>
+                            <span class="w-3 h-3 rounded-full bg-indigo-500"></span>
                         </div>
-                        <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-zinc-800 text-zinc-300">PRESET</span>
                     </div>
                 </div>
 
-                <!-- Theme 2 -->
-                <div class="p-5 rounded-3xl bg-zinc-900/80 border border-zinc-800 space-y-3">
-                    <div class="h-32 rounded-2xl bg-gradient-to-b from-indigo-950 to-zinc-950 p-4 flex flex-col justify-end border border-indigo-900/40">
-                        <div class="p-2.5 rounded-xl bg-indigo-500/20 backdrop-blur-sm border border-indigo-400/30 text-center text-xs font-bold text-indigo-200">
-                            Tombol BioLink Preview
+                <!-- Theme 2: Midnight Indigo -->
+                <div class="p-5 rounded-3xl bg-zinc-900 border border-zinc-800 hover:border-indigo-500/50 transition-all space-y-3 group">
+                    <div class="h-32 rounded-2xl bg-gradient-to-br from-slate-950 via-indigo-950 to-slate-900 border border-indigo-900/40 flex items-center justify-center p-4">
+                        <div class="w-full max-w-[180px] p-2.5 rounded-xl bg-indigo-500/10 border border-indigo-500/25 text-center">
+                            <span class="text-xs font-bold text-white block">Midnight Indigo</span>
+                            <span class="text-[10px] text-indigo-300 font-mono">Deep Cosmos</span>
                         </div>
                     </div>
                     <div class="flex items-center justify-between">
-                        <div>
-                            <h4 class="text-sm font-bold text-white">Midnight Indigo</h4>
-                            <p class="text-[10px] text-zinc-400 font-mono">Inter &bull; Deep Indigo</p>
+                        <span class="font-bold text-sm text-white">Midnight Indigo</span>
+                        <div class="flex items-center gap-1.5">
+                            <span class="w-3 h-3 rounded-full bg-slate-950 border border-zinc-700"></span>
+                            <span class="w-3 h-3 rounded-full bg-indigo-500"></span>
+                            <span class="w-3 h-3 rounded-full bg-purple-500"></span>
                         </div>
-                        <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-zinc-800 text-zinc-300">PRESET</span>
                     </div>
                 </div>
 
-                <!-- Theme 3 -->
-                <div class="p-5 rounded-3xl bg-zinc-900/80 border border-zinc-800 space-y-3">
-                    <div class="h-32 rounded-2xl bg-gradient-to-b from-emerald-950 to-zinc-950 p-4 flex flex-col justify-end border border-emerald-900/40">
-                        <div class="p-2.5 rounded-xl bg-emerald-500/20 backdrop-blur-sm border border-emerald-400/30 text-center text-xs font-bold text-emerald-200">
-                            Tombol BioLink Preview
+                <!-- Theme 3: Emerald Glass -->
+                <div class="p-5 rounded-3xl bg-zinc-900 border border-zinc-800 hover:border-emerald-500/50 transition-all space-y-3 group">
+                    <div class="h-32 rounded-2xl bg-gradient-to-br from-emerald-950 via-teal-950 to-zinc-950 border border-emerald-900/40 flex items-center justify-center p-4">
+                        <div class="w-full max-w-[180px] p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/25 text-center">
+                            <span class="text-xs font-bold text-white block">Emerald Glass</span>
+                            <span class="text-[10px] text-emerald-300 font-mono">Nature Minimal</span>
                         </div>
                     </div>
                     <div class="flex items-center justify-between">
-                        <div>
-                            <h4 class="text-sm font-bold text-white">Emerald Glass</h4>
-                            <p class="text-[10px] text-zinc-400 font-mono">Outfit &bull; Glassmorphic Green</p>
+                        <span class="font-bold text-sm text-white">Emerald Glass</span>
+                        <div class="flex items-center gap-1.5">
+                            <span class="w-3 h-3 rounded-full bg-emerald-950 border border-zinc-700"></span>
+                            <span class="w-3 h-3 rounded-full bg-emerald-400"></span>
+                            <span class="w-3 h-3 rounded-full bg-teal-400"></span>
                         </div>
-                        <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-zinc-800 text-zinc-300">PRESET</span>
                     </div>
                 </div>
 
-                <!-- Theme 4 -->
-                <div class="p-5 rounded-3xl bg-zinc-900/80 border border-zinc-800 space-y-3">
-                    <div class="h-32 rounded-2xl bg-[#090b14] p-4 flex flex-col justify-end border border-sky-500/30">
-                        <div class="p-2.5 rounded-xl bg-sky-500/20 backdrop-blur-sm border border-pink-500/40 text-center text-xs font-mono font-bold text-pink-300">
-                            Tombol BioLink Preview
+                <!-- Theme 4: Cyberpunk Neon -->
+                <div class="p-5 rounded-3xl bg-zinc-900 border border-zinc-800 hover:border-pink-500/50 transition-all space-y-3 group">
+                    <div class="h-32 rounded-2xl bg-gradient-to-br from-zinc-950 via-pink-950/40 to-cyan-950/40 border border-pink-900/40 flex items-center justify-center p-4">
+                        <div class="w-full max-w-[180px] p-2.5 rounded-xl bg-pink-500/10 border border-pink-500/30 text-center">
+                            <span class="text-xs font-bold text-white block">Cyberpunk Neon</span>
+                            <span class="text-[10px] text-pink-400 font-mono">Electric Vibe</span>
                         </div>
                     </div>
                     <div class="flex items-center justify-between">
-                        <div>
-                            <h4 class="text-sm font-bold text-white">Cyberpunk Neon</h4>
-                            <p class="text-[10px] text-zinc-400 font-mono">DM Mono &bull; Neon Glow</p>
+                        <span class="font-bold text-sm text-white">Cyberpunk Neon</span>
+                        <div class="flex items-center gap-1.5">
+                            <span class="w-3 h-3 rounded-full bg-pink-500"></span>
+                            <span class="w-3 h-3 rounded-full bg-cyan-400"></span>
+                            <span class="w-3 h-3 rounded-full bg-yellow-400"></span>
                         </div>
-                        <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-zinc-800 text-zinc-300">PRESET</span>
                     </div>
                 </div>
 
-                <!-- Theme 5 -->
-                <div class="p-5 rounded-3xl bg-zinc-900/80 border border-zinc-800 space-y-3">
-                    <div class="h-32 rounded-2xl bg-gradient-to-b from-rose-950 via-purple-950 to-zinc-950 p-4 flex flex-col justify-end border border-rose-900/40">
-                        <div class="p-2.5 rounded-xl bg-rose-500/20 backdrop-blur-sm border border-rose-400/30 text-center text-xs font-bold text-rose-200">
-                            Tombol BioLink Preview
+                <!-- Theme 5: Sunset Amber -->
+                <div class="p-5 rounded-3xl bg-zinc-900 border border-zinc-800 hover:border-amber-500/50 transition-all space-y-3 group">
+                    <div class="h-32 rounded-2xl bg-gradient-to-br from-zinc-950 via-amber-950/40 to-rose-950/40 border border-amber-900/40 flex items-center justify-center p-4">
+                        <div class="w-full max-w-[180px] p-2.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-center">
+                            <span class="text-xs font-bold text-white block">Sunset Amber</span>
+                            <span class="text-[10px] text-amber-300 font-mono">Warm Golden</span>
                         </div>
                     </div>
                     <div class="flex items-center justify-between">
-                        <div>
-                            <h4 class="text-sm font-bold text-white">Sunset Aura</h4>
-                            <p class="text-[10px] text-zinc-400 font-mono">Plus Jakarta &bull; Vibrant Sunset</p>
+                        <span class="font-bold text-sm text-white">Sunset Amber</span>
+                        <div class="flex items-center gap-1.5">
+                            <span class="w-3 h-3 rounded-full bg-amber-500"></span>
+                            <span class="w-3 h-3 rounded-full bg-orange-500"></span>
+                            <span class="w-3 h-3 rounded-full bg-rose-500"></span>
                         </div>
-                        <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-zinc-800 text-zinc-300">PRESET</span>
                     </div>
                 </div>
 
-                <!-- Theme 6 -->
-                <div class="p-5 rounded-3xl bg-zinc-900/80 border border-zinc-800 space-y-3">
-                    <div class="h-32 rounded-2xl bg-zinc-100 p-4 flex flex-col justify-end border border-zinc-300">
-                        <div class="p-2.5 rounded-xl bg-white shadow-md border border-zinc-200 text-center text-xs font-bold text-zinc-900">
-                            Tombol BioLink Preview
+                <!-- Theme 6: Nord Frost -->
+                <div class="p-5 rounded-3xl bg-zinc-900 border border-zinc-800 hover:border-sky-400/50 transition-all space-y-3 group">
+                    <div class="h-32 rounded-2xl bg-gradient-to-br from-slate-900 via-sky-950 to-slate-950 border border-sky-800/40 flex items-center justify-center p-4">
+                        <div class="w-full max-w-[180px] p-2.5 rounded-xl bg-sky-400/10 border border-sky-400/30 text-center">
+                            <span class="text-xs font-bold text-white block">Nord Frost</span>
+                            <span class="text-[10px] text-sky-300 font-mono">Arctic Modern</span>
                         </div>
                     </div>
                     <div class="flex items-center justify-between">
-                        <div>
-                            <h4 class="text-sm font-bold text-white">Minimalist Cream</h4>
-                            <p class="text-[10px] text-zinc-400 font-mono">Outfit &bull; Clean Light</p>
+                        <span class="font-bold text-sm text-white">Nord Frost</span>
+                        <div class="flex items-center gap-1.5">
+                            <span class="w-3 h-3 rounded-full bg-slate-800 border border-zinc-700"></span>
+                            <span class="w-3 h-3 rounded-full bg-sky-400"></span>
+                            <span class="w-3 h-3 rounded-full bg-teal-300"></span>
                         </div>
-                        <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-zinc-800 text-zinc-300">PRESET</span>
                     </div>
                 </div>
+
             </div>
         </section>
 
@@ -869,99 +973,57 @@
 
         <!-- SECTION: GOOGLE SEARCH & SEO READINESS -->
         <section id="seo-google" class="py-14 sm:py-24 px-4 sm:px-12 border-t border-zinc-800/80 max-w-6xl mx-auto w-full">
-            <div class="text-center mb-16 space-y-3">
+            <div class="text-center mb-10 sm:mb-16 space-y-3">
                 <span class="text-xs font-mono uppercase tracking-wider text-sky-400 font-bold block">OPTIMASI MESIN PENCARI (SEO & GOOGLE INDEXING)</span>
-                <h2 class="text-3xl sm:text-5xl font-black text-white tracking-tight">Mudah Ditemukan saat Audiens Mencari Anda di Google</h2>
+                <h2 class="text-2xl sm:text-5xl font-black text-white tracking-tight">Mudah Ditemukan saat Audiens Mencari Anda di Google</h2>
                 <p class="text-xs sm:text-sm text-zinc-400 max-w-2xl mx-auto">Setiap profil bio secara otomatis dioptimasi dengan metadata Schema.org JSON-LD, XML Sitemap, dan protokol OpenGraph sehingga nama dan karya Anda langsung tampil rapi di hasil pencarian Google.</p>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                <!-- Left: Google Search Mockup Card (7 Cols) -->
-                <div class="lg:col-span-7 bg-[#202124] border border-zinc-700/80 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-5 text-left">
-                    <!-- Google Search Bar Mockup -->
-                    <div class="flex items-center gap-3 bg-[#303134] rounded-full px-4 py-2.5 border border-zinc-600/50 shadow-inner">
-                        <svg class="w-4 h-4 text-zinc-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-                        <span class="text-xs text-zinc-200 font-medium">biolink windri</span>
-                        <div class="ml-auto flex items-center gap-2 text-zinc-400">
-                            <span class="text-[10px] font-mono bg-zinc-700/60 px-1.5 py-0.5 rounded text-zinc-300">Google Search</span>
-                        </div>
-                    </div>
-
-                    <!-- Search Result Item -->
-                    <div class="space-y-2 pt-2">
-                        <!-- Breadcrumb & Favicon -->
-                        <div class="flex items-center gap-2.5">
-                            <div class="w-6 h-6 rounded-full bg-zinc-800 flex items-center justify-center p-1 border border-zinc-700">
-                                <img src="{{ asset('favicon.svg') }}" alt="Favicon" class="w-full h-full">
-                            </div>
-                            <div class="text-xs leading-none">
-                                <span class="text-zinc-200 font-medium block">BioLink</span>
-                                <span class="text-[11px] text-zinc-400 font-mono">https://biolink.local › @windri</span>
-                            </div>
-                        </div>
-
-                        <!-- Clickable Title -->
-                        <h3 class="text-base sm:text-lg font-bold text-[#8ab4f8] hover:underline cursor-pointer leading-snug">
-                            Windri (@windri) • Senior Full-Stack Engineer | BioLink Resmi
-                        </h3>
-
-                        <!-- Snippet Description -->
-                        <p class="text-xs sm:text-sm text-[#bdc1c6] leading-relaxed">
-                            Hub profil resmi Windri. Temukan repositori GitHub windri-dev, live demo aplikasi SHOPPE, arsitektur server terdistribusi, dan kontak kolaborasi langsung via Telegram...
-                        </p>
-
-                        <!-- Google Sitelinks Rich Snippets (Responsive Grid) -->
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-3 border-t border-zinc-700/60">
-                            <div class="p-2.5 rounded-xl bg-zinc-800/40 hover:bg-zinc-800/80 transition-colors cursor-pointer">
-                                <span class="text-xs font-bold text-[#8ab4f8] block hover:underline truncate">GitHub windri-dev</span>
-                                <span class="text-[11px] text-zinc-400 block truncate">Jelajahi repositori open-source</span>
-                            </div>
-                            <div class="p-2.5 rounded-xl bg-zinc-800/40 hover:bg-zinc-800/80 transition-colors cursor-pointer">
-                                <span class="text-xs font-bold text-[#8ab4f8] block hover:underline truncate">SHOPPE E-Commerce</span>
-                                <span class="text-[11px] text-zinc-400 block truncate">Staging demo butik modern</span>
-                            </div>
-                            <div class="p-2.5 rounded-xl bg-zinc-800/40 hover:bg-zinc-800/80 transition-colors cursor-pointer">
-                                <span class="text-xs font-bold text-[#8ab4f8] block hover:underline truncate">Kontak Telegram</span>
-                                <span class="text-[11px] text-zinc-400 block truncate">Diskusi proyek & konsultasi</span>
-                            </div>
-                            <div class="p-2.5 rounded-xl bg-zinc-800/40 hover:bg-zinc-800/80 transition-colors cursor-pointer">
-                                <span class="text-xs font-bold text-[#8ab4f8] block hover:underline truncate">Simpan Kontak vCard</span>
-                                <span class="text-[11px] text-zinc-400 block truncate">Unduh nomor langsung ke ponsel</span>
-                            </div>
-                        </div>
-                    </div>
+            <!-- Realistic Google SERP Preview Card -->
+            <div class="rounded-3xl border border-zinc-800 bg-zinc-900/80 p-5 sm:p-8 shadow-2xl backdrop-blur-xl space-y-4 max-w-3xl mx-auto">
+                <div class="flex items-center gap-2 border-b border-zinc-800 pb-3 text-xs text-zinc-400">
+                    <svg class="w-4 h-4 text-sky-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    <span class="font-mono text-[11px] truncate min-w-0">Google Search &bull; "Windri BioLink Indonesia"</span>
                 </div>
 
-                <!-- Right: SEO Features Explanations (5 Cols) -->
-                <div class="lg:col-span-5 space-y-4 text-left">
-                    <div class="p-5 rounded-2xl bg-zinc-900/60 border border-zinc-800 space-y-2">
-                        <div class="w-8 h-8 rounded-lg bg-sky-500/10 border border-sky-500/20 text-sky-400 flex items-center justify-center">
-                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="m21 21-4.3-4.3"/><circle cx="11" cy="11" r="8"/></svg>
+                <div class="space-y-2 text-left">
+                    <!-- Favicon & URL Breadcrumb -->
+                    <div class="flex items-center gap-2 text-xs text-zinc-400">
+                        <img src="{{ asset('Logo.png') }}" alt="Favicon" class="w-4 h-4 object-contain">
+                        <div class="flex flex-col">
+                            <span class="text-xs font-medium text-white">BioLink</span>
+                            <span class="text-[11px] text-zinc-500 font-mono">https://bio.wn-cdn.net/@windri</span>
                         </div>
-                        <h4 class="font-bold text-sm text-white">Google Rich Snippets Terbaca Otomatis</h4>
-                        <p class="text-xs text-zinc-400 leading-relaxed">
-                            Tag <code>Schema.org JSON-LD</code> disuntikkan langsung di setiap profil bio, memberitahu bot Google bahwa halaman ini adalah profil resmi seseorang atau entitas bisnis.
-                        </p>
                     </div>
 
-                    <div class="p-5 rounded-2xl bg-zinc-900/60 border border-zinc-800 space-y-2">
-                        <div class="w-8 h-8 rounded-lg bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center">
-                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/><path d="M6 6h10"/><path d="M6 10h10"/></svg>
-                        </div>
-                        <h4 class="font-bold text-sm text-white">Sitemap XML Otomatis (/sitemap.xml)</h4>
-                        <p class="text-xs text-zinc-400 leading-relaxed">
-                            Setiap ada pengguna baru yang mendaftar atau memperbarui tautannya, sistem memperbarui sitemap XML secara instan sehingga crawler Google dapat merayapi halaman baru secara cepat.
-                        </p>
-                    </div>
+                    <!-- Clickable Title -->
+                    <h3 class="text-base sm:text-lg font-bold text-[#8ab4f8] hover:underline cursor-pointer leading-snug">
+                        Windri (@windri) &bull; Senior Full-Stack Engineer | BioLink Resmi
+                    </h3>
 
-                    <div class="p-5 rounded-2xl bg-zinc-900/60 border border-zinc-800 space-y-2">
-                        <div class="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center">
-                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+                    <!-- Snippet Description -->
+                    <p class="text-xs sm:text-sm text-[#bdc1c6] leading-relaxed">
+                        Hub profil resmi Windri. Temukan repositori GitHub windri-dev, live demo aplikasi SHOPPE, arsitektur server terdistribusi, dan kontak kolaborasi langsung via Telegram...
+                    </p>
+
+                    <!-- Google Sitelinks Rich Snippets (Responsive Grid) -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-3 border-t border-zinc-700/60">
+                        <div class="p-2.5 rounded-xl bg-zinc-800/40 hover:bg-zinc-800/80 transition-colors cursor-pointer">
+                            <span class="text-xs font-bold text-[#8ab4f8] block hover:underline truncate">GitHub windri-dev</span>
+                            <span class="text-[11px] text-zinc-400 block truncate">Jelajahi repositori open-source</span>
                         </div>
-                        <h4 class="font-bold text-sm text-white">Kustomisasi Title & Meta Keywords Mandiri</h4>
-                        <p class="text-xs text-zinc-400 leading-relaxed">
-                            Pengguna dapat mengatur judul spesifik dan kata kunci di menu Profil Dasbor untuk mengincar kata kunci pencarian yang relevan dengan spesialisasi mereka.
-                        </p>
+                        <div class="p-2.5 rounded-xl bg-zinc-800/40 hover:bg-zinc-800/80 transition-colors cursor-pointer">
+                            <span class="text-xs font-bold text-[#8ab4f8] block hover:underline truncate">SHOPPE E-Commerce</span>
+                            <span class="text-[11px] text-zinc-400 block truncate">Staging demo butik modern</span>
+                        </div>
+                        <div class="p-2.5 rounded-xl bg-zinc-800/40 hover:bg-zinc-800/80 transition-colors cursor-pointer">
+                            <span class="text-xs font-bold text-[#8ab4f8] block hover:underline truncate">Kontak Telegram</span>
+                            <span class="text-[11px] text-zinc-400 block truncate">Diskusi proyek & konsultasi</span>
+                        </div>
+                        <div class="p-2.5 rounded-xl bg-zinc-800/40 hover:bg-zinc-800/80 transition-colors cursor-pointer">
+                            <span class="text-xs font-bold text-[#8ab4f8] block hover:underline truncate">Simpan Kontak vCard</span>
+                            <span class="text-[11px] text-zinc-400 block truncate">Unduh nomor langsung ke ponsel</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1183,9 +1245,9 @@
             const card = document.getElementById('heroMockupCard');
             const pills = document.querySelectorAll('.theme-pill');
             pills.forEach(p => {
-                p.className = 'theme-pill px-3 py-1 rounded-full text-[11px] font-semibold bg-zinc-900 text-zinc-400 border border-zinc-800 hover:text-white transition-all';
+                p.className = 'theme-pill px-2.5 py-1 rounded-full text-[10px] font-semibold bg-zinc-900 text-zinc-400 border border-zinc-800 hover:text-white transition-all';
             });
-            btn.className = 'theme-pill px-3 py-1 rounded-full text-[11px] font-semibold bg-zinc-800 text-sky-400 border border-sky-500/50 shadow-sm transition-all';
+            btn.className = 'theme-pill px-2.5 py-1 rounded-full text-[10px] font-semibold bg-zinc-800 text-sky-400 border border-sky-500/50 shadow-sm transition-all';
 
             const name = document.getElementById('mockupName');
             const handle = document.getElementById('mockupHandle');
@@ -1193,7 +1255,7 @@
             const linkCards = card.querySelectorAll('.mockup-link-card');
 
             if (theme === 'dark') {
-                card.style.background = 'rgba(24, 24, 27, 0.9)';
+                card.style.background = 'rgba(24, 24, 27, 0.95)';
                 card.style.borderColor = 'rgba(63, 63, 70, 0.8)';
                 name.style.color = '#ffffff';
                 handle.style.color = '#38bdf8';
