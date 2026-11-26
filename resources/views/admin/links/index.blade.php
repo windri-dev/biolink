@@ -21,12 +21,36 @@
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
 
         <!-- Left Column: Links Management List (7 Cols) -->
-        <div class="lg:col-span-7 space-y-3" id="linksContainer">
-            @forelse($links as $link)
-                <div class="bg-zinc-900/70 border border-zinc-800 rounded-2xl p-4 flex items-center justify-between gap-4 transition-all hover:border-zinc-700" data-id="{{ $link->id }}">
-                    <div class="flex items-center gap-3.5 min-w-0">
-                        <!-- Icon Indicator -->
-                        <div class="w-10 h-10 rounded-xl bg-zinc-800 border border-zinc-700/80 flex items-center justify-center flex-shrink-0 text-zinc-300">
+        <div class="lg:col-span-7 space-y-3">
+            <div class="flex items-center justify-between px-1 text-[11px] text-zinc-400 font-medium">
+                <span class="flex items-center gap-1.5">
+                    <i data-lucide="arrow-up-down" class="w-3.5 h-3.5 text-sky-400"></i>
+                    <span>Tahan & geser icon grip atau klik panah untuk mengatur urutan tautan</span>
+                </span>
+                <span class="font-mono text-zinc-500">{{ count($links) }} Item</span>
+            </div>
+
+            <div class="space-y-3" id="linksContainer">
+                @forelse($links as $link)
+                    <div class="bg-zinc-900/70 border border-zinc-800 rounded-2xl p-3.5 sm:p-4 flex items-center justify-between gap-3 sm:gap-4 transition-all hover:border-zinc-700 select-none group" data-id="{{ $link->id }}">
+                        <div class="flex items-center gap-2.5 sm:gap-3.5 min-w-0">
+                            <!-- Drag Handle & Up/Down Arrows -->
+                            <div class="flex items-center gap-1 flex-shrink-0">
+                                <div class="drag-handle p-1.5 rounded-lg text-zinc-500 hover:text-white hover:bg-zinc-800 cursor-grab active:cursor-grabbing transition-colors" title="Geser (Drag & Drop) untuk mengatur urutan">
+                                    <i data-lucide="grip-vertical" class="w-4 h-4"></i>
+                                </div>
+                                <div class="flex flex-col -space-y-0.5">
+                                    <button type="button" onclick="moveLinkUp(this)" class="p-0.5 rounded text-zinc-500 hover:text-sky-400 hover:bg-zinc-800 transition-colors" title="Pindahkan ke atas">
+                                        <i data-lucide="chevron-up" class="w-3.5 h-3.5"></i>
+                                    </button>
+                                    <button type="button" onclick="moveLinkDown(this)" class="p-0.5 rounded text-zinc-500 hover:text-sky-400 hover:bg-zinc-800 transition-colors" title="Pindahkan ke bawah">
+                                        <i data-lucide="chevron-down" class="w-3.5 h-3.5"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Icon Indicator -->
+                            <div class="w-10 h-10 rounded-xl bg-zinc-800 border border-zinc-700/80 flex items-center justify-center flex-shrink-0 text-zinc-300">
                             @if($link->type === 'header')
                                 <svg class="w-5 h-5 text-purple-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <path d="M6 12h12"/><path d="M6 20V4"/><path d="M18 20V4"/>
@@ -102,6 +126,7 @@
                     <p class="text-sm">Belum ada tautan. Klik tombol di atas untuk menambahkan!</p>
                 </div>
             @endforelse
+            </div>
         </div>
 
         <!-- Right Column: Live Mobile Mockup Preview (5 Cols - Sticky) -->
@@ -389,5 +414,86 @@
             alert('Gagal mengubah status tautan');
         }
     }
+
+    // Initialize Drag & Drop Sortable
+    document.addEventListener('DOMContentLoaded', function() {
+        const container = document.getElementById('linksContainer');
+        if (container && typeof Sortable !== 'undefined') {
+            new Sortable(container, {
+                handle: '.drag-handle',
+                animation: 200,
+                ghostClass: 'bg-sky-500/10',
+                chosenClass: 'border-sky-500/50',
+                dragClass: 'shadow-2xl',
+                onEnd: function() {
+                    saveLinksOrder();
+                }
+            });
+        }
+    });
+
+    // Move Link 1 step Up
+    function moveLinkUp(btn) {
+        const card = btn.closest('[data-id]');
+        const prev = card.previousElementSibling;
+        if (prev && prev.hasAttribute('data-id')) {
+            card.parentNode.insertBefore(card, prev);
+            saveLinksOrder();
+        }
+    }
+
+    // Move Link 1 step Down
+    function moveLinkDown(btn) {
+        const card = btn.closest('[data-id]');
+        const next = card.nextElementSibling;
+        if (next && next.hasAttribute('data-id')) {
+            card.parentNode.insertBefore(next, card);
+            saveLinksOrder();
+        }
+    }
+
+    // Persist new link order to server via AJAX
+    async function saveLinksOrder() {
+        const container = document.getElementById('linksContainer');
+        const cards = container.querySelectorAll('[data-id]');
+        const order = Array.from(cards).map(c => parseInt(c.getAttribute('data-id')));
+
+        try {
+            const res = await fetch('{{ route('admin.links.reorder') }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                body: JSON.stringify({ order })
+            });
+            const data = await res.json();
+            if (data.success) {
+                showReorderToast();
+                refreshPreview();
+            }
+        } catch (err) {
+            console.error('Failed to save order:', err);
+        }
+    }
+
+    // Display floating toast message
+    function showReorderToast() {
+        const toast = document.getElementById('reorderToast');
+        if (!toast) return;
+        toast.classList.remove('translate-y-20', 'opacity-0');
+        setTimeout(() => {
+            toast.classList.add('translate-y-20', 'opacity-0');
+        }, 2200);
+    }
 </script>
+
+<!-- Floating Toast Notification -->
+<div id="reorderToast" class="fixed bottom-6 right-6 z-50 bg-emerald-500 text-white px-4 py-2.5 rounded-2xl shadow-2xl backdrop-blur-md text-xs font-bold flex items-center gap-2 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+    <i data-lucide="check-circle" class="w-4 h-4"></i>
+    <span>Urutan tautan berhasil disimpan!</span>
+</div>
+
+<!-- SortableJS CDN -->
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.2/Sortable.min.js"></script>
 @endsection
