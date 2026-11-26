@@ -46,6 +46,11 @@ Route::post('/admin/login', [AuthController::class, 'login'])->name('admin.login
 Route::get('/l/{id}', [PublicBioController::class, 'trackClick'])->name('public.click');
 Route::post('/api/ai-chat', [AiChatController::class, 'chat'])->middleware('throttle:30,1')->name('api.ai.chat');
 
+// Direct User Security Aliases (Accessible by All Registered Users)
+Route::middleware('auth')->group(function () {
+    Route::get('/security/2fa', [TwoFactorAuthController::class, 'index'])->name('security.2fa');
+});
+
 /*
 |--------------------------------------------------------------------------
 | Protected User Studio Dashboard (Multi-Tenant Scoped)

@@ -19,6 +19,28 @@
         </div>
     </div>
 
+    <!-- 2FA Security Notice for All Users -->
+    @if(!auth()->user()->hasTwoFactorEnabled())
+        <div class="bg-gradient-to-r from-amber-950/40 via-zinc-900 to-zinc-900 border border-amber-500/30 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-lg">
+            <div class="flex items-start sm:items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-amber-500/15 border border-amber-500/30 text-amber-400 flex items-center justify-center flex-shrink-0">
+                    <i data-lucide="shield-alert" class="w-5 h-5"></i>
+                </div>
+                <div>
+                    <h4 class="text-sm font-bold text-white flex items-center gap-2">
+                        <span>Tingkatkan Keamanan Akun Anda (2FA Belum Aktif)</span>
+                        <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 font-bold border border-amber-500/40">Sangat Disarankan</span>
+                    </h4>
+                    <p class="text-xs text-zinc-400 mt-0.5">Lindungi halaman bio link dan data profil Anda dengan Autentikasi Dua Faktor (Google Authenticator / Authy) agar terhindar dari akses tidak sah.</p>
+                </div>
+            </div>
+            <a href="{{ route('admin.security.2fa.index') }}" class="px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-zinc-950 text-xs font-bold transition-all shadow-md shadow-amber-500/20 inline-flex items-center gap-1.5 flex-shrink-0">
+                <i data-lucide="shield-check" class="w-4 h-4"></i>
+                <span>Aktifkan 2FA Sekarang</span>
+            </a>
+        </div>
+    @endif
+
     <!-- 4 Stats Cards -->
     <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <div class="bg-zinc-900/60 border border-zinc-800 rounded-2xl p-4">

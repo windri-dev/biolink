@@ -171,6 +171,14 @@
                                             @if($u->isSuperAdmin())
                                                 <span class="text-[9px] font-mono px-1.5 py-0.2 bg-amber-500/20 text-amber-300 rounded font-bold border border-amber-500/30">MASTER</span>
                                             @endif
+                                            @if($u->hasTwoFactorEnabled())
+                                                <span class="text-[9px] font-mono px-1.5 py-0.2 bg-emerald-500/20 text-emerald-300 rounded font-bold border border-emerald-500/30 inline-flex items-center gap-1" title="2FA Authenticator Aktif">
+                                                    <i data-lucide="shield-check" class="w-2.5 h-2.5"></i>
+                                                    <span>2FA ON</span>
+                                                </span>
+                                            @else
+                                                <span class="text-[9px] font-mono px-1.5 py-0.2 bg-zinc-800 text-zinc-400 rounded border border-zinc-700" title="2FA Belum Diaktifkan">2FA OFF</span>
+                                            @endif
                                         </div>
                                         <div class="text-[11px] text-zinc-400">{{ $u->email }}</div>
                                         @if($p)

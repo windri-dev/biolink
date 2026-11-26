@@ -107,6 +107,6 @@ class RegisterController
         Auth::login($user);
         $request->session()->regenerate();
 
-        return redirect()->route('admin.dashboard')->with('success', 'Selamat datang di BioLink! Halaman bio Anda siap disesuaikan.');
+        return redirect()->route('admin.dashboard')->with('success', 'Selamat datang di BioLink! Halaman bio Anda siap disesuaikan. Jangan lupa aktifkan Autentikasi 2FA di menu Keamanan demi perlindungan akun Anda.');
     }
 }
