@@ -26,8 +26,8 @@ class AiKnowledgeSeeder extends Seeder
             [
                 'category' => 'project',
                 'title' => 'Proyek Unggulan & Repositori',
-                'keywords' => 'proyek, repo, github, portfolio, shoppe, hbd, aplikasi, karya',
-                'content' => "Beberapa proyek unggulan yang dikembangkan Windri:\n1. **SHOPPE E-Commerce** (https://shoppe-staging.wn-cdn.net): Toko butik fesyen modern dengan AI Fashion Concierge interaktif, multi-size inventory, dan checkout fleksibel.\n2. **Web HBD** (https://hbd.wn-cdn.net): Aplikasi ucapan interaktif bertema kreatif.\n3. **Infrastruktur & Automasi Keamanan NetBird**: Sistem auto-defense sentinel multi-node.\nSemua kode terbuka dapat dicek langsung di GitHub resmi @windri-dev.",
+                'keywords' => 'proyek, repo, github, portfolio, aplikasi, karya',
+                'content' => "Beberapa proyek unggulan yang dikembangkan Windri:\n1. **BioLink Platform SaaS** (https://bio.wn-cdn.net): Platform agregasi tautan mandiri dengan keamanan enterprise dan integrasi CV digital.\n2. **Infrastruktur & Automasi Keamanan NetBird**: Sistem auto-defense sentinel multi-node.\nSemua kode terbuka dapat dicek langsung di GitHub resmi @windri-dev.",
                 'suggested_prompt' => 'Apa saja proyek yang pernah dibuat?',
                 'sort_order' => 2,
             ],

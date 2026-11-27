@@ -42,7 +42,7 @@ class ProfileSeeder extends Seeder
                 'ai_greeting_message' => 'Halo, saya asisten AI Windri. Tanyakan apa saja tentang proyek, stack teknologi, atau kontak kolaborasi.',
                 ...Profile::getDefaultCvPreset(),
                 'meta_title' => 'Windri (@windri) • Portfolio',
-                'meta_description' => 'Hub profil resmi Windri. Temukan repositori GitHub, proyek aplikasi e-commerce SHOPPE, arsitektur server, dan kontak.',
+                'meta_description' => 'Hub profil resmi Windri. Temukan repositori GitHub, arsitektur server, profil CV, dan kontak.',
             ]
         );
 
@@ -78,42 +78,16 @@ class ProfileSeeder extends Seeder
             ],
             [
                 'type' => 'link',
-                'title' => 'SHOPPE E-Commerce Staging',
-                'subtitle' => 'Platform butik modern dengan AI Fashion Concierge',
-                'url' => 'https://shoppe-staging.wn-cdn.net',
-                'icon' => 'shopping-bag',
-                'card_size' => 'full',
-                'badge_text' => 'LIVE DEMO',
-                'badge_color' => 'emerald',
-                'is_highlighted' => false,
-                'animation_type' => 'none',
-                'sort_order' => 2,
-            ],
-            [
-                'type' => 'link',
-                'title' => 'Web HBD Project',
-                'subtitle' => 'Aplikasi web interaktif ucapan spesial',
-                'url' => 'https://hbd.wn-cdn.net',
-                'icon' => 'sparkles',
-                'card_size' => 'half',
-                'badge_text' => 'CREATIVE',
-                'badge_color' => 'amber',
-                'is_highlighted' => false,
-                'animation_type' => 'none',
-                'sort_order' => 3,
-            ],
-            [
-                'type' => 'link',
                 'title' => 'Hubungi via Telegram',
                 'subtitle' => 'Diskusi kolaborasi & konsultasi',
                 'url' => 'https://t.me/windri',
                 'icon' => 'send',
-                'card_size' => 'half',
+                'card_size' => 'full',
                 'badge_text' => 'FAST CHAT',
                 'badge_color' => 'purple',
                 'is_highlighted' => false,
                 'animation_type' => 'none',
-                'sort_order' => 4,
+                'sort_order' => 2,
             ],
         ];
 
