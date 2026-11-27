@@ -18,17 +18,17 @@ class ProfileSeeder extends Seeder
         $user = User::first();
         $theme = Theme::where('slug', 'dark-luxury')->first();
 
-        $profile = Profile::updateOrCreate(
+        $profile = Profile::firstOrCreate(
             ['handle' => 'windri'],
             [
                 'user_id' => $user->id,
                 'theme_id' => $theme?->id,
                 'display_name' => 'Windri',
-                'avatar_url' => 'https://avatars.githubusercontent.com/u/102558837?v=4',
+                'avatar_url' => 'https://avatars.githubusercontent.com/u/273699737?v=4',
                 'bio' => 'Senior Full-Stack Software Engineer & Builder. Focusing on distributed systems, AI agent workflows, and clean web engineering.',
-                'tagline' => 'Full-Stack Software Engineer',
-                'location' => 'Jakarta, Indonesia',
-                'phone' => '+628123456789',
+                'tagline' => 'Senior Full-Stack Software Engineer',
+                'location' => 'Batam, Indonesia',
+                'phone' => '+628****6789',
                 'job_title' => 'Senior Full-Stack Engineer',
                 'company' => 'windri-dev',
                 'enable_vcard' => true,
