@@ -34,10 +34,9 @@ if [ -n "$DB_HOST" ] && [ "$DB_HOST" != "127.0.0.1" ] && [ "$DB_HOST" != "localh
     echo "[BioLink Entrypoint] Database is reachable!"
 fi
 
-# 5. Run migrations & initial seed
+# 5. Run migrations (Never run db:seed automatically on boot to prevent resetting user data)
 echo "[BioLink Entrypoint] Checking and running database migrations..."
 php artisan migrate --force || true
-php artisan db:seed --force || true
 
 # 6. Set correct permissions for web server
 echo "[BioLink Entrypoint] Enforcing storage and cache permissions..."
